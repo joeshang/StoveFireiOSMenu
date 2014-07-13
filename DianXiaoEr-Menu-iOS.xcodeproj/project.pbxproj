@@ -1,0 +1,455 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D22BE1941972747000A438D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22BE1931972747000A438D2 /* Foundation.framework */; };
+		D22BE1961972747000A438D2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22BE1951972747000A438D2 /* CoreGraphics.framework */; };
+		D22BE1981972747000A438D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22BE1971972747000A438D2 /* UIKit.framework */; };
+		D22BE19E1972747000A438D2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D22BE19C1972747000A438D2 /* InfoPlist.strings */; };
+		D22BE1A01972747000A438D2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D22BE19F1972747000A438D2 /* main.m */; };
+		D22BE1A41972747000A438D2 /* DXEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D22BE1A31972747000A438D2 /* DXEAppDelegate.m */; };
+		D22BE1A61972747000A438D2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22BE1A51972747000A438D2 /* Images.xcassets */; };
+		D22BE1AD1972747000A438D2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22BE1AC1972747000A438D2 /* XCTest.framework */; };
+		D22BE1AE1972747000A438D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22BE1931972747000A438D2 /* Foundation.framework */; };
+		D22BE1AF1972747000A438D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22BE1971972747000A438D2 /* UIKit.framework */; };
+		D22BE1B71972747000A438D2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D22BE1B51972747000A438D2 /* InfoPlist.strings */; };
+		D22BE1B91972747000A438D2 /* DianXiaoEr_Menu_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D22BE1B81972747000A438D2 /* DianXiaoEr_Menu_iOSTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D22BE1B01972747000A438D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D22BE1881972747000A438D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D22BE18F1972747000A438D2;
+			remoteInfo = "DianXiaoEr-Menu-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D22BE1901972747000A438D2 /* DianXiaoEr-Menu-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DianXiaoEr-Menu-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D22BE1931972747000A438D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D22BE1951972747000A438D2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D22BE1971972747000A438D2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D22BE19B1972747000A438D2 /* DianXiaoEr-Menu-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DianXiaoEr-Menu-iOS-Info.plist"; sourceTree = "<group>"; };
+		D22BE19D1972747000A438D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D22BE19F1972747000A438D2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D22BE1A11972747000A438D2 /* DianXiaoEr-Menu-iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DianXiaoEr-Menu-iOS-Prefix.pch"; sourceTree = "<group>"; };
+		D22BE1A21972747000A438D2 /* DXEAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DXEAppDelegate.h; sourceTree = "<group>"; };
+		D22BE1A31972747000A438D2 /* DXEAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DXEAppDelegate.m; sourceTree = "<group>"; };
+		D22BE1A51972747000A438D2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D22BE1AB1972747000A438D2 /* DianXiaoEr-Menu-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DianXiaoEr-Menu-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D22BE1AC1972747000A438D2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		D22BE1B41972747000A438D2 /* DianXiaoEr-Menu-iOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DianXiaoEr-Menu-iOSTests-Info.plist"; sourceTree = "<group>"; };
+		D22BE1B61972747000A438D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D22BE1B81972747000A438D2 /* DianXiaoEr_Menu_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DianXiaoEr_Menu_iOSTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D22BE18D1972747000A438D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D22BE1961972747000A438D2 /* CoreGraphics.framework in Frameworks */,
+				D22BE1981972747000A438D2 /* UIKit.framework in Frameworks */,
+				D22BE1941972747000A438D2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D22BE1A81972747000A438D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D22BE1AD1972747000A438D2 /* XCTest.framework in Frameworks */,
+				D22BE1AF1972747000A438D2 /* UIKit.framework in Frameworks */,
+				D22BE1AE1972747000A438D2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D22BE1871972747000A438D2 = {
+			isa = PBXGroup;
+			children = (
+				D22BE1991972747000A438D2 /* DianXiaoEr-Menu-iOS */,
+				D22BE1B21972747000A438D2 /* DianXiaoEr-Menu-iOSTests */,
+				D22BE1921972747000A438D2 /* Frameworks */,
+				D22BE1911972747000A438D2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D22BE1911972747000A438D2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D22BE1901972747000A438D2 /* DianXiaoEr-Menu-iOS.app */,
+				D22BE1AB1972747000A438D2 /* DianXiaoEr-Menu-iOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D22BE1921972747000A438D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D22BE1931972747000A438D2 /* Foundation.framework */,
+				D22BE1951972747000A438D2 /* CoreGraphics.framework */,
+				D22BE1971972747000A438D2 /* UIKit.framework */,
+				D22BE1AC1972747000A438D2 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D22BE1991972747000A438D2 /* DianXiaoEr-Menu-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D22BE1A21972747000A438D2 /* DXEAppDelegate.h */,
+				D22BE1A31972747000A438D2 /* DXEAppDelegate.m */,
+				D22BE1A51972747000A438D2 /* Images.xcassets */,
+				D22BE19A1972747000A438D2 /* Supporting Files */,
+			);
+			path = "DianXiaoEr-Menu-iOS";
+			sourceTree = "<group>";
+		};
+		D22BE19A1972747000A438D2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D22BE19B1972747000A438D2 /* DianXiaoEr-Menu-iOS-Info.plist */,
+				D22BE19C1972747000A438D2 /* InfoPlist.strings */,
+				D22BE19F1972747000A438D2 /* main.m */,
+				D22BE1A11972747000A438D2 /* DianXiaoEr-Menu-iOS-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D22BE1B21972747000A438D2 /* DianXiaoEr-Menu-iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				D22BE1B81972747000A438D2 /* DianXiaoEr_Menu_iOSTests.m */,
+				D22BE1B31972747000A438D2 /* Supporting Files */,
+			);
+			path = "DianXiaoEr-Menu-iOSTests";
+			sourceTree = "<group>";
+		};
+		D22BE1B31972747000A438D2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D22BE1B41972747000A438D2 /* DianXiaoEr-Menu-iOSTests-Info.plist */,
+				D22BE1B51972747000A438D2 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D22BE18F1972747000A438D2 /* DianXiaoEr-Menu-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D22BE1BC1972747000A438D2 /* Build configuration list for PBXNativeTarget "DianXiaoEr-Menu-iOS" */;
+			buildPhases = (
+				D22BE18C1972747000A438D2 /* Sources */,
+				D22BE18D1972747000A438D2 /* Frameworks */,
+				D22BE18E1972747000A438D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DianXiaoEr-Menu-iOS";
+			productName = "DianXiaoEr-Menu-iOS";
+			productReference = D22BE1901972747000A438D2 /* DianXiaoEr-Menu-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D22BE1AA1972747000A438D2 /* DianXiaoEr-Menu-iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D22BE1BF1972747000A438D2 /* Build configuration list for PBXNativeTarget "DianXiaoEr-Menu-iOSTests" */;
+			buildPhases = (
+				D22BE1A71972747000A438D2 /* Sources */,
+				D22BE1A81972747000A438D2 /* Frameworks */,
+				D22BE1A91972747000A438D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D22BE1B11972747000A438D2 /* PBXTargetDependency */,
+			);
+			name = "DianXiaoEr-Menu-iOSTests";
+			productName = "DianXiaoEr-Menu-iOSTests";
+			productReference = D22BE1AB1972747000A438D2 /* DianXiaoEr-Menu-iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D22BE1881972747000A438D2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = DXE;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Shang Chuanren";
+				TargetAttributes = {
+					D22BE1AA1972747000A438D2 = {
+						TestTargetID = D22BE18F1972747000A438D2;
+					};
+				};
+			};
+			buildConfigurationList = D22BE18B1972747000A438D2 /* Build configuration list for PBXProject "DianXiaoEr-Menu-iOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D22BE1871972747000A438D2;
+			productRefGroup = D22BE1911972747000A438D2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D22BE18F1972747000A438D2 /* DianXiaoEr-Menu-iOS */,
+				D22BE1AA1972747000A438D2 /* DianXiaoEr-Menu-iOSTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D22BE18E1972747000A438D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D22BE19E1972747000A438D2 /* InfoPlist.strings in Resources */,
+				D22BE1A61972747000A438D2 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D22BE1A91972747000A438D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D22BE1B71972747000A438D2 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D22BE18C1972747000A438D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D22BE1A41972747000A438D2 /* DXEAppDelegate.m in Sources */,
+				D22BE1A01972747000A438D2 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D22BE1A71972747000A438D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D22BE1B91972747000A438D2 /* DianXiaoEr_Menu_iOSTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D22BE1B11972747000A438D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D22BE18F1972747000A438D2 /* DianXiaoEr-Menu-iOS */;
+			targetProxy = D22BE1B01972747000A438D2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D22BE19C1972747000A438D2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D22BE19D1972747000A438D2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D22BE1B51972747000A438D2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D22BE1B61972747000A438D2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D22BE1BA1972747000A438D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		D22BE1BB1972747000A438D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D22BE1BD1972747000A438D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DianXiaoEr-Menu-iOS/DianXiaoEr-Menu-iOS-Prefix.pch";
+				INFOPLIST_FILE = "DianXiaoEr-Menu-iOS/DianXiaoEr-Menu-iOS-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D22BE1BE1972747000A438D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DianXiaoEr-Menu-iOS/DianXiaoEr-Menu-iOS-Prefix.pch";
+				INFOPLIST_FILE = "DianXiaoEr-Menu-iOS/DianXiaoEr-Menu-iOS-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D22BE1C01972747000A438D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DianXiaoEr-Menu-iOS.app/DianXiaoEr-Menu-iOS";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DianXiaoEr-Menu-iOS/DianXiaoEr-Menu-iOS-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "DianXiaoEr-Menu-iOSTests/DianXiaoEr-Menu-iOSTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		D22BE1C11972747000A438D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DianXiaoEr-Menu-iOS.app/DianXiaoEr-Menu-iOS";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DianXiaoEr-Menu-iOS/DianXiaoEr-Menu-iOS-Prefix.pch";
+				INFOPLIST_FILE = "DianXiaoEr-Menu-iOSTests/DianXiaoEr-Menu-iOSTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D22BE18B1972747000A438D2 /* Build configuration list for PBXProject "DianXiaoEr-Menu-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D22BE1BA1972747000A438D2 /* Debug */,
+				D22BE1BB1972747000A438D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D22BE1BC1972747000A438D2 /* Build configuration list for PBXNativeTarget "DianXiaoEr-Menu-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D22BE1BD1972747000A438D2 /* Debug */,
+				D22BE1BE1972747000A438D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D22BE1BF1972747000A438D2 /* Build configuration list for PBXNativeTarget "DianXiaoEr-Menu-iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D22BE1C01972747000A438D2 /* Debug */,
+				D22BE1C11972747000A438D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D22BE1881972747000A438D2 /* Project object */;
+}
