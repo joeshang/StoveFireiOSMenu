@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		731CAACE6DBB4861A8AEDEC7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A19EEB29E7462C89A58EDF /* libPods.a */; };
+		D20712251974D7AC00E34770 /* DXEOriginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D20712231974D7AC00E34770 /* DXEOriginViewController.m */; };
+		D20712261974D7AC00E34770 /* DXEOriginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D20712241974D7AC00E34770 /* DXEOriginViewController.xib */; };
+		D207122A1974D7BE00E34770 /* DXEQuestionnaireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D20712281974D7BE00E34770 /* DXEQuestionnaireViewController.m */; };
+		D207122B1974D7BE00E34770 /* DXEQuestionnaireViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D20712291974D7BE00E34770 /* DXEQuestionnaireViewController.xib */; };
+		D207122F1974D7D000E34770 /* DXEOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D207122D1974D7D000E34770 /* DXEOrderViewController.m */; };
+		D20712301974D7D000E34770 /* DXEOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D207122E1974D7D000E34770 /* DXEOrderViewController.xib */; };
+		D20712391974D7F500E34770 /* DXEMyselfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D20712371974D7F500E34770 /* DXEMyselfViewController.m */; };
+		D207123A1974D7F500E34770 /* DXEMyselfViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D20712381974D7F500E34770 /* DXEMyselfViewController.xib */; };
 		D22BE1941972747000A438D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22BE1931972747000A438D2 /* Foundation.framework */; };
 		D22BE1961972747000A438D2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22BE1951972747000A438D2 /* CoreGraphics.framework */; };
 		D22BE1981972747000A438D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22BE1971972747000A438D2 /* UIKit.framework */; };
@@ -19,6 +28,8 @@
 		D22BE1AF1972747000A438D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22BE1971972747000A438D2 /* UIKit.framework */; };
 		D22BE1B71972747000A438D2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D22BE1B51972747000A438D2 /* InfoPlist.strings */; };
 		D22BE1B91972747000A438D2 /* DianXiaoEr_Menu_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D22BE1B81972747000A438D2 /* DianXiaoEr_Menu_iOSTests.m */; };
+		D246598C1973FAFA0010B1B6 /* DXEHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D246598A1973FAFA0010B1B6 /* DXEHomePageViewController.m */; };
+		D246598D1973FAFA0010B1B6 /* DXEHomePageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D246598B1973FAFA0010B1B6 /* DXEHomePageViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +43,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07430FF3329A4EBFB4AB3C68 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		52A19EEB29E7462C89A58EDF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D20712221974D7AC00E34770 /* DXEOriginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEOriginViewController.h; path = ViewControllers/DXEOriginViewController.h; sourceTree = "<group>"; };
+		D20712231974D7AC00E34770 /* DXEOriginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEOriginViewController.m; path = ViewControllers/DXEOriginViewController.m; sourceTree = "<group>"; };
+		D20712241974D7AC00E34770 /* DXEOriginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOriginViewController.xib; path = ViewControllers/DXEOriginViewController.xib; sourceTree = "<group>"; };
+		D20712271974D7BE00E34770 /* DXEQuestionnaireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEQuestionnaireViewController.h; path = ViewControllers/DXEQuestionnaireViewController.h; sourceTree = "<group>"; };
+		D20712281974D7BE00E34770 /* DXEQuestionnaireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEQuestionnaireViewController.m; path = ViewControllers/DXEQuestionnaireViewController.m; sourceTree = "<group>"; };
+		D20712291974D7BE00E34770 /* DXEQuestionnaireViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEQuestionnaireViewController.xib; path = ViewControllers/DXEQuestionnaireViewController.xib; sourceTree = "<group>"; };
+		D207122C1974D7D000E34770 /* DXEOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEOrderViewController.h; path = ViewControllers/DXEOrderViewController.h; sourceTree = "<group>"; };
+		D207122D1974D7D000E34770 /* DXEOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEOrderViewController.m; path = ViewControllers/DXEOrderViewController.m; sourceTree = "<group>"; };
+		D207122E1974D7D000E34770 /* DXEOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOrderViewController.xib; path = ViewControllers/DXEOrderViewController.xib; sourceTree = "<group>"; };
+		D20712361974D7F500E34770 /* DXEMyselfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEMyselfViewController.h; path = ViewControllers/DXEMyselfViewController.h; sourceTree = "<group>"; };
+		D20712371974D7F500E34770 /* DXEMyselfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEMyselfViewController.m; path = ViewControllers/DXEMyselfViewController.m; sourceTree = "<group>"; };
+		D20712381974D7F500E34770 /* DXEMyselfViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEMyselfViewController.xib; path = ViewControllers/DXEMyselfViewController.xib; sourceTree = "<group>"; };
 		D22BE1901972747000A438D2 /* DianXiaoEr-Menu-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DianXiaoEr-Menu-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22BE1931972747000A438D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D22BE1951972747000A438D2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -48,6 +73,9 @@
 		D22BE1B41972747000A438D2 /* DianXiaoEr-Menu-iOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DianXiaoEr-Menu-iOSTests-Info.plist"; sourceTree = "<group>"; };
 		D22BE1B61972747000A438D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D22BE1B81972747000A438D2 /* DianXiaoEr_Menu_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DianXiaoEr_Menu_iOSTests.m; sourceTree = "<group>"; };
+		D24659891973FAFA0010B1B6 /* DXEHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEHomePageViewController.h; path = ViewControllers/DXEHomePageViewController.h; sourceTree = "<group>"; };
+		D246598A1973FAFA0010B1B6 /* DXEHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEHomePageViewController.m; path = ViewControllers/DXEHomePageViewController.m; sourceTree = "<group>"; };
+		D246598B1973FAFA0010B1B6 /* DXEHomePageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEHomePageViewController.xib; path = ViewControllers/DXEHomePageViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +86,7 @@
 				D22BE1961972747000A438D2 /* CoreGraphics.framework in Frameworks */,
 				D22BE1981972747000A438D2 /* UIKit.framework in Frameworks */,
 				D22BE1941972747000A438D2 /* Foundation.framework in Frameworks */,
+				731CAACE6DBB4861A8AEDEC7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +103,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D20712091974D0FA00E34770 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				D24659891973FAFA0010B1B6 /* DXEHomePageViewController.h */,
+				D246598A1973FAFA0010B1B6 /* DXEHomePageViewController.m */,
+				D246598B1973FAFA0010B1B6 /* DXEHomePageViewController.xib */,
+			);
+			name = HomePage;
+			sourceTree = "<group>";
+		};
+		D207120A1974D11500E34770 /* Myself */ = {
+			isa = PBXGroup;
+			children = (
+				D20712361974D7F500E34770 /* DXEMyselfViewController.h */,
+				D20712371974D7F500E34770 /* DXEMyselfViewController.m */,
+				D20712381974D7F500E34770 /* DXEMyselfViewController.xib */,
+			);
+			name = Myself;
+			sourceTree = "<group>";
+		};
+		D207120B1974D12800E34770 /* Origin */ = {
+			isa = PBXGroup;
+			children = (
+				D20712221974D7AC00E34770 /* DXEOriginViewController.h */,
+				D20712231974D7AC00E34770 /* DXEOriginViewController.m */,
+				D20712241974D7AC00E34770 /* DXEOriginViewController.xib */,
+			);
+			name = Origin;
+			sourceTree = "<group>";
+		};
+		D207120C1974D13200E34770 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				D207122C1974D7D000E34770 /* DXEOrderViewController.h */,
+				D207122D1974D7D000E34770 /* DXEOrderViewController.m */,
+				D207122E1974D7D000E34770 /* DXEOrderViewController.xib */,
+			);
+			name = Order;
+			sourceTree = "<group>";
+		};
+		D207120D1974D13D00E34770 /* Questionnaire */ = {
+			isa = PBXGroup;
+			children = (
+				D20712271974D7BE00E34770 /* DXEQuestionnaireViewController.h */,
+				D20712281974D7BE00E34770 /* DXEQuestionnaireViewController.m */,
+				D20712291974D7BE00E34770 /* DXEQuestionnaireViewController.xib */,
+			);
+			name = Questionnaire;
+			sourceTree = "<group>";
+		};
 		D22BE1871972747000A438D2 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +160,7 @@
 				D22BE1B21972747000A438D2 /* DianXiaoEr-Menu-iOSTests */,
 				D22BE1921972747000A438D2 /* Frameworks */,
 				D22BE1911972747000A438D2 /* Products */,
+				07430FF3329A4EBFB4AB3C68 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,6 +180,7 @@
 				D22BE1951972747000A438D2 /* CoreGraphics.framework */,
 				D22BE1971972747000A438D2 /* UIKit.framework */,
 				D22BE1AC1972747000A438D2 /* XCTest.framework */,
+				52A19EEB29E7462C89A58EDF /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -109,6 +190,7 @@
 			children = (
 				D22BE1A21972747000A438D2 /* DXEAppDelegate.h */,
 				D22BE1A31972747000A438D2 /* DXEAppDelegate.m */,
+				D246598E1973FB0A0010B1B6 /* View Controller */,
 				D22BE1A51972747000A438D2 /* Images.xcassets */,
 				D22BE19A1972747000A438D2 /* Supporting Files */,
 			);
@@ -144,6 +226,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D246598E1973FB0A0010B1B6 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D20712091974D0FA00E34770 /* HomePage */,
+				D207120B1974D12800E34770 /* Origin */,
+				D207120D1974D13D00E34770 /* Questionnaire */,
+				D207120C1974D13200E34770 /* Order */,
+				D207120A1974D11500E34770 /* Myself */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -151,9 +245,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D22BE1BC1972747000A438D2 /* Build configuration list for PBXNativeTarget "DianXiaoEr-Menu-iOS" */;
 			buildPhases = (
+				22AC35759D854BF5A8319E2C /* Check Pods Manifest.lock */,
 				D22BE18C1972747000A438D2 /* Sources */,
 				D22BE18D1972747000A438D2 /* Frameworks */,
 				D22BE18E1972747000A438D2 /* Resources */,
+				A382ECC0756747C3B4A1991C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -220,6 +316,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D207123A1974D7F500E34770 /* DXEMyselfViewController.xib in Resources */,
+				D20712261974D7AC00E34770 /* DXEOriginViewController.xib in Resources */,
+				D20712301974D7D000E34770 /* DXEOrderViewController.xib in Resources */,
+				D207122B1974D7BE00E34770 /* DXEQuestionnaireViewController.xib in Resources */,
+				D246598D1973FAFA0010B1B6 /* DXEHomePageViewController.xib in Resources */,
 				D22BE19E1972747000A438D2 /* InfoPlist.strings in Resources */,
 				D22BE1A61972747000A438D2 /* Images.xcassets in Resources */,
 			);
@@ -235,13 +336,51 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		22AC35759D854BF5A8319E2C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A382ECC0756747C3B4A1991C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D22BE18C1972747000A438D2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D20712251974D7AC00E34770 /* DXEOriginViewController.m in Sources */,
+				D20712391974D7F500E34770 /* DXEMyselfViewController.m in Sources */,
+				D207122F1974D7D000E34770 /* DXEOrderViewController.m in Sources */,
 				D22BE1A41972747000A438D2 /* DXEAppDelegate.m in Sources */,
+				D246598C1973FAFA0010B1B6 /* DXEHomePageViewController.m in Sources */,
 				D22BE1A01972747000A438D2 /* main.m in Sources */,
+				D207122A1974D7BE00E34770 /* DXEQuestionnaireViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +496,7 @@
 		};
 		D22BE1BD1972747000A438D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07430FF3329A4EBFB4AB3C68 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -370,6 +510,7 @@
 		};
 		D22BE1BE1972747000A438D2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07430FF3329A4EBFB4AB3C68 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -440,6 +581,7 @@
 				D22BE1BE1972747000A438D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D22BE1BF1972747000A438D2 /* Build configuration list for PBXNativeTarget "DianXiaoEr-Menu-iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -448,6 +590,7 @@
 				D22BE1C11972747000A438D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

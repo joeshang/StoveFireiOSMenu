@@ -7,13 +7,26 @@
 //
 
 #import "DXEAppDelegate.h"
+#import "RDVTabBar.h"
+#import "RDVTabBarItem.h"
+#import "RDVTabBarController.h"
+#import "DXEHomePageViewController.h"
+#import "DXEOriginViewController.h"
+#import "DXEQuestionnaireViewController.h"
+#import "DXEOrderViewController.h"
+#import "DXEMyselfViewController.h"
+
+#define kTabBarHeight           72
 
 @implementation DXEAppDelegate
+
+#pragma mark - app delegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    [self setupViewControllers];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -44,6 +57,88 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - setup methods
+
+- (void)setupViewControllers
+{
+    // 首页
+    DXEHomePageViewController *homepage = [[DXEHomePageViewController alloc] init];
+    UINavigationController *homepageNav = [[UINavigationController alloc] initWithRootViewController:homepage];
+    
+    // 起源
+    DXEOriginViewController *origin = [[DXEOriginViewController alloc] init];
+    UINavigationController *originNav = [[UINavigationController alloc] initWithRootViewController:origin];
+    
+    // 问卷
+    DXEQuestionnaireViewController *questionnaire = [[DXEQuestionnaireViewController alloc] init];
+    UINavigationController *questionnaireNav = [[UINavigationController alloc] initWithRootViewController:questionnaire];
+    
+    // 已点菜品
+    DXEOrderViewController *order = [[DXEOrderViewController alloc] init];
+    UINavigationController *orderNav = [[UINavigationController alloc] initWithRootViewController:order];
+    
+    // 我
+    DXEMyselfViewController *myself = [[DXEMyselfViewController alloc] init];
+    UINavigationController *myselfNav = [[UINavigationController alloc] initWithRootViewController:myself];
+    
+    // 上面的界面加入TabBarController，并且对TabBar进行自定义
+    RDVTabBarController *tabBarController = [[RDVTabBarController alloc] init];
+    [tabBarController setViewControllers:@[homepageNav,
+                                           originNav,
+                                           questionnaireNav,
+                                           orderNav,
+                                           myselfNav]];
+    [self customizeTabBarForController:tabBarController];
+    
+    self.window.rootViewController = tabBarController;
+}
+
+- (void)customizeTabBarForController:(RDVTabBarController *)tabBarController
+{
+    NSArray *tabBarItemTitle = @[@"首页", @"起源", @"问卷", @"已点菜品", @"我"];
+    NSArray *tabBarItemImageNamePrefix = @[@"homepage", @"origin", @"questionnaire", @"order", @"myself"];
+    
+    RDVTabBar *tabBar = [tabBarController tabBar];
+    [tabBar setHeight:kTabBarHeight];
+    
+    NSInteger index = 0;
+    for (RDVTabBarItem *item in [tabBar items])
+    {
+        [item setBackgroundColor:[UIColor colorWithHexString:@"222A2D"]];
+        
+        NSDictionary *selectedTextAttributes = @{
+                                                 NSFontAttributeName: [UIFont systemFontOfSize:14],
+                                                 NSForegroundColorAttributeName: [UIColor colorWithHexString:@"E1B554"]
+                                                 };
+        NSDictionary *unselectedTextAttributes = @{
+                                                   NSFontAttributeName: [UIFont systemFontOfSize:14],
+                                                   NSForegroundColorAttributeName: [UIColor colorWithHexString:@"717171"]
+                                                   };
+        [item setSelectedTitleAttributes:selectedTextAttributes];
+        [item setUnselectedTitleAttributes:unselectedTextAttributes];
+        [item setTitle:[tabBarItemTitle objectAtIndex:index]];
+        
+        UIImage *tabBarSelectedImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_tabbar_selected",
+                                                            [tabBarItemImageNamePrefix objectAtIndex:index]]];
+        UIImage *tabBarUnselectedImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_tabbar_unselected",
+                                                              [tabBarItemImageNamePrefix objectAtIndex:index]]];
+        [item setBackgroundSelectedImage:tabBarSelectedImage
+                     withUnselectedImage:tabBarUnselectedImage];
+        
+        index++;
+    }
+}
+
+- (void)customizeNavigationBar
+{
+    UIImage *backgroundImage = nil;
+    NSDictionary *textAttributes = nil;
+    
+    [[UINavigationBar appearance] setBackgroundImage:backgroundImage
+                                       forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
 }
 
 @end

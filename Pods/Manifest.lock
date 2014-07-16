@@ -1,0 +1,13 @@
+PODS:
+  - RDVTabBarController (1.1.6)
+  - RNThemeManager (0.1.0)
+
+DEPENDENCIES:
+  - RDVTabBarController
+  - RNThemeManager
+
+SPEC CHECKSUMS:
+  RDVTabBarController: 252dafb16725f9a07026618ff51acf06a12b206b
+  RNThemeManager: 3c5da94d26124f33aa46b50be607ab697fd06c17
+
+COCOAPODS: 0.33.1
