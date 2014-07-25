@@ -31,6 +31,9 @@ extern NSString * const RNThemeManagerDidChangeThemes;
 // Return a UIImage for an image name stored in theme file
 - (UIImage *)imageForKey:(NSString *)key;
 
+// Return a UIImage by name with theme directory prefix
+- (UIImage *)imageForName:(NSString *)name;
+
 // Change the theme name, should not include .plist extension
 - (void)changeTheme:(NSString *)themeName;
 

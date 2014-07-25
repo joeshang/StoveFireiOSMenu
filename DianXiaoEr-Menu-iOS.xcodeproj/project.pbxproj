@@ -16,6 +16,7 @@
 		D20712301974D7D000E34770 /* DXEOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D207122E1974D7D000E34770 /* DXEOrderViewController.xib */; };
 		D20712391974D7F500E34770 /* DXEMyselfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D20712371974D7F500E34770 /* DXEMyselfViewController.m */; };
 		D207123A1974D7F500E34770 /* DXEMyselfViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D20712381974D7F500E34770 /* DXEMyselfViewController.xib */; };
+		D21E59461982418000373622 /* Theme in Resources */ = {isa = PBXBuildFile; fileRef = D21E59451982418000373622 /* Theme */; };
 		D22BE1941972747000A438D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22BE1931972747000A438D2 /* Foundation.framework */; };
 		D22BE1961972747000A438D2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22BE1951972747000A438D2 /* CoreGraphics.framework */; };
 		D22BE1981972747000A438D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22BE1971972747000A438D2 /* UIKit.framework */; };
@@ -57,6 +58,7 @@
 		D20712361974D7F500E34770 /* DXEMyselfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEMyselfViewController.h; path = ViewControllers/DXEMyselfViewController.h; sourceTree = "<group>"; };
 		D20712371974D7F500E34770 /* DXEMyselfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEMyselfViewController.m; path = ViewControllers/DXEMyselfViewController.m; sourceTree = "<group>"; };
 		D20712381974D7F500E34770 /* DXEMyselfViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEMyselfViewController.xib; path = ViewControllers/DXEMyselfViewController.xib; sourceTree = "<group>"; };
+		D21E59451982418000373622 /* Theme */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Theme; sourceTree = "<group>"; };
 		D22BE1901972747000A438D2 /* DianXiaoEr-Menu-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DianXiaoEr-Menu-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22BE1931972747000A438D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D22BE1951972747000A438D2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -192,6 +194,7 @@
 				D22BE1A31972747000A438D2 /* DXEAppDelegate.m */,
 				D246598E1973FB0A0010B1B6 /* View Controller */,
 				D22BE1A51972747000A438D2 /* Images.xcassets */,
+				D21E59451982418000373622 /* Theme */,
 				D22BE19A1972747000A438D2 /* Supporting Files */,
 			);
 			path = "DianXiaoEr-Menu-iOS";
@@ -316,6 +319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D21E59461982418000373622 /* Theme in Resources */,
 				D207123A1974D7F500E34770 /* DXEMyselfViewController.xib in Resources */,
 				D20712261974D7AC00E34770 /* DXEOriginViewController.xib in Resources */,
 				D20712301974D7D000E34770 /* DXEOrderViewController.xib in Resources */,

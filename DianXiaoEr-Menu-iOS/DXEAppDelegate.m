@@ -7,6 +7,7 @@
 //
 
 #import "DXEAppDelegate.h"
+#import "RNThemeManager.h"
 #import "RDVTabBar.h"
 #import "RDVTabBarItem.h"
 #import "RDVTabBarController.h"
@@ -29,6 +30,9 @@
     [self setupViewControllers];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    [self customizeNavigationBar];
+    
     return YES;
 }
 
@@ -106,24 +110,26 @@
     NSInteger index = 0;
     for (RDVTabBarItem *item in [tabBar items])
     {
-        [item setBackgroundColor:[UIColor colorWithHexString:@"222A2D"]];
+        [item setBackgroundColor:[[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.BackgroundColor"]];
         
-        NSDictionary *selectedTextAttributes = @{
-                                                 NSFontAttributeName: [UIFont systemFontOfSize:14],
-                                                 NSForegroundColorAttributeName: [UIColor colorWithHexString:@"E1B554"]
-                                                 };
-        NSDictionary *unselectedTextAttributes = @{
-                                                   NSFontAttributeName: [UIFont systemFontOfSize:14],
-                                                   NSForegroundColorAttributeName: [UIColor colorWithHexString:@"717171"]
-                                                   };
+        NSDictionary *selectedTextAttributes =
+        @{
+          NSFontAttributeName: [[RNThemeManager sharedManager] fontForKey:@"Main.TabBar.ItemSelectedFont"],
+          NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.ItemSelectedFontColor"]
+        };
+        NSDictionary *unselectedTextAttributes =
+        @{
+          NSFontAttributeName: [[RNThemeManager sharedManager] fontForKey:@"Main.TabBar.ItemUnselectedFont"],
+          NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.ItemUnselectedFontColor"]
+        };
         [item setSelectedTitleAttributes:selectedTextAttributes];
         [item setUnselectedTitleAttributes:unselectedTextAttributes];
         [item setTitle:[tabBarItemTitle objectAtIndex:index]];
         
-        UIImage *tabBarSelectedImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_tabbar_selected",
-                                                            [tabBarItemImageNamePrefix objectAtIndex:index]]];
-        UIImage *tabBarUnselectedImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_tabbar_unselected",
-                                                              [tabBarItemImageNamePrefix objectAtIndex:index]]];
+        UIImage *tabBarSelectedImage = [[RNThemeManager sharedManager] imageForName:
+                                        [NSString stringWithFormat:@"%@_tabbar_selected", [tabBarItemImageNamePrefix objectAtIndex:index]]];
+        UIImage *tabBarUnselectedImage = [[RNThemeManager sharedManager] imageForName:
+                                          [NSString stringWithFormat:@"%@_tabbar_unselected", [tabBarItemImageNamePrefix objectAtIndex:index]]];
         [item setBackgroundSelectedImage:tabBarSelectedImage
                      withUnselectedImage:tabBarUnselectedImage];
         

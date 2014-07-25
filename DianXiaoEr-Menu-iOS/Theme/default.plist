@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Main.TabBar.ItemSelectedFont</key>
+	<string>Helvetica</string>
+	<key>Main.TabBar.ItemSelectedFontSize</key>
+	<string>14</string>
+	<key>Main.TabBar.ItemSelectedFontColor</key>
+	<string>e1b554</string>
+	<key>Main.TabBar.ItemUnselectedFont</key>
+	<string>Helvetica</string>
+	<key>Main.TabBar.ItemUnselectedFontSize</key>
+	<string>14</string>
+	<key>Main.TabBar.ItemUnselectedFontColor</key>
+	<string>717171</string>
+	<key>Main.TabBar.BackgroundColor</key>
+	<string>222a2d</string>
+</dict>
+</plist>
