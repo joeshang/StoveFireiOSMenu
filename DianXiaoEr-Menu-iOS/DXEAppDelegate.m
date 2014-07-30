@@ -17,7 +17,8 @@
 #import "DXEOrderViewController.h"
 #import "DXEMyselfViewController.h"
 
-#define kTabBarHeight           72
+#define kTabBarHeight                   72
+#define kTabBarItemTitleVerticalOffset  3.0f
 
 @implementation DXEAppDelegate
 
@@ -114,24 +115,25 @@
         
         NSDictionary *selectedTextAttributes =
         @{
-          NSFontAttributeName: [[RNThemeManager sharedManager] fontForKey:@"Main.TabBar.ItemSelectedFont"],
-          NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.ItemSelectedFontColor"]
+          NSFontAttributeName: [[RNThemeManager sharedManager] fontForKey:@"Main.TabBar.ItemSelectedTextFont"],
+          NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.ItemSelectedTextFontColor"]
         };
         NSDictionary *unselectedTextAttributes =
         @{
-          NSFontAttributeName: [[RNThemeManager sharedManager] fontForKey:@"Main.TabBar.ItemUnselectedFont"],
-          NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.ItemUnselectedFontColor"]
+          NSFontAttributeName: [[RNThemeManager sharedManager] fontForKey:@"Main.TabBar.ItemUnselectedTextFont"],
+          NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.ItemUnselectedTextFontColor"]
         };
         [item setSelectedTitleAttributes:selectedTextAttributes];
         [item setUnselectedTitleAttributes:unselectedTextAttributes];
         [item setTitle:[tabBarItemTitle objectAtIndex:index]];
+        item.titlePositionAdjustment = UIOffsetMake(0.0f, kTabBarItemTitleVerticalOffset);
         
         UIImage *tabBarSelectedImage = [[RNThemeManager sharedManager] imageForName:
-                                        [NSString stringWithFormat:@"%@_tabbar_selected", [tabBarItemImageNamePrefix objectAtIndex:index]]];
+                                        [NSString stringWithFormat:@"%@_tabbar_selected.png", [tabBarItemImageNamePrefix objectAtIndex:index]]];
         UIImage *tabBarUnselectedImage = [[RNThemeManager sharedManager] imageForName:
-                                          [NSString stringWithFormat:@"%@_tabbar_unselected", [tabBarItemImageNamePrefix objectAtIndex:index]]];
-        [item setBackgroundSelectedImage:tabBarSelectedImage
-                     withUnselectedImage:tabBarUnselectedImage];
+                                          [NSString stringWithFormat:@"%@_tabbar_unselected.png", [tabBarItemImageNamePrefix objectAtIndex:index]]];
+        [item setFinishedSelectedImage:tabBarSelectedImage
+           withFinishedUnselectedImage:tabBarUnselectedImage];
         
         index++;
     }

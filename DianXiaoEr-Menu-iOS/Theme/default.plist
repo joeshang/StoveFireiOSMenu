@@ -2,19 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Main.TabBar.ItemSelectedFont</key>
+	<key>Main.TabBar.ItemSelectedTextFont</key>
 	<string>Helvetica</string>
-	<key>Main.TabBar.ItemSelectedFontSize</key>
+	<key>Main.TabBar.ItemSelectedTextFontSize</key>
 	<string>14</string>
-	<key>Main.TabBar.ItemSelectedFontColor</key>
-	<string>e1b554</string>
-	<key>Main.TabBar.ItemUnselectedFont</key>
+	<key>Main.TabBar.ItemSelectedTextFontColor</key>
+	<string>E1B554</string>
+	<key>Main.TabBar.ItemUnselectedTextFont</key>
 	<string>Helvetica</string>
-	<key>Main.TabBar.ItemUnselectedFontSize</key>
+	<key>Main.TabBar.ItemUnselectedTextFontSize</key>
 	<string>14</string>
-	<key>Main.TabBar.ItemUnselectedFontColor</key>
+	<key>Main.TabBar.ItemUnselectedTextFontColor</key>
 	<string>717171</string>
+	<key>Main.TabBar.BadgeTextFont</key>
+	<string>Helvetica</string>
+	<key>Main.TabBar.BadgeTextFontSize</key>
+	<string>15</string>
+	<key>Main.TabBar.BadgeTextFontColor</key>
+	<string>FFFFFF</string>
 	<key>Main.TabBar.BackgroundColor</key>
-	<string>222a2d</string>
+	<string>222A2D</string>
 </dict>
 </plist>

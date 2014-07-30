@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:DianXiaoEr-Menu-iOS/Theme/default.plist">
-   </FileRef>
-   <FileRef
       location = "group:DianXiaoEr-Menu-iOS.xcodeproj">
    </FileRef>
    <FileRef

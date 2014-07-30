@@ -124,6 +124,11 @@
 @property (nonatomic) UIOffset badgePositionAdjustment;
 
 /**
+ *  The flag of badge's postition at center or not.
+ */
+@property (nonatomic) BOOL badgeIsAtCenter;
+
+/**
  * Font used for badge's text.
  */
 @property (nonatomic) UIFont *badgeTextFont;

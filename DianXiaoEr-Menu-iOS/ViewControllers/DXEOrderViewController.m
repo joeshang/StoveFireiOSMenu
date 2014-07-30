@@ -7,6 +7,8 @@
 //
 
 #import "DXEOrderViewController.h"
+#import "RDVTabBarItem.h"
+#import "RDVTabBarController.h"
 
 @interface DXEOrderViewController ()
 
@@ -17,8 +19,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    if (self)
+    {
     }
     return self;
 }
@@ -26,13 +28,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    self.rdv_tabBarItem.badgeValue = @"";
+    self.rdv_tabBarItem.badgeIsAtCenter = YES;
+    self.rdv_tabBarItem.badgeBackgroundColor = nil;
+    self.rdv_tabBarItem.badgeBackgroundImage = nil;
+    self.rdv_tabBarItem.badgeTextFont = [[RNThemeManager sharedManager] fontForKey:@"Main.TabBar.BadgeTextFont"];
+    self.rdv_tabBarItem.badgeTextColor = [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.BadgeTextFontColor"];
 }
 
 @end

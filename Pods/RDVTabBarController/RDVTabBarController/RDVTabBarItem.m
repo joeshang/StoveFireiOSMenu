@@ -86,6 +86,7 @@
     _badgeTextColor = [UIColor whiteColor];
     _badgeTextFont = [UIFont systemFontOfSize:12];
     _badgePositionAdjustment = UIOffsetZero;
+    _badgeIsAtCenter = FALSE;
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -202,10 +203,21 @@
             badgeSize = CGSizeMake(badgeSize.height, badgeSize.height);
         }
         
-        CGRect badgeBackgroundFrame = CGRectMake(roundf(frameSize.width / 2 + (image.size.width / 2) * 0.9) +
-                                                 [self badgePositionAdjustment].horizontal,
-                                                 textOffset + [self badgePositionAdjustment].vertical,
-                                                 badgeSize.width + 2 * textOffset, badgeSize.height + 2 * textOffset);
+        CGRect badgeBackgroundFrame;
+        if (_badgeIsAtCenter == TRUE)
+        {
+            badgeBackgroundFrame = CGRectMake(frameSize.width / 2 - badgeSize.width / 2 - textOffset +
+                                              [self badgePositionAdjustment].horizontal,
+                                              imageStartingY + imageSize.height / 2 - badgeSize.height / 2 - textOffset + [self badgePositionAdjustment].vertical,
+                                              badgeSize.width + 2 * textOffset, badgeSize.height + 2 * textOffset);
+        }
+        else
+        {
+            badgeBackgroundFrame = CGRectMake(roundf(frameSize.width / 2 + (image.size.width / 2) * 0.9) +
+                                              [self badgePositionAdjustment].horizontal,
+                                              textOffset + [self badgePositionAdjustment].vertical,
+                                              badgeSize.width + 2 * textOffset, badgeSize.height + 2 * textOffset);
+        }
         
         if ([self badgeBackgroundColor]) {
             CGContextSetFillColorWithColor(context, [[self badgeBackgroundColor] CGColor]);
