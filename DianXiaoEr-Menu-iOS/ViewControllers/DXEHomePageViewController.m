@@ -70,6 +70,7 @@
     self.dishScrollView.showsVerticalScrollIndicator = NO;
     self.dishScrollView.showsHorizontalScrollIndicator = NO;
     self.dishScrollView.pagingEnabled = YES;
+    self.dishScrollView.directionalLockEnabled = YES;
     
     // 为每一类菜品创建对应的collection view
     CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
