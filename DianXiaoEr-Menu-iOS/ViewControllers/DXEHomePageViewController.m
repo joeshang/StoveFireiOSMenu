@@ -10,25 +10,22 @@
 #import "DXETipsColletionViewCell.h"
 #import "DXEDishCollectionViewCell.h"
 
-#define kScrollMenuHeight                   55
-#define kNavigationBarHeight                64
+#define kDXECollectionViewSectionTop            17
+#define kDXECollectionViewSectionBottom         17
+#define kDXECollectionViewSectionLeft           17
+#define kDXECollectionViewSectionRight          17
+#define kDXECollectionViewHeaderHeight          0
+#define kDXECollectionViewFooterHeight          0
+#define kDXECollectionViewColumnSpacing         17
+#define kDXECollectionViewInteritemSpacing      17
 
-#define kCollectionViewSectionTop           17
-#define kCollectionViewSectionBottom        17
-#define kCollectionViewSectionLeft          17
-#define kCollectionViewSectionRight         17
-#define kCollectionViewHeaderHeight         0
-#define kCollectionViewFooterHeight         0
-#define kCollectionViewColumnSpacing        17
-#define kCollectionViewInteritemSpacing     17
-
-#define kCollectionViewCellWidth            360
-#define kCollectionViewInfoCellHeight       140
-#define kCollectionViewDishCellHeight       600
+#define kDXECollectionViewCellWidth             360
+#define kDXECollectionViewInfoCellHeight        140
+#define kDXECollectionViewDishCellHeight        600
 
 #warning 当接入Model时使用从后台取得的数据
-#define kCollectionViewCellCount            15
-#define kScrollMenuItemCount                10
+#define kDXECollectionViewCellCount             15
+#define kDXEScrollMenuItemCount                 10
 
 @interface DXEHomePageViewController ()
 
@@ -62,10 +59,11 @@
     [super viewDidLoad];
     
     // 初始化包含collection view的scroll view
-    self.dishScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,
-                                                                         kNavigationBarHeight + kScrollMenuHeight,
-                                                                         CGRectGetWidth(self.view.bounds),
-                                                                         CGRectGetHeight(self.view.bounds) - kNavigationBarHeight - kScrollMenuHeight)];
+    CGRect contentRect = CGRectMake(0,
+                                    kDXENavigationBarHeight + kDXEScrollMenuHeight,
+                                    CGRectGetWidth(self.view.bounds),
+                                    CGRectGetHeight(self.view.bounds) - kDXENavigationBarHeight - kDXEScrollMenuHeight - kDXETabBarHeight);
+    self.dishScrollView = [[UIScrollView alloc] initWithFrame:contentRect];
     self.dishScrollView.delegate = self;
     self.dishScrollView.showsVerticalScrollIndicator = NO;
     self.dishScrollView.showsHorizontalScrollIndicator = NO;
@@ -74,18 +72,18 @@
     
     // 为每一类菜品创建对应的collection view
     CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
-    layout.sectionInset = UIEdgeInsetsMake(kCollectionViewSectionTop,
-                                           kCollectionViewSectionLeft,
-                                           kCollectionViewSectionBottom,
-                                           kCollectionViewSectionRight);
-    layout.headerHeight = kCollectionViewHeaderHeight;
-    layout.footerHeight = kCollectionViewFooterHeight;
-    layout.minimumColumnSpacing = kCollectionViewColumnSpacing;
-    layout.minimumInteritemSpacing = kCollectionViewInteritemSpacing;
+    layout.sectionInset = UIEdgeInsetsMake(kDXECollectionViewSectionTop,
+                                           kDXECollectionViewSectionLeft,
+                                           kDXECollectionViewSectionBottom,
+                                           kDXECollectionViewSectionRight);
+    layout.headerHeight = kDXECollectionViewHeaderHeight;
+    layout.footerHeight = kDXECollectionViewFooterHeight;
+    layout.minimumColumnSpacing = kDXECollectionViewColumnSpacing;
+    layout.minimumInteritemSpacing = kDXECollectionViewInteritemSpacing;
     
     CGRect collectionViewRect;
 #warning 当接入Model时使用从后台取得的数据
-    for (int i = 0; i < kScrollMenuItemCount; i++)
+    for (int i = 0; i < kDXEScrollMenuItemCount; i++)
     {
         collectionViewRect= CGRectMake(i * CGRectGetWidth(self.view.bounds),
                                        0,
@@ -108,20 +106,11 @@
         [self.collectionViews addObject:collectionView];
     }
     
-    self.dishScrollView.contentSize = CGSizeMake(kScrollMenuItemCount * CGRectGetWidth(self.dishScrollView.bounds),
+#warning 当接入Model时使用从后台取得的数据
+    self.dishScrollView.contentSize = CGSizeMake(kDXEScrollMenuItemCount * CGRectGetWidth(self.dishScrollView.bounds),
                                                  CGRectGetHeight(self.dishScrollView.bounds));
     
     [self.view addSubview:self.dishScrollView];
-}
-
-#pragma mark - UIScrollViewDelegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView == self.dishScrollView)
-    {
-        
-    }
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -134,7 +123,7 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
 #warning 当接入Model时使用从后台取得的数据
-    return kCollectionViewCellCount;
+    return kDXECollectionViewCellCount;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -162,11 +151,11 @@
     CGSize size;
     if (indexPath.row == 0)
     {
-        size = CGSizeMake(kCollectionViewCellWidth, kCollectionViewInfoCellHeight);
+        size = CGSizeMake(kDXECollectionViewCellWidth, kDXECollectionViewInfoCellHeight);
     }
     else
     {
-        size = CGSizeMake(kCollectionViewCellWidth, kCollectionViewDishCellHeight);
+        size = CGSizeMake(kDXECollectionViewCellWidth, kDXECollectionViewDishCellHeight);
     }
     
     return size;

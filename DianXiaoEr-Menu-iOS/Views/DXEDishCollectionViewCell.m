@@ -24,9 +24,9 @@
     
     if (self)
     {
-        self.layer.cornerRadius = 5;
+        self.layer.cornerRadius = kDXECollectionViewCellRadius;
         self.layer.masksToBounds = YES;
-        self.layer.borderWidth = 2;
+        self.layer.borderWidth = kDXECollectionViewCellBorderWidth;
         self.layer.borderColor = [[UIColor blueColor] CGColor];
     }
     

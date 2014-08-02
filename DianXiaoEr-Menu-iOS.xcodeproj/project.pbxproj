@@ -57,6 +57,7 @@
 		D204928C198D4EAD00D8187E /* DXETipsColletionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXETipsColletionViewCell.m; path = Views/DXETipsColletionViewCell.m; sourceTree = "<group>"; };
 		D204928E198D4ED400D8187E /* DXETipsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXETipsCollectionViewCell.xib; path = Views/DXETipsCollectionViewCell.xib; sourceTree = "<group>"; };
 		D2049290198D4EEC00D8187E /* DXEDishCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEDishCollectionViewCell.xib; path = Views/DXEDishCollectionViewCell.xib; sourceTree = "<group>"; };
+		D2049293198D865600D8187E /* DXECommonHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXECommonHeader.h; sourceTree = "<group>"; };
 		D20712221974D7AC00E34770 /* DXEOriginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEOriginViewController.h; path = ViewControllers/DXEOriginViewController.h; sourceTree = "<group>"; };
 		D20712231974D7AC00E34770 /* DXEOriginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEOriginViewController.m; path = ViewControllers/DXEOriginViewController.m; sourceTree = "<group>"; };
 		D20712241974D7AC00E34770 /* DXEOriginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOriginViewController.xib; path = ViewControllers/DXEOriginViewController.xib; sourceTree = "<group>"; };
@@ -228,6 +229,7 @@
 		D22BE1991972747000A438D2 /* DianXiaoEr-Menu-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				D2049293198D865600D8187E /* DXECommonHeader.h */,
 				D22BE1A21972747000A438D2 /* DXEAppDelegate.h */,
 				D22BE1A31972747000A438D2 /* DXEAppDelegate.m */,
 				D2049278198D0C1000D8187E /* Model */,

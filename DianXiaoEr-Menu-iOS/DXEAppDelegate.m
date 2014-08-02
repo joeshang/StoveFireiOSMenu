@@ -17,8 +17,7 @@
 #import "DXEOrderViewController.h"
 #import "DXEMyselfViewController.h"
 
-#define kTabBarHeight                   72
-#define kTabBarItemTitleVerticalOffset  3.0f
+#define kDXETabBarItemTitleVerticalOffset           3.0f
 
 @implementation DXEAppDelegate
 
@@ -106,7 +105,7 @@
     NSArray *tabBarItemImageNamePrefix = @[@"homepage", @"origin", @"questionnaire", @"order", @"myself"];
     
     RDVTabBar *tabBar = [tabBarController tabBar];
-    [tabBar setHeight:kTabBarHeight];
+    [tabBar setHeight:kDXETabBarHeight];
     
     NSInteger index = 0;
     for (RDVTabBarItem *item in [tabBar items])
@@ -126,7 +125,7 @@
         [item setSelectedTitleAttributes:selectedTextAttributes];
         [item setUnselectedTitleAttributes:unselectedTextAttributes];
         [item setTitle:[tabBarItemTitle objectAtIndex:index]];
-        item.titlePositionAdjustment = UIOffsetMake(0.0f, kTabBarItemTitleVerticalOffset);
+        item.titlePositionAdjustment = UIOffsetMake(0.0f, kDXETabBarItemTitleVerticalOffset);
         
         UIImage *tabBarSelectedImage = [[RNThemeManager sharedManager] imageForName:
                                         [NSString stringWithFormat:@"%@_tabbar_selected.png", [tabBarItemImageNamePrefix objectAtIndex:index]]];
