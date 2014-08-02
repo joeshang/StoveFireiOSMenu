@@ -1,5 +1,5 @@
 #include "Pods-RDVTabBarController.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/RDVTabBarController" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/RDVTabBarController" "${PODS_ROOT}/Headers/RNThemeManager"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/RDVTabBarController" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/CHTCollectionViewWaterfallLayout" "${PODS_ROOT}/Headers/RDVTabBarController" "${PODS_ROOT}/Headers/RNThemeManager"
 OTHER_LDFLAGS = -ObjC ${PODS_RDVTABBARCONTROLLER_OTHER_LDFLAGS}
 PODS_ROOT = ${SRCROOT}

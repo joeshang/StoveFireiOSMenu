@@ -6,6 +6,12 @@
 // project.
 
 
+// CHTCollectionViewWaterfallLayout
+#define COCOAPODS_POD_AVAILABLE_CHTCollectionViewWaterfallLayout
+#define COCOAPODS_VERSION_MAJOR_CHTCollectionViewWaterfallLayout 0
+#define COCOAPODS_VERSION_MINOR_CHTCollectionViewWaterfallLayout 7
+#define COCOAPODS_VERSION_PATCH_CHTCollectionViewWaterfallLayout 0
+
 // RDVTabBarController
 #define COCOAPODS_POD_AVAILABLE_RDVTabBarController
 #define COCOAPODS_VERSION_MAJOR_RDVTabBarController 1

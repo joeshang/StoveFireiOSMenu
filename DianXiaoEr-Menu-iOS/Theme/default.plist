@@ -22,5 +22,7 @@
 	<string>FFFFFF</string>
 	<key>Main.TabBar.BackgroundColor</key>
 	<string>222A2D</string>
+	<key>HomePage.CollectionView.BackgroundColor</key>
+	<string>FFFFFF</string>
 </dict>
 </plist>

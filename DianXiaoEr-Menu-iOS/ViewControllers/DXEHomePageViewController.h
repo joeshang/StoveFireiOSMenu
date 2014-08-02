@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CHTCollectionViewWaterfallLayout.h"
 
 @interface DXEHomePageViewController : UIViewController
+< UIScrollViewDelegate, UICollectionViewDataSource, CHTCollectionViewDelegateWaterfallLayout >
+
+@property (nonatomic, strong) UIScrollView *dishScrollView;
+@property (nonatomic, strong) NSMutableArray *collectionViews;
 
 @end
