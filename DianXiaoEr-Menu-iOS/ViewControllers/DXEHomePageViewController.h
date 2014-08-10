@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "CHTCollectionViewWaterfallLayout.h"
+#import "iCarousel.h"
 
 @interface DXEHomePageViewController : UIViewController
-< UIScrollViewDelegate, UICollectionViewDataSource, CHTCollectionViewDelegateWaterfallLayout >
+<
+    UICollectionViewDataSource,
+    UICollectionViewDelegate,
+    CHTCollectionViewDelegateWaterfallLayout,
+    iCarouselDataSource,
+    iCarouselDelegate
+>
 
-@property (nonatomic, strong) UIScrollView *contentScrollView;
-@property (nonatomic, strong) NSMutableArray *collectionViews;
+@property (nonatomic, strong) iCarousel *contentContainer;
 
 @end

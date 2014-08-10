@@ -10,14 +10,6 @@
 
 @implementation DXEDishCollectionViewCell
 
-@synthesize dishPicture;
-@synthesize dishName;
-@synthesize dishEnglishName;
-@synthesize dishPrice;
-@synthesize dishFavor;
-@synthesize dishPriceIcon;
-@synthesize dishFavorIcon;
-
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];

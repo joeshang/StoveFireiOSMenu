@@ -10,12 +10,12 @@
 
 @interface DXEDishCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic) IBOutlet UIImageView *dishPicture;
 @property (nonatomic) IBOutlet UILabel *dishName;
 @property (nonatomic) IBOutlet UILabel *dishEnglishName;
+@property (nonatomic) IBOutlet UIImageView *dishImage;
 @property (nonatomic) IBOutlet UILabel *dishPrice;
-@property (nonatomic) IBOutlet UILabel *dishFavor;
 @property (nonatomic) IBOutlet UIImageView *dishPriceIcon;
+@property (nonatomic) IBOutlet UILabel *dishFavor;
 @property (nonatomic) IBOutlet UIImageView *dishFavorIcon;
 
 @end

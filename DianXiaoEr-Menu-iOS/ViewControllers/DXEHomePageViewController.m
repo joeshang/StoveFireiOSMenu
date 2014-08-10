@@ -33,27 +33,17 @@
 
 @implementation DXEHomePageViewController
 
-@synthesize contentScrollView = _contentScrollView;
-@synthesize collectionViews = _collectionViews;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-        _collectionViews = [[NSMutableArray alloc] initWithCapacity:kDXEScrollMenuItemCount];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    for (UICollectionView *collectionView in _collectionViews)
-    {
-        collectionView.delegate = nil;
-        collectionView.dataSource = nil;
-    }
-    _collectionViews = nil;
 }
 
 - (void)viewDidLoad
@@ -61,18 +51,31 @@
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    // 初始化包含collection view的scroll view
+    
     CGRect contentRect = CGRectMake(0,
                                     kDXENavigationBarHeight + kDXEScrollMenuHeight,
                                     CGRectGetWidth(self.view.bounds),
                                     CGRectGetHeight(self.view.bounds) - kDXENavigationBarHeight - kDXEScrollMenuHeight - kDXETabBarHeight);
-    self.contentScrollView = [[UIScrollView alloc] initWithFrame:contentRect];
-    self.contentScrollView.delegate = self;
-    self.contentScrollView.showsVerticalScrollIndicator = NO;
-    self.contentScrollView.showsHorizontalScrollIndicator = NO;
-    self.contentScrollView.pagingEnabled = YES;
-    self.contentScrollView.directionalLockEnabled = YES;
-    
+    self.contentContainer = [[iCarousel alloc] initWithFrame:contentRect];
+    self.contentContainer.type = iCarouselTypeLinear;
+    self.contentContainer.pagingEnabled = YES;
+    self.contentContainer.bounceDistance = 0.4;
+    self.contentContainer.delegate = self;
+    self.contentContainer.dataSource = self;
+    self.contentContainer.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionView.BackgroundColor"];
+    [self.view addSubview:self.contentContainer];
+}
+
+#pragma mark - iCarouselDataSource
+
+- (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel
+{
+#warning 当接入Model时使用从后台取得的数据
+    return kDXEScrollMenuItemCount;
+}
+
+- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
+{
     // 为每一类菜品创建对应的collection view
     CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
     layout.sectionInset = UIEdgeInsetsMake(kDXECollectionViewSectionTop,
@@ -84,37 +87,28 @@
     layout.minimumColumnSpacing = kDXECollectionViewColumnSpacing;
     layout.minimumInteritemSpacing = kDXECollectionViewInteritemSpacing;
     
-    CGRect collectionViewRect;
-#warning 当接入Model时使用从后台取得的数据
-    for (int i = 0; i < kDXEScrollMenuItemCount; i++)
-    {
-        collectionViewRect= CGRectMake(i * CGRectGetWidth(self.view.bounds),
-                                       0,
-                                       CGRectGetWidth(self.contentScrollView.bounds),
-                                       CGRectGetHeight(self.contentScrollView.bounds));
-        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:collectionViewRect
-                                                              collectionViewLayout:layout];
-        collectionView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionView.BackgroundColor"];
-        
-        collectionView.tag = i;
-        collectionView.delegate = self;
-        collectionView.dataSource = self;
-        
-        [collectionView registerNib:[UINib nibWithNibName:@"DXETipsCollectionViewCell" bundle:nil]
-         forCellWithReuseIdentifier:@"DXETipsCollectionViewCell"];
-        [collectionView registerNib:[UINib nibWithNibName:@"DXEDishCollectionViewCell" bundle:nil]
-         forCellWithReuseIdentifier:@"DXEDishCollectionViewCell"];
-        
-        [self.contentScrollView addSubview:collectionView];
-        [self.collectionViews addObject:collectionView];
-    }
+    CGRect collectionViewRect= CGRectMake(index * CGRectGetWidth(self.view.bounds),
+                                          0,
+                                          CGRectGetWidth(carousel.bounds),
+                                          CGRectGetHeight(carousel.bounds));
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:collectionViewRect
+                                                          collectionViewLayout:layout];
+    collectionView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionView.BackgroundColor"];
     
-#warning 当接入Model时使用从后台取得的数据
-    self.contentScrollView.contentSize = CGSizeMake(kDXEScrollMenuItemCount * CGRectGetWidth(self.contentScrollView.bounds),
-                                                 CGRectGetHeight(self.contentScrollView.bounds));
+    collectionView.tag = index;
+    collectionView.delaysContentTouches = NO;
+    collectionView.delegate = self;
+    collectionView.dataSource = self;
     
-//    [self.view addSubview:self.contentScrollView];
+    [collectionView registerNib:[UINib nibWithNibName:@"DXETipsCollectionViewCell" bundle:nil]
+     forCellWithReuseIdentifier:@"DXETipsCollectionViewCell"];
+    [collectionView registerNib:[UINib nibWithNibName:@"DXEDishCollectionViewCell" bundle:nil]
+     forCellWithReuseIdentifier:@"DXEDishCollectionViewCell"];
+    
+    return collectionView;
 }
+
+#pragma mark - iCarouselDelegate
 
 #pragma mark - UICollectionViewDataSource
 
@@ -143,6 +137,13 @@
                                                                                     forIndexPath:indexPath];
         return cell;
     }
+}
+
+#pragma mark- UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"page: %ld, index: %ld", collectionView.tag, indexPath.row);
 }
 
 #pragma mark - CHTCollectionViewDelegateWaterflowLayout

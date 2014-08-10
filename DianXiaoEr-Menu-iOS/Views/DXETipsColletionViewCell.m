@@ -10,12 +10,6 @@
 
 @implementation DXETipsColletionViewCell
 
-@synthesize className;
-@synthesize classEnglishName;
-@synthesize trafficControlTip;
-@synthesize date;
-@synthesize dayOfWeek;
-
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];

@@ -10,10 +10,6 @@
 
 @interface DXETipsColletionViewCell : UICollectionViewCell
 
-@property (nonatomic) IBOutlet UILabel *className;
-@property (nonatomic) IBOutlet UILabel *classEnglishName;
-@property (nonatomic) IBOutlet UILabel *trafficControlTip;
-@property (nonatomic) IBOutlet UILabel *date;
-@property (nonatomic) IBOutlet UILabel *dayOfWeek;
+@property (nonatomic) IBOutlet UIImageView *tipsImage;
 
 @end
