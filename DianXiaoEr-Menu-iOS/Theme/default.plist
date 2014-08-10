@@ -23,6 +23,6 @@
 	<key>Main.TabBar.BackgroundColor</key>
 	<string>222A2D</string>
 	<key>HomePage.CollectionView.BackgroundColor</key>
-	<string>FFFFFF</string>
+	<string>000000</string>
 </dict>
 </plist>

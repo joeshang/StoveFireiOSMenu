@@ -12,7 +12,7 @@
 @interface DXEHomePageViewController : UIViewController
 < UIScrollViewDelegate, UICollectionViewDataSource, CHTCollectionViewDelegateWaterfallLayout >
 
-@property (nonatomic, strong) UIScrollView *dishScrollView;
+@property (nonatomic, strong) UIScrollView *contentScrollView;
 @property (nonatomic, strong) NSMutableArray *collectionViews;
 
 @end

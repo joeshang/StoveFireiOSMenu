@@ -33,7 +33,7 @@
 
 @implementation DXEHomePageViewController
 
-@synthesize dishScrollView = _dishScrollView;
+@synthesize contentScrollView = _contentScrollView;
 @synthesize collectionViews = _collectionViews;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,6 +41,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
+        _collectionViews = [[NSMutableArray alloc] initWithCapacity:kDXEScrollMenuItemCount];
     }
     return self;
 }
@@ -52,23 +53,25 @@
         collectionView.delegate = nil;
         collectionView.dataSource = nil;
     }
+    _collectionViews = nil;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
     // 初始化包含collection view的scroll view
     CGRect contentRect = CGRectMake(0,
                                     kDXENavigationBarHeight + kDXEScrollMenuHeight,
                                     CGRectGetWidth(self.view.bounds),
                                     CGRectGetHeight(self.view.bounds) - kDXENavigationBarHeight - kDXEScrollMenuHeight - kDXETabBarHeight);
-    self.dishScrollView = [[UIScrollView alloc] initWithFrame:contentRect];
-    self.dishScrollView.delegate = self;
-    self.dishScrollView.showsVerticalScrollIndicator = NO;
-    self.dishScrollView.showsHorizontalScrollIndicator = NO;
-    self.dishScrollView.pagingEnabled = YES;
-    self.dishScrollView.directionalLockEnabled = YES;
+    self.contentScrollView = [[UIScrollView alloc] initWithFrame:contentRect];
+    self.contentScrollView.delegate = self;
+    self.contentScrollView.showsVerticalScrollIndicator = NO;
+    self.contentScrollView.showsHorizontalScrollIndicator = NO;
+    self.contentScrollView.pagingEnabled = YES;
+    self.contentScrollView.directionalLockEnabled = YES;
     
     // 为每一类菜品创建对应的collection view
     CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
@@ -87,8 +90,8 @@
     {
         collectionViewRect= CGRectMake(i * CGRectGetWidth(self.view.bounds),
                                        0,
-                                       CGRectGetWidth(self.dishScrollView.bounds),
-                                       CGRectGetHeight(self.dishScrollView.bounds));
+                                       CGRectGetWidth(self.contentScrollView.bounds),
+                                       CGRectGetHeight(self.contentScrollView.bounds));
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:collectionViewRect
                                                               collectionViewLayout:layout];
         collectionView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionView.BackgroundColor"];
@@ -102,15 +105,15 @@
         [collectionView registerNib:[UINib nibWithNibName:@"DXEDishCollectionViewCell" bundle:nil]
          forCellWithReuseIdentifier:@"DXEDishCollectionViewCell"];
         
-        [self.dishScrollView addSubview:collectionView];
+        [self.contentScrollView addSubview:collectionView];
         [self.collectionViews addObject:collectionView];
     }
     
 #warning 当接入Model时使用从后台取得的数据
-    self.dishScrollView.contentSize = CGSizeMake(kDXEScrollMenuItemCount * CGRectGetWidth(self.dishScrollView.bounds),
-                                                 CGRectGetHeight(self.dishScrollView.bounds));
+    self.contentScrollView.contentSize = CGSizeMake(kDXEScrollMenuItemCount * CGRectGetWidth(self.contentScrollView.bounds),
+                                                 CGRectGetHeight(self.contentScrollView.bounds));
     
-    [self.view addSubview:self.dishScrollView];
+//    [self.view addSubview:self.contentScrollView];
 }
 
 #pragma mark - UICollectionViewDataSource
