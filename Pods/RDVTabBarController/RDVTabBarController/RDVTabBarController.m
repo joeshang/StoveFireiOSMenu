@@ -53,9 +53,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self setSelectedIndex:[self selectedIndex]];
-    
     [self setTabBarHidden:NO animated:NO];
+    [self setSelectedIndex:[self selectedIndex]];
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
@@ -137,8 +136,9 @@
 
 - (NSInteger)indexForViewController:(UIViewController *)viewController {
     UIViewController *searchedController = viewController;
-    if ([searchedController navigationController]) {
-        searchedController = [searchedController navigationController];
+    UINavigationController *naviRootController = [searchedController navigationController];
+    if (naviRootController != nil && naviRootController != self.navigationController) {
+        searchedController = naviRootController;
     }
     return [[self viewControllers] indexOfObject:searchedController];
 }
