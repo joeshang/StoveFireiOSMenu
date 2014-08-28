@@ -9,10 +9,13 @@
 #ifndef DianXiaoEr_Menu_iOS_DXECommonHeader_h
 #define DianXiaoEr_Menu_iOS_DXECommonHeader_h
 
+#define kDXEStatusBarHeight                         20
+#define kDXENavigationBarHeight                     44
 #define kDXETabBarHeight                            72
-#define kDXENavigationBarHeight                     64
 
 #define kDXEScrollMenuHeight                        55
+
+#define kDXETabBarItemTitleVerticalOffset           3.0f
 
 #define kDXECollectionViewCellRadius                5
 #define kDXECollectionViewCellBorderWidth           2

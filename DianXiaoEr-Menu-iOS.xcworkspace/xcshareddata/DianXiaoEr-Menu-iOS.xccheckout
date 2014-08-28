@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>69212126-82BB-4DB5-894A-52095107EF70</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DianXiaoEr-Menu-iOS</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>26E5B706-7EA7-468D-9FEA-723893706F2E</key>
+		<string>https://github.com/joeshang/DianXiaoEr-Menu-iOS.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DianXiaoEr-Menu-iOS.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>26E5B706-7EA7-468D-9FEA-723893706F2E</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/joeshang/DianXiaoEr-Menu-iOS.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>26E5B706-7EA7-468D-9FEA-723893706F2E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>26E5B706-7EA7-468D-9FEA-723893706F2E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DianXiaoEr-Menu-iOS</string>
+		</dict>
+	</array>
+</dict>
+</plist>

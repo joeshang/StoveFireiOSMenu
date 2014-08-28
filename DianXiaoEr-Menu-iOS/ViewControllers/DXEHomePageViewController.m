@@ -44,6 +44,9 @@
 
 - (void)dealloc
 {
+    _contentContainer.delegate = nil;
+    _contentContainer.dataSource = nil;
+    _contentContainer = nil;
 }
 
 - (void)viewDidLoad
@@ -53,9 +56,9 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     CGRect contentRect = CGRectMake(0,
-                                    kDXENavigationBarHeight + kDXEScrollMenuHeight,
+                                    kDXEScrollMenuHeight,
                                     CGRectGetWidth(self.view.bounds),
-                                    CGRectGetHeight(self.view.bounds) - kDXENavigationBarHeight - kDXEScrollMenuHeight - kDXETabBarHeight);
+                                    CGRectGetHeight(self.view.bounds) - kDXEStatusBarHeight - kDXENavigationBarHeight - kDXEScrollMenuHeight - kDXETabBarHeight);
     self.contentContainer = [[iCarousel alloc] initWithFrame:contentRect];
     self.contentContainer.type = iCarouselTypeLinear;
     self.contentContainer.pagingEnabled = YES;
@@ -135,6 +138,7 @@
     {
         DXEDishCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DXEDishCollectionViewCell"
                                                                                     forIndexPath:indexPath];
+        cell.dishPrice.text = [NSString stringWithFormat:@"%ld", collectionView.tag];
         return cell;
     }
 }

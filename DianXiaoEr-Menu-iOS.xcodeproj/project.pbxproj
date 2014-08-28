@@ -13,6 +13,7 @@
 		D204928D198D4EAD00D8187E /* DXETipsColletionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D204928C198D4EAD00D8187E /* DXETipsColletionViewCell.m */; };
 		D204928F198D4ED400D8187E /* DXETipsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D204928E198D4ED400D8187E /* DXETipsCollectionViewCell.xib */; };
 		D2049291198D4EEC00D8187E /* DXEDishCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2049290198D4EEC00D8187E /* DXEDishCollectionViewCell.xib */; };
+		D20492A31997CB8E00D8187E /* qrcode_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D20492A21997CB8E00D8187E /* qrcode_button@2x.png */; };
 		D20712251974D7AC00E34770 /* DXEOriginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D20712231974D7AC00E34770 /* DXEOriginViewController.m */; };
 		D20712261974D7AC00E34770 /* DXEOriginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D20712241974D7AC00E34770 /* DXEOriginViewController.xib */; };
 		D207122A1974D7BE00E34770 /* DXEQuestionnaireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D20712281974D7BE00E34770 /* DXEQuestionnaireViewController.m */; };
@@ -35,6 +36,9 @@
 		D22BE1B91972747000A438D2 /* DianXiaoEr_Menu_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D22BE1B81972747000A438D2 /* DianXiaoEr_Menu_iOSTests.m */; };
 		D246598C1973FAFA0010B1B6 /* DXEHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D246598A1973FAFA0010B1B6 /* DXEHomePageViewController.m */; };
 		D246598D1973FAFA0010B1B6 /* DXEHomePageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D246598B1973FAFA0010B1B6 /* DXEHomePageViewController.xib */; };
+		D26026F61999F2DF004D6579 /* DXEOpenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D26026F41999F2DF004D6579 /* DXEOpenViewController.m */; };
+		D26026F71999F2DF004D6579 /* DXEOpenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D26026F51999F2DF004D6579 /* DXEOpenViewController.xib */; };
+		D26026FB199B4FAA004D6579 /* DXEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D26026FA199B4FAA004D6579 /* DXEMainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +62,7 @@
 		D204928E198D4ED400D8187E /* DXETipsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXETipsCollectionViewCell.xib; path = Views/DXETipsCollectionViewCell.xib; sourceTree = "<group>"; };
 		D2049290198D4EEC00D8187E /* DXEDishCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEDishCollectionViewCell.xib; path = Views/DXEDishCollectionViewCell.xib; sourceTree = "<group>"; };
 		D2049293198D865600D8187E /* DXECommonHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXECommonHeader.h; sourceTree = "<group>"; };
+		D20492A21997CB8E00D8187E /* qrcode_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_button@2x.png"; sourceTree = "<group>"; };
 		D20712221974D7AC00E34770 /* DXEOriginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEOriginViewController.h; path = ViewControllers/DXEOriginViewController.h; sourceTree = "<group>"; };
 		D20712231974D7AC00E34770 /* DXEOriginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEOriginViewController.m; path = ViewControllers/DXEOriginViewController.m; sourceTree = "<group>"; };
 		D20712241974D7AC00E34770 /* DXEOriginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOriginViewController.xib; path = ViewControllers/DXEOriginViewController.xib; sourceTree = "<group>"; };
@@ -89,6 +94,11 @@
 		D24659891973FAFA0010B1B6 /* DXEHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEHomePageViewController.h; path = ViewControllers/DXEHomePageViewController.h; sourceTree = "<group>"; };
 		D246598A1973FAFA0010B1B6 /* DXEHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEHomePageViewController.m; path = ViewControllers/DXEHomePageViewController.m; sourceTree = "<group>"; };
 		D246598B1973FAFA0010B1B6 /* DXEHomePageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEHomePageViewController.xib; path = ViewControllers/DXEHomePageViewController.xib; sourceTree = "<group>"; };
+		D26026F31999F2DF004D6579 /* DXEOpenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEOpenViewController.h; path = ViewControllers/DXEOpenViewController.h; sourceTree = "<group>"; };
+		D26026F41999F2DF004D6579 /* DXEOpenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEOpenViewController.m; path = ViewControllers/DXEOpenViewController.m; sourceTree = "<group>"; };
+		D26026F51999F2DF004D6579 /* DXEOpenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOpenViewController.xib; path = ViewControllers/DXEOpenViewController.xib; sourceTree = "<group>"; };
+		D26026F9199B4FAA004D6579 /* DXEMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEMainViewController.h; path = ViewControllers/DXEMainViewController.h; sourceTree = "<group>"; };
+		D26026FA199B4FAA004D6579 /* DXEMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEMainViewController.m; path = ViewControllers/DXEMainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,11 +154,12 @@
 			name = HomePage;
 			sourceTree = "<group>";
 		};
-		D204929A1994B6F500D8187E /* Category */ = {
+		D20492A11997CB8E00D8187E /* CommonResource */ = {
 			isa = PBXGroup;
 			children = (
+				D20492A21997CB8E00D8187E /* qrcode_button@2x.png */,
 			);
-			name = Category;
+			path = CommonResource;
 			sourceTree = "<group>";
 		};
 		D20712091974D0FA00E34770 /* HomePage */ = {
@@ -242,7 +253,6 @@
 				D2049278198D0C1000D8187E /* Model */,
 				D2049277198D0C0700D8187E /* View */,
 				D246598E1973FB0A0010B1B6 /* View Controller */,
-				D204929A1994B6F500D8187E /* Category */,
 				D2049273198344DE00D8187E /* Theme */,
 				D22BE1A51972747000A438D2 /* Images.xcassets */,
 				D22BE19A1972747000A438D2 /* Supporting Files */,
@@ -253,6 +263,7 @@
 		D22BE19A1972747000A438D2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D20492A11997CB8E00D8187E /* CommonResource */,
 				D22BE19B1972747000A438D2 /* DianXiaoEr-Menu-iOS-Info.plist */,
 				D22BE19C1972747000A438D2 /* InfoPlist.strings */,
 				D22BE19F1972747000A438D2 /* main.m */,
@@ -282,13 +293,34 @@
 		D246598E1973FB0A0010B1B6 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D26026F81999F2E6004D6579 /* Open */,
+				D26026FC199B4FB1004D6579 /* Main */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
+		D26026F81999F2E6004D6579 /* Open */ = {
+			isa = PBXGroup;
+			children = (
+				D26026F31999F2DF004D6579 /* DXEOpenViewController.h */,
+				D26026F41999F2DF004D6579 /* DXEOpenViewController.m */,
+				D26026F51999F2DF004D6579 /* DXEOpenViewController.xib */,
+			);
+			name = Open;
+			sourceTree = "<group>";
+		};
+		D26026FC199B4FB1004D6579 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D26026F9199B4FAA004D6579 /* DXEMainViewController.h */,
+				D26026FA199B4FAA004D6579 /* DXEMainViewController.m */,
 				D20712091974D0FA00E34770 /* HomePage */,
 				D207120B1974D12800E34770 /* Origin */,
 				D207120D1974D13D00E34770 /* Questionnaire */,
 				D207120C1974D13200E34770 /* Order */,
 				D207120A1974D11500E34770 /* Myself */,
 			);
-			name = "View Controller";
+			name = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,9 +404,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D20492A31997CB8E00D8187E /* qrcode_button@2x.png in Resources */,
 				D2049274198344DE00D8187E /* Theme in Resources */,
 				D207123A1974D7F500E34770 /* DXEMyselfViewController.xib in Resources */,
 				D20712261974D7AC00E34770 /* DXEOriginViewController.xib in Resources */,
+				D26026F71999F2DF004D6579 /* DXEOpenViewController.xib in Resources */,
 				D20712301974D7D000E34770 /* DXEOrderViewController.xib in Resources */,
 				D207122B1974D7BE00E34770 /* DXEQuestionnaireViewController.xib in Resources */,
 				D246598D1973FAFA0010B1B6 /* DXEHomePageViewController.xib in Resources */,
@@ -437,9 +471,11 @@
 				D20712251974D7AC00E34770 /* DXEOriginViewController.m in Sources */,
 				D20712391974D7F500E34770 /* DXEMyselfViewController.m in Sources */,
 				D207122F1974D7D000E34770 /* DXEOrderViewController.m in Sources */,
+				D26026F61999F2DF004D6579 /* DXEOpenViewController.m in Sources */,
 				D22BE1A41972747000A438D2 /* DXEAppDelegate.m in Sources */,
 				D204928D198D4EAD00D8187E /* DXETipsColletionViewCell.m in Sources */,
 				D246598C1973FAFA0010B1B6 /* DXEHomePageViewController.m in Sources */,
+				D26026FB199B4FAA004D6579 /* DXEMainViewController.m in Sources */,
 				D22BE1A01972747000A438D2 /* main.m in Sources */,
 				D207122A1974D7BE00E34770 /* DXEQuestionnaireViewController.m in Sources */,
 			);

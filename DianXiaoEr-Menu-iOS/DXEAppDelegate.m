@@ -8,16 +8,7 @@
 
 #import "DXEAppDelegate.h"
 #import "RNThemeManager.h"
-#import "RDVTabBar.h"
-#import "RDVTabBarItem.h"
-#import "RDVTabBarController.h"
-#import "DXEHomePageViewController.h"
-#import "DXEOriginViewController.h"
-#import "DXEQuestionnaireViewController.h"
-#import "DXEOrderViewController.h"
-#import "DXEMyselfViewController.h"
-
-#define kDXETabBarItemTitleVerticalOffset           3.0f
+#import "DXEOpenViewController.h"
 
 @implementation DXEAppDelegate
 
@@ -26,12 +17,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    [self setupViewControllers];
+    
+    DXEOpenViewController *open = [[DXEOpenViewController alloc] init];
+    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:open];
+    self.window.rootViewController = navi;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
-    [self customizeNavigationBar];
     
     return YES;
 }
@@ -63,81 +55,6 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-#pragma mark - setup methods
-
-- (void)setupViewControllers
-{
-    // 首页
-    DXEHomePageViewController *homepage = [[DXEHomePageViewController alloc] init];
-    UINavigationController *homepageNav = [[UINavigationController alloc] initWithRootViewController:homepage];
-    
-    // 起源
-    DXEOriginViewController *origin = [[DXEOriginViewController alloc] init];
-    UINavigationController *originNav = [[UINavigationController alloc] initWithRootViewController:origin];
-    
-    // 问卷
-    DXEQuestionnaireViewController *questionnaire = [[DXEQuestionnaireViewController alloc] init];
-    UINavigationController *questionnaireNav = [[UINavigationController alloc] initWithRootViewController:questionnaire];
-    
-    // 已点菜品
-    DXEOrderViewController *order = [[DXEOrderViewController alloc] init];
-    UINavigationController *orderNav = [[UINavigationController alloc] initWithRootViewController:order];
-    
-    // 我
-    DXEMyselfViewController *myself = [[DXEMyselfViewController alloc] init];
-    UINavigationController *myselfNav = [[UINavigationController alloc] initWithRootViewController:myself];
-    
-    // 上面的界面加入TabBarController，并且对TabBar进行自定义
-    RDVTabBarController *tabBarController = [[RDVTabBarController alloc] init];
-    [tabBarController setViewControllers:@[homepageNav,
-                                           originNav,
-                                           questionnaireNav,
-                                           orderNav,
-                                           myselfNav]];
-    [self customizeTabBarForController:tabBarController];
-    
-    self.window.rootViewController = tabBarController;
-}
-
-- (void)customizeTabBarForController:(RDVTabBarController *)tabBarController
-{
-    NSArray *tabBarItemTitle = @[@"首页", @"起源", @"问卷", @"已点菜品", @"我"];
-    NSArray *tabBarItemImageNamePrefix = @[@"homepage", @"origin", @"questionnaire", @"order", @"myself"];
-    
-    RDVTabBar *tabBar = [tabBarController tabBar];
-    [tabBar setHeight:kDXETabBarHeight];
-    
-    NSInteger index = 0;
-    for (RDVTabBarItem *item in [tabBar items])
-    {
-        [item setBackgroundColor:[[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.BackgroundColor"]];
-        
-        NSDictionary *selectedTextAttributes =
-        @{
-          NSFontAttributeName: [[RNThemeManager sharedManager] fontForKey:@"Main.TabBar.ItemSelectedTextFont"],
-          NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.ItemSelectedTextFontColor"]
-        };
-        NSDictionary *unselectedTextAttributes =
-        @{
-          NSFontAttributeName: [[RNThemeManager sharedManager] fontForKey:@"Main.TabBar.ItemUnselectedTextFont"],
-          NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.ItemUnselectedTextFontColor"]
-        };
-        [item setSelectedTitleAttributes:selectedTextAttributes];
-        [item setUnselectedTitleAttributes:unselectedTextAttributes];
-        [item setTitle:[tabBarItemTitle objectAtIndex:index]];
-        item.titlePositionAdjustment = UIOffsetMake(0.0f, kDXETabBarItemTitleVerticalOffset);
-        
-        UIImage *tabBarSelectedImage = [[RNThemeManager sharedManager] imageForName:
-                                        [NSString stringWithFormat:@"%@_tabbar_selected.png", [tabBarItemImageNamePrefix objectAtIndex:index]]];
-        UIImage *tabBarUnselectedImage = [[RNThemeManager sharedManager] imageForName:
-                                          [NSString stringWithFormat:@"%@_tabbar_unselected.png", [tabBarItemImageNamePrefix objectAtIndex:index]]];
-        [item setFinishedSelectedImage:tabBarSelectedImage
-           withFinishedUnselectedImage:tabBarUnselectedImage];
-        
-        index++;
-    }
-}
-
 - (void)customizeNavigationBar
 {
     UIImage *backgroundImage = nil;
@@ -146,6 +63,7 @@
     [[UINavigationBar appearance] setBackgroundImage:backgroundImage
                                        forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 }
 
 @end
