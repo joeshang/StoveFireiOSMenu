@@ -29,15 +29,21 @@
 
 @interface DXEHomePageViewController ()
 
+@property (nonatomic, strong) iCarousel *contentContainer;
+@property (nonatomic, strong) NSMutableArray *contents;
+
 @end
 
 @implementation DXEHomePageViewController
+
+#pragma mark - life cycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
+        _contents = [NSMutableArray arrayWithCapacity:kDXEScrollMenuItemCount];
     }
     return self;
 }
@@ -48,6 +54,8 @@
     _contentContainer.dataSource = nil;
     _contentContainer = nil;
 }
+
+#pragma mark - view related
 
 - (void)viewDidLoad
 {
@@ -67,6 +75,51 @@
     self.contentContainer.dataSource = self;
     self.contentContainer.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionView.BackgroundColor"];
     [self.view addSubview:self.contentContainer];
+    
+    for (NSUInteger i = 0; i < kDXEScrollMenuItemCount; i++)
+    {
+        // 为每一类菜品创建对应的collection view
+        CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
+        layout.sectionInset = UIEdgeInsetsMake(kDXECollectionViewSectionTop,
+                                               kDXECollectionViewSectionLeft,
+                                               kDXECollectionViewSectionBottom,
+                                               kDXECollectionViewSectionRight);
+        layout.headerHeight = kDXECollectionViewHeaderHeight;
+        layout.footerHeight = kDXECollectionViewFooterHeight;
+        layout.minimumColumnSpacing = kDXECollectionViewColumnSpacing;
+        layout.minimumInteritemSpacing = kDXECollectionViewInteritemSpacing;
+        
+        CGRect collectionViewRect= CGRectMake(i * CGRectGetWidth(self.view.bounds),
+                                              0,
+                                              CGRectGetWidth(self.contentContainer.bounds),
+                                              CGRectGetHeight(self.contentContainer.bounds));
+        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:collectionViewRect
+                                                              collectionViewLayout:layout];
+        collectionView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionView.BackgroundColor"];
+        
+        collectionView.tag = i;
+        collectionView.delaysContentTouches = NO;
+        collectionView.delegate = self;
+        collectionView.dataSource = self;
+        
+        [collectionView registerNib:[UINib nibWithNibName:@"DXETipsCollectionViewCell" bundle:nil]
+         forCellWithReuseIdentifier:@"DXETipsCollectionViewCell"];
+        [collectionView registerNib:[UINib nibWithNibName:@"DXEDishCollectionViewCell" bundle:nil]
+         forCellWithReuseIdentifier:@"DXEDishCollectionViewNormalCell"];
+        [collectionView registerNib:[UINib nibWithNibName:@"DXEDishCollectionViewCell" bundle:nil]
+         forCellWithReuseIdentifier:@"DXEDishCollectionViewInCartCell"];
+        [collectionView registerNib:[UINib nibWithNibName:@"DXEDishCollectionViewCell" bundle:nil]
+         forCellWithReuseIdentifier:@"DXEDishCollectionViewSoldoutCell"];
+        
+        [self.contents addObject:collectionView];
+    }
+}
+
+#pragma mark - target-action
+
+- (void)onCartButtonClickedAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"cart button click at index: %ld", indexPath.row);
 }
 
 #pragma mark - iCarouselDataSource
@@ -79,34 +132,9 @@
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
-    // 为每一类菜品创建对应的collection view
-    CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
-    layout.sectionInset = UIEdgeInsetsMake(kDXECollectionViewSectionTop,
-                                           kDXECollectionViewSectionLeft,
-                                           kDXECollectionViewSectionBottom,
-                                           kDXECollectionViewSectionRight);
-    layout.headerHeight = kDXECollectionViewHeaderHeight;
-    layout.footerHeight = kDXECollectionViewFooterHeight;
-    layout.minimumColumnSpacing = kDXECollectionViewColumnSpacing;
-    layout.minimumInteritemSpacing = kDXECollectionViewInteritemSpacing;
+    NSLog(@"carousel index: %ld", index);
     
-    CGRect collectionViewRect= CGRectMake(index * CGRectGetWidth(self.view.bounds),
-                                          0,
-                                          CGRectGetWidth(carousel.bounds),
-                                          CGRectGetHeight(carousel.bounds));
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:collectionViewRect
-                                                          collectionViewLayout:layout];
-    collectionView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionView.BackgroundColor"];
-    
-    collectionView.tag = index;
-    collectionView.delaysContentTouches = NO;
-    collectionView.delegate = self;
-    collectionView.dataSource = self;
-    
-    [collectionView registerNib:[UINib nibWithNibName:@"DXETipsCollectionViewCell" bundle:nil]
-     forCellWithReuseIdentifier:@"DXETipsCollectionViewCell"];
-    [collectionView registerNib:[UINib nibWithNibName:@"DXEDishCollectionViewCell" bundle:nil]
-     forCellWithReuseIdentifier:@"DXEDishCollectionViewCell"];
+    UICollectionView *collectionView = [self.contents objectAtIndex:index];
     
     return collectionView;
 }
@@ -136,8 +164,12 @@
     }
     else
     {
-        DXEDishCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DXEDishCollectionViewCell"
+        DXEDishCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DXEDishCollectionViewNormalCell"
                                                                                     forIndexPath:indexPath];
+        cell.controller = self;
+        cell.collectionView = collectionView;
+        cell.maskImage.hidden = YES;
+        cell.maskImage.alpha = 0.0;
         cell.dishPrice.text = [NSString stringWithFormat:@"%ld", collectionView.tag];
         return cell;
     }

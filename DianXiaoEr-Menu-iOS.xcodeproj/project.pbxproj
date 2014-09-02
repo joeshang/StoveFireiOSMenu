@@ -39,6 +39,9 @@
 		D26026F61999F2DF004D6579 /* DXEOpenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D26026F41999F2DF004D6579 /* DXEOpenViewController.m */; };
 		D26026F71999F2DF004D6579 /* DXEOpenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D26026F51999F2DF004D6579 /* DXEOpenViewController.xib */; };
 		D26026FB199B4FAA004D6579 /* DXEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D26026FA199B4FAA004D6579 /* DXEMainViewController.m */; };
+		D29FAAE619AFB45C00E667D4 /* cell_order_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D29FAAE319AFB45C00E667D4 /* cell_order_button@2x.png */; };
+		D29FAAE719AFB45C00E667D4 /* cell_order_flag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D29FAAE419AFB45C00E667D4 /* cell_order_flag@2x.png */; };
+		D29FAAE819AFB45C00E667D4 /* cell_soldout_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D29FAAE519AFB45C00E667D4 /* cell_soldout_button@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +102,9 @@
 		D26026F51999F2DF004D6579 /* DXEOpenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOpenViewController.xib; path = ViewControllers/DXEOpenViewController.xib; sourceTree = "<group>"; };
 		D26026F9199B4FAA004D6579 /* DXEMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEMainViewController.h; path = ViewControllers/DXEMainViewController.h; sourceTree = "<group>"; };
 		D26026FA199B4FAA004D6579 /* DXEMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEMainViewController.m; path = ViewControllers/DXEMainViewController.m; sourceTree = "<group>"; };
+		D29FAAE319AFB45C00E667D4 /* cell_order_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_order_button@2x.png"; sourceTree = "<group>"; };
+		D29FAAE419AFB45C00E667D4 /* cell_order_flag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_order_flag@2x.png"; sourceTree = "<group>"; };
+		D29FAAE519AFB45C00E667D4 /* cell_soldout_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_soldout_button@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +164,9 @@
 			isa = PBXGroup;
 			children = (
 				D20492A21997CB8E00D8187E /* qrcode_button@2x.png */,
+				D29FAAE319AFB45C00E667D4 /* cell_order_button@2x.png */,
+				D29FAAE419AFB45C00E667D4 /* cell_order_flag@2x.png */,
+				D29FAAE519AFB45C00E667D4 /* cell_soldout_button@2x.png */,
 			);
 			path = CommonResource;
 			sourceTree = "<group>";
@@ -253,6 +262,7 @@
 				D2049278198D0C1000D8187E /* Model */,
 				D2049277198D0C0700D8187E /* View */,
 				D246598E1973FB0A0010B1B6 /* View Controller */,
+				D20492A11997CB8E00D8187E /* CommonResource */,
 				D2049273198344DE00D8187E /* Theme */,
 				D22BE1A51972747000A438D2 /* Images.xcassets */,
 				D22BE19A1972747000A438D2 /* Supporting Files */,
@@ -263,7 +273,6 @@
 		D22BE19A1972747000A438D2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D20492A11997CB8E00D8187E /* CommonResource */,
 				D22BE19B1972747000A438D2 /* DianXiaoEr-Menu-iOS-Info.plist */,
 				D22BE19C1972747000A438D2 /* InfoPlist.strings */,
 				D22BE19F1972747000A438D2 /* main.m */,
@@ -404,6 +413,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D29FAAE619AFB45C00E667D4 /* cell_order_button@2x.png in Resources */,
+				D29FAAE719AFB45C00E667D4 /* cell_order_flag@2x.png in Resources */,
 				D20492A31997CB8E00D8187E /* qrcode_button@2x.png in Resources */,
 				D2049274198344DE00D8187E /* Theme in Resources */,
 				D207123A1974D7F500E34770 /* DXEMyselfViewController.xib in Resources */,
@@ -412,6 +423,7 @@
 				D20712301974D7D000E34770 /* DXEOrderViewController.xib in Resources */,
 				D207122B1974D7BE00E34770 /* DXEQuestionnaireViewController.xib in Resources */,
 				D246598D1973FAFA0010B1B6 /* DXEHomePageViewController.xib in Resources */,
+				D29FAAE819AFB45C00E667D4 /* cell_soldout_button@2x.png in Resources */,
 				D204928F198D4ED400D8187E /* DXETipsCollectionViewCell.xib in Resources */,
 				D22BE19E1972747000A438D2 /* InfoPlist.strings in Resources */,
 				D2049291198D4EEC00D8187E /* DXEDishCollectionViewCell.xib in Resources */,

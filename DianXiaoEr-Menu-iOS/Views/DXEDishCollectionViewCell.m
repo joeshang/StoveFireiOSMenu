@@ -8,6 +8,8 @@
 
 #import "DXEDishCollectionViewCell.h"
 
+#define kDXEDishCellAnimateDuration             0.3
+
 @implementation DXEDishCollectionViewCell
 
 -(id)initWithCoder:(NSCoder *)aDecoder
@@ -23,6 +25,50 @@
     }
     
     return self;
+}
+
+- (IBAction)onCartButtonClicked:(id)sender
+{
+    [self showInCartStatus];
+    
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:self];
+    SEL selector = NSSelectorFromString(@"onCartButtonClickedAtIndexPath:");
+    if ([self.controller respondsToSelector:selector])
+    {
+        [self.controller performSelector:selector
+                              withObject:indexPath];
+    }
+}
+
+- (void)showInCartStatus
+{
+    self.maskImage.image = [UIImage imageNamed:@"cell_incart_mask"];
+    self.maskImage.hidden = NO;
+    [UIView animateWithDuration:kDXEDishCellAnimateDuration
+                     animations:^{
+                         self.maskImage.alpha = 0.4;
+                     }];
+}
+
+- (void)showNormalStatus
+{
+    [UIView animateWithDuration:kDXEDishCellAnimateDuration
+                     animations:^{
+                         self.maskImage.alpha = 0.0;
+                     }
+                     completion:^(BOOL finished){
+                         self.maskImage.hidden = YES;
+                     }];
+}
+
+- (void)showSoldoutStatus
+{
+    self.maskImage.image = [UIImage imageNamed:@"cell_soldout_mask"];
+    self.maskImage.hidden = NO;
+    [UIView animateWithDuration:kDXEDishCellAnimateDuration
+                     animations:^{
+                         self.maskImage.alpha = 0.4;
+                     }];
 }
 
 @end

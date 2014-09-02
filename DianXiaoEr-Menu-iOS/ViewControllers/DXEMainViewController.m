@@ -35,7 +35,7 @@
 
 - (void)dealloc
 {
-    NSLog(@"main view controller deallo");
+    NSLog(@"main view controller dealloc");
 }
 
 - (void)setupTabController

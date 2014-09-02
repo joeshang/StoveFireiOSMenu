@@ -16,14 +16,17 @@
                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WYt-MK-oMy">
                         <rect key="frame" x="0.0" y="0.0" width="360" height="490"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ggz-eP-kgy">
                         <rect key="frame" x="20" y="564" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d7O-rZ-F7Z">
                         <rect key="frame" x="151" y="564" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="粉红色的冰淇淋" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ItA-3P-y2y">
                         <rect key="frame" x="20" y="505" width="320" height="22"/>
@@ -49,12 +52,29 @@
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.49999999999999961" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zCN-Vl-TRF">
+                        <rect key="frame" x="0.0" y="0.0" width="360" height="602"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nkE-DL-tOJ">
+                        <rect key="frame" x="266" y="556" width="74" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="cell_order_button.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="onCartButtonClicked:" destination="lGy-eV-7UU" eventType="touchUpInside" id="fmN-R8-i1I"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <size key="customSize" width="360" height="602"/>
             <connections>
+                <outlet property="cartButton" destination="nkE-DL-tOJ" id="jgH-oH-7jD"/>
                 <outlet property="dishEnglishName" destination="xqe-Av-9An" id="AMK-nz-dyV"/>
                 <outlet property="dishFavor" destination="cV1-Jj-zgQ" id="VOp-w0-Vht"/>
                 <outlet property="dishFavorIcon" destination="d7O-rZ-F7Z" id="hrC-f8-nSO"/>
@@ -62,7 +82,11 @@
                 <outlet property="dishName" destination="ItA-3P-y2y" id="3Bt-Gs-yxA"/>
                 <outlet property="dishPrice" destination="s8M-HP-q5M" id="9hS-Zi-ymN"/>
                 <outlet property="dishPriceIcon" destination="Ggz-eP-kgy" id="4Np-Zf-FUh"/>
+                <outlet property="maskImage" destination="zCN-Vl-TRF" id="mbs-HF-4SO"/>
             </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="cell_order_button.png" width="74" height="26"/>
+    </resources>
 </document>

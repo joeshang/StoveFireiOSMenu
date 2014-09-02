@@ -10,12 +10,19 @@
 
 @interface DXEDishCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic) IBOutlet UILabel *dishName;
-@property (nonatomic) IBOutlet UILabel *dishEnglishName;
-@property (nonatomic) IBOutlet UIImageView *dishImage;
-@property (nonatomic) IBOutlet UILabel *dishPrice;
-@property (nonatomic) IBOutlet UIImageView *dishPriceIcon;
-@property (nonatomic) IBOutlet UILabel *dishFavor;
-@property (nonatomic) IBOutlet UIImageView *dishFavorIcon;
+@property (weak, nonatomic) IBOutlet UILabel *dishName;
+@property (weak, nonatomic) IBOutlet UILabel *dishEnglishName;
+@property (weak, nonatomic) IBOutlet UIImageView *dishImage;
+@property (weak, nonatomic) IBOutlet UILabel *dishPrice;
+@property (weak, nonatomic) IBOutlet UIImageView *dishPriceIcon;
+@property (weak, nonatomic) IBOutlet UILabel *dishFavor;
+@property (weak, nonatomic) IBOutlet UIImageView *dishFavorIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *maskImage;
+@property (weak, nonatomic) IBOutlet UIButton *cartButton;
+
+@property (weak, nonatomic) id controller;
+@property (weak, nonatomic) UICollectionView *collectionView;
+
+- (IBAction)onCartButtonClicked:(id)sender;
 
 @end

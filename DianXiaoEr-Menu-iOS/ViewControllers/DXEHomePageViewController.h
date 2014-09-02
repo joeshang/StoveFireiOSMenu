@@ -19,6 +19,4 @@
     iCarouselDelegate
 >
 
-@property (nonatomic, strong) iCarousel *contentContainer;
-
 @end
