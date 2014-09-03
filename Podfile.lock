@@ -4,6 +4,9 @@ PODS:
   - NSObject-ObjectMap (2.3.1)
   - RDVTabBarController (1.1.6)
   - RNThemeManager (0.1.0)
+  - SDWebImage (3.7.1):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.7.1)
 
 DEPENDENCIES:
   - CHTCollectionViewWaterfallLayout
@@ -11,6 +14,7 @@ DEPENDENCIES:
   - NSObject-ObjectMap
   - RDVTabBarController
   - RNThemeManager
+  - SDWebImage
 
 SPEC CHECKSUMS:
   CHTCollectionViewWaterfallLayout: 184d3b6d5456b48e93ac97e93e606bd8b68aedcc
@@ -18,5 +22,6 @@ SPEC CHECKSUMS:
   NSObject-ObjectMap: b25adb10d18c60930db2c441c2fb7ae6c3d80282
   RDVTabBarController: 252dafb16725f9a07026618ff51acf06a12b206b
   RNThemeManager: 3c5da94d26124f33aa46b50be607ab697fd06c17
+  SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
 
 COCOAPODS: 0.33.1

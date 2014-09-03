@@ -31,6 +31,8 @@
 
 @implementation DXEDishDataManager
 
+#pragma mark - singleton init
+
 + (DXEDishDataManager *)sharedInstance
 {
     static DXEDishDataManager *sharedManager = nil;
@@ -50,6 +52,13 @@
     return sharedManager;
 }
 
++ (id)allocWithZone:(struct _NSZone *)zone
+{
+    return [self sharedInstance];
+}
+
+#pragma mark - data update
+
 - (void)updateDishClassFromJsonData:(NSData *)jsonData
 {
     NSArray *updateClasses = [NSObject arrayOfType:[DXEDishClass class] FromJSONData:jsonData];
@@ -66,11 +75,12 @@
     }
     else
     {
+        // 对于updateClasses中的数据，如果是错误项，则从数组中移除，如果是更新项，更新完也移除，最后剩下的全是新增项，全部加入dishClasses
         for (DXEDishClass *update in updateClasses)
         {
             if (update.classid == nil)
             {
-                NSLog(@"[DXEDishDataManager] empty classid in DishClass");
+                NSLog(@"Error: empty classid in DishClass");
                 [newClasses removeObject:update];
                 continue;
             }
@@ -120,11 +130,12 @@
     {
         if (update.classid == nil && update.itemid == nil)
         {
-            NSLog(@"[DXEDishDataManager] empty classid/itemid in DishItem");
+            NSLog(@"Error: empty classid/itemid in DishItem -> %@", [update JSONString]);
             continue;
         }
         
         [self.dishClasses enumerateObjectsUsingBlock:^(DXEDishClass *class, NSUInteger classIndex, BOOL *stop){
+            // 根据菜品的classid跟itemid，加入到对应菜类的数组中或更新对应项
             if ([update.classid integerValue] == [class.classid integerValue])
             {
                 *stop = YES;
@@ -138,12 +149,14 @@
                     [class.dishes enumerateObjectsUsingBlock:^(DXEDishItem *item, NSUInteger itemIndex, BOOL *stop){
                         if ([update.itemid integerValue] == [item.itemid integerValue])
                         {
+                            // 更新项
                             [item updateByNewObject:update];
                         }
                         else
                         {
                             if ([item isEqual:[class.dishes lastObject]])
                             {
+                                // 新增项
                                 [class.dishes addObject:update];
                             }
                         }
@@ -158,11 +171,42 @@
                 // 没有匹配的菜类
                 if (classIndex == [self.dishClasses count])
                 {
-                    NSLog(@"[DXEDishDataManager] invalid classid(%@) in DishItem: itemid = %@, name = %@", update.classid, update.itemid, update.name);
+                    NSLog(@"Error: invalid classid DishItem -> %@", [update JSONString]);
                 }
             }
         }];
     }
+}
+
+- (NSMutableArray *)imageKeys
+{
+    NSMutableArray *imageKeys = [[NSMutableArray alloc] init];
+    
+    if ([self.dishClasses count])
+    {
+        return nil;
+    }
+    
+    for (DXEDishClass *class in self.dishClasses)
+    {
+        if (class.imageKey != nil)
+        {
+            [imageKeys addObject:class.imageKey];
+        }
+        
+        if (class.dishes && [class.dishes count] != 0)
+        {
+            for (DXEDishItem *item in class.dishes)
+            {
+                if (item.imageKey != nil)
+                {
+                    [imageKeys addObject:item.imageKey];
+                }
+            }
+        }
+    }
+    
+    return imageKeys;
 }
 
 #ifdef DXE_TEST_DISH_DATA
@@ -179,7 +223,7 @@
         class.classid = [NSNumber numberWithInteger:i];
         class.showSequence = [NSNumber numberWithInteger:i + 1];
         class.name = [names objectAtIndex:i];
-        class.imageKey = [NSString stringWithFormat:@"0_%ld_%.0f", i, [[NSDate date] timeIntervalSince1970]];
+        class.imageKey = [NSString stringWithFormat:@"[0]%ld_%.0f", i, [[NSDate date] timeIntervalSince1970]];
         [array addObject:class];
     }
     
@@ -194,7 +238,7 @@
     vip.classid = [NSNumber numberWithInteger:10];
     vip.showSequence = [NSNumber numberWithInteger:0];
     vip.name = @"会员";
-    vip.imageKey = [NSString stringWithFormat:@"0_10_%.0f", [[NSDate date] timeIntervalSince1970]];
+    vip.imageKey = [NSString stringWithFormat:@"[0]10_%.0f", [[NSDate date] timeIntervalSince1970]];
     
     DXEDishClass *front = [[DXEDishClass alloc] init];
     front.classid = [NSNumber numberWithInteger:0];
@@ -223,7 +267,7 @@
             item.itemid = [NSNumber numberWithInteger:i * 100 + j];
             item.classid = [NSNumber numberWithInteger:i];
             item.name = [NSString stringWithFormat:@"%@j", [names objectAtIndex:i]];
-            item.imageKey = [NSString stringWithFormat:@"1_%ld_%.0f", j, [[NSDate date] timeIntervalSince1970]];
+            item.imageKey = [NSString stringWithFormat:@"[1]%ld_%.0f", j, [[NSDate date] timeIntervalSince1970]];
             item.showSequence = [NSNumber numberWithInteger:j + 1];
             item.price = [NSNumber numberWithInteger:20 + arc4random() % 100];
             item.like = [NSNumber numberWithInteger:1000 + arc4random() % 5000];
@@ -246,7 +290,7 @@
         DXEDishItem *item = [[DXEDishItem alloc] init];
         item.itemid = [NSNumber numberWithInteger:1000 + j];
         item.classid = [NSNumber numberWithInteger:10];
-        item.imageKey = [NSString stringWithFormat:@"1_%ld_%.0f", j, [[NSDate date] timeIntervalSince1970]];
+        item.imageKey = [NSString stringWithFormat:@"[1]%ld_%.0f", j, [[NSDate date] timeIntervalSince1970]];
         item.showSequence = [NSNumber numberWithInteger:j + 1];
         item.price = [NSNumber numberWithInteger:20 + arc4random() % 100];
         item.like = [NSNumber numberWithInteger:1000 + arc4random() % 5000];
