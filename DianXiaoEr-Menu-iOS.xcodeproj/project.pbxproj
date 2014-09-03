@@ -42,6 +42,9 @@
 		D29FAAE619AFB45C00E667D4 /* cell_order_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D29FAAE319AFB45C00E667D4 /* cell_order_button@2x.png */; };
 		D29FAAE719AFB45C00E667D4 /* cell_order_flag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D29FAAE419AFB45C00E667D4 /* cell_order_flag@2x.png */; };
 		D29FAAE819AFB45C00E667D4 /* cell_soldout_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D29FAAE519AFB45C00E667D4 /* cell_soldout_button@2x.png */; };
+		D29FAB5619B5C1E000E667D4 /* DXEDishClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D29FAB5319B5C1E000E667D4 /* DXEDishClass.m */; };
+		D29FAB5719B5C1E000E667D4 /* DXEDishItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D29FAB5519B5C1E000E667D4 /* DXEDishItem.m */; };
+		D29FAB5D19B603A000E667D4 /* DXEDishDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D29FAB5C19B603A000E667D4 /* DXEDishDataManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +108,12 @@
 		D29FAAE319AFB45C00E667D4 /* cell_order_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_order_button@2x.png"; sourceTree = "<group>"; };
 		D29FAAE419AFB45C00E667D4 /* cell_order_flag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_order_flag@2x.png"; sourceTree = "<group>"; };
 		D29FAAE519AFB45C00E667D4 /* cell_soldout_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_soldout_button@2x.png"; sourceTree = "<group>"; };
+		D29FAB5219B5C1E000E667D4 /* DXEDishClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEDishClass.h; path = Model/DXEDishClass.h; sourceTree = "<group>"; };
+		D29FAB5319B5C1E000E667D4 /* DXEDishClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEDishClass.m; path = Model/DXEDishClass.m; sourceTree = "<group>"; };
+		D29FAB5419B5C1E000E667D4 /* DXEDishItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEDishItem.h; path = Model/DXEDishItem.h; sourceTree = "<group>"; };
+		D29FAB5519B5C1E000E667D4 /* DXEDishItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEDishItem.m; path = Model/DXEDishItem.m; sourceTree = "<group>"; };
+		D29FAB5B19B603A000E667D4 /* DXEDishDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEDishDataManager.h; path = Model/DXEDishDataManager.h; sourceTree = "<group>"; };
+		D29FAB5C19B603A000E667D4 /* DXEDishDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEDishDataManager.m; path = Model/DXEDishDataManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +152,12 @@
 		D2049278198D0C1000D8187E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D29FAB5219B5C1E000E667D4 /* DXEDishClass.h */,
+				D29FAB5319B5C1E000E667D4 /* DXEDishClass.m */,
+				D29FAB5419B5C1E000E667D4 /* DXEDishItem.h */,
+				D29FAB5519B5C1E000E667D4 /* DXEDishItem.m */,
+				D29FAB5B19B603A000E667D4 /* DXEDishDataManager.h */,
+				D29FAB5C19B603A000E667D4 /* DXEDishDataManager.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -483,11 +498,14 @@
 				D20712251974D7AC00E34770 /* DXEOriginViewController.m in Sources */,
 				D20712391974D7F500E34770 /* DXEMyselfViewController.m in Sources */,
 				D207122F1974D7D000E34770 /* DXEOrderViewController.m in Sources */,
+				D29FAB5719B5C1E000E667D4 /* DXEDishItem.m in Sources */,
 				D26026F61999F2DF004D6579 /* DXEOpenViewController.m in Sources */,
 				D22BE1A41972747000A438D2 /* DXEAppDelegate.m in Sources */,
 				D204928D198D4EAD00D8187E /* DXETipsColletionViewCell.m in Sources */,
 				D246598C1973FAFA0010B1B6 /* DXEHomePageViewController.m in Sources */,
+				D29FAB5619B5C1E000E667D4 /* DXEDishClass.m in Sources */,
 				D26026FB199B4FAA004D6579 /* DXEMainViewController.m in Sources */,
+				D29FAB5D19B603A000E667D4 /* DXEDishDataManager.m in Sources */,
 				D22BE1A01972747000A438D2 /* main.m in Sources */,
 				D207122A1974D7BE00E34770 /* DXEQuestionnaireViewController.m in Sources */,
 			);

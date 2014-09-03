@@ -1,0 +1,5 @@
+#include "Pods-NSObject-ObjectMap.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/NSObject-ObjectMap" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/CHTCollectionViewWaterfallLayout" "${PODS_ROOT}/Headers/NSObject-ObjectMap" "${PODS_ROOT}/Headers/RDVTabBarController" "${PODS_ROOT}/Headers/RNThemeManager" "${PODS_ROOT}/Headers/iCarousel"
+OTHER_LDFLAGS = -ObjC
+PODS_ROOT = ${SRCROOT}

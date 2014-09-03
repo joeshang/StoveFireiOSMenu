@@ -1,18 +1,21 @@
 PODS:
   - CHTCollectionViewWaterfallLayout (0.7)
   - iCarousel (1.8)
+  - NSObject-ObjectMap (2.3.1)
   - RDVTabBarController (1.1.6)
   - RNThemeManager (0.1.0)
 
 DEPENDENCIES:
   - CHTCollectionViewWaterfallLayout
   - iCarousel
+  - NSObject-ObjectMap
   - RDVTabBarController
   - RNThemeManager
 
 SPEC CHECKSUMS:
   CHTCollectionViewWaterfallLayout: 184d3b6d5456b48e93ac97e93e606bd8b68aedcc
   iCarousel: cf77aea48dfcde9a0cd85569a1d8a9b6dd543bd7
+  NSObject-ObjectMap: b25adb10d18c60930db2c441c2fb7ae6c3d80282
   RDVTabBarController: 252dafb16725f9a07026618ff51acf06a12b206b
   RNThemeManager: 3c5da94d26124f33aa46b50be607ab697fd06c17
 

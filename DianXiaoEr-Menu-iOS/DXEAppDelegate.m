@@ -9,6 +9,7 @@
 #import "DXEAppDelegate.h"
 #import "RNThemeManager.h"
 #import "DXEOpenViewController.h"
+#import "DXEDishDataManager.h"
 
 @implementation DXEAppDelegate
 
@@ -17,6 +18,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [DXEDishDataManager sharedInstance];
     
     DXEOpenViewController *open = [[DXEOpenViewController alloc] init];
     UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:open];
