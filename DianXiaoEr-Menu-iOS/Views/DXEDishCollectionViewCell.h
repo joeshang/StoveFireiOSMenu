@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, DXEDishCellMode) {
+    DXEDishCellModeNormal,
+    DXEDishCellModeInCart,
+    DXEDishCellModeSoldout
+};
+
 @interface DXEDishCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *dishName;
@@ -17,12 +23,16 @@
 @property (weak, nonatomic) IBOutlet UIImageView *dishPriceIcon;
 @property (weak, nonatomic) IBOutlet UILabel *dishFavor;
 @property (weak, nonatomic) IBOutlet UIImageView *dishFavorIcon;
-@property (weak, nonatomic) IBOutlet UIImageView *maskImage;
+@property (weak, nonatomic) IBOutlet UIView *maskView;
+@property (weak, nonatomic) IBOutlet UIImageView *inCartFlag;
+@property (weak, nonatomic) IBOutlet UIImageView *soldoutFlag;
 @property (weak, nonatomic) IBOutlet UIButton *cartButton;
 
 @property (weak, nonatomic) id controller;
 @property (weak, nonatomic) UICollectionView *collectionView;
+@property (assign, nonatomic) DXEDishCellMode cellMode;
 
 - (IBAction)onCartButtonClicked:(id)sender;
+- (void)showCellMode:(DXEDishCellMode)cellMode animate:(BOOL)animated;
 
 @end

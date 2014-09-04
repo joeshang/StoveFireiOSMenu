@@ -44,9 +44,9 @@
         self.price = [update.price copy];
     }
     
-    if (update.like != nil)
+    if (update.favor != nil)
     {
-        self.like = [update.like copy];
+        self.favor = [update.favor copy];
     }
     
     if (update.ingredient != nil)

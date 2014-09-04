@@ -8,14 +8,10 @@
 
 #import "DXEDishDataManager.h"
 #import "NSObject+ObjectMap.h"
-#import "DXEDishItem.h"
-#import "DXEDishClass.h"
 
 #define DXE_TEST_DISH_DATA
 
 @interface DXEDishDataManager ()
-
-@property (nonatomic, strong) NSMutableArray *dishClasses;
 
 - (void)updateDishClassFromJsonData:(NSData *)jsonData;
 - (void)updateDishItemFromJsonData:(NSData *)jsonData;
@@ -128,7 +124,7 @@
     
     for (DXEDishItem *update in updateItems)
     {
-        if (update.classid == nil && update.itemid == nil)
+        if (update.classid == nil || update.itemid == nil)
         {
             NSLog(@"Error: empty classid/itemid in DishItem -> %@", [update JSONString]);
             continue;
@@ -150,6 +146,7 @@
                         if ([update.itemid integerValue] == [item.itemid integerValue])
                         {
                             // 更新项
+                            *stop = YES;
                             [item updateByNewObject:update];
                         }
                         else
@@ -169,7 +166,7 @@
             else
             {
                 // 没有匹配的菜类
-                if (classIndex == [self.dishClasses count])
+                if ([class isEqual:[self.dishClasses lastObject]])
                 {
                     NSLog(@"Error: invalid classid DishItem -> %@", [update JSONString]);
                 }
@@ -223,7 +220,7 @@
         class.classid = [NSNumber numberWithInteger:i];
         class.showSequence = [NSNumber numberWithInteger:i + 1];
         class.name = [names objectAtIndex:i];
-        class.imageKey = [NSString stringWithFormat:@"[0]%ld_%.0f", i, [[NSDate date] timeIntervalSince1970]];
+        class.imageKey = [NSString stringWithFormat:@"0-%ld@%.0f", i, [[NSDate date] timeIntervalSince1970]];
         [array addObject:class];
     }
     
@@ -238,7 +235,7 @@
     vip.classid = [NSNumber numberWithInteger:10];
     vip.showSequence = [NSNumber numberWithInteger:0];
     vip.name = @"会员";
-    vip.imageKey = [NSString stringWithFormat:@"[0]10_%.0f", [[NSDate date] timeIntervalSince1970]];
+    vip.imageKey = [NSString stringWithFormat:@"0-10@%.0f", [[NSDate date] timeIntervalSince1970]];
     
     DXEDishClass *front = [[DXEDishClass alloc] init];
     front.classid = [NSNumber numberWithInteger:0];
@@ -266,11 +263,11 @@
             DXEDishItem *item = [[DXEDishItem alloc] init];
             item.itemid = [NSNumber numberWithInteger:i * 100 + j];
             item.classid = [NSNumber numberWithInteger:i];
-            item.name = [NSString stringWithFormat:@"%@j", [names objectAtIndex:i]];
-            item.imageKey = [NSString stringWithFormat:@"[1]%ld_%.0f", j, [[NSDate date] timeIntervalSince1970]];
+            item.name = [NSString stringWithFormat:@"%@%ld", [names objectAtIndex:i], j];
+            item.imageKey = [NSString stringWithFormat:@"1-%ld@%.0f", j, [[NSDate date] timeIntervalSince1970]];
             item.showSequence = [NSNumber numberWithInteger:j + 1];
-            item.price = [NSNumber numberWithInteger:20 + arc4random() % 100];
-            item.like = [NSNumber numberWithInteger:1000 + arc4random() % 5000];
+            item.price = [NSNumber numberWithFloat:20 + arc4random() % 100];
+            item.favor = [NSNumber numberWithInteger:1000 + arc4random() % 5000];
             item.ingredient = @"此物只应天上有，人间能够几回尝，此时不尝何时尝？原料顶级棒，安全放心，注意注意，前方高能预警，核能预警！巨美味巨好吃，嘿咻嘿咻北鼻够~";
             item.soldout = [NSNumber numberWithBool:NO];
             item.inCart = nil;
@@ -283,28 +280,33 @@
 
 - (NSData *)dishItemDataOfTestingUpdateAndAdd
 {
+    NSArray *names = kDXEDishClassName;
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:20];
+    
     NSUInteger count = 8 + arc4random() % 6;
     for (NSUInteger j = 0; j < count; j++)
     {
         DXEDishItem *item = [[DXEDishItem alloc] init];
         item.itemid = [NSNumber numberWithInteger:1000 + j];
         item.classid = [NSNumber numberWithInteger:10];
-        item.imageKey = [NSString stringWithFormat:@"[1]%ld_%.0f", j, [[NSDate date] timeIntervalSince1970]];
+        item.imageKey = [NSString stringWithFormat:@"1-%ld@%.0f", j, [[NSDate date] timeIntervalSince1970]];
         item.showSequence = [NSNumber numberWithInteger:j + 1];
-        item.price = [NSNumber numberWithInteger:20 + arc4random() % 100];
-        item.like = [NSNumber numberWithInteger:1000 + arc4random() % 5000];
+        item.price = [NSNumber numberWithFloat:20 + arc4random() % 100];
+        item.favor = [NSNumber numberWithInteger:1000 + arc4random() % 5000];
         item.ingredient = @"此物只应天上有，人间能够几回尝，此时不尝何时尝？原料顶级棒，安全放心，注意注意，前方高能预警，核能预警！巨美味巨好吃，嘿咻嘿咻北鼻够~";
         item.soldout = [NSNumber numberWithBool:NO];
         item.inCart = nil;
         [array addObject:item];
     }
     
-    DXEDishItem *update = [[DXEDishItem alloc] init];
-    update.itemid = [NSNumber numberWithInteger:0];
-    update.classid = [NSNumber numberWithInteger:0];
-    update.price = [NSNumber numberWithInteger:88];
-    [array addObject:update];
+    for (NSUInteger i = 0; i < [names count]; i++)
+    {
+        DXEDishItem *update = [[DXEDishItem alloc] init];
+        update.itemid = [NSNumber numberWithInteger:i * 100];
+        update.classid = [NSNumber numberWithInteger:i];
+        update.soldout = [NSNumber numberWithBool:YES];
+        [array addObject:update];
+    }
     
     return [array JSONData];
 }

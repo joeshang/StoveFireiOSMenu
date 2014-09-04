@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DXEDishItem.h"
+#import "DXEDishClass.h"
 
 @interface DXEDishDataManager : NSObject
 
+@property (nonatomic, strong) NSMutableArray *dishClasses;
+
 + (DXEDishDataManager *)sharedInstance;
+- (NSMutableArray *)imageKeys;
 
 @end

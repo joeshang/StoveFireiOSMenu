@@ -12,6 +12,7 @@
 
 + (DXEImageManager *)sharedInstance;
 
+- (void)updateImageWithKeys:(NSMutableArray *)newImageKeys;
 - (UIImage *)imageForKey:(NSString *)imageKey;
 - (BOOL)saveChanges;
 

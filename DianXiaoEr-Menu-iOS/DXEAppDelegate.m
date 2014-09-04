@@ -21,6 +21,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     [DXEDishDataManager sharedInstance];
+    [[DXEImageManager sharedInstance] updateImageWithKeys:[[DXEDishDataManager sharedInstance] imageKeys]];
     
     DXEOpenViewController *open = [[DXEOpenViewController alloc] init];
     UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:open];

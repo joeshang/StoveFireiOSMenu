@@ -9,6 +9,8 @@
 #import "DXEImageManager.h"
 #import "UIImageView+WebCache.h"
 
+#define DXE_TEST_IMAGE_KEYS
+
 @interface DXEImageManager ()
 
 @property (nonatomic, strong) NSMutableArray *cachedImageKeys;
@@ -51,6 +53,11 @@
 
 #pragma mark - getting image
 
+// imageKey的命名格式为：class-id@time
+//  * class：图片的种类，例如菜类图片的class为0，菜品图片的class为1
+//  * id：图片的ID，是图片在本类中的唯一标示
+//  * time：图片更新的时间，用来对比图片是否需要更新
+
 - (NSString *)imagePathForKey:(NSString *)imageKey
 {
     NSString *cacheDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -60,31 +67,37 @@
 
 - (UIImage *)imageForKey:(NSString *)imageKey
 {
-    UIImage *image = [self.cachedImages objectForKey:imageKey];
-    if (image == nil)
+#ifdef DXE_TEST_IMAGE_KEYS
+    NSString *imageClass = [imageKey substringToIndex:1];
+    UIImage *image;
+    if ([imageClass isEqualToString:@"0"])
     {
-        image = [UIImage imageWithContentsOfFile:[self imagePathForKey:imageKey]];
-        
-        if (image)
-        {
-            [self.cachedImages setValue:image forKey:imageKey];
-        }
-        else
-        {
-            NSLog(@"Error: unable to find %@", [self imagePathForKey:imageKey]);
-        }
+        image = [UIImage imageNamed:@"test_dish_class"];
     }
-    
+    else if ([imageClass isEqualToString:@"1"])
+    {
+        image = [UIImage imageNamed:@"test_dish_item"];
+    }
     return image;
+#else
+    return [[SDWebImageManager sharedManager].imageCache imageFromDiskCacheForKey:imageKey];
+#endif
 }
 
 - (void)deleteImageForKey:(NSString *)imageKey
 {
+#ifdef DXE_TEST_IMAGE_KEYS
+    NSLog(@"delete image: %@", imageKey);
+#else
     [[SDWebImageManager sharedManager].imageCache removeImageForKey:imageKey];
+#endif
 }
 
 - (void)requestWebImageForKey:(NSString *)imageKey
 {
+#ifdef DXE_TEST_IMAGE_KEYS
+    NSLog(@"request web image: %@", imageKey);
+#else
     [[SDWebImageManager sharedManager] downloadImageWithURL:nil
                                                     options:0
                                                    progress:nil
@@ -95,6 +108,7 @@
                                                           [[SDWebImageManager sharedManager].imageCache storeImage:image forKey:imageKey];
                                                       }
                                                   }];
+#endif
 }
 
 - (void)updateImageWithKeys:(NSMutableArray *)newImageKeys
@@ -125,8 +139,8 @@
                 }
                 else
                 {
-                    NSString *newID = [[newKey componentsSeparatedByString:@"_"] objectAtIndex:0];
-                    NSString *cachedID = [[cachedKey componentsSeparatedByString:@"_"] objectAtIndex:0];
+                    NSString *newID = [[newKey componentsSeparatedByString:@"@"] objectAtIndex:0];
+                    NSString *cachedID = [[cachedKey componentsSeparatedByString:@"@"] objectAtIndex:0];
                     // 图片id匹配说明是更新项，删除旧图片，请求新图片
                     if ([newID isEqualToString:cachedID])
                     {
