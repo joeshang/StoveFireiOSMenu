@@ -13,20 +13,19 @@
 
 @implementation DXEDishCollectionViewCell
 
--(id)initWithCoder:(NSCoder *)aDecoder
+- (void)awakeFromNib
 {
-    self = [super initWithCoder:aDecoder];
+    self.layer.cornerRadius = kDXECollectionViewCellRadius;
+    self.layer.masksToBounds = YES;
+    self.layer.borderWidth = kDXECollectionViewCellBorderWidth;
+    self.layer.borderColor = [[[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionViewCell.BorderColor"] CGColor];
     
-    if (self)
-    {
-        self.layer.cornerRadius = kDXECollectionViewCellRadius;
-        self.layer.masksToBounds = YES;
-        self.layer.borderWidth = kDXECollectionViewCellBorderWidth;
-        self.layer.borderColor = [[UIColor blueColor] CGColor];
-        
-    }
-    
-    return self;
+    self.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionViewCell.BackgroundColor"];
+    UIColor *tintColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionViewCell.TintColor"];
+    self.dishName.textColor = tintColor;
+    self.dishEnglishName.textColor = tintColor;
+    self.dishPrice.textColor = tintColor;
+    self.dishFavor.textColor = tintColor;
 }
 
 - (IBAction)onCartButtonClicked:(id)sender
@@ -62,7 +61,7 @@
         case DXEDishCellModeNormal:
         {
             self.cartButton.enabled = YES;
-            self.cartButton.imageView.image = [UIImage imageNamed:@"cell_order_button"];
+            self.cartButton.imageView.image = [UIImage imageNamed:@"cell_add2cart_button"];
             [UIView animateWithDuration:kDXEDishCellAnimateDuration
                              animations:^{
                                  self.maskView.alpha = 0.0;
@@ -79,7 +78,7 @@
         case DXEDishCellModeInCart:
         {
             self.cartButton.enabled = YES;
-            self.cartButton.imageView.image = [UIImage imageNamed:@"cell_order_button"];
+            self.cartButton.imageView.image = [UIImage imageNamed:@"cell_add2cart_button"];
             self.maskView.hidden = NO;
             self.inCartFlag.hidden = NO;
             [UIView animateWithDuration:kDXEDishCellAnimateDuration

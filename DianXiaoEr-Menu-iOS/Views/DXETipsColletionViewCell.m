@@ -10,19 +10,12 @@
 
 @implementation DXETipsColletionViewCell
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (void)awakeFromNib
 {
-    self = [super initWithCoder:aDecoder];
-    
-    if (self)
-    {
-        self.layer.cornerRadius = kDXECollectionViewCellRadius;
-        self.layer.masksToBounds = YES;
-        self.layer.borderWidth = kDXECollectionViewCellBorderWidth;
-        self.layer.borderColor = [[UIColor blueColor] CGColor];
-    }
-    
-    return self;
+    self.layer.cornerRadius = kDXECollectionViewCellRadius;
+    self.layer.masksToBounds = YES;
+    self.layer.borderWidth = kDXECollectionViewCellBorderWidth;
+    self.layer.borderColor = [[[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionViewCell.BorderColor"] CGColor];
 }
 
 @end

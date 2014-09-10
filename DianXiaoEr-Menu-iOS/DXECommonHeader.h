@@ -18,6 +18,8 @@
 #define kDXETabBarItemTitleVerticalOffset           3.0f
 
 #define kDXECollectionViewCellRadius                5
-#define kDXECollectionViewCellBorderWidth           2
+#define kDXECollectionViewCellBorderWidth           1
+#define kDXEDishDetailViewRadius                    15
+#define kDXEDishDetailViewBorderWidth               1
 
 #endif

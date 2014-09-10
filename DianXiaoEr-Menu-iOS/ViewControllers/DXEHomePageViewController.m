@@ -9,8 +9,10 @@
 #import "DXEHomePageViewController.h"
 #import "DXETipsColletionViewCell.h"
 #import "DXEDishCollectionViewCell.h"
+#import "DXEDishDetailView.h"
 #import "DXEDishDataManager.h"
 #import "DXEImageManager.h"
+#import "CRModal.h"
 
 #define kDXECollectionViewSectionTop            17
 #define kDXECollectionViewSectionBottom         17
@@ -31,6 +33,7 @@
 @property (nonatomic, strong) NSMutableArray *contents;
 @property (nonatomic, strong) NSMutableArray *showDishes;
 @property (nonatomic, strong) NSMutableArray *hideDishes;
+@property (nonatomic, strong) DXEDishItem *selectedDishItem;
 
 @end
 
@@ -127,6 +130,16 @@
     }
 }
 
+- (IBAction)onCartButtonClickedInDishDetailView:(id)sender
+{
+    if (self.selectedDishItem && self.selectedDishItem.inCart == NO)
+    {
+        self.selectedDishItem.inCart = YES;
+    }
+    
+    [CRModal dismiss];
+}
+
 #pragma mark - iCarouselDataSource
 
 - (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel
@@ -198,9 +211,7 @@
         cell.dishName.text = item.name;
         cell.dishImage.image = [[DXEImageManager sharedInstance] imageForKey:item.imageKey];
         cell.dishPrice.text = [NSString stringWithFormat:@"%.2f", [item.price floatValue]];
-        cell.dishPriceIcon.image = [UIImage imageNamed:@"cell_price_icon"];
         cell.dishFavor.text = [item.favor stringValue];
-        cell.dishFavorIcon.image = [UIImage imageNamed:@"cell_favor_icon"];
         
         cell.controller = self;
         cell.collectionView = collectionView;
@@ -214,6 +225,26 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"page: %ld, index: %ld", collectionView.tag, indexPath.row);
+    
+    NSUInteger index = [self.contents indexOfObject:collectionView];
+    DXEDishClass *class = [self.showDishes objectAtIndex:index];
+    DXEDishItem *item = [class.dishes objectAtIndex:indexPath.row - 1];
+    self.selectedDishItem = item;
+    
+    DXEDishDetailView *dishDetailView = [[[NSBundle mainBundle] loadNibNamed:@"DXEDishDetailView" owner:self options:nil] firstObject];
+    dishDetailView.dishName.text = item.name;
+    dishDetailView.dishPrice.text = [NSString stringWithFormat:@"%.2f", [item.price floatValue]];
+    dishDetailView.dishFavor.text = [item.favor stringValue];
+    dishDetailView.dishIngredient.selectable = YES;
+    dishDetailView.dishIngredient.text = item.ingredient;
+    dishDetailView.dishIngredient.selectable = NO;
+    dishDetailView.dishImage.image = [[DXEImageManager sharedInstance] imageForKey:item.imageKey];
+    
+    [CRModal showModalView:dishDetailView
+               coverOption:CRModalOptionCoverDark
+       tapOutsideToDismiss:YES
+                  animated:YES
+                completion:nil];
 }
 
 #pragma mark - CHTCollectionViewDelegateWaterflowLayout
