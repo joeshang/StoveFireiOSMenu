@@ -81,7 +81,6 @@
         [item setSelectedTitleAttributes:selectedTextAttributes];
         [item setUnselectedTitleAttributes:unselectedTextAttributes];
         [item setTitle:[tabBarItemTitle objectAtIndex:index]];
-        item.titlePositionAdjustment = UIOffsetMake(0.0f, kDXETabBarItemTitleVerticalOffset);
         
         UIImage *tabBarSelectedImage = [[RNThemeManager sharedManager] imageForName:
                                         [NSString stringWithFormat:@"%@_tabbar_selected.png", [tabBarItemImageNamePrefix objectAtIndex:index]]];

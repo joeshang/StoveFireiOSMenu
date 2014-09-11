@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		731CAACE6DBB4861A8AEDEC7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A19EEB29E7462C89A58EDF /* libPods.a */; };
-		D2049274198344DE00D8187E /* Theme in Resources */ = {isa = PBXBuildFile; fileRef = D2049273198344DE00D8187E /* Theme */; };
 		D2049288198D4AA900D8187E /* DXEDishCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2049287198D4AA900D8187E /* DXEDishCollectionViewCell.m */; };
 		D204928D198D4EAD00D8187E /* DXETipsColletionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D204928C198D4EAD00D8187E /* DXETipsColletionViewCell.m */; };
 		D204928F198D4ED400D8187E /* DXETipsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D204928E198D4ED400D8187E /* DXETipsCollectionViewCell.xib */; };
@@ -51,6 +50,7 @@
 		D2981E3919BF041D00DD22E2 /* CRModal.m in Sources */ = {isa = PBXBuildFile; fileRef = D2981E3619BF041D00DD22E2 /* CRModal.m */; };
 		D2981E3A19BF041D00DD22E2 /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = D2981E3819BF041D00DD22E2 /* UIImage+Blur.m */; };
 		D2981E3C19BF08A000DD22E2 /* test_dish_item@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2981E3B19BF08A000DD22E2 /* test_dish_item@2x.png */; };
+		D2981F0E19C03FAD00DD22E2 /* Theme in Resources */ = {isa = PBXBuildFile; fileRef = D2981F0D19C03FAD00DD22E2 /* Theme */; };
 		D29FAAE819AFB45C00E667D4 /* cell_soldout_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D29FAAE519AFB45C00E667D4 /* cell_soldout_button@2x.png */; };
 		D29FAB5619B5C1E000E667D4 /* DXEDishClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D29FAB5319B5C1E000E667D4 /* DXEDishClass.m */; };
 		D29FAB5719B5C1E000E667D4 /* DXEDishItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D29FAB5519B5C1E000E667D4 /* DXEDishItem.m */; };
@@ -70,7 +70,6 @@
 /* Begin PBXFileReference section */
 		07430FF3329A4EBFB4AB3C68 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		52A19EEB29E7462C89A58EDF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2049273198344DE00D8187E /* Theme */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Theme; sourceTree = "<group>"; };
 		D2049286198D4AA900D8187E /* DXEDishCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEDishCollectionViewCell.h; path = Views/DXEDishCollectionViewCell.h; sourceTree = "<group>"; };
 		D2049287198D4AA900D8187E /* DXEDishCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEDishCollectionViewCell.m; path = Views/DXEDishCollectionViewCell.m; sourceTree = "<group>"; };
 		D204928B198D4EAD00D8187E /* DXETipsColletionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXETipsColletionViewCell.h; path = Views/DXETipsColletionViewCell.h; sourceTree = "<group>"; };
@@ -131,6 +130,7 @@
 		D2981E3719BF041D00DD22E2 /* UIImage+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blur.h"; sourceTree = "<group>"; };
 		D2981E3819BF041D00DD22E2 /* UIImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blur.m"; sourceTree = "<group>"; };
 		D2981E3B19BF08A000DD22E2 /* test_dish_item@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test_dish_item@2x.png"; sourceTree = "<group>"; };
+		D2981F0D19C03FAD00DD22E2 /* Theme */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Theme; sourceTree = "<group>"; };
 		D29FAAE519AFB45C00E667D4 /* cell_soldout_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_soldout_button@2x.png"; sourceTree = "<group>"; };
 		D29FAB5219B5C1E000E667D4 /* DXEDishClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEDishClass.h; path = Model/DXEDishClass.h; sourceTree = "<group>"; };
 		D29FAB5319B5C1E000E667D4 /* DXEDishClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEDishClass.m; path = Model/DXEDishClass.m; sourceTree = "<group>"; };
@@ -204,7 +204,7 @@
 			name = HomePage;
 			sourceTree = "<group>";
 		};
-		D20492A11997CB8E00D8187E /* CommonResource */ = {
+		D20492A11997CB8E00D8187E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
 				D20492A21997CB8E00D8187E /* qrcode_button@2x.png */,
@@ -217,6 +217,7 @@
 				D2981E2019B85AA900DD22E2 /* test_dish_class@2x.png */,
 				D2981E3B19BF08A000DD22E2 /* test_dish_item@2x.png */,
 			);
+			name = Resource;
 			path = CommonResource;
 			sourceTree = "<group>";
 		};
@@ -312,9 +313,9 @@
 				D2049277198D0C0700D8187E /* View */,
 				D246598E1973FB0A0010B1B6 /* View Controller */,
 				D2981E3319BF03E500DD22E2 /* Library */,
-				D20492A11997CB8E00D8187E /* CommonResource */,
-				D2049273198344DE00D8187E /* Theme */,
+				D20492A11997CB8E00D8187E /* Resource */,
 				D22BE1A51972747000A438D2 /* Images.xcassets */,
+				D2981F0D19C03FAD00DD22E2 /* Theme */,
 				D22BE19A1972747000A438D2 /* Supporting Files */,
 			);
 			path = "DianXiaoEr-Menu-iOS";
@@ -482,10 +483,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2981F0E19C03FAD00DD22E2 /* Theme in Resources */,
 				D2981E2719B85E3200DD22E2 /* cell_price_icon@2x.png in Resources */,
 				D2981E3019B8A96400DD22E2 /* DXEDishDetailView.xib in Resources */,
 				D20492A31997CB8E00D8187E /* qrcode_button@2x.png in Resources */,
-				D2049274198344DE00D8187E /* Theme in Resources */,
 				D2981E3C19BF08A000DD22E2 /* test_dish_item@2x.png in Resources */,
 				D207123A1974D7F500E34770 /* DXEMyselfViewController.xib in Resources */,
 				D20712261974D7AC00E34770 /* DXEOriginViewController.xib in Resources */,
