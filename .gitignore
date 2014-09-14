@@ -1,4 +1,7 @@
-.DS_Store
-*~.nib
-*.swp
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
 xcuserdata
+.DS_Store
+*.swp
+Pods
+Podfile.lock

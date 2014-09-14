@@ -39,6 +39,8 @@
 		D26026F61999F2DF004D6579 /* DXEOpenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D26026F41999F2DF004D6579 /* DXEOpenViewController.m */; };
 		D26026F71999F2DF004D6579 /* DXEOpenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D26026F51999F2DF004D6579 /* DXEOpenViewController.xib */; };
 		D26026FB199B4FAA004D6579 /* DXEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D26026FA199B4FAA004D6579 /* DXEMainViewController.m */; };
+		D273A3BD19C603180081BB37 /* CRModal.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A3BA19C603180081BB37 /* CRModal.m */; };
+		D273A3BE19C603180081BB37 /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A3BC19C603180081BB37 /* UIImage+Blur.m */; };
 		D2981E2219B85AA900DD22E2 /* test_dish_class@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2019B85AA900DD22E2 /* test_dish_class@2x.png */; };
 		D2981E2619B85E3200DD22E2 /* cell_favor_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2419B85E3200DD22E2 /* cell_favor_icon@2x.png */; };
 		D2981E2719B85E3200DD22E2 /* cell_price_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2519B85E3200DD22E2 /* cell_price_icon@2x.png */; };
@@ -47,8 +49,6 @@
 		D2981E2E19B8A93E00DD22E2 /* DXEDishDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2981E2D19B8A93E00DD22E2 /* DXEDishDetailView.m */; };
 		D2981E3019B8A96400DD22E2 /* DXEDishDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2F19B8A96400DD22E2 /* DXEDishDetailView.xib */; };
 		D2981E3219BED5A800DD22E2 /* cell_add2cart_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2981E3119BED5A800DD22E2 /* cell_add2cart_button@2x.png */; };
-		D2981E3919BF041D00DD22E2 /* CRModal.m in Sources */ = {isa = PBXBuildFile; fileRef = D2981E3619BF041D00DD22E2 /* CRModal.m */; };
-		D2981E3A19BF041D00DD22E2 /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = D2981E3819BF041D00DD22E2 /* UIImage+Blur.m */; };
 		D2981E3C19BF08A000DD22E2 /* test_dish_item@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2981E3B19BF08A000DD22E2 /* test_dish_item@2x.png */; };
 		D2981F0E19C03FAD00DD22E2 /* Theme in Resources */ = {isa = PBXBuildFile; fileRef = D2981F0D19C03FAD00DD22E2 /* Theme */; };
 		D29FAAE819AFB45C00E667D4 /* cell_soldout_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D29FAAE519AFB45C00E667D4 /* cell_soldout_button@2x.png */; };
@@ -116,6 +116,10 @@
 		D26026F51999F2DF004D6579 /* DXEOpenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOpenViewController.xib; path = ViewControllers/DXEOpenViewController.xib; sourceTree = "<group>"; };
 		D26026F9199B4FAA004D6579 /* DXEMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEMainViewController.h; path = ViewControllers/DXEMainViewController.h; sourceTree = "<group>"; };
 		D26026FA199B4FAA004D6579 /* DXEMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEMainViewController.m; path = ViewControllers/DXEMainViewController.m; sourceTree = "<group>"; };
+		D273A3B919C603180081BB37 /* CRModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRModal.h; sourceTree = "<group>"; };
+		D273A3BA19C603180081BB37 /* CRModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRModal.m; sourceTree = "<group>"; };
+		D273A3BB19C603180081BB37 /* UIImage+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blur.h"; sourceTree = "<group>"; };
+		D273A3BC19C603180081BB37 /* UIImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blur.m"; sourceTree = "<group>"; };
 		D2981E2019B85AA900DD22E2 /* test_dish_class@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test_dish_class@2x.png"; sourceTree = "<group>"; };
 		D2981E2419B85E3200DD22E2 /* cell_favor_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_favor_icon@2x.png"; sourceTree = "<group>"; };
 		D2981E2519B85E3200DD22E2 /* cell_price_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_price_icon@2x.png"; sourceTree = "<group>"; };
@@ -125,10 +129,6 @@
 		D2981E2D19B8A93E00DD22E2 /* DXEDishDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEDishDetailView.m; path = Views/DXEDishDetailView.m; sourceTree = "<group>"; };
 		D2981E2F19B8A96400DD22E2 /* DXEDishDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEDishDetailView.xib; path = Views/DXEDishDetailView.xib; sourceTree = "<group>"; };
 		D2981E3119BED5A800DD22E2 /* cell_add2cart_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_add2cart_button@2x.png"; sourceTree = "<group>"; };
-		D2981E3519BF041D00DD22E2 /* CRModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRModal.h; sourceTree = "<group>"; };
-		D2981E3619BF041D00DD22E2 /* CRModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRModal.m; sourceTree = "<group>"; };
-		D2981E3719BF041D00DD22E2 /* UIImage+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blur.h"; sourceTree = "<group>"; };
-		D2981E3819BF041D00DD22E2 /* UIImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blur.m"; sourceTree = "<group>"; };
 		D2981E3B19BF08A000DD22E2 /* test_dish_item@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test_dish_item@2x.png"; sourceTree = "<group>"; };
 		D2981F0D19C03FAD00DD22E2 /* Theme */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Theme; sourceTree = "<group>"; };
 		D29FAAE519AFB45C00E667D4 /* cell_soldout_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_soldout_button@2x.png"; sourceTree = "<group>"; };
@@ -312,7 +312,7 @@
 				D2049278198D0C1000D8187E /* Model */,
 				D2049277198D0C0700D8187E /* View */,
 				D246598E1973FB0A0010B1B6 /* View Controller */,
-				D2981E3319BF03E500DD22E2 /* Library */,
+				D273A3B719C603180081BB37 /* Library */,
 				D20492A11997CB8E00D8187E /* Resource */,
 				D22BE1A51972747000A438D2 /* Images.xcassets */,
 				D2981F0D19C03FAD00DD22E2 /* Theme */,
@@ -383,21 +383,21 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
-		D2981E3319BF03E500DD22E2 /* Library */ = {
+		D273A3B719C603180081BB37 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				D2981E3419BF041D00DD22E2 /* CRModal */,
+				D273A3B819C603180081BB37 /* CRModal */,
 			);
-			name = Library;
+			path = Library;
 			sourceTree = "<group>";
 		};
-		D2981E3419BF041D00DD22E2 /* CRModal */ = {
+		D273A3B819C603180081BB37 /* CRModal */ = {
 			isa = PBXGroup;
 			children = (
-				D2981E3519BF041D00DD22E2 /* CRModal.h */,
-				D2981E3619BF041D00DD22E2 /* CRModal.m */,
-				D2981E3719BF041D00DD22E2 /* UIImage+Blur.h */,
-				D2981E3819BF041D00DD22E2 /* UIImage+Blur.m */,
+				D273A3B919C603180081BB37 /* CRModal.h */,
+				D273A3BA19C603180081BB37 /* CRModal.m */,
+				D273A3BB19C603180081BB37 /* UIImage+Blur.h */,
+				D273A3BC19C603180081BB37 /* UIImage+Blur.m */,
 			);
 			path = CRModal;
 			sourceTree = "<group>";
@@ -555,10 +555,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2981E3A19BF041D00DD22E2 /* UIImage+Blur.m in Sources */,
+				D273A3BE19C603180081BB37 /* UIImage+Blur.m in Sources */,
 				D2049288198D4AA900D8187E /* DXEDishCollectionViewCell.m in Sources */,
 				D20712251974D7AC00E34770 /* DXEOriginViewController.m in Sources */,
-				D2981E3919BF041D00DD22E2 /* CRModal.m in Sources */,
+				D273A3BD19C603180081BB37 /* CRModal.m in Sources */,
 				D20712391974D7F500E34770 /* DXEMyselfViewController.m in Sources */,
 				D207122F1974D7D000E34770 /* DXEOrderViewController.m in Sources */,
 				D29FAB5719B5C1E000E667D4 /* DXEDishItem.m in Sources */,

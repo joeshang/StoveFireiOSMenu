@@ -79,15 +79,15 @@
         {
             self.cartButton.enabled = YES;
             self.cartButton.imageView.image = [UIImage imageNamed:@"cell_add2cart_button"];
-            self.maskView.hidden = NO;
             self.inCartFlag.hidden = NO;
             [UIView animateWithDuration:kDXEDishCellAnimateDuration
                              animations:^{
-                                 self.maskView.alpha = kDXEDishCellDarkMaskAlpha;
+                                 self.maskView.alpha = 0.0;
                                  self.inCartFlag.alpha = 1.0;
                                  self.soldoutFlag.alpha = 0.0;
                              }
                              completion:^(BOOL finished){
+                                 self.maskView.hidden = YES;
                                  self.soldoutFlag.hidden = YES;
                              }];
             break;

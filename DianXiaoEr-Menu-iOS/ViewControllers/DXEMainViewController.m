@@ -70,12 +70,12 @@
         
         NSDictionary *selectedTextAttributes =
         @{
-          NSFontAttributeName: [[RNThemeManager sharedManager] fontForKey:@"Main.TabBar.ItemSelectedTextFont"],
+          NSFontAttributeName: [UIFont systemFontOfSize:11],
           NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.ItemSelectedTextFontColor"]
         };
         NSDictionary *unselectedTextAttributes =
         @{
-          NSFontAttributeName: [[RNThemeManager sharedManager] fontForKey:@"Main.TabBar.ItemUnselectedTextFont"],
+          NSFontAttributeName: [UIFont systemFontOfSize:11],
           NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.ItemUnselectedTextFontColor"]
         };
         [item setSelectedTitleAttributes:selectedTextAttributes];
