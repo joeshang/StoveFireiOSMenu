@@ -22,10 +22,10 @@ typedef NS_ENUM(NSInteger, DXEDishCellMode) {
 @property (weak, nonatomic) IBOutlet UILabel *dishPrice;
 @property (weak, nonatomic) IBOutlet UIImageView *dishPriceIcon;
 @property (weak, nonatomic) IBOutlet UILabel *dishFavor;
-@property (weak, nonatomic) IBOutlet UIImageView *dishFavorIcon;
 @property (weak, nonatomic) IBOutlet UIView *maskView;
 @property (weak, nonatomic) IBOutlet UIImageView *inCartFlag;
 @property (weak, nonatomic) IBOutlet UIImageView *soldoutFlag;
+@property (weak, nonatomic) IBOutlet UIButton *favorButton;
 @property (weak, nonatomic) IBOutlet UIButton *cartButton;
 
 @property (weak, nonatomic) id controller;
@@ -33,6 +33,8 @@ typedef NS_ENUM(NSInteger, DXEDishCellMode) {
 @property (assign, nonatomic) DXEDishCellMode cellMode;
 
 - (IBAction)onCartButtonClicked:(id)sender;
+- (IBAction)onFavorButtonClicked:(id)sender;
+
 - (void)showCellMode:(DXEDishCellMode)cellMode animate:(BOOL)animated;
 
 @end

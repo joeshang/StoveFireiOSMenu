@@ -11,7 +11,7 @@
 
 #define kDXEStatusBarHeight                         20
 #define kDXENavigationBarHeight                     44
-#define kDXETabBarHeight                            72
+#define kDXETabBarHeight                            71
 
 #define kDXEScrollMenuHeight                        53
 

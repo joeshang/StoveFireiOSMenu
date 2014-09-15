@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *dishImage;
 @property (weak, nonatomic) IBOutlet UILabel *dishPrice;
 @property (weak, nonatomic) IBOutlet UILabel *dishFavor;
+@property (weak, nonatomic) IBOutlet UIButton *favorButton;
 @property (weak, nonatomic) IBOutlet UIButton *cartButton;
 @property (weak, nonatomic) IBOutlet UITextView *dishIngredient;
 

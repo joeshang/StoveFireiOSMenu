@@ -32,13 +32,33 @@
 {
     [self showCellMode:DXEDishCellModeInCart animate:YES];
     
-    NSIndexPath *indexPath = [self.collectionView indexPathForCell:self];
     SEL selector = NSSelectorFromString(@"onCartButtonClickedInCollectionView:atIndexPath:");
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:self];
     if ([self.controller respondsToSelector:selector])
     {
-        [self.controller performSelector:selector
-                              withObject:self.collectionView
-                              withObject:indexPath];
+        // func is a trick for performSelector:withObject without "may cause a leak because its selector is unknown" warning
+        // [self.controller performSelector:selector
+        //                       withObject:self.collectionView
+        //                       withObject:indexPath];
+        IMP imp = [self.controller methodForSelector:selector];
+        void (*func)(id, SEL, UICollectionView *, NSIndexPath *) = (void *)imp;
+        func(self.controller, selector, self.collectionView, indexPath);
+    }
+}
+
+- (IBAction)onFavorButtonClicked:(id)sender
+{
+    SEL selector = NSSelectorFromString(@"onFavorButtonClickedInCollectionView:atIndexPath:");
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:self];
+    if ([self.controller respondsToSelector:selector])
+    {
+        // func is a trick for performSelector:withObject without "may cause a leak because its selector is unknown" warning
+        // [self.controller performSelector:selector
+        //                       withObject:self.collectionView
+        //                       withObject:indexPath];
+        IMP imp = [self.controller methodForSelector:selector];
+        void (*func)(id, SEL, UICollectionView *, NSIndexPath *) = (void *)imp;
+        func(self.controller, selector, self.collectionView, indexPath);
     }
 }
 
@@ -62,7 +82,7 @@
         {
             self.cartButton.enabled = YES;
             self.cartButton.imageView.image = [UIImage imageNamed:@"cell_add2cart_button"];
-            [UIView animateWithDuration:kDXEDishCellAnimateDuration
+            [UIView animateWithDuration:duration
                              animations:^{
                                  self.maskView.alpha = 0.0;
                                  self.inCartFlag.alpha = 0.0;
@@ -80,7 +100,7 @@
             self.cartButton.enabled = YES;
             self.cartButton.imageView.image = [UIImage imageNamed:@"cell_add2cart_button"];
             self.inCartFlag.hidden = NO;
-            [UIView animateWithDuration:kDXEDishCellAnimateDuration
+            [UIView animateWithDuration:duration
                              animations:^{
                                  self.maskView.alpha = 0.0;
                                  self.inCartFlag.alpha = 1.0;
@@ -98,7 +118,7 @@
             self.cartButton.imageView.image = [UIImage imageNamed:@"cell_soldout_button"];
             self.maskView.hidden = NO;
             self.soldoutFlag.hidden = NO;
-            [UIView animateWithDuration:kDXEDishCellAnimateDuration
+            [UIView animateWithDuration:duration
                              animations:^{
                                  self.maskView.alpha = kDXEDishCellDarkMaskAlpha;
                                  self.soldoutFlag.alpha = 1.0;

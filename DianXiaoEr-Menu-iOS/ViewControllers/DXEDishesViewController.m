@@ -19,6 +19,9 @@
 
 @interface DXEDishesViewController ()
 
+@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
+@property (nonatomic, strong) DXEDishDetailView *dishDetailView;
+
 @end
 
 @implementation DXEDishesViewController
@@ -103,6 +106,16 @@
         cell.dishImage.image = [[DXEImageManager sharedInstance] imageForKey:item.imageKey];
         cell.dishPrice.text = [NSString stringWithFormat:@"%.2f", [item.price floatValue]];
         cell.dishFavor.text = [item.favor stringValue];
+        if (item.inFavor)
+        {
+            [cell.favorButton setImage:[UIImage imageNamed:@"dish_cell_favor_solid_icon"]
+                              forState:UIControlStateNormal];
+        }
+        else
+        {
+            [cell.favorButton setImage:[UIImage imageNamed:@"dish_cell_favor_hollow_icon"]
+                              forState:UIControlStateNormal];
+        }
         
         cell.controller = self;
         cell.collectionView = collectionView;
@@ -120,20 +133,35 @@
     DXEDishItem *item = [self.dishClass.dishes objectAtIndex:indexPath.row - 1];
     if ([item.soldout boolValue] == NO)
     {
-        DXEDishDetailView *dishDetailView = [[[NSBundle mainBundle] loadNibNamed:@"DXEDishDetailView" owner:self options:nil] firstObject];
-        dishDetailView.dishName.text = item.name;
-        dishDetailView.dishPrice.text = [NSString stringWithFormat:@"%.2f", [item.price floatValue]];
-        dishDetailView.dishFavor.text = [item.favor stringValue];
-        dishDetailView.dishIngredient.selectable = YES;
-        dishDetailView.dishIngredient.text = item.ingredient;
-        dishDetailView.dishIngredient.selectable = NO;
-        dishDetailView.dishImage.image = [[DXEImageManager sharedInstance] imageForKey:item.imageKey];
+        self.selectedIndexPath = indexPath;
         
-        [CRModal showModalView:dishDetailView
+        self.dishDetailView = [[[NSBundle mainBundle] loadNibNamed:@"DXEDishDetailView" owner:self options:nil] firstObject];
+        self.dishDetailView.dishName.text = item.name;
+        self.dishDetailView.dishPrice.text = [NSString stringWithFormat:@"%.2f", [item.price floatValue]];
+        self.dishDetailView.dishFavor.text = [item.favor stringValue];
+        self.dishDetailView.dishIngredient.selectable = YES;
+        self.dishDetailView.dishIngredient.text = item.ingredient;
+        self.dishDetailView.dishIngredient.selectable = NO;
+        self.dishDetailView.dishImage.image = [[DXEImageManager sharedInstance] imageForKey:item.imageKey];
+        if (item.inFavor)
+        {
+            [self.dishDetailView.favorButton setImage:[UIImage imageNamed:@"dish_cell_favor_solid_icon"]
+                                             forState:UIControlStateNormal];
+        }
+        else
+        {
+            [self.dishDetailView.favorButton setImage:[UIImage imageNamed:@"dish_cell_favor_hollow_icon"]
+                                             forState:UIControlStateNormal];
+        }
+        
+        [CRModal showModalView:self.dishDetailView
                    coverOption:CRModalOptionCoverDark
            tapOutsideToDismiss:YES
                       animated:YES
-                    completion:nil];
+                    completion:^{
+                        self.selectedIndexPath = nil;
+                        self.dishDetailView = nil;
+                    }];
     }
 }
 
@@ -169,9 +197,51 @@
     }
 }
 
+- (void)onFavorButtonClickedInCollectionView:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath
+{
+    DXEDishItem *item = [self.dishClass.dishes objectAtIndex:indexPath.row - 1];
+    if (item.inFavor)
+    {
+        item.inFavor = NO;
+        item.favor = [NSNumber numberWithInt:[item.favor intValue] - 1];
+    }
+    else
+    {
+        item.inFavor = YES;
+        item.favor = [NSNumber numberWithInt:[item.favor intValue] + 1];
+    }
+    
+    [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+}
+
 - (IBAction)onCartButtonClickedInDishDetailView:(id)sender
 {
+    DXEDishItem *item = [self.dishClass.dishes objectAtIndex:self.selectedIndexPath.row - 1];
+    item.inCart = YES;
+    [self.collectionView reloadItemsAtIndexPaths:@[self.selectedIndexPath]];
+    
     [CRModal dismiss];
+}
+
+- (IBAction)onFavorButtonClickedInDishDetailView:(id)sender
+{
+    DXEDishItem *item = [self.dishClass.dishes objectAtIndex:self.selectedIndexPath.row - 1];
+    if (item.inFavor)
+    {
+        item.inFavor = NO;
+        item.favor = [NSNumber numberWithInt:[item.favor intValue] - 1];
+        [self.dishDetailView.favorButton setImage:[UIImage imageNamed:@"dish_cell_favor_hollow_icon"]
+                                         forState:UIControlStateNormal];
+    }
+    else
+    {
+        item.inFavor = YES;
+        item.favor = [NSNumber numberWithInt:[item.favor intValue] + 1];
+        [self.dishDetailView.favorButton setImage:[UIImage imageNamed:@"dish_cell_favor_solid_icon"]
+                                         forState:UIControlStateNormal];
+    }
+    self.dishDetailView.dishFavor.text = [item.favor stringValue];
+    [self.collectionView reloadItemsAtIndexPaths:@[self.selectedIndexPath]];
 }
 
 @end

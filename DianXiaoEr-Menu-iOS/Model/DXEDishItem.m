@@ -17,6 +17,7 @@
     if (self)
     {
         _inCart = NO;
+        _inFavor = NO;
     }
     
     return self;

@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSNumber *soldout;
 
 @property (nonatomic, assign) BOOL inCart;
+@property (nonatomic, assign) BOOL inFavor;
 
 - (void)updateByNewObject:(DXEDishItem *)update;
 

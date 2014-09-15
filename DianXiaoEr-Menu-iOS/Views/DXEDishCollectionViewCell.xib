@@ -22,16 +22,22 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cell_price_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ggz-eP-kgy">
-                        <rect key="frame" x="20" y="564" width="18" height="18"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dish_cell_price_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ggz-eP-kgy">
+                        <rect key="frame" x="20" y="565" width="19" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cell_favor_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="d7O-rZ-F7Z">
-                        <rect key="frame" x="130" y="564" width="18" height="18"/>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wV3-sf-sEc">
+                        <rect key="frame" x="116" y="556" width="80" height="42"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </imageView>
+                        <inset key="contentEdgeInsets" minX="-32" minY="0.0" maxX="0.0" maxY="8"/>
+                        <state key="normal" image="dish_cell_favor_hollow_icon.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="onFavorButtonClicked:" destination="lGy-eV-7UU" eventType="touchUpInside" id="jao-cv-UaN"/>
+                        </connections>
+                    </button>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="粉红色的冰淇淋" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ItA-3P-y2y">
                         <rect key="frame" x="20" y="505" width="320" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -40,7 +46,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8M-HP-q5M">
-                        <rect key="frame" x="39" y="564" width="75" height="20"/>
+                        <rect key="frame" x="40" y="564" width="75" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,6 +66,14 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dish_cell_soldout_flag.png" translatesAutoresizingMaskIntoConstraints="NO" id="Q8a-d1-nxm">
+                        <rect key="frame" x="212" y="420" width="128" height="128"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cell_incart_flag.png" translatesAutoresizingMaskIntoConstraints="NO" id="UfW-h1-Ga6">
+                        <rect key="frame" x="159" y="230" width="42" height="29"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nkE-DL-tOJ">
                         <rect key="frame" x="266" y="556" width="74" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -70,14 +84,6 @@
                             <action selector="onCartButtonClicked:" destination="lGy-eV-7UU" eventType="touchUpInside" id="fmN-R8-i1I"/>
                         </connections>
                     </button>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cell_soldout_flag.png" translatesAutoresizingMaskIntoConstraints="NO" id="Q8a-d1-nxm">
-                        <rect key="frame" x="216" y="427" width="124" height="100"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cell_incart_flag.png" translatesAutoresizingMaskIntoConstraints="NO" id="UfW-h1-Ga6">
-                        <rect key="frame" x="159" y="230" width="42" height="29"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -87,11 +93,11 @@
                 <outlet property="cartButton" destination="nkE-DL-tOJ" id="jgH-oH-7jD"/>
                 <outlet property="dishEnglishName" destination="xqe-Av-9An" id="AMK-nz-dyV"/>
                 <outlet property="dishFavor" destination="cV1-Jj-zgQ" id="VOp-w0-Vht"/>
-                <outlet property="dishFavorIcon" destination="d7O-rZ-F7Z" id="hrC-f8-nSO"/>
                 <outlet property="dishImage" destination="WYt-MK-oMy" id="sS9-hq-BBu"/>
                 <outlet property="dishName" destination="ItA-3P-y2y" id="3Bt-Gs-yxA"/>
                 <outlet property="dishPrice" destination="s8M-HP-q5M" id="9hS-Zi-ymN"/>
                 <outlet property="dishPriceIcon" destination="Ggz-eP-kgy" id="4Np-Zf-FUh"/>
+                <outlet property="favorButton" destination="wV3-sf-sEc" id="c5R-pa-MOa"/>
                 <outlet property="inCartFlag" destination="UfW-h1-Ga6" id="2N0-4a-z26"/>
                 <outlet property="maskView" destination="7dR-g1-wq6" id="5Rt-dR-oxz"/>
                 <outlet property="soldoutFlag" destination="Q8a-d1-nxm" id="KdM-2z-VrN"/>
@@ -100,9 +106,9 @@
     </objects>
     <resources>
         <image name="cell_add2cart_button.png" width="120" height="42"/>
-        <image name="cell_favor_icon.png" width="18" height="18"/>
         <image name="cell_incart_flag.png" width="42" height="29"/>
-        <image name="cell_price_icon.png" width="18" height="18"/>
-        <image name="cell_soldout_flag.png" width="120" height="95"/>
+        <image name="dish_cell_favor_hollow_icon.png" width="19" height="16"/>
+        <image name="dish_cell_price_icon.png" width="19" height="16"/>
+        <image name="dish_cell_soldout_flag.png" width="128" height="128"/>
     </resources>
 </document>
