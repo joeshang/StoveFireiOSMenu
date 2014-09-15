@@ -208,11 +208,13 @@
 
 #ifdef DXE_TEST_DISH_DATA
 
-#define kDXEDishClassName   @[@"前菜", @"沙拉", @"刺身", @"寿司", @"主菜", @"炸物", @"烤物", @"铁板烧", @"煮物", @"蒸物"]
+#define kDXEDishClassName           @[@"前菜", @"沙拉", @"刺身", @"寿司", @"主菜", @"炸物", @"烤物", @"铁板烧", @"煮物", @"蒸物"]
+#define kDXEDishClassEnglishName    @[@"APPETIZER", @"SHALA", @"SASHIMI", @"SUSHI", @"ENTREE", @"FRIED", @"GRILLED", @"TEPPANYAKI", @"SIMMERED", @"STREAMING"]
 
 - (NSData *)dishClassDataOfTestingNew
 {
     NSArray *names = kDXEDishClassName;
+    NSArray *englishNames = kDXEDishClassEnglishName;
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:[names count]];
     for (NSUInteger i = 0; i < [names count]; i++)
     {
@@ -220,6 +222,7 @@
         class.classid = [NSNumber numberWithInteger:i];
         class.showSequence = [NSNumber numberWithInteger:i + 1];
         class.name = [names objectAtIndex:i];
+        class.englishName = [englishNames objectAtIndex:i];
         class.imageKey = [NSString stringWithFormat:@"0-%ld@%.0f", i, [[NSDate date] timeIntervalSince1970]];
         [array addObject:class];
     }
@@ -235,6 +238,7 @@
     vip.classid = [NSNumber numberWithInteger:10];
     vip.showSequence = [NSNumber numberWithInteger:0];
     vip.name = @"会员";
+    vip.englishName = @"VIP";
     vip.imageKey = [NSString stringWithFormat:@"0-10@%.0f", [[NSDate date] timeIntervalSince1970]];
     
     DXEDishClass *front = [[DXEDishClass alloc] init];
@@ -254,6 +258,7 @@
 - (NSData *)dishItemDataOfTestingNew
 {
     NSArray *names = kDXEDishClassName;
+    NSArray *englishNames = kDXEDishClassEnglishName;
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:[names count] * 10];
     for (NSUInteger i = 0; i < [names count]; i++)
     {
@@ -263,7 +268,8 @@
             DXEDishItem *item = [[DXEDishItem alloc] init];
             item.itemid = [NSNumber numberWithInteger:i * 100 + j];
             item.classid = [NSNumber numberWithInteger:i];
-            item.name = [NSString stringWithFormat:@"%@%ld", [names objectAtIndex:i], j];
+            item.name = [NSString stringWithFormat:@"%@_%ld", [names objectAtIndex:i], j];
+            item.englishName = [NSString stringWithFormat:@"%@_%ld", [englishNames objectAtIndex:i], j];
             item.imageKey = [NSString stringWithFormat:@"1-%ld@%.0f", j, [[NSDate date] timeIntervalSince1970]];
             item.showSequence = [NSNumber numberWithInteger:j + 1];
             item.price = [NSNumber numberWithFloat:20 + arc4random() % 100];
@@ -289,6 +295,8 @@
         DXEDishItem *item = [[DXEDishItem alloc] init];
         item.itemid = [NSNumber numberWithInteger:1000 + j];
         item.classid = [NSNumber numberWithInteger:10];
+        item.name = [NSString stringWithFormat:@"会员专属_%ld", j];
+        item.englishName = [NSString stringWithFormat:@"VIP_%ld", j];
         item.imageKey = [NSString stringWithFormat:@"1-%ld@%.0f", j, [[NSDate date] timeIntervalSince1970]];
         item.showSequence = [NSNumber numberWithInteger:j + 1];
         item.price = [NSNumber numberWithFloat:20 + arc4random() % 100];

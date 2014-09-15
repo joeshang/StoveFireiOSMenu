@@ -41,6 +41,11 @@
 		D26026FB199B4FAA004D6579 /* DXEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D26026FA199B4FAA004D6579 /* DXEMainViewController.m */; };
 		D273A3BD19C603180081BB37 /* CRModal.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A3BA19C603180081BB37 /* CRModal.m */; };
 		D273A3BE19C603180081BB37 /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A3BC19C603180081BB37 /* UIImage+Blur.m */; };
+		D273A3C819C60B7B0081BB37 /* CRScrollMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A3C119C60B7B0081BB37 /* CRScrollMenu.m */; };
+		D273A3C919C60B7B0081BB37 /* CRScrollMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A3C319C60B7B0081BB37 /* CRScrollMenuButton.m */; };
+		D273A3CA19C60B7B0081BB37 /* CRScrollMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A3C519C60B7B0081BB37 /* CRScrollMenuController.m */; };
+		D273A3CB19C60B7B0081BB37 /* CRScrollMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A3C719C60B7B0081BB37 /* CRScrollMenuItem.m */; };
+		D273A3D619C616340081BB37 /* DXEDishesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A3D519C616340081BB37 /* DXEDishesViewController.m */; };
 		D2981E2219B85AA900DD22E2 /* test_dish_class@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2019B85AA900DD22E2 /* test_dish_class@2x.png */; };
 		D2981E2619B85E3200DD22E2 /* cell_favor_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2419B85E3200DD22E2 /* cell_favor_icon@2x.png */; };
 		D2981E2719B85E3200DD22E2 /* cell_price_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2519B85E3200DD22E2 /* cell_price_icon@2x.png */; };
@@ -120,6 +125,16 @@
 		D273A3BA19C603180081BB37 /* CRModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRModal.m; sourceTree = "<group>"; };
 		D273A3BB19C603180081BB37 /* UIImage+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blur.h"; sourceTree = "<group>"; };
 		D273A3BC19C603180081BB37 /* UIImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blur.m"; sourceTree = "<group>"; };
+		D273A3C019C60B7B0081BB37 /* CRScrollMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRScrollMenu.h; sourceTree = "<group>"; };
+		D273A3C119C60B7B0081BB37 /* CRScrollMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRScrollMenu.m; sourceTree = "<group>"; };
+		D273A3C219C60B7B0081BB37 /* CRScrollMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRScrollMenuButton.h; sourceTree = "<group>"; };
+		D273A3C319C60B7B0081BB37 /* CRScrollMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRScrollMenuButton.m; sourceTree = "<group>"; };
+		D273A3C419C60B7B0081BB37 /* CRScrollMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRScrollMenuController.h; sourceTree = "<group>"; };
+		D273A3C519C60B7B0081BB37 /* CRScrollMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRScrollMenuController.m; sourceTree = "<group>"; };
+		D273A3C619C60B7B0081BB37 /* CRScrollMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRScrollMenuItem.h; sourceTree = "<group>"; };
+		D273A3C719C60B7B0081BB37 /* CRScrollMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRScrollMenuItem.m; sourceTree = "<group>"; };
+		D273A3D419C616340081BB37 /* DXEDishesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEDishesViewController.h; path = ViewControllers/DXEDishesViewController.h; sourceTree = "<group>"; };
+		D273A3D519C616340081BB37 /* DXEDishesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEDishesViewController.m; path = ViewControllers/DXEDishesViewController.m; sourceTree = "<group>"; };
 		D2981E2019B85AA900DD22E2 /* test_dish_class@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test_dish_class@2x.png"; sourceTree = "<group>"; };
 		D2981E2419B85E3200DD22E2 /* cell_favor_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_favor_icon@2x.png"; sourceTree = "<group>"; };
 		D2981E2519B85E3200DD22E2 /* cell_price_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_price_icon@2x.png"; sourceTree = "<group>"; };
@@ -227,6 +242,8 @@
 				D24659891973FAFA0010B1B6 /* DXEHomePageViewController.h */,
 				D246598A1973FAFA0010B1B6 /* DXEHomePageViewController.m */,
 				D246598B1973FAFA0010B1B6 /* DXEHomePageViewController.xib */,
+				D273A3D419C616340081BB37 /* DXEDishesViewController.h */,
+				D273A3D519C616340081BB37 /* DXEDishesViewController.m */,
 			);
 			name = HomePage;
 			sourceTree = "<group>";
@@ -386,6 +403,7 @@
 		D273A3B719C603180081BB37 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				D273A3BF19C60B7B0081BB37 /* CRScrollMenuController */,
 				D273A3B819C603180081BB37 /* CRModal */,
 			);
 			path = Library;
@@ -400,6 +418,21 @@
 				D273A3BC19C603180081BB37 /* UIImage+Blur.m */,
 			);
 			path = CRModal;
+			sourceTree = "<group>";
+		};
+		D273A3BF19C60B7B0081BB37 /* CRScrollMenuController */ = {
+			isa = PBXGroup;
+			children = (
+				D273A3C019C60B7B0081BB37 /* CRScrollMenu.h */,
+				D273A3C119C60B7B0081BB37 /* CRScrollMenu.m */,
+				D273A3C219C60B7B0081BB37 /* CRScrollMenuButton.h */,
+				D273A3C319C60B7B0081BB37 /* CRScrollMenuButton.m */,
+				D273A3C419C60B7B0081BB37 /* CRScrollMenuController.h */,
+				D273A3C519C60B7B0081BB37 /* CRScrollMenuController.m */,
+				D273A3C619C60B7B0081BB37 /* CRScrollMenuItem.h */,
+				D273A3C719C60B7B0081BB37 /* CRScrollMenuItem.m */,
+			);
+			path = CRScrollMenuController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -562,16 +595,21 @@
 				D20712391974D7F500E34770 /* DXEMyselfViewController.m in Sources */,
 				D207122F1974D7D000E34770 /* DXEOrderViewController.m in Sources */,
 				D29FAB5719B5C1E000E667D4 /* DXEDishItem.m in Sources */,
+				D273A3CB19C60B7B0081BB37 /* CRScrollMenuItem.m in Sources */,
 				D2981E2E19B8A93E00DD22E2 /* DXEDishDetailView.m in Sources */,
+				D273A3C919C60B7B0081BB37 /* CRScrollMenuButton.m in Sources */,
+				D273A3C819C60B7B0081BB37 /* CRScrollMenu.m in Sources */,
 				D26026F61999F2DF004D6579 /* DXEOpenViewController.m in Sources */,
 				D22BE1A41972747000A438D2 /* DXEAppDelegate.m in Sources */,
 				D204928D198D4EAD00D8187E /* DXETipsColletionViewCell.m in Sources */,
 				D246598C1973FAFA0010B1B6 /* DXEHomePageViewController.m in Sources */,
 				D29FAB5619B5C1E000E667D4 /* DXEDishClass.m in Sources */,
+				D273A3CA19C60B7B0081BB37 /* CRScrollMenuController.m in Sources */,
 				D26026FB199B4FAA004D6579 /* DXEMainViewController.m in Sources */,
 				D29FAB5D19B603A000E667D4 /* DXEDishDataManager.m in Sources */,
 				D24986CD19B70CB00029CC57 /* DXEImageManager.m in Sources */,
 				D22BE1A01972747000A438D2 /* main.m in Sources */,
+				D273A3D619C616340081BB37 /* DXEDishesViewController.m in Sources */,
 				D207122A1974D7BE00E34770 /* DXEQuestionnaireViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

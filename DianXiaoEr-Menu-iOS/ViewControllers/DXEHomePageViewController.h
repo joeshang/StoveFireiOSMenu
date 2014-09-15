@@ -7,16 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CHTCollectionViewWaterfallLayout.h"
-#import "iCarousel.h"
 
 @interface DXEHomePageViewController : UIViewController
-<
-    UICollectionViewDataSource,
-    UICollectionViewDelegate,
-    CHTCollectionViewDelegateWaterfallLayout,
-    iCarouselDataSource,
-    iCarouselDelegate
->
 
 @end

@@ -7,12 +7,13 @@
 //
 
 #import "DXEHomePageViewController.h"
-#import "DXETipsColletionViewCell.h"
-#import "DXEDishCollectionViewCell.h"
-#import "DXEDishDetailView.h"
+#import "DXEDishesViewController.h"
+#import "CHTCollectionViewWaterfallLayout.h"
+#import "CRScrollMenuController.h"
 #import "DXEDishDataManager.h"
-#import "DXEImageManager.h"
-#import "CRModal.h"
+
+#define kDXEScrollMenuButtonPadding             21
+#define kDXEScrollMenuIndicatorHeight           2
 
 #define kDXECollectionViewSectionTop            17
 #define kDXECollectionViewSectionBottom         17
@@ -23,17 +24,12 @@
 #define kDXECollectionViewColumnSpacing         17
 #define kDXECollectionViewInteritemSpacing      17
 
-#define kDXECollectionViewCellWidth             360
-#define kDXECollectionViewInfoCellHeight        140
-#define kDXECollectionViewDishCellHeight        600
-
 @interface DXEHomePageViewController ()
 
-@property (nonatomic, strong) iCarousel *contentContainer;
-@property (nonatomic, strong) NSMutableArray *contents;
+@property (nonatomic, strong) CRScrollMenuController *scrollMenuController;
+@property (nonatomic, strong) NSMutableArray *contentViewControllers;
 @property (nonatomic, strong) NSMutableArray *showDishes;
 @property (nonatomic, strong) NSMutableArray *hideDishes;
-@property (nonatomic, strong) DXEDishItem *selectedDishItem;
 
 @end
 
@@ -54,13 +50,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    _contentContainer.delegate = nil;
-    _contentContainer.dataSource = nil;
-    _contentContainer = nil;
-}
-
 #pragma mark - view related
 
 - (void)viewDidLoad
@@ -69,22 +58,32 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    CGRect contentRect = CGRectMake(0,
-                                    kDXEScrollMenuHeight,
-                                    CGRectGetWidth(self.view.bounds),
-                                    CGRectGetHeight(self.view.bounds) - kDXEStatusBarHeight - kDXENavigationBarHeight - kDXEScrollMenuHeight - kDXETabBarHeight);
-    self.contentContainer = [[iCarousel alloc] initWithFrame:contentRect];
-    self.contentContainer.type = iCarouselTypeLinear;
-    self.contentContainer.pagingEnabled = YES;
-    self.contentContainer.bounceDistance = 0.4;
-    self.contentContainer.delegate = self;
-    self.contentContainer.dataSource = self;
-    self.contentContainer.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionView.BackgroundColor"];
-    [self.view addSubview:self.contentContainer];
+    self.view.backgroundColor = [UIColor redColor];
     
-    self.contents = [NSMutableArray arrayWithCapacity:[self.showDishes count]];
-    [self.showDishes enumerateObjectsUsingBlock:^(DXEDishClass *class, NSUInteger index, BOOL *stop){
-        // 为每一类菜品创建对应的collection view
+    self.scrollMenuController = [[CRScrollMenuController alloc] init];
+    self.scrollMenuController.scrollMenuHeight = kDXEScrollMenuHeight;
+    self.scrollMenuController.scrollMenuBackgroundImage = [[RNThemeManager sharedManager] imageForName:@"scrollmenu_background"];
+    self.scrollMenuController.scrollMenuIndicatorColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.ScrollMenu.ItemSelectedTextColor"];
+    self.scrollMenuController.scrollMenuIndicatorHeight = kDXEScrollMenuIndicatorHeight;
+    self.scrollMenuController.scrollMenuButtonPadding = kDXEScrollMenuButtonPadding;
+    self.scrollMenuController.normalTitleAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:17],
+                                                        NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"HomePage.ScrollMenu.ItemUnselectedTextColor"]};
+    self.scrollMenuController.selectedTitleAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:17],
+                                                          NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"HomePage.ScrollMenu.ItemSelectedTextColor"]};
+    self.scrollMenuController.normalSubtitleAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:8],
+                                                           NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"HomePage.ScrollMenu.ItemUnselectedTextColor"]};
+    self.scrollMenuController.selectedSubtitleAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:8],
+                                                             NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"HomePage.ScrollMenu.ItemSelectedTextColor"]};
+    
+    [self addChildViewController:self.scrollMenuController];
+    self.scrollMenuController.view.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionView.BackgroundColor"];
+    [self.view addSubview:self.scrollMenuController.view];
+    [self.scrollMenuController didMoveToParentViewController:self];
+    
+    NSMutableArray *items = [NSMutableArray arrayWithCapacity:[self.showDishes count]];
+    self.contentViewControllers = [NSMutableArray arrayWithCapacity:[self.showDishes count]];
+    for (DXEDishClass *class in self.showDishes)
+    {
         CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
         layout.sectionInset = UIEdgeInsetsMake(kDXECollectionViewSectionTop,
                                                kDXECollectionViewSectionLeft,
@@ -94,176 +93,27 @@
         layout.footerHeight = kDXECollectionViewFooterHeight;
         layout.minimumColumnSpacing = kDXECollectionViewColumnSpacing;
         layout.minimumInteritemSpacing = kDXECollectionViewInteritemSpacing;
+    
+        DXEDishesViewController *dishViewController = [[DXEDishesViewController alloc] initWithCollectionViewLayout:layout];
+        dishViewController.dishClass = class;
+        [self.contentViewControllers addObject:dishViewController];
         
-        CGRect collectionViewRect= CGRectMake(index * CGRectGetWidth(self.view.bounds),
-                                              0,
-                                              CGRectGetWidth(self.contentContainer.bounds),
-                                              CGRectGetHeight(self.contentContainer.bounds));
-        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:collectionViewRect
-                                                              collectionViewLayout:layout];
-        collectionView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionView.BackgroundColor"];
-        
-        collectionView.tag = [class.classid intValue];
-        collectionView.delaysContentTouches = NO;
-        collectionView.delegate = self;
-        collectionView.dataSource = self;
-        
-        [collectionView registerNib:[UINib nibWithNibName:@"DXETipsCollectionViewCell" bundle:nil]
-         forCellWithReuseIdentifier:@"DXETipsCollectionViewCell"];
-        [collectionView registerNib:[UINib nibWithNibName:@"DXEDishCollectionViewCell" bundle:nil]
-         forCellWithReuseIdentifier:@"DXEDishCollectionViewCell"];
-        
-        [self.contents addObject:collectionView];
-    }];
-}
-
-#pragma mark - target-action
-
-- (void)onCartButtonClickedInCollectionView:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath
-{
-    NSUInteger index = [self.contents indexOfObject:collectionView];
-    DXEDishClass *class = [self.showDishes objectAtIndex:index];
-    DXEDishItem *item = [class.dishes objectAtIndex:indexPath.row - 1];
-    if (item.inCart == NO)
-    {
-        item.inCart = YES;
+        CRScrollMenuItem *item = [[CRScrollMenuItem alloc] init];
+        item.title = class.name;
+        item.subtitle = class.englishName;
+        [items addObject:item];
     }
+    [self.scrollMenuController setViewControllers:self.contentViewControllers withItems:items];
 }
 
-- (IBAction)onCartButtonClickedInDishDetailView:(id)sender
+- (void)viewWillAppear:(BOOL)animated
 {
-    if (self.selectedDishItem && self.selectedDishItem.inCart == NO)
-    {
-        self.selectedDishItem.inCart = YES;
-    }
+    [super viewWillAppear:animated];
     
-    [CRModal dismiss];
-}
-
-#pragma mark - iCarouselDataSource
-
-- (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel
-{
-    return [self.showDishes count];
-}
-
-- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
-{
-    NSLog(@"carousel index: %ld", index);
-    
-    UICollectionView *collectionView = [self.contents objectAtIndex:index];
-    
-    return collectionView;
-}
-
-#pragma mark - iCarouselDelegate
-
-#pragma mark - UICollectionViewDataSource
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    NSUInteger index = [self.contents indexOfObject:collectionView];
-    DXEDishClass *class = [self.showDishes objectAtIndex:index];
-    
-    return [class.dishes count];
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSUInteger index = [self.contents indexOfObject:collectionView];
-    DXEDishClass *class = [self.showDishes objectAtIndex:index];
-    
-    if (indexPath.row == 0)
-    {
-        DXETipsColletionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DXETipsCollectionViewCell"
-                                                                                   forIndexPath:indexPath];
-        cell.tipsImage.image = [[DXEImageManager sharedInstance] imageForKey:class.imageKey];
-        
-        return cell;
-    }
-    else
-    {
-        DXEDishItem *item = [class.dishes objectAtIndex:indexPath.row - 1];
-        DXEDishCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DXEDishCollectionViewCell"
-                                                                                    forIndexPath:indexPath];
-        
-        if ([item.soldout boolValue] == YES)
-        {
-            cell.cellMode = DXEDishCellModeSoldout;
-        }
-        else
-        {
-            if (item.inCart == YES)
-            {
-                cell.cellMode = DXEDishCellModeInCart;
-            }
-            else
-            {
-                cell.cellMode = DXEDishCellModeNormal;
-            }
-        }
-        
-        cell.dishName.text = item.name;
-        cell.dishImage.image = [[DXEImageManager sharedInstance] imageForKey:item.imageKey];
-        cell.dishPrice.text = [NSString stringWithFormat:@"%.2f", [item.price floatValue]];
-        cell.dishFavor.text = [item.favor stringValue];
-        
-        cell.controller = self;
-        cell.collectionView = collectionView;
-        
-        return cell;
-    }
-}
-
-#pragma mark- UICollectionViewDelegate
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"page: %ld, index: %ld", collectionView.tag, indexPath.row);
-    
-    NSUInteger index = [self.contents indexOfObject:collectionView];
-    DXEDishClass *class = [self.showDishes objectAtIndex:index];
-    DXEDishItem *item = [class.dishes objectAtIndex:indexPath.row - 1];
-    self.selectedDishItem = item;
-    
-    DXEDishDetailView *dishDetailView = [[[NSBundle mainBundle] loadNibNamed:@"DXEDishDetailView" owner:self options:nil] firstObject];
-    dishDetailView.dishName.text = item.name;
-    dishDetailView.dishPrice.text = [NSString stringWithFormat:@"%.2f", [item.price floatValue]];
-    dishDetailView.dishFavor.text = [item.favor stringValue];
-    dishDetailView.dishIngredient.selectable = YES;
-    dishDetailView.dishIngredient.text = item.ingredient;
-    dishDetailView.dishIngredient.selectable = NO;
-    dishDetailView.dishImage.image = [[DXEImageManager sharedInstance] imageForKey:item.imageKey];
-    
-    [CRModal showModalView:dishDetailView
-               coverOption:CRModalOptionCoverDark
-       tapOutsideToDismiss:YES
-                  animated:YES
-                completion:nil];
-}
-
-#pragma mark - CHTCollectionViewDelegateWaterflowLayout
-
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout *)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    CGSize size;
-    if (indexPath.row == 0)
-    {
-        size = CGSizeMake(kDXECollectionViewCellWidth, kDXECollectionViewInfoCellHeight);
-    }
-    else
-    {
-        size = CGSizeMake(kDXECollectionViewCellWidth, kDXECollectionViewDishCellHeight);
-    }
-    
-    return size;
+    self.scrollMenuController.view.frame = CGRectMake(0,
+                                                      0,
+                                                      CGRectGetWidth(self.view.bounds),
+                                                      CGRectGetHeight(self.view.bounds));
 }
 
 @end

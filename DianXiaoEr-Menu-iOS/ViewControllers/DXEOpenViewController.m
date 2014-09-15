@@ -51,7 +51,8 @@
 - (IBAction)onLoginButtonClicked:(id)sender
 {
     DXEMainViewController *main = [[DXEMainViewController alloc] init];
-    [self.navigationController pushViewController:main animated:YES];
+    UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:main];
+    [[UIApplication sharedApplication] keyWindow].rootViewController = navigation;
 }
 
 @end

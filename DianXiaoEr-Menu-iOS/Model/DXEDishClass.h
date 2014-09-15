@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) NSNumber *classid;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *englishName;
 @property (nonatomic, strong) NSNumber *showSequence;
 @property (nonatomic, strong) NSString *imageKey;
 

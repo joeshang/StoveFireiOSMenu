@@ -28,6 +28,11 @@
         self.name = [update.name copy];
     }
     
+    if (update.englishName != nil)
+    {
+        self.englishName = [update.englishName copy];
+    }
+    
     if (update.imageKey != nil)
     {
         self.imageKey = [update.imageKey copy];

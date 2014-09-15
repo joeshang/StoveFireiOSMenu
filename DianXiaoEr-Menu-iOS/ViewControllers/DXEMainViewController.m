@@ -122,7 +122,6 @@
 
 - (void)onQRcodeButtonClicked:(id)sender
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSNumber *itemid;
 @property (nonatomic, strong) NSNumber *classid;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *englishName;
 @property (nonatomic, strong) NSString *imageKey;
 @property (nonatomic, strong) NSNumber *showSequence;
 @property (nonatomic, strong) NSNumber *price;
