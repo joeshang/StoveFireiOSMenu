@@ -13,9 +13,9 @@
 #import "DXEDishDetailView.h"
 #import "DXEImageManager.h"
 
-#define kDXECollectionViewCellWidth             360
+#define kDXECollectionViewCellWidth             357
 #define kDXECollectionViewInfoCellHeight        140
-#define kDXECollectionViewDishCellHeight        600
+#define kDXECollectionViewDishCellHeight        597
 
 @interface DXEDishesViewController ()
 

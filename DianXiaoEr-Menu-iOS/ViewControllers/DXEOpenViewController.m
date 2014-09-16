@@ -7,7 +7,17 @@
 //
 
 #import "DXEOpenViewController.h"
-#import "DXEMainViewController.h"
+#import "RNThemeManager.h"
+#import "RDVTabBar.h"
+#import "RDVTabBarItem.h"
+#import "RDVTabBarController.h"
+#import "DXEHomePageViewController.h"
+#import "DXEOriginViewController.h"
+#import "DXEQuestionnaireViewController.h"
+#import "DXEOrderViewController.h"
+#import "DXEMyselfViewController.h"
+
+#define kDXETabBarTitleFontSize         12
 
 @interface DXEOpenViewController ()
 
@@ -50,9 +60,63 @@
 
 - (IBAction)onLoginButtonClicked:(id)sender
 {
-    DXEMainViewController *main = [[DXEMainViewController alloc] init];
-    UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:main];
-    [[UIApplication sharedApplication] keyWindow].rootViewController = navigation;
+    // 首页
+    DXEHomePageViewController *homepage = [[DXEHomePageViewController alloc] init];
+    // 起源
+    DXEOriginViewController *origin = [[DXEOriginViewController alloc] init];
+    // 问卷
+    DXEQuestionnaireViewController *questionnaire = [[DXEQuestionnaireViewController alloc] init];
+    // 已点菜品
+    DXEOrderViewController *order = [[DXEOrderViewController alloc] init];
+    // 我
+    DXEMyselfViewController *myself = [[DXEMyselfViewController alloc] init];
+    
+    RDVTabBarController *mainViewController = [[RDVTabBarController alloc] init];
+    [mainViewController setViewControllers:@[homepage,
+                               origin,
+                               questionnaire,
+                               order,
+                               myself]];
+    
+    NSArray *tabBarItemTitle = @[@"首 页", @"起 源", @"问 卷", @"已点菜品", @"我"];
+    NSArray *tabBarItemImageNamePrefix = @[@"homepage", @"origin", @"questionnaire", @"order", @"myself"];
+    
+    RDVTabBar *tabBar = [mainViewController tabBar];
+    [tabBar setHeight:kDXETabBarHeight];
+    
+    UIImage *tabBarBackgroundImage = [[RNThemeManager sharedManager] imageForName:@"tabbar_background.png"];
+    
+    NSInteger index = 0;
+    for (RDVTabBarItem *item in [tabBar items])
+    {
+        [item setBackgroundSelectedImage:tabBarBackgroundImage
+                     withUnselectedImage:tabBarBackgroundImage];
+        
+        NSDictionary *selectedTextAttributes =
+        @{
+          NSFontAttributeName: [UIFont systemFontOfSize:kDXETabBarTitleFontSize],
+          NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.ItemSelectedTextFontColor"]
+        };
+        NSDictionary *unselectedTextAttributes =
+        @{
+          NSFontAttributeName: [UIFont systemFontOfSize:kDXETabBarTitleFontSize],
+          NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.ItemUnselectedTextFontColor"]
+        };
+        [item setSelectedTitleAttributes:selectedTextAttributes];
+        [item setUnselectedTitleAttributes:unselectedTextAttributes];
+        [item setTitle:[tabBarItemTitle objectAtIndex:index]];
+        
+        UIImage *tabBarSelectedImage = [[RNThemeManager sharedManager] imageForName:
+                                        [NSString stringWithFormat:@"%@_tabbar_selected.png", [tabBarItemImageNamePrefix objectAtIndex:index]]];
+        UIImage *tabBarUnselectedImage = [[RNThemeManager sharedManager] imageForName:
+                                          [NSString stringWithFormat:@"%@_tabbar_unselected.png", [tabBarItemImageNamePrefix objectAtIndex:index]]];
+        [item setFinishedSelectedImage:tabBarSelectedImage
+           withFinishedUnselectedImage:tabBarUnselectedImage];
+        
+        index++;
+    }
+    
+    [[UIApplication sharedApplication] keyWindow].rootViewController = mainViewController;
 }
 
 @end

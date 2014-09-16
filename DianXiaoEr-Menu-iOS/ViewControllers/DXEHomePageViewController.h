@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DXETopBarBaseViewController.h"
 
-@interface DXEHomePageViewController : UIViewController
-
+@interface DXEHomePageViewController : DXETopBarBaseViewController
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DXETopBarBaseViewController.h"
 
-@interface DXEQuestionnaireViewController : UIViewController
+@interface DXEQuestionnaireViewController : DXETopBarBaseViewController
 
 @end
