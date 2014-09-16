@@ -18,15 +18,16 @@ typedef NS_ENUM(NSInteger, DXEDishCellMode) {
 
 @property (weak, nonatomic) IBOutlet UILabel *dishName;
 @property (weak, nonatomic) IBOutlet UILabel *dishEnglishName;
+@property (weak, nonatomic) IBOutlet UIImageView *maskView;
 @property (weak, nonatomic) IBOutlet UIImageView *dishImage;
 @property (weak, nonatomic) IBOutlet UILabel *dishPrice;
 @property (weak, nonatomic) IBOutlet UIImageView *dishPriceIcon;
 @property (weak, nonatomic) IBOutlet UILabel *dishFavor;
-@property (weak, nonatomic) IBOutlet UIView *maskView;
 @property (weak, nonatomic) IBOutlet UIImageView *inCartFlag;
 @property (weak, nonatomic) IBOutlet UIImageView *soldoutFlag;
 @property (weak, nonatomic) IBOutlet UIButton *favorButton;
 @property (weak, nonatomic) IBOutlet UIButton *cartButton;
+
 
 @property (weak, nonatomic) id controller;
 @property (weak, nonatomic) UICollectionView *collectionView;

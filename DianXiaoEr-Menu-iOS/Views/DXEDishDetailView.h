@@ -19,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *favorButton;
 @property (weak, nonatomic) IBOutlet UIButton *cartButton;
 @property (weak, nonatomic) IBOutlet UITextView *dishIngredient;
+@property (weak, nonatomic) IBOutlet UIImageView *inCartFlag;
 
 @end

@@ -143,6 +143,14 @@
         self.dishDetailView.dishIngredient.text = item.ingredient;
         self.dishDetailView.dishIngredient.selectable = NO;
         self.dishDetailView.dishImage.image = [[DXEImageManager sharedInstance] imageForKey:item.imageKey];
+        if (item.inCart)
+        {
+            self.dishDetailView.inCartFlag.alpha = 1.0;
+        }
+        else
+        {
+            self.dishDetailView.inCartFlag.alpha = 0.0;
+        }
         if (item.inFavor)
         {
             [self.dishDetailView.favorButton setImage:[UIImage imageNamed:@"dish_cell_favor_solid_icon"]
@@ -217,9 +225,19 @@
 - (IBAction)onCartButtonClickedInDishDetailView:(id)sender
 {
     DXEDishItem *item = [self.dishClass.dishes objectAtIndex:self.selectedIndexPath.row - 1];
-    item.inCart = YES;
-    [self.collectionView reloadItemsAtIndexPaths:@[self.selectedIndexPath]];
+    if (!item.inCart)
+    {
+        item.inCart = YES;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.dishDetailView.inCartFlag.alpha = 1.0;
+        }];
+    }
     
+    [self.collectionView reloadItemsAtIndexPaths:@[self.selectedIndexPath]];
+}
+
+- (IBAction)onTapOnDishImage:(id)sender
+{
     [CRModal dismiss];
 }
 

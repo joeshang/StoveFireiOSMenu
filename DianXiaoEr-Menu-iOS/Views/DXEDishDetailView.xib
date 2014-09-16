@@ -13,6 +13,9 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jzl-F7-oTs">
                     <rect key="frame" x="0.0" y="0.0" width="570" height="782"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="k5e-dF-p7D" appends="YES" id="oA2-TN-LTb"/>
+                    </connections>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBf-UE-iDo">
                     <rect key="frame" x="119" y="843" width="75" height="33"/>
@@ -53,7 +56,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ame-Xb-QNz">
-                    <rect key="frame" x="20" y="878" width="530" height="1"/>
+                    <rect key="frame" x="15" y="878" width="540" height="1"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -67,11 +70,12 @@
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCj-2b-EIE">
-                    <rect key="frame" x="414" y="817" width="120" height="42"/>
+                    <rect key="frame" x="428" y="822" width="122" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="cell_add2cart_button.png">
+                    <state key="normal" image="dish_cell_add2cart_button.png">
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="highlighted" image="dish_cell_add2cart_pressed_button.png"/>
                     <connections>
                         <action selector="onCartButtonClickedInDishDetailView:" destination="-1" eventType="touchUpInside" id="rLn-EV-ygl"/>
                     </connections>
@@ -81,8 +85,13 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dish_cell_incart_flag.png" translatesAutoresizingMaskIntoConstraints="NO" id="UaR-Yc-Njc">
+                    <rect key="frame" x="465" y="0.0" width="48" height="66"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="cartButton" destination="cCj-2b-EIE" id="FqP-0p-GLr"/>
@@ -93,12 +102,21 @@
                 <outlet property="dishName" destination="fdA-I0-uRD" id="hsV-Aq-Qwb"/>
                 <outlet property="dishPrice" destination="84s-x1-BNJ" id="p2T-3M-tEb"/>
                 <outlet property="favorButton" destination="pBf-UE-iDo" id="W9r-ec-vbS"/>
+                <outlet property="inCartFlag" destination="UaR-Yc-Njc" id="eJK-G9-NWd"/>
+                <outletCollection property="gestureRecognizers" destination="k5e-dF-p7D" appends="YES" id="03n-ca-zdO"/>
             </connections>
         </view>
+        <tapGestureRecognizer id="k5e-dF-p7D">
+            <connections>
+                <action selector="onTapOnDishImage:" destination="-1" id="fpS-MN-xIQ"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="cell_add2cart_button.png" width="120" height="42"/>
+        <image name="dish_cell_add2cart_button.png" width="244" height="90"/>
+        <image name="dish_cell_add2cart_pressed_button.png" width="244" height="90"/>
         <image name="dish_cell_favor_hollow_icon.png" width="19" height="16"/>
+        <image name="dish_cell_incart_flag.png" width="48" height="66"/>
         <image name="dish_cell_price_icon.png" width="19" height="16"/>
     </resources>
 </document>
