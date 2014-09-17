@@ -23,6 +23,8 @@
 
 @property (nonatomic, assign) BOOL inCart;
 @property (nonatomic, assign) BOOL inFavor;
+@property (nonatomic, assign) NSUInteger count;
+@property (nonatomic, strong) NSString *tradeid;
 
 - (void)updateByNewObject:(DXEDishItem *)update;
 

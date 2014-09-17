@@ -18,6 +18,8 @@
     {
         _inCart = NO;
         _inFavor = NO;
+        _count = 0;
+        _tradeid = nil;
     }
     
     return self;

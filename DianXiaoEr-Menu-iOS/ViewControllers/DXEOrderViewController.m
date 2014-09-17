@@ -7,10 +7,16 @@
 //
 
 #import "DXEOrderViewController.h"
+#import "CRScrollMenuController.h"
 #import "RDVTabBarItem.h"
 #import "RDVTabBarController.h"
 
+#define kDXEOrderBadgeFontSize          13
+#define kDXEOrderBadgePositionOffset    UIOffsetMake(0, 3);
+
 @interface DXEOrderViewController ()
+
+@property (nonatomic, strong) CRScrollMenuController *scrollMenuController;
 
 @end
 
@@ -33,7 +39,8 @@
     self.rdv_tabBarItem.badgeIsAtCenter = YES;
     self.rdv_tabBarItem.badgeBackgroundColor = nil;
     self.rdv_tabBarItem.badgeBackgroundImage = nil;
-    self.rdv_tabBarItem.badgeTextFont = [UIFont systemFontOfSize:15];
+    self.rdv_tabBarItem.badgePositionAdjustment = kDXEOrderBadgePositionOffset;
+    self.rdv_tabBarItem.badgeTextFont = [UIFont systemFontOfSize:kDXEOrderBadgeFontSize];
     self.rdv_tabBarItem.badgeTextColor = [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.BadgeTextFontColor"];
 }
 

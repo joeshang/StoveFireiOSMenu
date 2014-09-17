@@ -12,11 +12,6 @@
 #import "CRScrollMenuController.h"
 #import "DXEDishDataManager.h"
 
-#define kDXEScrollMenuButtonPadding             18
-#define kDXEScrollMenuIndicatorHeight           2
-#define kDXEScrollMenuTitleFontSize             20
-#define kDXEScrollMenuSubtitleFontSize          9
-
 #define kDXECollectionViewSectionTop            17
 #define kDXECollectionViewSectionBottom         17
 #define kDXECollectionViewSectionLeft           17
@@ -28,7 +23,6 @@
 
 @interface DXEHomePageViewController ()
 
-@property (nonatomic, strong) CRScrollMenuController *scrollMenuController;
 @property (nonatomic, strong) NSMutableArray *contentViewControllers;
 @property (nonatomic, strong) NSMutableArray *showDishes;
 @property (nonatomic, strong) NSMutableArray *hideDishes;
@@ -58,27 +52,7 @@
 {
     [super viewDidLoad];
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    self.scrollMenuController = [[CRScrollMenuController alloc] init];
-    self.scrollMenuController.scrollMenuHeight = kDXEScrollMenuHeight;
-    self.scrollMenuController.scrollMenuBackgroundImage = [[RNThemeManager sharedManager] imageForName:@"scrollmenu_background"];
-    self.scrollMenuController.scrollMenuIndicatorColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.ScrollMenu.ItemSelectedTextColor"];
-    self.scrollMenuController.scrollMenuIndicatorHeight = kDXEScrollMenuIndicatorHeight;
-    self.scrollMenuController.scrollMenuButtonPadding = kDXEScrollMenuButtonPadding;
-    self.scrollMenuController.normalTitleAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:kDXEScrollMenuTitleFontSize],
-                                                        NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"HomePage.ScrollMenu.ItemUnselectedTextColor"]};
-    self.scrollMenuController.selectedTitleAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:kDXEScrollMenuTitleFontSize],
-                                                          NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"HomePage.ScrollMenu.ItemSelectedTextColor"]};
-    self.scrollMenuController.normalSubtitleAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:kDXEScrollMenuSubtitleFontSize],
-                                                           NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"HomePage.ScrollMenu.ItemUnselectedTextColor"]};
-    self.scrollMenuController.selectedSubtitleAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:kDXEScrollMenuSubtitleFontSize],
-                                                             NSForegroundColorAttributeName: [[RNThemeManager sharedManager] colorForKey:@"HomePage.ScrollMenu.ItemSelectedTextColor"]};
-    
-    [self addChildViewController:self.scrollMenuController];
-    self.scrollMenuController.view.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionView.BackgroundColor"];
-    [self.view addSubview:self.scrollMenuController.view];
-    [self.scrollMenuController didMoveToParentViewController:self];
+    self.view.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionView.BackgroundColor"];
     
     NSMutableArray *items = [NSMutableArray arrayWithCapacity:[self.showDishes count]];
     self.contentViewControllers = [NSMutableArray arrayWithCapacity:[self.showDishes count]];
@@ -104,16 +78,6 @@
         [items addObject:item];
     }
     [self.scrollMenuController setViewControllers:self.contentViewControllers withItems:items];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    self.scrollMenuController.view.frame = CGRectMake(0,
-                                                      kDXENavigationBarHeight,
-                                                      CGRectGetWidth(self.view.bounds),
-                                                      CGRectGetHeight(self.view.bounds) - kDXENavigationBarHeight);
 }
 
 @end
