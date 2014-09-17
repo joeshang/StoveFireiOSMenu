@@ -56,6 +56,12 @@
     [self.dishesTableView reloadData];
 }
 
+- (void)setTotalPrice:(float)totalPrice
+{
+    _totalPrice = totalPrice;
+    self.ensureOrderingView.totalPrice.text = [NSString stringWithFormat:@"￥%.2f", _totalPrice];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -65,7 +71,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[DXEOrderManager sharedInstance].cartList count];
+    return [[DXEOrderManager sharedInstance].cart count];
 }
 
 #pragma mark - UITableViewDelegate
@@ -73,7 +79,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DXEDishInCartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DXEDishInCartTableViewCell" forIndexPath:indexPath];
-    DXEDishItem *item = [[NSArray arrayWithArray:[DXEOrderManager sharedInstance].cartList] objectAtIndex:indexPath.row];
+    DXEDishItem *item = [[NSArray arrayWithArray:[DXEOrderManager sharedInstance].cart] objectAtIndex:indexPath.row];
     
     cell.controller = self;
     cell.dishName.text = item.name;
@@ -86,13 +92,13 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    self.totalPrice = 0.0;
-    for (DXEDishItem *item in [DXEOrderManager sharedInstance].cartList)
+    float total = 0.0;
+    for (DXEDishItem *item in [DXEOrderManager sharedInstance].cart)
     {
         float price = [item.price floatValue];
-        self.totalPrice += price * item.count;
+        total += price * item.count;
     }
-    self.ensureOrderingView.totalPrice.text = [NSString stringWithFormat:@"%.2f", self.totalPrice];
+    self.totalPrice = total;
     
     return self.ensureOrderingView;
 }
@@ -102,12 +108,11 @@
 - (void)onIncreaseButtonClickedInTableCell:(DXEDishInCartTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.dishesTableView indexPathForCell:cell];
-    DXEDishItem *item = [[DXEOrderManager sharedInstance].cartList objectAtIndex:indexPath.row];
+    DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
     if (item.count < kDXEDishItemCountInCartMax)
     {
         item.count++;
         self.totalPrice += [item.price floatValue];
-        self.ensureOrderingView.totalPrice.text = [NSString stringWithFormat:@"%.2f", self.totalPrice];
     }
     [cell updateDishCountButtonsByCount:item.count];
 }
@@ -115,12 +120,11 @@
 - (void)onDecreaseButtonClickedInTableCell:(DXEDishInCartTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.dishesTableView indexPathForCell:cell];
-    DXEDishItem *item = [[DXEOrderManager sharedInstance].cartList objectAtIndex:indexPath.row];
+    DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
     if (item.count > kDXEDishItemCountInCartMin)
     {
         item.count--;
         self.totalPrice -= [item.price floatValue];
-        self.ensureOrderingView.totalPrice.text = [NSString stringWithFormat:@"%.2f", self.totalPrice];
     }
     [cell updateDishCountButtonsByCount:item.count];
 }
@@ -128,10 +132,11 @@
 - (void)onDeleteButtonClickedInTableCell:(DXEDishInCartTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.dishesTableView indexPathForCell:cell];
-    DXEDishItem *item = [[DXEOrderManager sharedInstance].cartList objectAtIndex:indexPath.row];
+    DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
+    self.totalPrice -= [item.price floatValue] * item.count;
     item.inCart = NO;
     item.count = 0;
-    [[DXEOrderManager sharedInstance].cartList removeObjectIdenticalTo:item];
+    [[DXEOrderManager sharedInstance].cart removeObjectIdenticalTo:item];
     [self.dishesTableView deleteRowsAtIndexPaths:@[indexPath]
                           withRowAnimation:UITableViewRowAnimationFade];
 }

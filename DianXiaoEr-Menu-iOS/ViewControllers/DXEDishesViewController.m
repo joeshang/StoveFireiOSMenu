@@ -203,7 +203,7 @@
     {
         item.inCart = YES;
         item.count = 1;
-        [[DXEOrderManager sharedInstance].cartList addObject:item];
+        [[DXEOrderManager sharedInstance].cart addObject:item];
     }
     else
     {
@@ -218,7 +218,7 @@
     {
         item.inCart = YES;
         item.count = 1;
-        [[DXEOrderManager sharedInstance].cartList addObject:item];
+        [[DXEOrderManager sharedInstance].cart addObject:item];
         
         [UIView animateWithDuration:0.3 animations:^{
             self.dishDetailView.inCartFlag.alpha = 1.0;
