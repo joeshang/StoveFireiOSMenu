@@ -22,5 +22,17 @@
 	<string>646464</string>
 	<key>HomePage.CollectionViewCell.TintColor</key>
 	<string>727171</string>
+	<key>Order.TitleView.BorderColor</key>
+	<string>646464</string>
+	<key>Order.TitleView.TitleFontColor</key>
+	<string>FFFFFF</string>
+	<key>Order.DishCell.NameFontColor</key>
+	<string>DEB96C</string>
+	<key>Order.DishCell.PriceFontColor</key>
+	<string>FFFFFF</string>
+	<key>Order.DishCell.CountFontColor</key>
+	<string>FFFFFF</string>
+	<key>Order.EnsureOrdering.FontColor</key>
+	<string>DEB96C</string>
 </dict>
 </plist>

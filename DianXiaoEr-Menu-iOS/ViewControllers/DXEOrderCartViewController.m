@@ -10,8 +10,12 @@
 #import "DXEDishItem.h"
 #import "DXEOrderManager.h"
 #import "DXEDishInCartTableViewCell.h"
+#import "DXEEnsureOrderingView.h"
 
 @interface DXEOrderCartViewController ()
+
+@property (nonatomic, strong) DXEEnsureOrderingView *ensureOrderingView;
+@property (nonatomic, assign) float totalPrice;
 
 @end
 
@@ -21,7 +25,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        _totalPrice = 0.0;
     }
     return self;
 }
@@ -30,12 +34,16 @@
 {
     [super viewDidLoad];
     
-    self.titleView.layer.cornerRadius = 5;
-    self.titleView.layer.borderWidth = 1;
-    self.titleView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.titleView.layer.cornerRadius = kDXEOrderTitleViewRadius;
+    self.titleView.layer.borderWidth = kDXEOrderTitleViewBorderWidth;
+    self.titleView.layer.borderColor = [[[RNThemeManager sharedManager] colorForKey:@"Order.TitleView.BorderColor"] CGColor];;
     
     [self.dishesTableView registerNib:[UINib nibWithNibName:@"DXEDishInCartTableViewCell" bundle:nil]
          forCellReuseIdentifier:@"DXEDishInCartTableViewCell"];
+    
+    self.ensureOrderingView = [[[NSBundle mainBundle] loadNibNamed:@"DXEEnsureOrderingView"
+                                                            owner:self
+                                                           options:nil] firstObject];
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,6 +84,19 @@
     return cell;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    self.totalPrice = 0.0;
+    for (DXEDishItem *item in [DXEOrderManager sharedInstance].cartList)
+    {
+        float price = [item.price floatValue];
+        self.totalPrice += price * item.count;
+    }
+    self.ensureOrderingView.totalPrice.text = [NSString stringWithFormat:@"%.2f", self.totalPrice];
+    
+    return self.ensureOrderingView;
+}
+
 #pragma mark - target-action
 
 - (void)onIncreaseButtonClickedInTableCell:(DXEDishInCartTableViewCell *)cell
@@ -85,6 +106,8 @@
     if (item.count < kDXEDishItemCountInCartMax)
     {
         item.count++;
+        self.totalPrice += [item.price floatValue];
+        self.ensureOrderingView.totalPrice.text = [NSString stringWithFormat:@"%.2f", self.totalPrice];
     }
     [cell updateDishCountButtonsByCount:item.count];
 }
@@ -96,6 +119,8 @@
     if (item.count > kDXEDishItemCountInCartMin)
     {
         item.count--;
+        self.totalPrice -= [item.price floatValue];
+        self.ensureOrderingView.totalPrice.text = [NSString stringWithFormat:@"%.2f", self.totalPrice];
     }
     [cell updateDishCountButtonsByCount:item.count];
 }
@@ -109,6 +134,11 @@
     [[DXEOrderManager sharedInstance].cartList removeObjectIdenticalTo:item];
     [self.dishesTableView deleteRowsAtIndexPaths:@[indexPath]
                           withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (IBAction)onEnsureOrderingButtonClicked:(id)sender
+{
+    NSLog(@"ensure ordering, total price is %0.2f", self.totalPrice);
 }
 
 @end

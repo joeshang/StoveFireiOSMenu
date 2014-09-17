@@ -17,6 +17,9 @@
 #define kDXEDishDetailViewRadius                    15
 #define kDXEDishDetailViewBorderWidth               1
 
+#define kDXEOrderTitleViewRadius                    5
+#define kDXEOrderTitleViewBorderWidth               1
+
 #define kDXEDishItemCountInCartMin                  1
 #define kDXEDishItemCountInCartMax                  99
 

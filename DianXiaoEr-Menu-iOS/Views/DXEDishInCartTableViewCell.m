@@ -12,7 +12,10 @@
 
 - (void)awakeFromNib
 {
-    // Initialization code
+    self.dishName.textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.NameFontColor"];
+    self.dishEnglishName.textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.NameFontColor"];
+    self.dishPrice.textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.PriceFontColor"];
+    self.dishCount.textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.CountFontColor"];
 }
 
 - (void)updateDishCountButtonsByCount:(NSInteger)count
