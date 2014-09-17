@@ -7,16 +7,14 @@
 //
 
 #import "DXEOrderViewController.h"
-#import "CRScrollMenuController.h"
 #import "RDVTabBarItem.h"
 #import "RDVTabBarController.h"
+#import "DXEOrderCartViewController.h"
 
 #define kDXEOrderBadgeFontSize          13
 #define kDXEOrderBadgePositionOffset    UIOffsetMake(0, 3);
 
 @interface DXEOrderViewController ()
-
-@property (nonatomic, strong) CRScrollMenuController *scrollMenuController;
 
 @end
 
@@ -42,6 +40,12 @@
     self.rdv_tabBarItem.badgePositionAdjustment = kDXEOrderBadgePositionOffset;
     self.rdv_tabBarItem.badgeTextFont = [UIFont systemFontOfSize:kDXEOrderBadgeFontSize];
     self.rdv_tabBarItem.badgeTextColor = [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.BadgeTextFontColor"];
+    
+    DXEOrderCartViewController *cart = [[DXEOrderCartViewController alloc] init];
+    CRScrollMenuItem *item = [[CRScrollMenuItem alloc] init];
+    item.title = @"已点菜单";
+    
+    [self.scrollMenuController setViewControllers:@[cart] withItems:@[item]];
 }
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DXETopBarBaseViewController.h"
+#import "DXEScrollMenuBaseViewController.h"
 
-@interface DXEOrderViewController : DXETopBarBaseViewController
+@interface DXEOrderViewController : DXEScrollMenuBaseViewController
 @end

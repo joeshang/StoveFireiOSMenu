@@ -12,6 +12,7 @@
 #import "CRModal.h"
 #import "DXEDishDetailView.h"
 #import "DXEImageManager.h"
+#import "DXEOrderManager.h"
 
 #define kDXECollectionViewCellWidth             357
 #define kDXECollectionViewInfoCellHeight        140
@@ -198,11 +199,42 @@
 {
     DXEDishItem *item = [self.dishClass.dishes objectAtIndex:indexPath.row - 1];
     
-    if (item.inCart == NO)
+    if (!item.inCart)
     {
         item.inCart = YES;
-        [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+        item.count = 1;
+        [[DXEOrderManager sharedInstance].cartList addObject:item];
     }
+    else
+    {
+        item.count++;
+    }
+}
+
+- (IBAction)onCartButtonClickedInDishDetailView:(id)sender
+{
+    DXEDishItem *item = [self.dishClass.dishes objectAtIndex:self.selectedIndexPath.row - 1];
+    if (!item.inCart)
+    {
+        item.inCart = YES;
+        item.count = 1;
+        [[DXEOrderManager sharedInstance].cartList addObject:item];
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.dishDetailView.inCartFlag.alpha = 1.0;
+        }];
+    }
+    else
+    {
+        item.count++;
+    }
+    
+    [self.collectionView reloadItemsAtIndexPaths:@[self.selectedIndexPath]];
+}
+
+- (IBAction)onTapOnDishImage:(id)sender
+{
+    [CRModal dismiss];
 }
 
 - (void)onFavorButtonClickedInCollectionView:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath
@@ -220,25 +252,6 @@
     }
     
     [collectionView reloadItemsAtIndexPaths:@[indexPath]];
-}
-
-- (IBAction)onCartButtonClickedInDishDetailView:(id)sender
-{
-    DXEDishItem *item = [self.dishClass.dishes objectAtIndex:self.selectedIndexPath.row - 1];
-    if (!item.inCart)
-    {
-        item.inCart = YES;
-        [UIView animateWithDuration:0.3 animations:^{
-            self.dishDetailView.inCartFlag.alpha = 1.0;
-        }];
-    }
-    
-    [self.collectionView reloadItemsAtIndexPaths:@[self.selectedIndexPath]];
-}
-
-- (IBAction)onTapOnDishImage:(id)sender
-{
-    [CRModal dismiss];
 }
 
 - (IBAction)onFavorButtonClickedInDishDetailView:(id)sender

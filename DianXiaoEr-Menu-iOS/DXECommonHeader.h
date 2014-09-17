@@ -12,10 +12,12 @@
 #define kDXENavigationBarHeight                     94
 #define kDXETabBarHeight                            71
 
-
 #define kDXECollectionViewCellRadius                5
 #define kDXECollectionViewCellBorderWidth           1
 #define kDXEDishDetailViewRadius                    15
 #define kDXEDishDetailViewBorderWidth               1
+
+#define kDXEDishItemCountInCartMin                  1
+#define kDXEDishItemCountInCartMax                  99
 
 #endif
