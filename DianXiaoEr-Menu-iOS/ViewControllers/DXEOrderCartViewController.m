@@ -39,9 +39,16 @@
     [self.dishesTableView registerNib:[UINib nibWithNibName:@"DXEOrderDishTableViewCell" bundle:nil]
          forCellReuseIdentifier:@"DXEOrderDishTableViewCell"];
     
-    self.ensureOrderingView = [[[NSBundle mainBundle] loadNibNamed:@"DXEEnsureOrderingView"
+    DXEOrderTitleView *titleView = [[[NSBundle mainBundle] loadNibNamed:@"DXEOrderTitleView"
                                                             owner:self
                                                            options:nil] firstObject];
+    titleView.nameTitle.text = @"已点菜品";
+    self.dishesTableView.tableHeaderView = titleView;
+    
+    self.ensureOrderingView = [[[NSBundle mainBundle] loadNibNamed:@"DXEEnsureOrderingView"
+                                                             owner:self
+                                                           options:nil] firstObject];
+    self.dishesTableView.tableFooterView = self.ensureOrderingView;
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,31 +91,9 @@
     cell.dishEnglishName.text = item.englishName;
     cell.dishPrice.text = [NSString stringWithFormat:@"单价：￥%.2f", [item.price floatValue]];
     [cell updateCellByDishCount:item.count dishPrice:[item.price floatValue]];
+    self.totalPrice += [item.price floatValue];
     
     return cell;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    DXEOrderTitleView *titleView = [[[NSBundle mainBundle] loadNibNamed:@"DXEOrderTitleView"
-                                                            owner:self
-                                                           options:nil] firstObject];
-    titleView.nameTitle.text = @"已点菜品";
-    
-    return titleView;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    float total = 0.0;
-    for (DXEDishItem *item in [DXEOrderManager sharedInstance].cart)
-    {
-        float price = [item.price floatValue];
-        total += price * item.count;
-    }
-    self.totalPrice = total;
-    
-    return self.ensureOrderingView;
 }
 
 #pragma mark - target-action
