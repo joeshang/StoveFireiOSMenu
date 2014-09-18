@@ -9,7 +9,8 @@
 #import "DXEOrderCartViewController.h"
 #import "DXEDishItem.h"
 #import "DXEOrderManager.h"
-#import "DXEDishInCartTableViewCell.h"
+#import "DXEOrderDishTableViewCell.h"
+#import "DXEOrderTitleView.h"
 #import "DXEEnsureOrderingView.h"
 
 @interface DXEOrderCartViewController ()
@@ -34,12 +35,9 @@
 {
     [super viewDidLoad];
     
-    self.titleView.layer.cornerRadius = kDXEOrderTitleViewRadius;
-    self.titleView.layer.borderWidth = kDXEOrderTitleViewBorderWidth;
-    self.titleView.layer.borderColor = [[[RNThemeManager sharedManager] colorForKey:@"Order.TitleView.BorderColor"] CGColor];;
     
-    [self.dishesTableView registerNib:[UINib nibWithNibName:@"DXEDishInCartTableViewCell" bundle:nil]
-         forCellReuseIdentifier:@"DXEDishInCartTableViewCell"];
+    [self.dishesTableView registerNib:[UINib nibWithNibName:@"DXEOrderDishTableViewCell" bundle:nil]
+         forCellReuseIdentifier:@"DXEOrderDishTableViewCell"];
     
     self.ensureOrderingView = [[[NSBundle mainBundle] loadNibNamed:@"DXEEnsureOrderingView"
                                                             owner:self
@@ -78,7 +76,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DXEDishInCartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DXEDishInCartTableViewCell" forIndexPath:indexPath];
+    DXEOrderDishTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DXEOrderDishTableViewCell" forIndexPath:indexPath];
     DXEDishItem *item = [[NSArray arrayWithArray:[DXEOrderManager sharedInstance].cart] objectAtIndex:indexPath.row];
     
     cell.controller = self;
@@ -88,6 +86,16 @@
     [cell updateDishCountButtonsByCount:item.count];
     
     return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    DXEOrderTitleView *titleView = [[[NSBundle mainBundle] loadNibNamed:@"DXEOrderTitleView"
+                                                            owner:self
+                                                           options:nil] firstObject];
+    titleView.nameTitle.text = @"已点菜品";
+    
+    return titleView;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -105,7 +113,7 @@
 
 #pragma mark - target-action
 
-- (void)onIncreaseButtonClickedInTableCell:(DXEDishInCartTableViewCell *)cell
+- (void)onIncreaseButtonClickedInTableCell:(DXEOrderDishTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.dishesTableView indexPathForCell:cell];
     DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
@@ -117,7 +125,7 @@
     [cell updateDishCountButtonsByCount:item.count];
 }
 
-- (void)onDecreaseButtonClickedInTableCell:(DXEDishInCartTableViewCell *)cell
+- (void)onDecreaseButtonClickedInTableCell:(DXEOrderDishTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.dishesTableView indexPathForCell:cell];
     DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
@@ -129,7 +137,7 @@
     [cell updateDishCountButtonsByCount:item.count];
 }
 
-- (void)onDeleteButtonClickedInTableCell:(DXEDishInCartTableViewCell *)cell
+- (void)onDeleteButtonClickedInTableCell:(DXEOrderDishTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.dishesTableView indexPathForCell:cell];
     DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];

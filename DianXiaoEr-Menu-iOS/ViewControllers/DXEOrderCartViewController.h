@@ -11,7 +11,6 @@
 @interface DXEOrderCartViewController : UIViewController
 < UITableViewDelegate, UITableViewDataSource >
 
-@property (nonatomic, weak) IBOutlet UIView *titleView;
 @property (nonatomic, weak) IBOutlet UITableView *dishesTableView;
 
 @end

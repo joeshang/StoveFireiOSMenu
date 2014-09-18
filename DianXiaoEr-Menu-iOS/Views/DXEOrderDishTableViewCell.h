@@ -8,15 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DXEDishInCartTableViewCell : UITableViewCell
+@interface DXEOrderDishTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *dishThumbnail;
 @property (weak, nonatomic) IBOutlet UILabel *dishName;
 @property (weak, nonatomic) IBOutlet UILabel *dishEnglishName;
 @property (weak, nonatomic) IBOutlet UILabel *dishCount;
 @property (weak, nonatomic) IBOutlet UIButton *decreaseButton;
 @property (weak, nonatomic) IBOutlet UIButton *increaseButton;
+@property (weak, nonatomic) IBOutlet UIImageView *countUnderline;
 @property (weak, nonatomic) IBOutlet UILabel *dishPrice;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 @property (weak, nonatomic) id controller;
 

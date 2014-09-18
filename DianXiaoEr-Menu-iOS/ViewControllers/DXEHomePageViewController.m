@@ -11,6 +11,7 @@
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "CRScrollMenuController.h"
 #import "DXEDishDataManager.h"
+#import "DXEOrderManager.h"
 
 #define kDXECollectionViewSectionTop            17
 #define kDXECollectionViewSectionBottom         17
@@ -42,8 +43,18 @@
         _showDishes = [NSMutableArray arrayWithArray:[[DXEDishDataManager sharedInstance].dishClasses filteredArrayUsingPredicate:showPredicate]];
         NSPredicate *hidePredicate = [NSPredicate predicateWithFormat:@"name = %@", @"会员"];
         _hideDishes = [NSMutableArray arrayWithArray:[[DXEDishDataManager sharedInstance].dishClasses filteredArrayUsingPredicate:hidePredicate]];
+        
+        [[DXEOrderManager sharedInstance] addObserver:self
+                                           forKeyPath:@"cartList"
+                                              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                                              context:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[DXEOrderManager sharedInstance] removeObserver:self forKeyPath:@"cartList"];
 }
 
 #pragma mark - view related
@@ -78,6 +89,19 @@
         [items addObject:item];
     }
     [self.scrollMenuController setViewControllers:self.contentViewControllers withItems:items];
+}
+
+#pragma mark - notification
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if ([keyPath isEqualToString:@"cartList"])
+    {
+        NSLog(@"%@", change);
+    }
 }
 
 @end

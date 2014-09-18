@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Shang Chuanren. All rights reserved.
 //
 
-#import "DXEDishInCartTableViewCell.h"
+#import "DXEOrderDishTableViewCell.h"
 
-@implementation DXEDishInCartTableViewCell
+@implementation DXEOrderDishTableViewCell
 
 - (void)awakeFromNib
 {
@@ -16,6 +16,12 @@
     self.dishEnglishName.textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.NameFontColor"];
     self.dishPrice.textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.PriceFontColor"];
     self.dishCount.textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.CountFontColor"];
+    
+    self.backgroundImageView.layer.cornerRadius = kDXEOrderTitleViewRadius;
+    self.backgroundImageView.layer.borderWidth = kDXEOrderTitleViewBorderWidth;
+    self.backgroundImageView.layer.borderColor = [[[RNThemeManager sharedManager] colorForKey:@"Order.TitleView.BorderColor"] CGColor];;
+    
+    self.contentView.backgroundColor = [UIColor blackColor];
 }
 
 - (void)updateDishCountButtonsByCount:(NSInteger)count
@@ -66,7 +72,7 @@
         // [self.controller performSelector:selector
         //                       withObject:self
         IMP imp = [self.controller methodForSelector:selector];
-        void (*func)(id, SEL, DXEDishInCartTableViewCell *) = (void *)imp;
+        void (*func)(id, SEL, DXEOrderDishTableViewCell *) = (void *)imp;
         func(self.controller, selector, self);
     }
 }
