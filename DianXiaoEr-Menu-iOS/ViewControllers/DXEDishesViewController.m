@@ -11,6 +11,7 @@
 #import "DXEDishCollectionViewCell.h"
 #import "CRModal.h"
 #import "DXEDishDetailView.h"
+#import "DXEDishClass.h"
 #import "DXEImageManager.h"
 #import "DXEOrderManager.h"
 
@@ -57,6 +58,13 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)updateDishCellByDishItem:(DXEDishItem *)item
+{
+    NSUInteger index = [self.dishClass.dishes indexOfObjectIdenticalTo:item];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index + 1 inSection:0];
+    [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
 }
 
 #pragma mark - UICollectionViewDataSource

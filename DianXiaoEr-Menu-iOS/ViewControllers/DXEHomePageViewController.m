@@ -46,7 +46,7 @@
         
         [[DXEOrderManager sharedInstance] addObserver:self
                                            forKeyPath:@"cartList"
-                                              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                                              options:NSKeyValueObservingOptionOld
                                               context:nil];
     }
     return self;
@@ -100,7 +100,21 @@
 {
     if ([keyPath isEqualToString:@"cartList"])
     {
-        NSLog(@"%@", change);
+        if ([change[NSKeyValueChangeKindKey] intValue] == NSKeyValueChangeRemoval)
+        {
+            NSArray *removalItems = change[NSKeyValueChangeOldKey];
+            for (DXEDishItem *item in removalItems)
+            {
+                for (DXEDishesViewController *controller in self.contentViewControllers)
+                {
+                    if ([item.classid isEqualToNumber:[controller.dishClass classid]])
+                    {
+                        [controller updateDishCellByDishItem:item];
+                        break;
+                    }
+                }
+            }
+        }
     }
 }
 

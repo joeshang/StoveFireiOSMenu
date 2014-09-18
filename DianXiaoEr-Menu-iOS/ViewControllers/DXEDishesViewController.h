@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DXEDishClass.h"
 #import "CHTCollectionViewWaterfallLayout.h"
+
+@class DXEDishItem;
+@class DXEDishClass;
 
 @interface DXEDishesViewController : UICollectionViewController
 < UICollectionViewDelegate, UICollectionViewDataSource, CHTCollectionViewDelegateWaterfallLayout >
 
 @property (nonatomic, strong) DXEDishClass *dishClass;
+
+- (void)updateDishCellByDishItem:(DXEDishItem *)item;
 
 @end
