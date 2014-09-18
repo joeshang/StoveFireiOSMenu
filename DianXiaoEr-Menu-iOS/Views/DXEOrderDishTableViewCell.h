@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *increaseButton;
 @property (weak, nonatomic) IBOutlet UIImageView *countUnderline;
 @property (weak, nonatomic) IBOutlet UILabel *dishPrice;
+@property (weak, nonatomic) IBOutlet UILabel *dishTotalPrice;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 @property (weak, nonatomic) id controller;
@@ -27,6 +28,6 @@
 - (IBAction)onDecreaseButtonClicked:(id)sender;
 - (IBAction)onDeleteButtonClicked:(id)sender;
 
-- (void)updateDishCountButtonsByCount:(NSInteger)count;
+- (void)updateCellByDishCount:(NSInteger)count dishPrice:(float)price;
 
 @end

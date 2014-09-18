@@ -12,10 +12,12 @@
 
 - (void)awakeFromNib
 {
+    UIColor *borderColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionViewCell.BorderColor"];
     self.layer.cornerRadius = kDXEDishDetailViewRadius;
     self.layer.masksToBounds = YES;
     self.layer.borderWidth = kDXEDishDetailViewBorderWidth;
-    self.layer.borderColor = [[[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionViewCell.BorderColor"] CGColor];
+    self.layer.borderColor = [borderColor CGColor];
+    self.separator.backgroundColor = borderColor;
     
     self.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionViewCell.BackgroundColor"];
     UIColor *tintColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionViewCell.TintColor"];

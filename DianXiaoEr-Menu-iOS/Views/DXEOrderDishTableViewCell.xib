@@ -18,20 +18,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oj3-0Q-8UU" userLabel="DishThumbnail">
-                        <rect key="frame" x="8" y="9" width="152" height="122"/>
+                        <rect key="frame" x="8" y="9" width="151" height="122"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="菜品名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0UB-Ic-IW8">
-                        <rect key="frame" x="168" y="42" width="120" height="40"/>
+                        <rect key="frame" x="172" y="45" width="120" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DISH ENGLISH NAME" lineBreakMode="wordWrap" baselineAdjustment="none" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="7QS-RU-EUg">
-                        <rect key="frame" x="168" y="74" width="120" height="20"/>
+                        <rect key="frame" x="172" y="74" width="120" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="单价：￥000.00" lineBreakMode="wordWrap" baselineAdjustment="none" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="WmT-w5-tIB">
+                        <rect key="frame" x="172" y="102" width="120" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpF-jy-kON">
@@ -98,8 +104,9 @@
                 <outlet property="dishCount" destination="tpF-jy-kON" id="xEA-NI-TCt"/>
                 <outlet property="dishEnglishName" destination="7QS-RU-EUg" id="JcW-rU-bNK"/>
                 <outlet property="dishName" destination="0UB-Ic-IW8" id="8oN-G2-aDY"/>
-                <outlet property="dishPrice" destination="13L-tc-YJ8" id="ah5-NA-25E"/>
+                <outlet property="dishPrice" destination="WmT-w5-tIB" id="c3V-wy-8c9"/>
                 <outlet property="dishThumbnail" destination="Oj3-0Q-8UU" id="q16-Qf-srp"/>
+                <outlet property="dishTotalPrice" destination="13L-tc-YJ8" id="RSv-bd-xDK"/>
                 <outlet property="increaseButton" destination="HtK-sT-kAT" id="IgR-D3-KOr"/>
             </connections>
         </tableViewCell>

@@ -18,7 +18,7 @@
                     </connections>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBf-UE-iDo">
-                    <rect key="frame" x="119" y="843" width="75" height="33"/>
+                    <rect key="frame" x="119" y="840" width="75" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="dish_cell_favor_hollow_icon.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -35,23 +35,23 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84s-x1-BNJ">
-                    <rect key="frame" x="33" y="848" width="73" height="22"/>
+                    <rect key="frame" x="33" y="845" width="73" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSC-ZF-Bry">
-                    <rect key="frame" x="140" y="848" width="85" height="22"/>
+                    <rect key="frame" x="140" y="845" width="85" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DISH ENGLISH NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCq-TK-0Jj">
-                    <rect key="frame" x="20" y="825" width="360" height="21"/>
+                    <rect key="frame" x="20" y="820" width="360" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -61,8 +61,8 @@
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="菜品介绍" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j4n-Et-R2c">
-                    <rect key="frame" x="20" y="884" width="530" height="48"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍菜品介绍" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j4n-Et-R2c">
+                    <rect key="frame" x="15" y="884" width="540" height="48"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -70,7 +70,7 @@
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCj-2b-EIE">
-                    <rect key="frame" x="428" y="822" width="122" height="45"/>
+                    <rect key="frame" x="425" y="822" width="122" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="dish_cell_add2cart_button.png">
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -81,7 +81,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dish_cell_price_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="7FX-3J-KiN">
-                    <rect key="frame" x="16" y="851" width="19" height="16"/>
+                    <rect key="frame" x="16" y="847" width="19" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
@@ -103,6 +103,7 @@
                 <outlet property="dishPrice" destination="84s-x1-BNJ" id="p2T-3M-tEb"/>
                 <outlet property="favorButton" destination="pBf-UE-iDo" id="W9r-ec-vbS"/>
                 <outlet property="inCartFlag" destination="UaR-Yc-Njc" id="eJK-G9-NWd"/>
+                <outlet property="separator" destination="ame-Xb-QNz" id="13D-6B-KWq"/>
                 <outletCollection property="gestureRecognizers" destination="k5e-dF-p7D" appends="YES" id="03n-ca-zdO"/>
             </connections>
         </view>

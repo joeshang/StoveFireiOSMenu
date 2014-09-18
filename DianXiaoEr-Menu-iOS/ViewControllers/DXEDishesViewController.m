@@ -104,6 +104,7 @@
         }
         
         cell.dishName.text = item.name;
+        cell.dishEnglishName.text = item.englishName;
         cell.dishImage.image = [[DXEImageManager sharedInstance] imageForKey:item.imageKey];
         cell.dishPrice.text = [NSString stringWithFormat:@"%.2f", [item.price floatValue]];
         cell.dishFavor.text = [item.favor stringValue];
@@ -138,6 +139,7 @@
         
         self.dishDetailView = [[[NSBundle mainBundle] loadNibNamed:@"DXEDishDetailView" owner:self options:nil] firstObject];
         self.dishDetailView.dishName.text = item.name;
+        self.dishDetailView.dishEnglishName.text = item.englishName;
         self.dishDetailView.dishPrice.text = [NSString stringWithFormat:@"%.2f", [item.price floatValue]];
         self.dishDetailView.dishFavor.text = [item.favor stringValue];
         self.dishDetailView.dishIngredient.selectable = YES;

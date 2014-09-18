@@ -82,8 +82,8 @@
     cell.controller = self;
     cell.dishName.text = item.name;
     cell.dishEnglishName.text = item.englishName;
-    cell.dishPrice.text = [NSString stringWithFormat:@"￥%.2f", [item.price floatValue]];
-    [cell updateDishCountButtonsByCount:item.count];
+    cell.dishPrice.text = [NSString stringWithFormat:@"单价：￥%.2f", [item.price floatValue]];
+    [cell updateCellByDishCount:item.count dishPrice:[item.price floatValue]];
     
     return cell;
 }
@@ -122,7 +122,7 @@
         item.count++;
         self.totalPrice += [item.price floatValue];
     }
-    [cell updateDishCountButtonsByCount:item.count];
+    [cell updateCellByDishCount:item.count dishPrice:[item.price floatValue]];
 }
 
 - (void)onDecreaseButtonClickedInTableCell:(DXEOrderDishTableViewCell *)cell
@@ -134,7 +134,7 @@
         item.count--;
         self.totalPrice -= [item.price floatValue];
     }
-    [cell updateDishCountButtonsByCount:item.count];
+    [cell updateCellByDishCount:item.count dishPrice:[item.price floatValue]];
 }
 
 - (void)onDeleteButtonClickedInTableCell:(DXEOrderDishTableViewCell *)cell

@@ -12,9 +12,11 @@
 
 - (void)awakeFromNib
 {
-    self.dishName.textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.NameFontColor"];
-    self.dishEnglishName.textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.NameFontColor"];
-    self.dishPrice.textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.PriceFontColor"];
+    UIColor *nameColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.NameFontColor"];
+    self.dishName.textColor = nameColor;
+    self.dishEnglishName.textColor = nameColor;
+    self.dishPrice.textColor = nameColor;
+    self.dishTotalPrice.textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.PriceFontColor"];
     self.dishCount.textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.CountFontColor"];
     
     self.backgroundImageView.image = [[RNThemeManager sharedManager] imageForName:@"order_cell_background.png"];
@@ -22,9 +24,11 @@
     self.contentView.backgroundColor = [UIColor blackColor];
 }
 
-- (void)updateDishCountButtonsByCount:(NSInteger)count
+- (void)updateCellByDishCount:(NSInteger)count dishPrice:(float)price;
 {
     self.dishCount.text = [NSString stringWithFormat:@"%ld", count];
+    self.dishTotalPrice.text = [NSString stringWithFormat:@"￥%.2f", count * price];
+    
     if (count == kDXEDishItemCountInCartMin)
     {
         self.decreaseButton.enabled = NO;
