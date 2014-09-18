@@ -17,9 +17,7 @@
     self.dishPrice.textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.PriceFontColor"];
     self.dishCount.textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.CountFontColor"];
     
-    self.backgroundImageView.layer.cornerRadius = kDXEOrderTitleViewRadius;
-    self.backgroundImageView.layer.borderWidth = kDXEOrderTitleViewBorderWidth;
-    self.backgroundImageView.layer.borderColor = [[[RNThemeManager sharedManager] colorForKey:@"Order.TitleView.BorderColor"] CGColor];;
+    self.backgroundImageView.image = [[RNThemeManager sharedManager] imageForName:@"order_cell_background.png"];
     
     self.contentView.backgroundColor = [UIColor blackColor];
 }
@@ -30,19 +28,15 @@
     if (count == kDXEDishItemCountInCartMin)
     {
         self.decreaseButton.enabled = NO;
-        self.decreaseButton.backgroundColor = [UIColor lightGrayColor];
     }
     else if (count == kDXEDishItemCountInCartMax)
     {
         self.increaseButton.enabled = NO;
-        self.increaseButton.backgroundColor = [UIColor lightGrayColor];
     }
     else
     {
         self.decreaseButton.enabled = YES;
         self.increaseButton.enabled = YES;
-        self.decreaseButton.backgroundColor = [UIColor blueColor];
-        self.increaseButton.backgroundColor = [UIColor blueColor];
     }
 }
 
