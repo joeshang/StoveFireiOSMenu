@@ -216,14 +216,14 @@
     NSArray *names = kDXEDishClassName;
     NSArray *englishNames = kDXEDishClassEnglishName;
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:[names count]];
-    for (NSUInteger i = 0; i < [names count]; i++)
+    for (int i = 0; i < [names count]; i++)
     {
         DXEDishClass *class = [[DXEDishClass alloc] init];
         class.classid = [NSNumber numberWithInteger:i];
         class.showSequence = [NSNumber numberWithInteger:i + 1];
         class.name = [names objectAtIndex:i];
         class.englishName = [englishNames objectAtIndex:i];
-        class.imageKey = [NSString stringWithFormat:@"0-%ld@%.0f", i, [[NSDate date] timeIntervalSince1970]];
+        class.imageKey = [NSString stringWithFormat:@"0-%d@%.0f", i, [[NSDate date] timeIntervalSince1970]];
         [array addObject:class];
     }
     
@@ -260,23 +260,22 @@
     NSArray *names = kDXEDishClassName;
     NSArray *englishNames = kDXEDishClassEnglishName;
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:[names count] * 10];
-    for (NSUInteger i = 0; i < [names count]; i++)
+    for (int i = 0; i < [names count]; i++)
     {
-        NSUInteger count = 8 + arc4random() % 6;
-        for (NSUInteger j = 0; j < count; j++)
+        int count = 8 + arc4random() % 6;
+        for (int j = 0; j < count; j++)
         {
             DXEDishItem *item = [[DXEDishItem alloc] init];
             item.itemid = [NSNumber numberWithInteger:i * 100 + j];
             item.classid = [NSNumber numberWithInteger:i];
-            item.name = [NSString stringWithFormat:@"%@_%ld", [names objectAtIndex:i], j];
-            item.englishName = [NSString stringWithFormat:@"%@_%ld", [englishNames objectAtIndex:i], j];
-            item.imageKey = [NSString stringWithFormat:@"1-%ld@%.0f", j, [[NSDate date] timeIntervalSince1970]];
+            item.name = [NSString stringWithFormat:@"%@_%d", [names objectAtIndex:i], j];
+            item.englishName = [NSString stringWithFormat:@"%@_%d", [englishNames objectAtIndex:i], j];
+            item.imageKey = [NSString stringWithFormat:@"1-%d@%.0f", j, [[NSDate date] timeIntervalSince1970]];
             item.showSequence = [NSNumber numberWithInteger:j + 1];
             item.price = [NSNumber numberWithFloat:20 + arc4random() % 100];
             item.favor = [NSNumber numberWithInteger:1000 + arc4random() % 5000];
             item.ingredient = @"此物只应天上有，人间能够几回尝，此时不尝何时尝？原料顶级棒，安全放心，注意注意，前方高能预警，核能预警！巨美味巨好吃，嘿咻嘿咻北鼻够~";
             item.soldout = [NSNumber numberWithBool:NO];
-            item.inCart = nil;
             [array addObject:item];
         }
     }
@@ -289,25 +288,24 @@
     NSArray *names = kDXEDishClassName;
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:20];
     
-    NSUInteger count = 8 + arc4random() % 6;
-    for (NSUInteger j = 0; j < count; j++)
+    int count = 8 + arc4random() % 6;
+    for (int j = 0; j < count; j++)
     {
         DXEDishItem *item = [[DXEDishItem alloc] init];
         item.itemid = [NSNumber numberWithInteger:1000 + j];
         item.classid = [NSNumber numberWithInteger:10];
-        item.name = [NSString stringWithFormat:@"会员专属_%ld", j];
-        item.englishName = [NSString stringWithFormat:@"VIP_%ld", j];
-        item.imageKey = [NSString stringWithFormat:@"1-%ld@%.0f", j, [[NSDate date] timeIntervalSince1970]];
+        item.name = [NSString stringWithFormat:@"会员专属_%d", j];
+        item.englishName = [NSString stringWithFormat:@"VIP_%d", j];
+        item.imageKey = [NSString stringWithFormat:@"1-%d@%.0f", j, [[NSDate date] timeIntervalSince1970]];
         item.showSequence = [NSNumber numberWithInteger:j + 1];
         item.price = [NSNumber numberWithFloat:20 + arc4random() % 100];
         item.favor = [NSNumber numberWithInteger:1000 + arc4random() % 5000];
         item.ingredient = @"此物只应天上有，人间能够几回尝，此时不尝何时尝？原料顶级棒，安全放心，注意注意，前方高能预警，核能预警！巨美味巨好吃，嘿咻嘿咻北鼻够~";
         item.soldout = [NSNumber numberWithBool:NO];
-        item.inCart = nil;
         [array addObject:item];
     }
     
-    for (NSUInteger i = 0; i < [names count]; i++)
+    for (int i = 0; i < [names count]; i++)
     {
         DXEDishItem *update = [[DXEDishItem alloc] init];
         update.itemid = [NSNumber numberWithInteger:i * 100];

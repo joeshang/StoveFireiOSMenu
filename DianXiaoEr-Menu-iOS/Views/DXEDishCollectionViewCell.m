@@ -26,6 +26,10 @@
     self.dishEnglishName.textColor = tintColor;
     self.dishPrice.textColor = tintColor;
     self.dishFavor.textColor = tintColor;
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                    action:@selector(onTapOnDishImage:)];
+    [self.dishImage addGestureRecognizer:tapRecognizer];
 }
 
 - (IBAction)onCartButtonClicked:(id)sender
@@ -33,22 +37,23 @@
     [self showCellMode:DXEDishCellModeInCart animate:YES];
     
     SEL selector = NSSelectorFromString(@"onCartButtonClickedInCollectionView:atIndexPath:");
-    NSIndexPath *indexPath = [self.collectionView indexPathForCell:self];
-    if ([self.controller respondsToSelector:selector])
-    {
-        // func is a trick for performSelector:withObject without "may cause a leak because its selector is unknown" warning
-        // [self.controller performSelector:selector
-        //                       withObject:self.collectionView
-        //                       withObject:indexPath];
-        IMP imp = [self.controller methodForSelector:selector];
-        void (*func)(id, SEL, UICollectionView *, NSIndexPath *) = (void *)imp;
-        func(self.controller, selector, self.collectionView, indexPath);
-    }
+    [self sendActionToControllerWithSelector:selector];
 }
 
 - (IBAction)onFavorButtonClicked:(id)sender
 {
     SEL selector = NSSelectorFromString(@"onFavorButtonClickedInCollectionView:atIndexPath:");
+    [self sendActionToControllerWithSelector:selector];
+}
+
+- (void)onTapOnDishImage:(id)sender
+{
+    SEL selector = NSSelectorFromString(@"onTapOnDishImageInCollectionView:atIndexPath:");
+    [self sendActionToControllerWithSelector:selector];
+}
+
+- (void)sendActionToControllerWithSelector:(SEL)selector
+{
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:self];
     if ([self.controller respondsToSelector:selector])
     {

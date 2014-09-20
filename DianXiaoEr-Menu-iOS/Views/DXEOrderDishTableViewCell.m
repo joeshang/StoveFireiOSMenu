@@ -26,7 +26,7 @@
 
 - (void)updateCellByDishCount:(NSInteger)count dishPrice:(float)price;
 {
-    self.dishCount.text = [NSString stringWithFormat:@"%ld", count];
+    self.dishCount.text = [NSString stringWithFormat:@"%d", (int)count];
     self.dishTotalPrice.text = [NSString stringWithFormat:@"￥%.2f", count * price];
     
     if (count == kDXEDishItemCountInCartMin)

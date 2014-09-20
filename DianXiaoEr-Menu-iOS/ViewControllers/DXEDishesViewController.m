@@ -134,12 +134,61 @@
     }
 }
 
-#pragma mark- UICollectionViewDelegate
+#pragma mark - CHTCollectionViewDelegateWaterflowLayout
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"page: %ld, index: %ld", collectionView.tag, indexPath.row);
+    CGSize size;
+    if (indexPath.row == 0)
+    {
+        size = CGSizeMake(kDXECollectionViewCellWidth, kDXECollectionViewInfoCellHeight);
+    }
+    else
+    {
+        size = CGSizeMake(kDXECollectionViewCellWidth, kDXECollectionViewDishCellHeight);
+    }
     
+    return size;
+}
+
+#pragma mark - Target-Action in Collection View
+
+- (void)onCartButtonClickedInCollectionView:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath
+{
+    DXEDishItem *item = [self.dishClass.dishes objectAtIndex:indexPath.row - 1];
+    
+    if (!item.inCart)
+    {
+        item.count = [NSNumber numberWithInteger:1];
+        [[DXEOrderManager sharedInstance].cart addObject:item];
+    }
+    else
+    {
+        item.count = [NSNumber numberWithInteger:[item.count integerValue] + 1];
+    }
+}
+
+- (void)onFavorButtonClickedInCollectionView:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath
+{
+    DXEDishItem *item = [self.dishClass.dishes objectAtIndex:indexPath.row - 1];
+    if (item.inFavor)
+    {
+        item.inFavor = NO;
+        item.favor = [NSNumber numberWithInt:[item.favor intValue] - 1];
+    }
+    else
+    {
+        item.inFavor = YES;
+        item.favor = [NSNumber numberWithInt:[item.favor intValue] + 1];
+    }
+    
+    [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+}
+
+- (void)onTapOnDishImageInCollectionView:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath
+{
     DXEDishItem *item = [self.dishClass.dishes objectAtIndex:indexPath.row - 1];
     if ([item.soldout boolValue] == NO)
     {
@@ -175,7 +224,7 @@
         
         [CRModal showModalView:self.dishDetailView
                    coverOption:CRModalOptionCoverDark
-           tapOutsideToDismiss:YES
+           tapOutsideToDismiss:NO
                       animated:YES
                     completion:^{
                         self.selectedIndexPath = nil;
@@ -184,41 +233,7 @@
     }
 }
 
-#pragma mark - CHTCollectionViewDelegateWaterflowLayout
-
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout *)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    CGSize size;
-    if (indexPath.row == 0)
-    {
-        size = CGSizeMake(kDXECollectionViewCellWidth, kDXECollectionViewInfoCellHeight);
-    }
-    else
-    {
-        size = CGSizeMake(kDXECollectionViewCellWidth, kDXECollectionViewDishCellHeight);
-    }
-    
-    return size;
-}
-
-#pragma mark - Target-Action
-
-- (void)onCartButtonClickedInCollectionView:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath
-{
-    DXEDishItem *item = [self.dishClass.dishes objectAtIndex:indexPath.row - 1];
-    
-    if (!item.inCart)
-    {
-        item.count = [NSNumber numberWithInteger:1];
-        [[DXEOrderManager sharedInstance].cart addObject:item];
-    }
-    else
-    {
-        item.count = [NSNumber numberWithInteger:[item.count integerValue] + 1];
-    }
-}
+#pragma mark - Target-Action in Dish Detail View
 
 - (IBAction)onCartButtonClickedInDishDetailView:(id)sender
 {
@@ -240,28 +255,6 @@
     [self.collectionView reloadItemsAtIndexPaths:@[self.selectedIndexPath]];
 }
 
-- (IBAction)onTapOnDishImage:(id)sender
-{
-    [CRModal dismiss];
-}
-
-- (void)onFavorButtonClickedInCollectionView:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath
-{
-    DXEDishItem *item = [self.dishClass.dishes objectAtIndex:indexPath.row - 1];
-    if (item.inFavor)
-    {
-        item.inFavor = NO;
-        item.favor = [NSNumber numberWithInt:[item.favor intValue] - 1];
-    }
-    else
-    {
-        item.inFavor = YES;
-        item.favor = [NSNumber numberWithInt:[item.favor intValue] + 1];
-    }
-    
-    [collectionView reloadItemsAtIndexPaths:@[indexPath]];
-}
-
 - (IBAction)onFavorButtonClickedInDishDetailView:(id)sender
 {
     DXEDishItem *item = [self.dishClass.dishes objectAtIndex:self.selectedIndexPath.row - 1];
@@ -281,6 +274,11 @@
     }
     self.dishDetailView.dishFavor.text = [item.favor stringValue];
     [self.collectionView reloadItemsAtIndexPaths:@[self.selectedIndexPath]];
+}
+
+- (IBAction)onTapOnDishImageInDishDetailView:(id)sender
+{
+    [CRModal dismiss];
 }
 
 @end

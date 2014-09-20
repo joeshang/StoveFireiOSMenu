@@ -10,11 +10,12 @@
             <rect key="frame" x="0.0" y="0.0" width="570" height="954"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jzl-F7-oTs">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jzl-F7-oTs">
                     <rect key="frame" x="0.0" y="0.0" width="570" height="782"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <gestureRecognizers/>
                     <connections>
-                        <outletCollection property="gestureRecognizers" destination="k5e-dF-p7D" appends="YES" id="oA2-TN-LTb"/>
+                        <outletCollection property="gestureRecognizers" destination="3bD-69-Miu" appends="YES" id="sRo-Ee-7c2"/>
                     </connections>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBf-UE-iDo">
@@ -104,12 +105,12 @@
                 <outlet property="favorButton" destination="pBf-UE-iDo" id="W9r-ec-vbS"/>
                 <outlet property="inCartFlag" destination="UaR-Yc-Njc" id="eJK-G9-NWd"/>
                 <outlet property="separator" destination="ame-Xb-QNz" id="13D-6B-KWq"/>
-                <outletCollection property="gestureRecognizers" destination="k5e-dF-p7D" appends="YES" id="03n-ca-zdO"/>
             </connections>
         </view>
-        <tapGestureRecognizer id="k5e-dF-p7D">
+        <tapGestureRecognizer id="3bD-69-Miu">
             <connections>
-                <action selector="onTapOnDishImage:" destination="-1" id="fpS-MN-xIQ"/>
+                <action selector="onTapOnDishImageInDishDetailView:" destination="-1" id="zII-Xy-L2o"/>
+                <outlet property="delegate" destination="-1" id="cKK-78-Vl3"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

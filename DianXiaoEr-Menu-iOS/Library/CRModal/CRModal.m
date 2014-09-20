@@ -13,7 +13,7 @@
 #define kCRModalAlphaDismiss            0.0
 #define kCRModalAnimationDuration       0.3
 #define kCRModalBlurValue               0.3
-#define kCRModalDarkAlphaValue          0.7
+#define kCRModalDarkAlphaValue          0.8
 
 @interface CRModal ()
 
