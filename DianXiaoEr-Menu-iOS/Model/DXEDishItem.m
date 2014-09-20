@@ -16,13 +16,38 @@
     
     if (self)
     {
-        _inCart = NO;
         _inFavor = NO;
-        _count = 0;
+        _inCart = NO;
+        _count = [NSNumber numberWithInteger:0];
         _tradeid = nil;
     }
     
     return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    DXEDishItem *copy = [[[self class] allocWithZone:zone] init];
+    
+    if (copy)
+    {
+        copy.itemid = [self.itemid copy];
+        copy.classid = [self.classid copy];
+        copy.name = [self.name copy];
+        copy.englishName = [self.englishName copy];
+        copy.imageKey = [self.imageKey copy];
+        copy.showSequence = [self.showSequence copy];
+        copy.price = [self.price copy];
+        copy.favor = [self.favor copy];
+        copy.ingredient = [self.ingredient copy];
+        copy.soldout = [self.soldout copy];
+        copy.inCart = self.inCart;
+        copy.inFavor = self.inFavor;
+        copy.count = [self.count copy];
+        copy.tradeid = [self.tradeid copy];
+    }
+    
+    return copy;
 }
 
 - (void)updateByNewObject:(DXEDishItem *)update

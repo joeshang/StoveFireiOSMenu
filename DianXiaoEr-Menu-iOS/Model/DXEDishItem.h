@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DXEDishItem : NSObject
+@interface DXEDishItem : NSObject <NSCopying>
 
 @property (nonatomic, strong) NSNumber *itemid;
 @property (nonatomic, strong) NSNumber *classid;
@@ -23,7 +23,7 @@
 
 @property (nonatomic, assign) BOOL inCart;
 @property (nonatomic, assign) BOOL inFavor;
-@property (nonatomic, assign) NSInteger count;
+@property (nonatomic, strong) NSNumber *count;
 @property (nonatomic, strong) NSString *tradeid;
 
 - (void)updateByNewObject:(DXEDishItem *)update;

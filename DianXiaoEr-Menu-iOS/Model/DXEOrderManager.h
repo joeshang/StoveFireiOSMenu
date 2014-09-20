@@ -12,6 +12,12 @@
 
 @interface DXEOrderManager : NSObject
 
+@property (nonatomic, strong) NSNumber *totalCount;
+@property (nonatomic, strong) NSMutableArray *cartList;
+@property (nonatomic, strong) NSMutableArray *todoList;
+@property (nonatomic, strong) NSMutableArray *doingList;
+@property (nonatomic, strong) NSMutableArray *doneList;
+
 + (DXEOrderManager *)sharedInstance;
 
 - (NSMutableArray *)cart;

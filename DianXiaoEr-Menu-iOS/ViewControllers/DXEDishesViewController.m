@@ -45,7 +45,7 @@
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    self.collectionView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionView.BackgroundColor"];
+    self.collectionView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.BackgroundColor"];
     self.collectionView.tag = [self.dishClass.classid intValue];
     self.collectionView.delaysContentTouches = NO;
     
@@ -211,13 +211,12 @@
     
     if (!item.inCart)
     {
-        item.inCart = YES;
-        item.count = 1;
+        item.count = [NSNumber numberWithInteger:1];
         [[DXEOrderManager sharedInstance].cart addObject:item];
     }
     else
     {
-        item.count++;
+        item.count = [NSNumber numberWithInteger:[item.count integerValue] + 1];
     }
 }
 
@@ -226,8 +225,7 @@
     DXEDishItem *item = [self.dishClass.dishes objectAtIndex:self.selectedIndexPath.row - 1];
     if (!item.inCart)
     {
-        item.inCart = YES;
-        item.count = 1;
+        item.count = [NSNumber numberWithInteger:1];
         [[DXEOrderManager sharedInstance].cart addObject:item];
         
         [UIView animateWithDuration:0.3 animations:^{
@@ -236,7 +234,7 @@
     }
     else
     {
-        item.count++;
+        item.count = [NSNumber numberWithInteger:[item.count integerValue] + 1];
     }
     
     [self.collectionView reloadItemsAtIndexPaths:@[self.selectedIndexPath]];

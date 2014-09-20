@@ -45,7 +45,7 @@
         _hideDishes = [NSMutableArray arrayWithArray:[[DXEDishDataManager sharedInstance].dishClasses filteredArrayUsingPredicate:hidePredicate]];
         
         [[DXEOrderManager sharedInstance] addObserver:self
-                                           forKeyPath:@"cartList"
+                                           forKeyPath:NSStringFromSelector(@selector(cartList))
                                               options:NSKeyValueObservingOptionOld
                                               context:nil];
     }
@@ -54,7 +54,8 @@
 
 - (void)dealloc
 {
-    [[DXEOrderManager sharedInstance] removeObserver:self forKeyPath:@"cartList"];
+    [[DXEOrderManager sharedInstance] removeObserver:self
+                                          forKeyPath:NSStringFromSelector(@selector(cartList))];
 }
 
 #pragma mark - view related
@@ -63,7 +64,7 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionView.BackgroundColor"];
+    self.view.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.BackgroundColor"];
     
     NSMutableArray *items = [NSMutableArray arrayWithCapacity:[self.showDishes count]];
     self.contentViewControllers = [NSMutableArray arrayWithCapacity:[self.showDishes count]];
@@ -98,20 +99,18 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    if ([keyPath isEqualToString:@"cartList"])
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(cartList))]
+        && [change[NSKeyValueChangeKindKey] intValue] == NSKeyValueChangeRemoval)
     {
-        if ([change[NSKeyValueChangeKindKey] intValue] == NSKeyValueChangeRemoval)
+        NSArray *removalItems = change[NSKeyValueChangeOldKey];
+        for (DXEDishItem *item in removalItems)
         {
-            NSArray *removalItems = change[NSKeyValueChangeOldKey];
-            for (DXEDishItem *item in removalItems)
+            for (DXEDishesViewController *controller in self.contentViewControllers)
             {
-                for (DXEDishesViewController *controller in self.contentViewControllers)
+                if ([item.classid isEqualToNumber:[controller.dishClass classid]])
                 {
-                    if ([item.classid isEqualToNumber:[controller.dishClass classid]])
-                    {
-                        [controller updateDishCellByDishItem:item];
-                        break;
-                    }
+                    [controller updateDishCellByDishItem:item];
+                    break;
                 }
             }
         }

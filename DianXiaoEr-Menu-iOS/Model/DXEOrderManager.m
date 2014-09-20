@@ -7,13 +7,9 @@
 //
 
 #import "DXEOrderManager.h"
+#import "DXEDishItem.h"
 
 @interface DXEOrderManager ()
-
-@property (nonatomic, strong) NSMutableArray *cartList;
-@property (nonatomic, strong) NSMutableArray *todoList;
-@property (nonatomic, strong) NSMutableArray *doingList;
-@property (nonatomic, strong) NSMutableArray *doneList;
 
 @end
 
@@ -27,6 +23,7 @@
     {
         sharedManager = [[super allocWithZone:nil] init];
         
+        sharedManager.totalCount = 0;
         sharedManager.cartList = [[NSMutableArray alloc] init];
         sharedManager.todoList = [[NSMutableArray alloc] init];
         sharedManager.doingList = [[NSMutableArray alloc] init];
@@ -67,16 +64,29 @@
 
 - (void)insertObject:(DXEDishItem *)object inCartListAtIndex:(NSUInteger)index
 {
+    [object addObserver:self
+             forKeyPath:NSStringFromSelector(@selector(count))
+                options:NSKeyValueObservingOptionNew
+                context:nil];
+    object.inCart = YES;
+    self.totalCount = [NSNumber numberWithInteger:[self.totalCount integerValue] + [object.count integerValue]];
     [self.cartList insertObject:object atIndex:index];
 }
 
 - (void)removeObjectFromCartListAtIndex:(NSUInteger)index
 {
+    DXEDishItem *object = [self.cartList objectAtIndex:index];
+    [object removeObserver:self
+                forKeyPath:NSStringFromSelector(@selector(count))];
+    object.inCart = NO;
+    self.totalCount = [NSNumber numberWithInteger:[self.totalCount integerValue] - [object.count integerValue]];
+    object.count = [NSNumber numberWithInteger:0];
     [self.cartList removeObjectAtIndex:index];
 }
 
 - (void)insertObject:(DXEDishItem *)object inTodoListAtIndex:(NSUInteger)index
 {
+    self.totalCount = [NSNumber numberWithInteger:[self.totalCount integerValue] + [object.count integerValue]];
     [self.todoList insertObject:object atIndex:index];
 }
 
@@ -103,6 +113,24 @@
 - (void)removeObjectFromDoneListAtIndex:(NSUInteger)index
 {
     [self.doneList removeObjectAtIndex:index];
+}
+
+#pragma mark - Notification
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(count))])
+    {
+        int totalCount = 0;
+        totalCount += [[self valueForKeyPath:@"cartList.@sum.count"] intValue];
+        totalCount += [[self valueForKeyPath:@"todoList.@sum.count"] intValue];
+        totalCount += [[self valueForKeyPath:@"doingList.@sum.count"] intValue];
+        totalCount += [[self valueForKeyPath:@"doneList.@sum.count"] intValue];
+        self.totalCount = [NSNumber numberWithInt:totalCount];
+    }
 }
 
 @end

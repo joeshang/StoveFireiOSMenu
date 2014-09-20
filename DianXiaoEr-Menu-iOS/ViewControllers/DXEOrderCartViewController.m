@@ -25,19 +25,23 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         _totalPrice = 0.0;
     }
     return self;
 }
 
+#pragma mark - view related
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"Order.BackgroundColor"];
     
     [self.dishesTableView registerNib:[UINib nibWithNibName:@"DXEOrderDishTableViewCell" bundle:nil]
-         forCellReuseIdentifier:@"DXEOrderDishTableViewCell"];
+               forCellReuseIdentifier:@"DXEOrderDishTableViewCell"];
     
     DXEOrderTitleView *titleView = [[[NSBundle mainBundle] loadNibNamed:@"DXEOrderTitleView"
                                                             owner:self
@@ -58,7 +62,15 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     [self.dishesTableView reloadData];
+    float totalPrice = 0.0;
+    for (DXEDishItem *item in [DXEOrderManager sharedInstance].cart)
+    {
+        totalPrice += [item.price floatValue] * [item.count integerValue];
+    }
+    self.totalPrice = totalPrice;
 }
 
 - (void)setTotalPrice:(float)totalPrice
@@ -84,14 +96,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DXEOrderDishTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DXEOrderDishTableViewCell" forIndexPath:indexPath];
-    DXEDishItem *item = [[NSArray arrayWithArray:[DXEOrderManager sharedInstance].cart] objectAtIndex:indexPath.row];
+    DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
     
     cell.controller = self;
     cell.dishName.text = item.name;
     cell.dishEnglishName.text = item.englishName;
     cell.dishPrice.text = [NSString stringWithFormat:@"单价：￥%.2f", [item.price floatValue]];
-    [cell updateCellByDishCount:item.count dishPrice:[item.price floatValue]];
-    self.totalPrice += [item.price floatValue];
+    [cell updateCellByDishCount:[item.count integerValue] dishPrice:[item.price floatValue]];
     
     return cell;
 }
@@ -102,33 +113,31 @@
 {
     NSIndexPath *indexPath = [self.dishesTableView indexPathForCell:cell];
     DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
-    if (item.count < kDXEDishItemCountInCartMax)
+    if ([item.count integerValue] < kDXEDishItemCountInCartMax)
     {
-        item.count++;
+        item.count = [NSNumber numberWithInteger:[item.count integerValue] + 1];
         self.totalPrice += [item.price floatValue];
     }
-    [cell updateCellByDishCount:item.count dishPrice:[item.price floatValue]];
+    [cell updateCellByDishCount:[item.count integerValue] dishPrice:[item.price floatValue]];
 }
 
 - (void)onDecreaseButtonClickedInTableCell:(DXEOrderDishTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.dishesTableView indexPathForCell:cell];
     DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
-    if (item.count > kDXEDishItemCountInCartMin)
+    if ([item.count integerValue] > kDXEDishItemCountInCartMin)
     {
-        item.count--;
+        item.count = [NSNumber numberWithInteger:[item.count integerValue] - 1];
         self.totalPrice -= [item.price floatValue];
     }
-    [cell updateCellByDishCount:item.count dishPrice:[item.price floatValue]];
+    [cell updateCellByDishCount:[item.count integerValue] dishPrice:[item.price floatValue]];
 }
 
 - (void)onDeleteButtonClickedInTableCell:(DXEOrderDishTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.dishesTableView indexPathForCell:cell];
     DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
-    self.totalPrice -= [item.price floatValue] * item.count;
-    item.inCart = NO;
-    item.count = 0;
+    self.totalPrice -= [item.price floatValue] * [item.count integerValue];
     [[DXEOrderManager sharedInstance].cart removeObjectIdenticalTo:item];
     [self.dishesTableView deleteRowsAtIndexPaths:@[indexPath]
                           withRowAnimation:UITableViewRowAnimationFade];
@@ -137,6 +146,15 @@
 - (IBAction)onEnsureOrderingButtonClicked:(id)sender
 {
     NSLog(@"ensure ordering, total price is %0.2f", self.totalPrice);
+    
+    for (DXEDishItem *item in [DXEOrderManager sharedInstance].cart)
+    {
+        DXEDishItem *orderedItem = [item copy];
+        [[DXEOrderManager sharedInstance].todo addObject:orderedItem];
+    }
+    [[DXEOrderManager sharedInstance].cart removeAllObjects];
+    self.totalPrice = 0.0;
+    [self.dishesTableView reloadData];
 }
 
 @end

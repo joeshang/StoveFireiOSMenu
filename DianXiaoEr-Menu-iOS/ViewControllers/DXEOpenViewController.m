@@ -18,6 +18,9 @@
 #import "DXEMyselfViewController.h"
 
 #define kDXETabBarTitleFontSize         12
+#define kDXEOrderControllerIndex        3
+#define kDXEOrderBadgeFontSize          13
+#define kDXEOrderBadgePositionOffset    UIOffsetMake(0, 3);
 
 @interface DXEOpenViewController ()
 
@@ -115,6 +118,15 @@
         
         index++;
     }
+    
+    RDVTabBarItem *orderItem = [[tabBar items] objectAtIndex:kDXEOrderControllerIndex];
+    orderItem.badgeValue = @"";
+    orderItem.badgeIsAtCenter = YES;
+    orderItem.badgeBackgroundColor = nil;
+    orderItem.badgeBackgroundImage = nil;
+    orderItem.badgePositionAdjustment = kDXEOrderBadgePositionOffset;
+    orderItem.badgeTextFont = [UIFont systemFontOfSize:kDXEOrderBadgeFontSize];
+    orderItem.badgeTextColor = [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.BadgeTextFontColor"];
     
     [[UIApplication sharedApplication] keyWindow].rootViewController = mainViewController;
 }
