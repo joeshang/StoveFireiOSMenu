@@ -10,9 +10,9 @@
 	<string>FFFFFF</string>
 	<key>Main.TabBar.BackgroundColor</key>
 	<string>222A2D</string>
-	<key>HomePage.ScrollMenu.ItemSelectedTextColor</key>
+	<key>ScrollMenu.SelectedTextColor</key>
 	<string>DEB96C</string>
-	<key>HomePage.ScrollMenu.ItemUnselectedTextColor</key>
+	<key>ScrollMenu.NormalTextColor</key>
 	<string>727171</string>
 	<key>HomePage.BackgroundColor</key>
 	<string>000000</string>

@@ -53,7 +53,6 @@
 		D273A44319C885A10081BB37 /* dish_cell_add2cart_pressed_button.png in Resources */ = {isa = PBXBuildFile; fileRef = D273A44019C885A10081BB37 /* dish_cell_add2cart_pressed_button.png */; };
 		D273A44419C885A10081BB37 /* dish_cell_soldout_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D273A44119C885A10081BB37 /* dish_cell_soldout_button@2x.png */; };
 		D273A44719C8A2750081BB37 /* DXEOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A44619C8A2750081BB37 /* DXEOrderManager.m */; };
-		D273A44C19C97CC10081BB37 /* DXEScrollMenuBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A44B19C97CC10081BB37 /* DXEScrollMenuBaseViewController.m */; };
 		D273A45019C983970081BB37 /* DXEOrderCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A44E19C983970081BB37 /* DXEOrderCartViewController.m */; };
 		D273A45119C983970081BB37 /* DXEOrderCartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D273A44F19C983970081BB37 /* DXEOrderCartViewController.xib */; };
 		D273A45E19C98D0E0081BB37 /* DXEOrderDishTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A45C19C98D0E0081BB37 /* DXEOrderDishTableViewCell.m */; };
@@ -159,8 +158,6 @@
 		D273A44119C885A10081BB37 /* dish_cell_soldout_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dish_cell_soldout_button@2x.png"; sourceTree = "<group>"; };
 		D273A44519C8A2750081BB37 /* DXEOrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEOrderManager.h; path = Model/DXEOrderManager.h; sourceTree = "<group>"; };
 		D273A44619C8A2750081BB37 /* DXEOrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEOrderManager.m; path = Model/DXEOrderManager.m; sourceTree = "<group>"; };
-		D273A44A19C97CC10081BB37 /* DXEScrollMenuBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEScrollMenuBaseViewController.h; path = ViewControllers/DXEScrollMenuBaseViewController.h; sourceTree = "<group>"; };
-		D273A44B19C97CC10081BB37 /* DXEScrollMenuBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEScrollMenuBaseViewController.m; path = ViewControllers/DXEScrollMenuBaseViewController.m; sourceTree = "<group>"; };
 		D273A44D19C983970081BB37 /* DXEOrderCartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEOrderCartViewController.h; path = ViewControllers/DXEOrderCartViewController.h; sourceTree = "<group>"; };
 		D273A44E19C983970081BB37 /* DXEOrderCartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEOrderCartViewController.m; path = ViewControllers/DXEOrderCartViewController.m; sourceTree = "<group>"; };
 		D273A44F19C983970081BB37 /* DXEOrderCartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOrderCartViewController.xib; path = ViewControllers/DXEOrderCartViewController.xib; sourceTree = "<group>"; };
@@ -441,8 +438,6 @@
 			children = (
 				D273A43619C81FA00081BB37 /* DXETopBarBaseViewController.h */,
 				D273A43719C81FA00081BB37 /* DXETopBarBaseViewController.m */,
-				D273A44A19C97CC10081BB37 /* DXEScrollMenuBaseViewController.h */,
-				D273A44B19C97CC10081BB37 /* DXEScrollMenuBaseViewController.m */,
 				D20712091974D0FA00E34770 /* HomePage */,
 				D207120B1974D12800E34770 /* Origin */,
 				D207120D1974D13D00E34770 /* Questionnaire */,
@@ -687,7 +682,6 @@
 				D246598C1973FAFA0010B1B6 /* DXEHomePageViewController.m in Sources */,
 				D29FAB5619B5C1E000E667D4 /* DXEDishClass.m in Sources */,
 				D273A3CA19C60B7B0081BB37 /* CRScrollMenuController.m in Sources */,
-				D273A44C19C97CC10081BB37 /* DXEScrollMenuBaseViewController.m in Sources */,
 				D29FAB5D19B603A000E667D4 /* DXEDishDataManager.m in Sources */,
 				D24986CD19B70CB00029CC57 /* DXEImageManager.m in Sources */,
 				D22BE1A01972747000A438D2 /* main.m in Sources */,

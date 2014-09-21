@@ -12,6 +12,12 @@
 #define kDXENavigationBarHeight                     94
 #define kDXETabBarHeight                            71
 
+#define kDXEScrollMenuHeight                        53
+#define kDXEScrollMenuButtonPadding                 18
+#define kDXEScrollMenuIndicatorHeight               2
+#define kDXEScrollMenuTitleFontSize                 20
+#define kDXEScrollMenuSubtitleFontSize              9
+
 #define kDXECollectionViewCellRadius                5
 #define kDXECollectionViewCellBorderWidth           1
 #define kDXEDishDetailViewRadius                    15

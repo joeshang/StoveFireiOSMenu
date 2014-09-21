@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DXEScrollMenuBaseViewController.h"
 
-@interface DXEHomePageViewController : DXEScrollMenuBaseViewController
+@interface DXEHomePageViewController : UIViewController
 @end

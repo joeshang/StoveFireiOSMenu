@@ -13,17 +13,24 @@
 #import "DXEDishDataManager.h"
 #import "DXEOrderManager.h"
 
-#define kDXECollectionViewSectionTop            17
-#define kDXECollectionViewSectionBottom         17
-#define kDXECollectionViewSectionLeft           17
-#define kDXECollectionViewSectionRight          17
-#define kDXECollectionViewHeaderHeight          0
-#define kDXECollectionViewFooterHeight          0
-#define kDXECollectionViewColumnSpacing         17
-#define kDXECollectionViewInteritemSpacing      17
+#define kDXEHomePageScrollMenuHeight                    53
+#define kDXEHomePageScrollMenuButtonPadding             18
+#define kDXEHomePageScrollMenuIndicatorHeight           2
+#define kDXEHomePageScrollMenuTitleFontSize             20
+#define kDXEHomePageScrollMenuSubtitleFontSize          9
+
+#define kDXECollectionViewSectionTop                    17
+#define kDXECollectionViewSectionBottom                 17
+#define kDXECollectionViewSectionLeft                   17
+#define kDXECollectionViewSectionRight                  17
+#define kDXECollectionViewHeaderHeight                  0
+#define kDXECollectionViewFooterHeight                  0
+#define kDXECollectionViewColumnSpacing                 17
+#define kDXECollectionViewInteritemSpacing              17
 
 @interface DXEHomePageViewController ()
 
+@property (nonatomic, strong) CRScrollMenuController *scrollMenuController;
 @property (nonatomic, strong) NSMutableArray *contentViewControllers;
 @property (nonatomic, strong) NSMutableArray *showDishes;
 @property (nonatomic, strong) NSMutableArray *hideDishes;
@@ -64,7 +71,40 @@
 {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.BackgroundColor"];
+    
+    UIColor *normalColor =[[RNThemeManager sharedManager] colorForKey:@"ScrollMenu.NormalTextColor"];
+    UIColor *selectedColor =[[RNThemeManager sharedManager] colorForKey:@"ScrollMenu.SelectedTextColor"];
+    self.scrollMenuController = [[CRScrollMenuController alloc] init];
+    self.scrollMenuController.scrollMenuHeight = kDXEHomePageScrollMenuHeight;
+    self.scrollMenuController.scrollMenuBackgroundImage = [[RNThemeManager sharedManager] imageForName:@"scrollmenu_background"];
+    self.scrollMenuController.scrollMenuIndicatorColor = selectedColor;
+    self.scrollMenuController.scrollMenuIndicatorHeight = kDXEHomePageScrollMenuIndicatorHeight;
+    self.scrollMenuController.scrollMenuButtonPadding = kDXEHomePageScrollMenuButtonPadding;
+    self.scrollMenuController.normalTitleAttributes =
+    @{
+      NSFontAttributeName: [UIFont systemFontOfSize:kDXEHomePageScrollMenuTitleFontSize],
+      NSForegroundColorAttributeName: normalColor
+      };
+    self.scrollMenuController.selectedTitleAttributes =
+    @{
+      NSFontAttributeName: [UIFont systemFontOfSize:kDXEHomePageScrollMenuTitleFontSize],
+      NSForegroundColorAttributeName: selectedColor
+      };
+    self.scrollMenuController.normalSubtitleAttributes =
+    @{
+      NSFontAttributeName: [UIFont systemFontOfSize:kDXEHomePageScrollMenuSubtitleFontSize],
+      NSForegroundColorAttributeName: normalColor
+      };
+    self.scrollMenuController.selectedSubtitleAttributes =
+    @{
+      NSFontAttributeName: [UIFont systemFontOfSize:kDXEHomePageScrollMenuSubtitleFontSize],
+      NSForegroundColorAttributeName: selectedColor
+      };
+    [self addChildViewController:self.scrollMenuController];
+    [self.view addSubview:self.scrollMenuController.view];
+    [self.scrollMenuController didMoveToParentViewController:self];
     
     NSMutableArray *items = [NSMutableArray arrayWithCapacity:[self.showDishes count]];
     self.contentViewControllers = [NSMutableArray arrayWithCapacity:[self.showDishes count]];
@@ -90,6 +130,13 @@
         [items addObject:item];
     }
     [self.scrollMenuController setViewControllers:self.contentViewControllers withItems:items];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.scrollMenuController.view.frame = self.view.bounds;
 }
 
 #pragma mark - notification
