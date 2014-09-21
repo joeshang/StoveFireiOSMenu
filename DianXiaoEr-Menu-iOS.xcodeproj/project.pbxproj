@@ -47,7 +47,7 @@
 		D273A3DF19C73CDE0081BB37 /* dish_cell_price_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D273A3DB19C73CDE0081BB37 /* dish_cell_price_icon@2x.png */; };
 		D273A3E019C73CDE0081BB37 /* dish_cell_soldout_flag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D273A3DC19C73CDE0081BB37 /* dish_cell_soldout_flag@2x.png */; };
 		D273A3E219C73E030081BB37 /* qrcode_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D273A3E119C73E030081BB37 /* qrcode_button@2x.png */; };
-		D273A43819C81FA00081BB37 /* DXETopBarBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A43719C81FA00081BB37 /* DXETopBarBaseViewController.m */; };
+		D273A43819C81FA00081BB37 /* DXEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A43719C81FA00081BB37 /* DXEMainViewController.m */; };
 		D273A43E19C884F80081BB37 /* dish_cell_incart_flag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D273A43D19C884F80081BB37 /* dish_cell_incart_flag@2x.png */; };
 		D273A44219C885A10081BB37 /* dish_cell_add2cart_button.png in Resources */ = {isa = PBXBuildFile; fileRef = D273A43F19C885A10081BB37 /* dish_cell_add2cart_button.png */; };
 		D273A44319C885A10081BB37 /* dish_cell_add2cart_pressed_button.png in Resources */ = {isa = PBXBuildFile; fileRef = D273A44019C885A10081BB37 /* dish_cell_add2cart_pressed_button.png */; };
@@ -67,6 +67,8 @@
 		D273A47519CAC6160081BB37 /* order_cell_increase_disable_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D273A46F19CAC6160081BB37 /* order_cell_increase_disable_button@2x.png */; };
 		D273A47619CAC6160081BB37 /* order_cell_increase_normal_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D273A47019CAC6160081BB37 /* order_cell_increase_normal_button@2x.png */; };
 		D273A47719CAC6160081BB37 /* order_ensure_ordering_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D273A47119CAC6160081BB37 /* order_ensure_ordering_button@2x.png */; };
+		D290281E19CF1F650093AF33 /* CRTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D290281B19CF1F650093AF33 /* CRTabBar.m */; };
+		D290281F19CF1F650093AF33 /* CRTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D290281D19CF1F650093AF33 /* CRTabBarItem.m */; };
 		D2981E2219B85AA900DD22E2 /* test_dish_class@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2019B85AA900DD22E2 /* test_dish_class@2x.png */; };
 		D2981E2E19B8A93E00DD22E2 /* DXEDishDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2981E2D19B8A93E00DD22E2 /* DXEDishDetailView.m */; };
 		D2981E3019B8A96400DD22E2 /* DXEDishDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2F19B8A96400DD22E2 /* DXEDishDetailView.xib */; };
@@ -150,8 +152,8 @@
 		D273A3DB19C73CDE0081BB37 /* dish_cell_price_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dish_cell_price_icon@2x.png"; sourceTree = "<group>"; };
 		D273A3DC19C73CDE0081BB37 /* dish_cell_soldout_flag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dish_cell_soldout_flag@2x.png"; sourceTree = "<group>"; };
 		D273A3E119C73E030081BB37 /* qrcode_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_button@2x.png"; sourceTree = "<group>"; };
-		D273A43619C81FA00081BB37 /* DXETopBarBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXETopBarBaseViewController.h; path = ViewControllers/DXETopBarBaseViewController.h; sourceTree = "<group>"; };
-		D273A43719C81FA00081BB37 /* DXETopBarBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXETopBarBaseViewController.m; path = ViewControllers/DXETopBarBaseViewController.m; sourceTree = "<group>"; };
+		D273A43619C81FA00081BB37 /* DXEMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEMainViewController.h; path = ViewControllers/DXEMainViewController.h; sourceTree = "<group>"; };
+		D273A43719C81FA00081BB37 /* DXEMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEMainViewController.m; path = ViewControllers/DXEMainViewController.m; sourceTree = "<group>"; };
 		D273A43D19C884F80081BB37 /* dish_cell_incart_flag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dish_cell_incart_flag@2x.png"; sourceTree = "<group>"; };
 		D273A43F19C885A10081BB37 /* dish_cell_add2cart_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dish_cell_add2cart_button.png; sourceTree = "<group>"; };
 		D273A44019C885A10081BB37 /* dish_cell_add2cart_pressed_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dish_cell_add2cart_pressed_button.png; sourceTree = "<group>"; };
@@ -176,6 +178,10 @@
 		D273A46F19CAC6160081BB37 /* order_cell_increase_disable_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_cell_increase_disable_button@2x.png"; sourceTree = "<group>"; };
 		D273A47019CAC6160081BB37 /* order_cell_increase_normal_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_cell_increase_normal_button@2x.png"; sourceTree = "<group>"; };
 		D273A47119CAC6160081BB37 /* order_ensure_ordering_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_ensure_ordering_button@2x.png"; sourceTree = "<group>"; };
+		D290281A19CF1F650093AF33 /* CRTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRTabBar.h; sourceTree = "<group>"; };
+		D290281B19CF1F650093AF33 /* CRTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRTabBar.m; sourceTree = "<group>"; };
+		D290281C19CF1F650093AF33 /* CRTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRTabBarItem.h; sourceTree = "<group>"; };
+		D290281D19CF1F650093AF33 /* CRTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRTabBarItem.m; sourceTree = "<group>"; };
 		D2981E2019B85AA900DD22E2 /* test_dish_class@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test_dish_class@2x.png"; sourceTree = "<group>"; };
 		D2981E2C19B8A93E00DD22E2 /* DXEDishDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEDishDetailView.h; path = Views/DXEDishDetailView.h; sourceTree = "<group>"; };
 		D2981E2D19B8A93E00DD22E2 /* DXEDishDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEDishDetailView.m; path = Views/DXEDishDetailView.m; sourceTree = "<group>"; };
@@ -436,8 +442,8 @@
 		D26026FC199B4FB1004D6579 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				D273A43619C81FA00081BB37 /* DXETopBarBaseViewController.h */,
-				D273A43719C81FA00081BB37 /* DXETopBarBaseViewController.m */,
+				D273A43619C81FA00081BB37 /* DXEMainViewController.h */,
+				D273A43719C81FA00081BB37 /* DXEMainViewController.m */,
 				D20712091974D0FA00E34770 /* HomePage */,
 				D207120B1974D12800E34770 /* Origin */,
 				D207120D1974D13D00E34770 /* Questionnaire */,
@@ -450,6 +456,7 @@
 		D273A3B719C603180081BB37 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				D290281919CF1F650093AF33 /* CRTabBar */,
 				D273A3BF19C60B7B0081BB37 /* CRScrollMenuController */,
 				D273A3B819C603180081BB37 /* CRModal */,
 			);
@@ -496,6 +503,17 @@
 				D273A46519C9D4DF0081BB37 /* DXEEnsureOrderingView.xib */,
 			);
 			name = Order;
+			sourceTree = "<group>";
+		};
+		D290281919CF1F650093AF33 /* CRTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				D290281A19CF1F650093AF33 /* CRTabBar.h */,
+				D290281B19CF1F650093AF33 /* CRTabBar.m */,
+				D290281C19CF1F650093AF33 /* CRTabBarItem.h */,
+				D290281D19CF1F650093AF33 /* CRTabBarItem.m */,
+			);
+			path = CRTabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -665,14 +683,16 @@
 				D273A3BE19C603180081BB37 /* UIImage+Blur.m in Sources */,
 				D2049288198D4AA900D8187E /* DXEDishCollectionViewCell.m in Sources */,
 				D20712251974D7AC00E34770 /* DXEOriginViewController.m in Sources */,
-				D273A43819C81FA00081BB37 /* DXETopBarBaseViewController.m in Sources */,
+				D273A43819C81FA00081BB37 /* DXEMainViewController.m in Sources */,
 				D273A44719C8A2750081BB37 /* DXEOrderManager.m in Sources */,
 				D273A3BD19C603180081BB37 /* CRModal.m in Sources */,
 				D20712391974D7F500E34770 /* DXEMyselfViewController.m in Sources */,
 				D273A45019C983970081BB37 /* DXEOrderCartViewController.m in Sources */,
 				D207122F1974D7D000E34770 /* DXEOrderViewController.m in Sources */,
+				D290281E19CF1F650093AF33 /* CRTabBar.m in Sources */,
 				D29FAB5719B5C1E000E667D4 /* DXEDishItem.m in Sources */,
 				D273A3CB19C60B7B0081BB37 /* CRScrollMenuItem.m in Sources */,
+				D290281F19CF1F650093AF33 /* CRTabBarItem.m in Sources */,
 				D2981E2E19B8A93E00DD22E2 /* DXEDishDetailView.m in Sources */,
 				D273A3C919C60B7B0081BB37 /* CRScrollMenuButton.m in Sources */,
 				D273A3C819C60B7B0081BB37 /* CRScrollMenu.m in Sources */,

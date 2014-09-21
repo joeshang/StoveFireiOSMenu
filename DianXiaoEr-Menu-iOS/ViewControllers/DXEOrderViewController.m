@@ -7,8 +7,6 @@
 //
 
 #import "DXEOrderViewController.h"
-#import "RDVTabBarItem.h"
-#import "RDVTabBarController.h"
 #import "DXEOrderManager.h"
 #import "DXEOrderCartViewController.h"
 #import "CRScrollMenu.h"
@@ -34,18 +32,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-        [[DXEOrderManager sharedInstance] addObserver:self
-                                           forKeyPath:NSStringFromSelector(@selector(totalCount))
-                                              options:NSKeyValueObservingOptionNew
-                                              context:nil];
     }
     return self;
-}
-
-- (void)dealloc
-{
-    [[DXEOrderManager sharedInstance] removeObserver:self
-                                          forKeyPath:NSStringFromSelector(@selector(totalCount))];
 }
 
 - (void)viewDidLoad
@@ -107,24 +95,6 @@
 - (void)scrollMenu:(CRScrollMenu *)scrollMenu didSelectedAtIndex:(NSUInteger)index
 {
     
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:NSStringFromSelector(@selector(totalCount))])
-    {
-        NSLog(@"%@", change);
-        
-        NSNumber *totalCount = [DXEOrderManager sharedInstance].totalCount;
-        if ([totalCount integerValue] == 0)
-        {
-            self.rdv_tabBarItem.badgeValue = @"";
-        }
-        else
-        {
-            self.rdv_tabBarItem.badgeValue = [totalCount stringValue];
-        }
-    }
 }
 
 @end
