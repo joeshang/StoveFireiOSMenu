@@ -89,7 +89,7 @@
     self.currentViewController.view.frame = CGRectMake(0,
                                                        kDXEOrderScrollMenuHeight,
                                                        CGRectGetWidth(self.view.bounds),
-                                                       CGRectGetWidth(self.view.bounds) - kDXEOrderScrollMenuHeight);
+                                                       CGRectGetHeight(self.view.bounds) - kDXEOrderScrollMenuHeight);
 }
 
 - (void)scrollMenu:(CRScrollMenu *)scrollMenu didSelectedAtIndex:(NSUInteger)index

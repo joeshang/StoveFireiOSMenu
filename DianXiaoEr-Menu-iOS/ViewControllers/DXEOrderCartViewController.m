@@ -15,6 +15,7 @@
 
 @interface DXEOrderCartViewController ()
 
+@property (nonatomic, strong) DXEOrderTitleView *titleView;
 @property (nonatomic, strong) DXEEnsureOrderingView *ensureOrderingView;
 @property (nonatomic, assign) float totalPrice;
 
@@ -38,16 +39,17 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"Order.BackgroundColor"];
+    UIColor *backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"Order.BackgroundColor"];
+    self.view.backgroundColor = backgroundColor;
     
     [self.dishesTableView registerNib:[UINib nibWithNibName:@"DXEOrderDishTableViewCell" bundle:nil]
                forCellReuseIdentifier:@"DXEOrderDishTableViewCell"];
     
-    DXEOrderTitleView *titleView = [[[NSBundle mainBundle] loadNibNamed:@"DXEOrderTitleView"
-                                                            owner:self
-                                                           options:nil] firstObject];
-    titleView.nameTitle.text = @"已点菜品";
-    self.dishesTableView.tableHeaderView = titleView;
+    self.titleView = [[[NSBundle mainBundle] loadNibNamed:@"DXEOrderTitleView"
+                                                    owner:self
+                                                  options:nil] firstObject];
+    self.titleView.backgroundColor = backgroundColor;
+    self.titleView.nameTitle.text = @"已点菜品";
     
     self.ensureOrderingView = [[[NSBundle mainBundle] loadNibNamed:@"DXEEnsureOrderingView"
                                                              owner:self
@@ -105,6 +107,16 @@
     [cell updateCellByDishCount:[item.count integerValue] dishPrice:[item.price floatValue]];
     
     return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 0)
+    {
+        return self.titleView;
+    }
+
+    return nil;
 }
 
 #pragma mark - target-action
