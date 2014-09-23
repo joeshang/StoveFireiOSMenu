@@ -72,10 +72,10 @@
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.BackgroundColor"];
+    self.view.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
     
-    UIColor *normalColor =[[RNThemeManager sharedManager] colorForKey:@"ScrollMenu.NormalTextColor"];
-    UIColor *selectedColor =[[RNThemeManager sharedManager] colorForKey:@"ScrollMenu.SelectedTextColor"];
+    UIColor *normalColor =[[RNThemeManager sharedManager] colorForKey:@"DarkenColor"];
+    UIColor *selectedColor =[[RNThemeManager sharedManager] colorForKey:@"HighlightColor"];
     self.scrollMenuController = [[CRScrollMenuController alloc] init];
     self.scrollMenuController.scrollMenuHeight = kDXEHomePageScrollMenuHeight;
     self.scrollMenuController.scrollMenuBackgroundImage = [[RNThemeManager sharedManager] imageForName:@"scrollmenu_background"];

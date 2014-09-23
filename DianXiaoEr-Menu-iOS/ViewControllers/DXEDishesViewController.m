@@ -45,7 +45,7 @@
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    self.collectionView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.BackgroundColor"];
+    self.collectionView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
     self.collectionView.tag = [self.dishClass.classid intValue];
     self.collectionView.delaysContentTouches = NO;
     

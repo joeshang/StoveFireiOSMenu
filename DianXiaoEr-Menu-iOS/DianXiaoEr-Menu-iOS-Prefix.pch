@@ -15,5 +15,6 @@
     #import <Foundation/Foundation.h>
     #import "UIColor+HexString.h"
     #import "RNThemeManager.h"
+    #import "NSObject+ObjectMap.h"
     #import "DXECommonHeader.h"
 #endif

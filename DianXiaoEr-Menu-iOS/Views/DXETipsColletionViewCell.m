@@ -12,10 +12,10 @@
 
 - (void)awakeFromNib
 {
-    self.layer.cornerRadius = kDXECollectionViewCellRadius;
     self.layer.masksToBounds = YES;
-    self.layer.borderWidth = kDXECollectionViewCellBorderWidth;
-    self.layer.borderColor = [[[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionViewCell.BorderColor"] CGColor];
+    self.layer.cornerRadius = kDXECommonCornerRadius;
+    self.layer.borderWidth = kDXECommonBorderWidth;
+    self.layer.borderColor = [[[RNThemeManager sharedManager] colorForKey:@"BorderColor"] CGColor];
 }
 
 @end

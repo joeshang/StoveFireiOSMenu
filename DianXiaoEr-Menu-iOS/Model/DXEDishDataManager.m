@@ -7,7 +7,6 @@
 //
 
 #import "DXEDishDataManager.h"
-#import "NSObject+ObjectMap.h"
 
 #define DXE_TEST_DISH_DATA
 

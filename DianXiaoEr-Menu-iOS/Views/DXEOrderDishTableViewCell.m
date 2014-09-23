@@ -12,16 +12,17 @@
 
 - (void)awakeFromNib
 {
-    UIColor *nameColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.NameFontColor"];
+    self.contentView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
+    self.backgroundImageView.image = [[RNThemeManager sharedManager] imageForName:@"order_cell_background.png"];
+    
+    UIColor *nameColor = [[RNThemeManager sharedManager] colorForKey:@"HighlightColor"];
     self.dishName.textColor = nameColor;
     self.dishEnglishName.textColor = nameColor;
     self.dishPrice.textColor = nameColor;
-    self.dishTotalPrice.textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.PriceFontColor"];
-    self.dishCount.textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.DishCell.CountFontColor"];
-    
-    self.backgroundImageView.image = [[RNThemeManager sharedManager] imageForName:@"order_cell_background.png"];
-    
-    self.contentView.backgroundColor = [UIColor blackColor];
+
+    UIColor *tintColor = [[RNThemeManager sharedManager] colorForKey:@"NormalColor"];
+    self.dishCount.textColor = tintColor;
+    self.dishTotalPrice.textColor = tintColor;
 }
 
 - (void)updateCellByDishCount:(NSInteger)count dishPrice:(float)price;

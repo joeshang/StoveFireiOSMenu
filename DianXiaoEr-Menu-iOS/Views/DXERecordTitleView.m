@@ -1,21 +1,23 @@
 //
-//  DXEOrderTitleView.m
+//  DXERecordTitleView.m
 //  DianXiaoEr-Menu-iOS
 //
-//  Created by Joe Shang on 9/18/14.
+//  Created by Joe Shang on 9/23/14.
 //  Copyright (c) 2014 Shang Chuanren. All rights reserved.
 //
 
-#import "DXEOrderTitleView.h"
+#import "DXERecordTitleView.h"
 
-@implementation DXEOrderTitleView
+@implementation DXERecordTitleView
 
 - (void)awakeFromNib
 {
     UIColor *titleColor = [[RNThemeManager sharedManager] colorForKey:@"NormalColor"];
-    self.nameTitle.textColor = titleColor;
-    self.countTitle.textColor = titleColor;
-    self.priceTitle.textColor = titleColor;
+    self.recordTitle.textColor = titleColor;
+    self.dateTitle.textColor = titleColor;
+    self.dishCountTitle.textColor = titleColor;
+    self.totalPriceTitle.textColor = titleColor;
+    self.detailTitle.textColor = titleColor;
     
     self.contentView.clipsToBounds = YES;
     self.contentView.layer.cornerRadius = kDXECommonCornerRadius;

@@ -40,10 +40,10 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"Order.BackgroundColor"];
+    self.view.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
     
-    UIColor *normalColor =[[RNThemeManager sharedManager] colorForKey:@"ScrollMenu.NormalTextColor"];
-    UIColor *selectedColor =[[RNThemeManager sharedManager] colorForKey:@"ScrollMenu.SelectedTextColor"];
+    UIColor *normalColor =[[RNThemeManager sharedManager] colorForKey:@"DarkenColor"];
+    UIColor *selectedColor =[[RNThemeManager sharedManager] colorForKey:@"HighlightColor"];
     self.scrollMenu = [[CRScrollMenu alloc] initWithFrame:CGRectMake(0,
                                                                      0,
                                                                      CGRectGetWidth(self.view.bounds),

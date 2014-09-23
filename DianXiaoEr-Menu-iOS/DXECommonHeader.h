@@ -18,15 +18,7 @@
 #define kDXEScrollMenuTitleFontSize                 20
 #define kDXEScrollMenuSubtitleFontSize              9
 
-#define kDXECollectionViewCellRadius                5
-#define kDXECollectionViewCellBorderWidth           1
-#define kDXEDishDetailViewRadius                    15
-#define kDXEDishDetailViewBorderWidth               1
-
-#define kDXEOrderTitleViewRadius                    5
-#define kDXEOrderTitleViewBorderWidth               1
-
-#define kDXEDishItemCountInCartMin                  1
-#define kDXEDishItemCountInCartMax                  99
+#define kDXECommonCornerRadius                      5
+#define kDXECommonBorderWidth                       1
 
 #endif

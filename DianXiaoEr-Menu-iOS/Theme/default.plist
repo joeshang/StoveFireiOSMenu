@@ -2,39 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>HighlightColor</key>
+	<string>DEB96C</string>
+	<key>DarkenColor</key>
+	<string>727171</string>
+	<key>NormalColor</key>
+	<string>FFFFFF</string>
+	<key>BackgroundColor</key>
+	<string>000000</string>
+	<key>BorderColor</key>
+	<string>646464</string>
 	<key>Main.TabBar.SelectedTextColor</key>
 	<string>A3813D</string>
 	<key>Main.TabBar.NormalTextColor</key>
 	<string>939393</string>
 	<key>Main.TabBar.BadgeTextFontColor</key>
 	<string>FFFFFF</string>
-	<key>Main.TabBar.BackgroundColor</key>
-	<string>222A2D</string>
-	<key>ScrollMenu.SelectedTextColor</key>
-	<string>DEB96C</string>
-	<key>ScrollMenu.NormalTextColor</key>
-	<string>727171</string>
-	<key>HomePage.BackgroundColor</key>
-	<string>000000</string>
-	<key>HomePage.CollectionViewCell.BackgroundColor</key>
-	<string>000000</string>
-	<key>HomePage.CollectionViewCell.BorderColor</key>
-	<string>646464</string>
-	<key>HomePage.CollectionViewCell.TintColor</key>
-	<string>727171</string>
-	<key>Order.BackgroundColor</key>
-	<string>000000</string>
-	<key>Order.TitleView.BorderColor</key>
-	<string>646464</string>
-	<key>Order.TitleView.TitleFontColor</key>
-	<string>FFFFFF</string>
-	<key>Order.DishCell.NameFontColor</key>
-	<string>DEB96C</string>
-	<key>Order.DishCell.PriceFontColor</key>
-	<string>FFFFFF</string>
-	<key>Order.DishCell.CountFontColor</key>
-	<string>FFFFFF</string>
 	<key>Order.EnsureOrdering.FontColor</key>
 	<string>E9A83D</string>
+	<key>Myself.RecordCell.BackgroundColor</key>
+	<string>1B1B1B</string>
 </dict>
 </plist>

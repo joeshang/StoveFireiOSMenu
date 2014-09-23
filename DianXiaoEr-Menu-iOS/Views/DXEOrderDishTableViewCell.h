@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#define kDXEDishItemCountInCartMin                  1
+#define kDXEDishItemCountInCartMax                  99
+
 @interface DXEOrderDishTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;

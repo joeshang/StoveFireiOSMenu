@@ -15,13 +15,18 @@
 #import "DXEOrderViewController.h"
 #import "DXEMyselfViewController.h"
 #import "DXEOrderManager.h"
-#import "DXEOpenViewController.h"
+#import "DXEMember.h"
+#import "DXEDiningRecord.h"
+#import "DXERecordDishItem.h"
+
+#define DXE_TEST_MEMBER
 
 #define kDXEQrCodeButtonOriginX         660
 #define kDXEQrCodeButtonOriginY         25
 #define kDXETabBarTitleFontSize         12
 #define kDXEOrderBadgeFontSize          13
 #define kDXEOrderViewControllerIndex    3
+#define kDXEMemberViewControllerIndex   4
 
 @interface DXEMainViewController () < CRTabBarDelegate >
 
@@ -165,6 +170,14 @@
 
 - (BOOL)tabBar:(CRTabBar *)tabBar shouldSelecteItemAtIndex:(NSInteger)index
 {
+    if (index == kDXEMemberViewControllerIndex)
+    {
+        DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:kDXEMemberViewControllerIndex];
+        if (!myself.login)
+        {
+            return NO;
+        }
+    }
     return YES;
 }
 
@@ -190,8 +203,9 @@
 
 - (void)onQRcodeButtonClicked:(id)sender
 {
-    DXEOpenViewController *open = [[DXEOpenViewController alloc] init];
-    [[UIApplication sharedApplication] keyWindow].rootViewController = open;
+    DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:kDXEMemberViewControllerIndex];
+    myself.member = [[DXEMember alloc] initWithJSONData:[self testMemberData]];
+    myself.login = YES;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -212,5 +226,57 @@
         }
     }
 }
+
+#ifdef DXE_TEST_MEMBER
+
+- (NSData *)testMemberData
+{
+    DXEMember *member = [[DXEMember alloc] init];
+    NSMutableArray *records = [NSMutableArray arrayWithCapacity:6];
+    
+    for (int i = 0; i < 6; i++)
+    {
+        DXEDiningRecord *record = [[DXEDiningRecord alloc] init];
+        
+        NSMutableArray *items = [NSMutableArray arrayWithCapacity:i + 1];
+        int totalPrice = 0;
+        int totalCount = 0;
+        
+        for (int j = 0; j < i + 1; j++)
+        {
+            int price = 20 + arc4random() % 100;
+            int count = arc4random() % 2 + 1;
+            
+            DXERecordDishItem *item = [[DXERecordDishItem alloc] init];
+            item.name = @"菜品名称";
+            item.englishName = @"DISH ENGLISH NAME";
+            item.price = [NSNumber numberWithFloat:price];
+            item.count = [NSNumber numberWithInt:count];
+            
+            totalPrice += price;
+            totalCount += count;
+            [items addObject:item];
+        }
+        
+        record.dishCount = [NSNumber numberWithInt:totalCount];
+        record.totalPrice = [NSNumber numberWithFloat:totalPrice];
+        record.dishes = [items copy];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"YYYY.MM.dd   hh:mm";
+        record.date = [formatter stringFromDate:[NSDate date]];
+        
+        [records addObject:record];
+    }
+    
+    member.memberid = [NSNumber numberWithInt:0];
+    member.memberName = @"Joe Shang";
+    member.memberPhone = @"157****0922";
+    member.memberAccount = [NSNumber numberWithFloat:arc4random() % 20000];
+    member.records = records;
+    
+    return [member JSONData];
+}
+
+#endif
 
 @end

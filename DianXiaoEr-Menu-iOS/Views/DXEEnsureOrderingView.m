@@ -16,9 +16,10 @@
     self.totalPrice.textColor = fontColor;
     self.totalPriceTitle.textColor = fontColor;
     
-    self.priceView.layer.cornerRadius = kDXEOrderTitleViewRadius;
-    self.priceView.layer.borderWidth = kDXEOrderTitleViewBorderWidth;
-    self.priceView.layer.borderColor = [[[RNThemeManager sharedManager] colorForKey:@"Order.TitleView.BorderColor"] CGColor];;
+    self.priceView.clipsToBounds = YES;
+    self.priceView.layer.cornerRadius = kDXECommonCornerRadius;
+    self.priceView.layer.borderWidth = kDXECommonBorderWidth;
+    self.priceView.layer.borderColor = [[[RNThemeManager sharedManager] colorForKey:@"BorderColor"] CGColor];;
 }
 
 @end

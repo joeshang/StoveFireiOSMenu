@@ -39,8 +39,7 @@
 {
     [super viewDidLoad];
     
-    UIColor *backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"Order.BackgroundColor"];
-    self.view.backgroundColor = backgroundColor;
+    self.view.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
     
     [self.dishesTableView registerNib:[UINib nibWithNibName:@"DXEOrderDishTableViewCell" bundle:nil]
                forCellReuseIdentifier:@"DXEOrderDishTableViewCell"];
@@ -48,7 +47,6 @@
     self.titleView = [[[NSBundle mainBundle] loadNibNamed:@"DXEOrderTitleView"
                                                     owner:self
                                                   options:nil] firstObject];
-    self.titleView.backgroundColor = backgroundColor;
     self.titleView.nameTitle.text = @"已点菜品";
     
     self.ensureOrderingView = [[[NSBundle mainBundle] loadNibNamed:@"DXEEnsureOrderingView"

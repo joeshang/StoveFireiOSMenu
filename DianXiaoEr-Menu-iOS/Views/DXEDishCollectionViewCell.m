@@ -15,13 +15,13 @@
 
 - (void)awakeFromNib
 {
-    self.layer.cornerRadius = kDXECollectionViewCellRadius;
     self.layer.masksToBounds = YES;
-    self.layer.borderWidth = kDXECollectionViewCellBorderWidth;
-    self.layer.borderColor = [[[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionViewCell.BorderColor"] CGColor];
+    self.layer.cornerRadius = kDXECommonCornerRadius;
+    self.layer.borderWidth = kDXECommonBorderWidth;
+    self.layer.borderColor = [[[RNThemeManager sharedManager] colorForKey:@"BorderColor"] CGColor];
     
-    self.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionViewCell.BackgroundColor"];
-    UIColor *tintColor = [[RNThemeManager sharedManager] colorForKey:@"HomePage.CollectionViewCell.TintColor"];
+    self.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
+    UIColor *tintColor = [[RNThemeManager sharedManager] colorForKey:@"DarkenColor"];
     self.dishName.textColor = tintColor;
     self.dishEnglishName.textColor = tintColor;
     self.dishPrice.textColor = tintColor;
