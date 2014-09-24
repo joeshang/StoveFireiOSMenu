@@ -14,7 +14,7 @@
 {
     self.contentView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
     self.backgroundImageView.image = [[RNThemeManager sharedManager] imageForName:@"myself_record_cell_background.png"];
-    self.backgroundImageView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"Myself.RecordCell.BackgroundColor"];
+    self.backgroundImageView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"Cell.BackgroundColor"];
     
     self.brand.image = [[RNThemeManager sharedManager] imageForName:@"myself_record_brand.png"];
     

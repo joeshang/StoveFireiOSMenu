@@ -20,7 +20,7 @@
 	<string>FFFFFF</string>
 	<key>Order.EnsureOrdering.FontColor</key>
 	<string>E9A83D</string>
-	<key>Myself.RecordCell.BackgroundColor</key>
+	<key>Cell.BackgroundColor</key>
 	<string>1B1B1B</string>
 </dict>
 </plist>

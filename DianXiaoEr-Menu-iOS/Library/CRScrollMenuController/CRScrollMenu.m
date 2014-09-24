@@ -322,4 +322,9 @@
     _backgroundImageView.image = backgroundImage;
 }
 
+- (NSUInteger)currentIndex
+{
+    return _currentIndex;
+}
+
 @end

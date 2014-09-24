@@ -14,24 +14,16 @@
 
 @property (nonatomic, strong) NSNumber *totalCount;
 @property (nonatomic, strong) NSMutableArray *cartList;
-@property (nonatomic, strong) NSMutableArray *todoList;
-@property (nonatomic, strong) NSMutableArray *doingList;
-@property (nonatomic, strong) NSMutableArray *doneList;
+@property (nonatomic, strong) NSMutableArray *orderList;
 
 + (DXEOrderManager *)sharedInstance;
 
 - (NSMutableArray *)cart;
-- (NSMutableArray *)todo;
-- (NSMutableArray *)doing;
-- (NSMutableArray *)done;
+- (NSMutableArray *)order;
 
 - (void)insertObject:(DXEDishItem *)object inCartListAtIndex:(NSUInteger)index;
 - (void)removeObjectFromCartListAtIndex:(NSUInteger)index;
-- (void)insertObject:(DXEDishItem *)object inTodoListAtIndex:(NSUInteger)index;
-- (void)removeObjectFromTodoListAtIndex:(NSUInteger)index;
-- (void)insertObject:(DXEDishItem *)object inDoingListAtIndex:(NSUInteger)index;
-- (void)removeObjectFromDoingListAtIndex:(NSUInteger)index;
-- (void)insertObject:(DXEDishItem *)object inDoneListAtIndex:(NSUInteger)index;
-- (void)removeObjectFromDoneListAtIndex:(NSUInteger)index;
+- (void)insertObject:(DXEDishItem *)object inOrderListAtIndex:(NSUInteger)index;
+- (void)removeObjectFromOrderListAtIndex:(NSUInteger)index;
 
 @end

@@ -25,9 +25,7 @@
         
         sharedManager.totalCount = 0;
         sharedManager.cartList = [[NSMutableArray alloc] init];
-        sharedManager.todoList = [[NSMutableArray alloc] init];
-        sharedManager.doingList = [[NSMutableArray alloc] init];
-        sharedManager.doneList = [[NSMutableArray alloc] init];
+        sharedManager.orderList = [[NSMutableArray alloc] init];
     }
     
     return sharedManager;
@@ -45,19 +43,9 @@
     return [self mutableArrayValueForKey:@"cartList"];
 }
 
-- (NSMutableArray *)todo
+- (NSMutableArray *)order
 {
-    return [self mutableArrayValueForKey:@"todoList"];
-}
-
-- (NSMutableArray *)doing
-{
-    return [self mutableArrayValueForKey:@"doingList"];
-}
-
-- (NSMutableArray *)done
-{
-    return [self mutableArrayValueForKey:@"doneList"];
+    return [self mutableArrayValueForKey:@"orderList"];
 }
 
 #pragma mark - KVC
@@ -84,35 +72,14 @@
     [self.cartList removeObjectAtIndex:index];
 }
 
-- (void)insertObject:(DXEDishItem *)object inTodoListAtIndex:(NSUInteger)index
+- (void)insertObject:(DXEDishItem *)object inOrderListAtIndex:(NSUInteger)index
 {
-    self.totalCount = [NSNumber numberWithInteger:[self.totalCount integerValue] + [object.count integerValue]];
-    [self.todoList insertObject:object atIndex:index];
+    [self.orderList insertObject:object atIndex:index];
 }
 
-- (void)removeObjectFromTodoListAtIndex:(NSUInteger)index
+- (void)removeObjectFromOrderListAtIndex:(NSUInteger)index
 {
-    [self.todoList removeObjectAtIndex:index];
-}
-
-- (void)insertObject:(DXEDishItem *)object inDoingListAtIndex:(NSUInteger)index
-{
-    [self.doingList insertObject:object atIndex:index];
-}
-
-- (void)removeObjectFromDoingListAtIndex:(NSUInteger)index
-{
-    [self.doingList removeObjectAtIndex:index];
-}
-
-- (void)insertObject:(DXEDishItem *)object inDoneListAtIndex:(NSUInteger)index
-{
-    [self.doneList insertObject:object atIndex:index];
-}
-
-- (void)removeObjectFromDoneListAtIndex:(NSUInteger)index
-{
-    [self.doneList removeObjectAtIndex:index];
+    [self.orderList removeObjectAtIndex:index];
 }
 
 #pragma mark - Notification
@@ -126,9 +93,7 @@
     {
         int totalCount = 0;
         totalCount += [[self valueForKeyPath:@"cartList.@sum.count"] intValue];
-        totalCount += [[self valueForKeyPath:@"todoList.@sum.count"] intValue];
-        totalCount += [[self valueForKeyPath:@"doingList.@sum.count"] intValue];
-        totalCount += [[self valueForKeyPath:@"doneList.@sum.count"] intValue];
+        totalCount += [[self valueForKeyPath:@"orderList.@sum.count"] intValue];
         self.totalCount = [NSNumber numberWithInt:totalCount];
     }
 }

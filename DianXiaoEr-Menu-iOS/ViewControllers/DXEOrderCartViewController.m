@@ -160,7 +160,7 @@
     for (DXEDishItem *item in [DXEOrderManager sharedInstance].cart)
     {
         DXEDishItem *orderedItem = [item copy];
-        [[DXEOrderManager sharedInstance].todo addObject:orderedItem];
+        [[DXEOrderManager sharedInstance].order addObject:orderedItem];
     }
     [[DXEOrderManager sharedInstance].cart removeAllObjects];
     self.totalPrice = 0.0;

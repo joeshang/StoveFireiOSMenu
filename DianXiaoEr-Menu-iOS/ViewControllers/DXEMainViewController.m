@@ -25,8 +25,15 @@
 #define kDXEQrCodeButtonOriginY         25
 #define kDXETabBarTitleFontSize         12
 #define kDXEOrderBadgeFontSize          13
-#define kDXEOrderViewControllerIndex    3
-#define kDXEMemberViewControllerIndex   4
+
+typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
+{
+    DXEMainChildViewControllerIndexHomepage,
+    DXEMainChildViewControllerIndexOrigin,
+    DXEMainChildViewControllerIndexQuestionnaire,
+    DXEMainChildViewControllerIndexOrder,
+    DXEMainChildViewControllerIndexMyself
+};
 
 @interface DXEMainViewController () < CRTabBarDelegate >
 
@@ -43,12 +50,17 @@
                                            forKeyPath:NSStringFromSelector(@selector(totalCount))
                                               options:NSKeyValueObservingOptionNew
                                               context:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onMoveToHomepage:)
+                                                     name:@"MoveToHomepage"
+                                                   object:nil];
     }
     return self;
 }
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[DXEOrderManager sharedInstance] removeObserver:self
                                           forKeyPath:NSStringFromSelector(@selector(totalCount))];
 }
@@ -106,7 +118,7 @@
         item.normalTitleAttributes = normalTextAttributes;
         item.selectedTitleAttributes = selectedTextAttributes;
         
-        if (index == kDXEOrderViewControllerIndex)
+        if (index == DXEMainChildViewControllerIndexOrder)
         {
             item.badgeTextFont = [UIFont systemFontOfSize:kDXEOrderBadgeFontSize];
             item.badgeTextColor = [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.BadgeTextFontColor"];
@@ -170,9 +182,9 @@
 
 - (BOOL)tabBar:(CRTabBar *)tabBar shouldSelecteItemAtIndex:(NSInteger)index
 {
-    if (index == kDXEMemberViewControllerIndex)
+    if (index == DXEMainChildViewControllerIndexMyself)
     {
-        DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:kDXEMemberViewControllerIndex];
+        DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexMyself];
         if (!myself.login)
         {
             return NO;
@@ -182,6 +194,11 @@
 }
 
 - (void)tabBar:(CRTabBar *)tabBar didSelectItemAtIndex:(NSInteger)index
+{
+    [self moveToChildViewControllerAtIndex:index];
+}
+
+- (void)moveToChildViewControllerAtIndex:(NSInteger)index
 {
     UIViewController *newSelectedViewController = [self.contentViewControllers objectAtIndex:index];
     if (newSelectedViewController == self.selectedViewController)
@@ -203,9 +220,15 @@
 
 - (void)onQRcodeButtonClicked:(id)sender
 {
-    DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:kDXEMemberViewControllerIndex];
+    DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexMyself];
     myself.member = [[DXEMember alloc] initWithJSONData:[self testMemberData]];
     myself.login = YES;
+}
+
+- (void)onMoveToHomepage:(NSNotification *)notification
+{
+    [self.tabBar setItemSelectedAtIndex:DXEMainChildViewControllerIndexHomepage];
+    [self moveToChildViewControllerAtIndex:DXEMainChildViewControllerIndexHomepage];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -215,7 +238,7 @@
         NSLog(@"%@", change);
         
         NSNumber *totalCount = [DXEOrderManager sharedInstance].totalCount;
-        CRTabBarItem *item = [self.tabBar.items objectAtIndex:kDXEOrderViewControllerIndex];
+        CRTabBarItem *item = [self.tabBar.items objectAtIndex:DXEMainChildViewControllerIndexOrder];
         if ([totalCount integerValue] == 0)
         {
             item.badgeValue = @"";
