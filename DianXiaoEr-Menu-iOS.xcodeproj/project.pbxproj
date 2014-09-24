@@ -90,6 +90,12 @@
 		D290286919D33BA60093AF33 /* DXEOrderProgressTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D290286819D33BA60093AF33 /* DXEOrderProgressTitleView.xib */; };
 		D290286B19D351C70093AF33 /* DXEOriginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D290286A19D351C70093AF33 /* DXEOriginViewController.m */; };
 		D290286F19D3539B0093AF33 /* origin_content@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D290286E19D3539B0093AF33 /* origin_content@2x.png */; };
+		D290287219D35A860093AF33 /* DXEMemberLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = D290287119D35A860093AF33 /* DXEMemberLoginView.m */; };
+		D290287419D35A9D0093AF33 /* DXEMemberLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D290287319D35A9D0093AF33 /* DXEMemberLoginView.xib */; };
+		D290287919D35B700093AF33 /* member_login_brand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D290287519D35B700093AF33 /* member_login_brand@2x.png */; };
+		D290287A19D35B700093AF33 /* member_login_close_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D290287619D35B700093AF33 /* member_login_close_button@2x.png */; };
+		D290287B19D35B700093AF33 /* member_login_password_icon@2x.png.png in Resources */ = {isa = PBXBuildFile; fileRef = D290287719D35B700093AF33 /* member_login_password_icon@2x.png.png */; };
+		D290287C19D35B700093AF33 /* member_login_user_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D290287819D35B700093AF33 /* member_login_user_icon@2x.png */; };
 		D2981E2219B85AA900DD22E2 /* test_dish_class@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2019B85AA900DD22E2 /* test_dish_class@2x.png */; };
 		D2981E2E19B8A93E00DD22E2 /* DXEDishDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2981E2D19B8A93E00DD22E2 /* DXEDishDetailView.m */; };
 		D2981E3019B8A96400DD22E2 /* DXEDishDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2F19B8A96400DD22E2 /* DXEDishDetailView.xib */; };
@@ -233,6 +239,13 @@
 		D290286819D33BA60093AF33 /* DXEOrderProgressTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOrderProgressTitleView.xib; path = Views/DXEOrderProgressTitleView.xib; sourceTree = "<group>"; };
 		D290286A19D351C70093AF33 /* DXEOriginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXEOriginViewController.m; sourceTree = "<group>"; };
 		D290286E19D3539B0093AF33 /* origin_content@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "origin_content@2x.png"; sourceTree = "<group>"; };
+		D290287019D35A860093AF33 /* DXEMemberLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEMemberLoginView.h; path = Views/DXEMemberLoginView.h; sourceTree = "<group>"; };
+		D290287119D35A860093AF33 /* DXEMemberLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEMemberLoginView.m; path = Views/DXEMemberLoginView.m; sourceTree = "<group>"; };
+		D290287319D35A9D0093AF33 /* DXEMemberLoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEMemberLoginView.xib; path = Views/DXEMemberLoginView.xib; sourceTree = "<group>"; };
+		D290287519D35B700093AF33 /* member_login_brand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "member_login_brand@2x.png"; sourceTree = "<group>"; };
+		D290287619D35B700093AF33 /* member_login_close_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "member_login_close_button@2x.png"; sourceTree = "<group>"; };
+		D290287719D35B700093AF33 /* member_login_password_icon@2x.png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "member_login_password_icon@2x.png.png"; sourceTree = "<group>"; };
+		D290287819D35B700093AF33 /* member_login_user_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "member_login_user_icon@2x.png"; sourceTree = "<group>"; };
 		D2981E2019B85AA900DD22E2 /* test_dish_class@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test_dish_class@2x.png"; sourceTree = "<group>"; };
 		D2981E2C19B8A93E00DD22E2 /* DXEDishDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEDishDetailView.h; path = Views/DXEDishDetailView.h; sourceTree = "<group>"; };
 		D2981E2D19B8A93E00DD22E2 /* DXEDishDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEDishDetailView.m; path = Views/DXEDishDetailView.m; sourceTree = "<group>"; };
@@ -345,6 +358,10 @@
 				D273A47119CAC6160081BB37 /* order_ensure_ordering_button@2x.png */,
 				D290283819D1728A0093AF33 /* myself_record_detail_button@2x.png */,
 				D290283419D169810093AF33 /* myself_avatar_background@2x.png */,
+				D290287519D35B700093AF33 /* member_login_brand@2x.png */,
+				D290287619D35B700093AF33 /* member_login_close_button@2x.png */,
+				D290287719D35B700093AF33 /* member_login_password_icon@2x.png.png */,
+				D290287819D35B700093AF33 /* member_login_user_icon@2x.png */,
 				D2981E2019B85AA900DD22E2 /* test_dish_class@2x.png */,
 				D2981E3B19BF08A000DD22E2 /* test_dish_item@2x.png */,
 			);
@@ -601,6 +618,9 @@
 				D290282319D0784D0093AF33 /* DXERecordTableViewCell.h */,
 				D290282419D0784D0093AF33 /* DXERecordTableViewCell.m */,
 				D290282519D0784D0093AF33 /* DXERecordTableViewCell.xib */,
+				D290287019D35A860093AF33 /* DXEMemberLoginView.h */,
+				D290287119D35A860093AF33 /* DXEMemberLoginView.m */,
+				D290287319D35A9D0093AF33 /* DXEMemberLoginView.xib */,
 			);
 			name = Myself;
 			sourceTree = "<group>";
@@ -700,16 +720,20 @@
 				D2981E3019B8A96400DD22E2 /* DXEDishDetailView.xib in Resources */,
 				D290285B19D2C97C0093AF33 /* order_empty_cart_not_ordered@2x.png in Resources */,
 				D273A47519CAC6160081BB37 /* order_cell_increase_disable_button@2x.png in Resources */,
+				D290287B19D35B700093AF33 /* member_login_password_icon@2x.png.png in Resources */,
 				D290285219D1D7EE0093AF33 /* DXEOrderProgressViewController.xib in Resources */,
+				D290287C19D35B700093AF33 /* member_login_user_icon@2x.png in Resources */,
 				D2981E3C19BF08A000DD22E2 /* test_dish_item@2x.png in Resources */,
 				D273A45119C983970081BB37 /* DXEOrderCartViewController.xib in Resources */,
 				D290283919D1728A0093AF33 /* myself_record_detail_button@2x.png in Resources */,
 				D273A3DD19C73CDE0081BB37 /* dish_cell_favor_hollow_icon@2x.png in Resources */,
 				D290282719D0784D0093AF33 /* DXERecordTableViewCell.xib in Resources */,
+				D290287419D35A9D0093AF33 /* DXEMemberLoginView.xib in Resources */,
 				D273A46619C9D4DF0081BB37 /* DXEEnsureOrderingView.xib in Resources */,
 				D290283519D169810093AF33 /* myself_avatar_background@2x.png in Resources */,
 				D207123A1974D7F500E34770 /* DXEMyselfViewController.xib in Resources */,
 				D20712261974D7AC00E34770 /* DXEOriginViewController.xib in Resources */,
+				D290287919D35B700093AF33 /* member_login_brand@2x.png in Resources */,
 				D273A44219C885A10081BB37 /* dish_cell_add2cart_button.png in Resources */,
 				D26026F71999F2DF004D6579 /* DXEOpenViewController.xib in Resources */,
 				D273A44319C885A10081BB37 /* dish_cell_add2cart_pressed_button.png in Resources */,
@@ -720,6 +744,7 @@
 				D290286F19D3539B0093AF33 /* origin_content@2x.png in Resources */,
 				D290286919D33BA60093AF33 /* DXEOrderProgressTitleView.xib in Resources */,
 				D204928F198D4ED400D8187E /* DXETipsCollectionViewCell.xib in Resources */,
+				D290287A19D35B700093AF33 /* member_login_close_button@2x.png in Resources */,
 				D22BE19E1972747000A438D2 /* InfoPlist.strings in Resources */,
 				D2049291198D4EEC00D8187E /* DXEDishCollectionViewCell.xib in Resources */,
 				D22BE1A61972747000A438D2 /* Images.xcassets in Resources */,
@@ -816,6 +841,7 @@
 				D290282E19D089ED0093AF33 /* DXERecordDishItem.m in Sources */,
 				D290286719D33B460093AF33 /* DXEOrderProgressTitleView.m in Sources */,
 				D290282219D06B390093AF33 /* DXEMember.m in Sources */,
+				D290287219D35A860093AF33 /* DXEMemberLoginView.m in Sources */,
 				D273A45E19C98D0E0081BB37 /* DXEOrderCartTableViewCell.m in Sources */,
 				D273A46419C9D48C0081BB37 /* DXEEnsureOrderingView.m in Sources */,
 				D207122A1974D7BE00E34770 /* DXEQuestionnaireViewController.m in Sources */,

@@ -123,6 +123,7 @@
     if ([member.records count] == 0)
     {
         self.recordEmptyTips.hidden = NO;
+        self.recordEmptyTips.image = [[RNThemeManager sharedManager] imageForName:@"myself_record_empty_flag.png"];
     }
     
     [self.recordTableView reloadData];

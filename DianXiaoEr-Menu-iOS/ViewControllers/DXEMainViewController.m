@@ -9,6 +9,7 @@
 #import "DXEMainViewController.h"
 #import "CRTabBar.h"
 #import "CRTabBarItem.h"
+#import "CRModal.h"
 #import "DXEHomePageViewController.h"
 #import "DXEOriginViewController.h"
 #import "DXEQuestionnaireViewController.h"
@@ -18,6 +19,7 @@
 #import "DXEMember.h"
 #import "DXEDiningRecord.h"
 #import "DXERecordDishItem.h"
+#import "DXEMemberLoginView.h"
 
 #define DXE_TEST_MEMBER
 
@@ -187,6 +189,16 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
         DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexMyself];
         if (!myself.login)
         {
+            NSString *nibName = NSStringFromClass([DXEMemberLoginView class]);
+            DXEMemberLoginView *loginView = [[[NSBundle mainBundle] loadNibNamed:nibName
+                                                                          owner:self
+                                                                         options:nil] firstObject];
+            [CRModal showModalView:loginView
+                       coverOption:CRModalOptionCoverDark
+               tapOutsideToDismiss:NO
+                          animated:YES
+                        completion:nil];
+            
             return NO;
         }
     }
@@ -220,9 +232,20 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
 
 - (void)onQRcodeButtonClicked:(id)sender
 {
+    
+}
+
+- (IBAction)onMemberLoginViewCloseButtonClicked:(id)sender
+{
+    [CRModal dismiss];
+}
+
+- (IBAction)onMemberLoginViewLoginButtonClicked:(id)sender
+{
     DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexMyself];
     myself.member = [[DXEMember alloc] initWithJSONData:[self testMemberData]];
     myself.login = YES;
+    [CRModal dismiss];
 }
 
 - (void)onMoveToHomepage:(NSNotification *)notification
