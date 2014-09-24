@@ -55,12 +55,12 @@
 		D273A44719C8A2750081BB37 /* DXEOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A44619C8A2750081BB37 /* DXEOrderManager.m */; };
 		D273A45019C983970081BB37 /* DXEOrderCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A44E19C983970081BB37 /* DXEOrderCartViewController.m */; };
 		D273A45119C983970081BB37 /* DXEOrderCartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D273A44F19C983970081BB37 /* DXEOrderCartViewController.xib */; };
-		D273A45E19C98D0E0081BB37 /* DXEOrderDishTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A45C19C98D0E0081BB37 /* DXEOrderDishTableViewCell.m */; };
-		D273A45F19C98D0E0081BB37 /* DXEOrderDishTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D273A45D19C98D0E0081BB37 /* DXEOrderDishTableViewCell.xib */; };
+		D273A45E19C98D0E0081BB37 /* DXEOrderCartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A45C19C98D0E0081BB37 /* DXEOrderCartTableViewCell.m */; };
+		D273A45F19C98D0E0081BB37 /* DXEOrderCartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D273A45D19C98D0E0081BB37 /* DXEOrderCartTableViewCell.xib */; };
 		D273A46419C9D48C0081BB37 /* DXEEnsureOrderingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A46319C9D48C0081BB37 /* DXEEnsureOrderingView.m */; };
 		D273A46619C9D4DF0081BB37 /* DXEEnsureOrderingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D273A46519C9D4DF0081BB37 /* DXEEnsureOrderingView.xib */; };
-		D273A46919CA96EA0081BB37 /* DXEOrderTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A46819CA96EA0081BB37 /* DXEOrderTitleView.m */; };
-		D273A46B19CA97FB0081BB37 /* DXEOrderTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D273A46A19CA97FB0081BB37 /* DXEOrderTitleView.xib */; };
+		D273A46919CA96EA0081BB37 /* DXEOrderCartTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A46819CA96EA0081BB37 /* DXEOrderCartTitleView.m */; };
+		D273A46B19CA97FB0081BB37 /* DXEOrderCartTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D273A46A19CA97FB0081BB37 /* DXEOrderCartTitleView.xib */; };
 		D273A47219CAC6160081BB37 /* order_cell_count_underline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D273A46C19CAC6160081BB37 /* order_cell_count_underline@2x.png */; };
 		D273A47319CAC6160081BB37 /* order_cell_decrease_disable_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D273A46D19CAC6160081BB37 /* order_cell_decrease_disable_button@2x.png */; };
 		D273A47419CAC6160081BB37 /* order_cell_decrease_normal_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D273A46E19CAC6160081BB37 /* order_cell_decrease_normal_button@2x.png */; };
@@ -85,6 +85,10 @@
 		D290285B19D2C97C0093AF33 /* order_empty_cart_not_ordered@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D290285819D2C97C0093AF33 /* order_empty_cart_not_ordered@2x.png */; };
 		D290285D19D2C97C0093AF33 /* order_empty_gotohomepage_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D290285A19D2C97C0093AF33 /* order_empty_gotohomepage_button@2x.png */; };
 		D290285F19D2CD000093AF33 /* order_empty_cart_ordered@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D290285E19D2CD000093AF33 /* order_empty_cart_ordered@2x.png */; };
+		D290286319D2D42A0093AF33 /* DXEOrderProgressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D290286119D2D42A0093AF33 /* DXEOrderProgressTableViewCell.m */; };
+		D290286419D2D42A0093AF33 /* DXEOrderProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D290286219D2D42A0093AF33 /* DXEOrderProgressTableViewCell.xib */; };
+		D290286719D33B460093AF33 /* DXEOrderProgressTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = D290286619D33B460093AF33 /* DXEOrderProgressTitleView.m */; };
+		D290286919D33BA60093AF33 /* DXEOrderProgressTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D290286819D33BA60093AF33 /* DXEOrderProgressTitleView.xib */; };
 		D2981E2219B85AA900DD22E2 /* test_dish_class@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2019B85AA900DD22E2 /* test_dish_class@2x.png */; };
 		D2981E2E19B8A93E00DD22E2 /* DXEDishDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2981E2D19B8A93E00DD22E2 /* DXEDishDetailView.m */; };
 		D2981E3019B8A96400DD22E2 /* DXEDishDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2F19B8A96400DD22E2 /* DXEDishDetailView.xib */; };
@@ -179,15 +183,15 @@
 		D273A44D19C983970081BB37 /* DXEOrderCartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEOrderCartViewController.h; path = ViewControllers/DXEOrderCartViewController.h; sourceTree = "<group>"; };
 		D273A44E19C983970081BB37 /* DXEOrderCartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEOrderCartViewController.m; path = ViewControllers/DXEOrderCartViewController.m; sourceTree = "<group>"; };
 		D273A44F19C983970081BB37 /* DXEOrderCartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOrderCartViewController.xib; path = ViewControllers/DXEOrderCartViewController.xib; sourceTree = "<group>"; };
-		D273A45B19C98D0E0081BB37 /* DXEOrderDishTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEOrderDishTableViewCell.h; path = Views/DXEOrderDishTableViewCell.h; sourceTree = "<group>"; };
-		D273A45C19C98D0E0081BB37 /* DXEOrderDishTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEOrderDishTableViewCell.m; path = Views/DXEOrderDishTableViewCell.m; sourceTree = "<group>"; };
-		D273A45D19C98D0E0081BB37 /* DXEOrderDishTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOrderDishTableViewCell.xib; path = Views/DXEOrderDishTableViewCell.xib; sourceTree = "<group>"; };
+		D273A45B19C98D0E0081BB37 /* DXEOrderCartTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEOrderCartTableViewCell.h; path = Views/DXEOrderCartTableViewCell.h; sourceTree = "<group>"; };
+		D273A45C19C98D0E0081BB37 /* DXEOrderCartTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEOrderCartTableViewCell.m; path = Views/DXEOrderCartTableViewCell.m; sourceTree = "<group>"; };
+		D273A45D19C98D0E0081BB37 /* DXEOrderCartTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOrderCartTableViewCell.xib; path = Views/DXEOrderCartTableViewCell.xib; sourceTree = "<group>"; };
 		D273A46219C9D48C0081BB37 /* DXEEnsureOrderingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEEnsureOrderingView.h; path = Views/DXEEnsureOrderingView.h; sourceTree = "<group>"; };
 		D273A46319C9D48C0081BB37 /* DXEEnsureOrderingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEEnsureOrderingView.m; path = Views/DXEEnsureOrderingView.m; sourceTree = "<group>"; };
 		D273A46519C9D4DF0081BB37 /* DXEEnsureOrderingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEEnsureOrderingView.xib; path = Views/DXEEnsureOrderingView.xib; sourceTree = "<group>"; };
-		D273A46719CA96EA0081BB37 /* DXEOrderTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEOrderTitleView.h; path = Views/DXEOrderTitleView.h; sourceTree = "<group>"; };
-		D273A46819CA96EA0081BB37 /* DXEOrderTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEOrderTitleView.m; path = Views/DXEOrderTitleView.m; sourceTree = "<group>"; };
-		D273A46A19CA97FB0081BB37 /* DXEOrderTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOrderTitleView.xib; path = Views/DXEOrderTitleView.xib; sourceTree = "<group>"; };
+		D273A46719CA96EA0081BB37 /* DXEOrderCartTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEOrderCartTitleView.h; path = Views/DXEOrderCartTitleView.h; sourceTree = "<group>"; };
+		D273A46819CA96EA0081BB37 /* DXEOrderCartTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEOrderCartTitleView.m; path = Views/DXEOrderCartTitleView.m; sourceTree = "<group>"; };
+		D273A46A19CA97FB0081BB37 /* DXEOrderCartTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOrderCartTitleView.xib; path = Views/DXEOrderCartTitleView.xib; sourceTree = "<group>"; };
 		D273A46C19CAC6160081BB37 /* order_cell_count_underline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_cell_count_underline@2x.png"; sourceTree = "<group>"; };
 		D273A46D19CAC6160081BB37 /* order_cell_decrease_disable_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_cell_decrease_disable_button@2x.png"; sourceTree = "<group>"; };
 		D273A46E19CAC6160081BB37 /* order_cell_decrease_normal_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_cell_decrease_normal_button@2x.png"; sourceTree = "<group>"; };
@@ -221,6 +225,12 @@
 		D290285819D2C97C0093AF33 /* order_empty_cart_not_ordered@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_empty_cart_not_ordered@2x.png"; sourceTree = "<group>"; };
 		D290285A19D2C97C0093AF33 /* order_empty_gotohomepage_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_empty_gotohomepage_button@2x.png"; sourceTree = "<group>"; };
 		D290285E19D2CD000093AF33 /* order_empty_cart_ordered@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_empty_cart_ordered@2x.png"; sourceTree = "<group>"; };
+		D290286019D2D42A0093AF33 /* DXEOrderProgressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEOrderProgressTableViewCell.h; path = Views/DXEOrderProgressTableViewCell.h; sourceTree = "<group>"; };
+		D290286119D2D42A0093AF33 /* DXEOrderProgressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEOrderProgressTableViewCell.m; path = Views/DXEOrderProgressTableViewCell.m; sourceTree = "<group>"; };
+		D290286219D2D42A0093AF33 /* DXEOrderProgressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOrderProgressTableViewCell.xib; path = Views/DXEOrderProgressTableViewCell.xib; sourceTree = "<group>"; };
+		D290286519D33B460093AF33 /* DXEOrderProgressTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEOrderProgressTitleView.h; path = Views/DXEOrderProgressTitleView.h; sourceTree = "<group>"; };
+		D290286619D33B460093AF33 /* DXEOrderProgressTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEOrderProgressTitleView.m; path = Views/DXEOrderProgressTitleView.m; sourceTree = "<group>"; };
+		D290286819D33BA60093AF33 /* DXEOrderProgressTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOrderProgressTitleView.xib; path = Views/DXEOrderProgressTitleView.xib; sourceTree = "<group>"; };
 		D2981E2019B85AA900DD22E2 /* test_dish_class@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test_dish_class@2x.png"; sourceTree = "<group>"; };
 		D2981E2C19B8A93E00DD22E2 /* DXEDishDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEDishDetailView.h; path = Views/DXEDishDetailView.h; sourceTree = "<group>"; };
 		D2981E2D19B8A93E00DD22E2 /* DXEDishDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEDishDetailView.m; path = Views/DXEDishDetailView.m; sourceTree = "<group>"; };
@@ -277,12 +287,12 @@
 				D29FAB5319B5C1E000E667D4 /* DXEDishClass.m */,
 				D29FAB5419B5C1E000E667D4 /* DXEDishItem.h */,
 				D29FAB5519B5C1E000E667D4 /* DXEDishItem.m */,
-				D273A44519C8A2750081BB37 /* DXEOrderManager.h */,
-				D273A44619C8A2750081BB37 /* DXEOrderManager.m */,
 				D29FAB5B19B603A000E667D4 /* DXEDishDataManager.h */,
 				D29FAB5C19B603A000E667D4 /* DXEDishDataManager.m */,
 				D24986CB19B70CB00029CC57 /* DXEImageManager.h */,
 				D24986CC19B70CB00029CC57 /* DXEImageManager.m */,
+				D273A44519C8A2750081BB37 /* DXEOrderManager.h */,
+				D273A44619C8A2750081BB37 /* DXEOrderManager.m */,
 				D290282C19D089ED0093AF33 /* DXERecordDishItem.h */,
 				D290282D19D089ED0093AF33 /* DXERecordDishItem.m */,
 				D290282919D088740093AF33 /* DXEDiningRecord.h */,
@@ -549,15 +559,21 @@
 		D273A45519C98C850081BB37 /* Order */ = {
 			isa = PBXGroup;
 			children = (
-				D273A46719CA96EA0081BB37 /* DXEOrderTitleView.h */,
-				D273A46819CA96EA0081BB37 /* DXEOrderTitleView.m */,
-				D273A46A19CA97FB0081BB37 /* DXEOrderTitleView.xib */,
-				D273A45B19C98D0E0081BB37 /* DXEOrderDishTableViewCell.h */,
-				D273A45C19C98D0E0081BB37 /* DXEOrderDishTableViewCell.m */,
-				D273A45D19C98D0E0081BB37 /* DXEOrderDishTableViewCell.xib */,
+				D273A46719CA96EA0081BB37 /* DXEOrderCartTitleView.h */,
+				D273A46819CA96EA0081BB37 /* DXEOrderCartTitleView.m */,
+				D273A46A19CA97FB0081BB37 /* DXEOrderCartTitleView.xib */,
+				D273A45B19C98D0E0081BB37 /* DXEOrderCartTableViewCell.h */,
+				D273A45C19C98D0E0081BB37 /* DXEOrderCartTableViewCell.m */,
+				D273A45D19C98D0E0081BB37 /* DXEOrderCartTableViewCell.xib */,
 				D273A46219C9D48C0081BB37 /* DXEEnsureOrderingView.h */,
 				D273A46319C9D48C0081BB37 /* DXEEnsureOrderingView.m */,
 				D273A46519C9D4DF0081BB37 /* DXEEnsureOrderingView.xib */,
+				D290286519D33B460093AF33 /* DXEOrderProgressTitleView.h */,
+				D290286619D33B460093AF33 /* DXEOrderProgressTitleView.m */,
+				D290286819D33BA60093AF33 /* DXEOrderProgressTitleView.xib */,
+				D290286019D2D42A0093AF33 /* DXEOrderProgressTableViewCell.h */,
+				D290286119D2D42A0093AF33 /* DXEOrderProgressTableViewCell.m */,
+				D290286219D2D42A0093AF33 /* DXEOrderProgressTableViewCell.xib */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -671,13 +687,13 @@
 				D273A47319CAC6160081BB37 /* order_cell_decrease_disable_button@2x.png in Resources */,
 				D273A3E219C73E030081BB37 /* qrcode_button@2x.png in Resources */,
 				D273A43E19C884F80081BB37 /* dish_cell_incart_flag@2x.png in Resources */,
-				D273A46B19CA97FB0081BB37 /* DXEOrderTitleView.xib in Resources */,
+				D273A46B19CA97FB0081BB37 /* DXEOrderCartTitleView.xib in Resources */,
 				D2981F0E19C03FAD00DD22E2 /* Theme in Resources */,
 				D290285D19D2C97C0093AF33 /* order_empty_gotohomepage_button@2x.png in Resources */,
 				D290283319D124A40093AF33 /* DXERecordTitleView.xib in Resources */,
 				D273A3DF19C73CDE0081BB37 /* dish_cell_price_icon@2x.png in Resources */,
 				D273A3E019C73CDE0081BB37 /* dish_cell_soldout_flag@2x.png in Resources */,
-				D273A45F19C98D0E0081BB37 /* DXEOrderDishTableViewCell.xib in Resources */,
+				D273A45F19C98D0E0081BB37 /* DXEOrderCartTableViewCell.xib in Resources */,
 				D2981E3019B8A96400DD22E2 /* DXEDishDetailView.xib in Resources */,
 				D290285B19D2C97C0093AF33 /* order_empty_cart_not_ordered@2x.png in Resources */,
 				D273A47519CAC6160081BB37 /* order_cell_increase_disable_button@2x.png in Resources */,
@@ -698,6 +714,7 @@
 				D207122B1974D7BE00E34770 /* DXEQuestionnaireViewController.xib in Resources */,
 				D273A44419C885A10081BB37 /* dish_cell_soldout_button@2x.png in Resources */,
 				D290284119D1A0190093AF33 /* DXEOrderEmptyViewController.xib in Resources */,
+				D290286919D33BA60093AF33 /* DXEOrderProgressTitleView.xib in Resources */,
 				D204928F198D4ED400D8187E /* DXETipsCollectionViewCell.xib in Resources */,
 				D22BE19E1972747000A438D2 /* InfoPlist.strings in Resources */,
 				D2049291198D4EEC00D8187E /* DXEDishCollectionViewCell.xib in Resources */,
@@ -706,6 +723,7 @@
 				D2981E2219B85AA900DD22E2 /* test_dish_class@2x.png in Resources */,
 				D273A47219CAC6160081BB37 /* order_cell_count_underline@2x.png in Resources */,
 				D273A47719CAC6160081BB37 /* order_ensure_ordering_button@2x.png in Resources */,
+				D290286419D2D42A0093AF33 /* DXEOrderProgressTableViewCell.xib in Resources */,
 				D273A3DE19C73CDE0081BB37 /* dish_cell_favor_solid_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -759,7 +777,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D290283119D124750093AF33 /* DXERecordTitleView.m in Sources */,
-				D273A46919CA96EA0081BB37 /* DXEOrderTitleView.m in Sources */,
+				D290286319D2D42A0093AF33 /* DXEOrderProgressTableViewCell.m in Sources */,
+				D273A46919CA96EA0081BB37 /* DXEOrderCartTitleView.m in Sources */,
 				D273A3BE19C603180081BB37 /* UIImage+Blur.m in Sources */,
 				D2049288198D4AA900D8187E /* DXEDishCollectionViewCell.m in Sources */,
 				D20712251974D7AC00E34770 /* DXEOriginViewController.m in Sources */,
@@ -791,8 +810,9 @@
 				D22BE1A01972747000A438D2 /* main.m in Sources */,
 				D273A3D619C616340081BB37 /* DXEDishesViewController.m in Sources */,
 				D290282E19D089ED0093AF33 /* DXERecordDishItem.m in Sources */,
+				D290286719D33B460093AF33 /* DXEOrderProgressTitleView.m in Sources */,
 				D290282219D06B390093AF33 /* DXEMember.m in Sources */,
-				D273A45E19C98D0E0081BB37 /* DXEOrderDishTableViewCell.m in Sources */,
+				D273A45E19C98D0E0081BB37 /* DXEOrderCartTableViewCell.m in Sources */,
 				D273A46419C9D48C0081BB37 /* DXEEnsureOrderingView.m in Sources */,
 				D207122A1974D7BE00E34770 /* DXEQuestionnaireViewController.m in Sources */,
 			);

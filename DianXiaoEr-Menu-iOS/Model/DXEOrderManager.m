@@ -23,7 +23,7 @@
     {
         sharedManager = [[super allocWithZone:nil] init];
         
-        sharedManager.totalCount = 0;
+        sharedManager.totalCount = [NSNumber numberWithInt:0];
         sharedManager.cartList = [[NSMutableArray alloc] init];
         sharedManager.orderList = [[NSMutableArray alloc] init];
     }
@@ -74,11 +74,25 @@
 
 - (void)insertObject:(DXEDishItem *)object inOrderListAtIndex:(NSUInteger)index
 {
+    object.progress = [NSNumber numberWithInt:DXEDishProgressTodo];
+    [object addObserver:self
+             forKeyPath:NSStringFromSelector(@selector(progress))
+                options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                context:nil];
+    self.totalCount = [NSNumber numberWithInteger:[self.totalCount integerValue] + [object.count integerValue]];
+    
     [self.orderList insertObject:object atIndex:index];
 }
 
 - (void)removeObjectFromOrderListAtIndex:(NSUInteger)index
 {
+    DXEDishItem *object = [self.cartList objectAtIndex:index];
+    [object removeObserver:self
+                forKeyPath:NSStringFromSelector(@selector(progress))];
+    object.progress = nil;
+    self.totalCount = [NSNumber numberWithInteger:[self.totalCount integerValue] - [object.count integerValue]];
+    object.count = [NSNumber numberWithInteger:0];
+    
     [self.orderList removeObjectAtIndex:index];
 }
 
@@ -95,6 +109,17 @@
         totalCount += [[self valueForKeyPath:@"cartList.@sum.count"] intValue];
         totalCount += [[self valueForKeyPath:@"orderList.@sum.count"] intValue];
         self.totalCount = [NSNumber numberWithInt:totalCount];
+    }
+    else if ([keyPath isEqualToString:NSStringFromSelector(@selector(progress))])
+    {
+        NSNumber *old = change[NSKeyValueChangeOldKey];
+        NSNumber *new = change[NSKeyValueChangeNewKey];
+        
+        if (old == nil || [old integerValue] != [new integerValue])
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderProgressUpdating"
+             object:nil];
+        }
     }
 }
 

@@ -130,16 +130,12 @@ typedef NS_ENUM(NSUInteger, DXEOrderOperation)
     [self.progressViewController willMoveToParentViewController:self];
     
     self.emptyNotOrderedViewController = [[DXEOrderEmptyViewController alloc] init];
-    self.emptyNotOrderedViewController.tipsImageView.image = [UIImage imageNamed:@"order_empty_cart_not_ordered"];
-    self.emptyOrderedViewController.tipsTitle.text = @"不忍心让盘子空着?";
-    self.emptyOrderedViewController.tipsSubtitle.text = @"快去点餐吧!";
+    self.emptyNotOrderedViewController.type = DXEOrderEmptyViewControllerTypeNotOrdered;
     [self addChildViewController:self.emptyNotOrderedViewController];
     [self.emptyNotOrderedViewController willMoveToParentViewController:self];
     
     self.emptyOrderedViewController = [[DXEOrderEmptyViewController alloc] init];
-    self.emptyOrderedViewController.tipsImageView.image = [UIImage imageNamed:@"order_empty_cart_ordered"];
-    self.emptyOrderedViewController.tipsTitle.text = @"厨师正在为您制作美食";
-    self.emptyOrderedViewController.tipsSubtitle.text = @"请耐心等待，还需要加餐吗?";
+    self.emptyOrderedViewController.type = DXEOrderEmptyViewControllerTypeOrdered;
     [self addChildViewController:self.emptyOrderedViewController];
     [self.emptyOrderedViewController willMoveToParentViewController:self];
     
@@ -245,6 +241,11 @@ typedef NS_ENUM(NSUInteger, DXEOrderOperation)
         }
     }
     
+    if (operation == DXEOrderOperationUnconcern)
+    {
+        return;
+    }
+    
     switch (self.state)
     {
         case DXEOrderViewStateEmptyCart:
@@ -271,7 +272,8 @@ typedef NS_ENUM(NSUInteger, DXEOrderOperation)
             else if (operation == DXEOrderOperationOrdering)
             {
                 [self switchChildViewControllerFrom:self.currentViewController
-                                                 to:self.emptyOrderedViewController];
+                                                 to:self.progressViewController];
+                [self.scrollMenu scrollToIndex:DXEOrderScrollMenuIndexProgress];
                 self.state = DXEOrderViewStateOrdered;
             }
             break;
@@ -294,7 +296,8 @@ typedef NS_ENUM(NSUInteger, DXEOrderOperation)
             if (operation == DXEOrderOperationOrdering)
             {
                 [self switchChildViewControllerFrom:self.currentViewController
-                                                 to:self.emptyOrderedViewController];
+                                                 to:self.progressViewController];
+                [self.scrollMenu scrollToIndex:DXEOrderScrollMenuIndexProgress];
                 self.state = DXEOrderViewStateOrdered;
             }
             break;

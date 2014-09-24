@@ -61,13 +61,15 @@
     self.memberPhoneIcon.image = [[RNThemeManager sharedManager] imageForName:@"myself_member_phone_icon.png"];
     self.memberAccountIcon.image = [[RNThemeManager sharedManager] imageForName:@"myself_member_account_icon.png"];
     
-    self.titleView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([DXERecordTitleView class])
+    NSString *nibName = NSStringFromClass([DXERecordTitleView class]);
+    self.titleView = [[[NSBundle mainBundle] loadNibNamed:nibName
                                                    owner:self
                                                   options:nil] firstObject];
     
+    nibName = NSStringFromClass([DXERecordTableViewCell class]);
+    [self.recordTableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
+               forCellReuseIdentifier:nibName];
     self.recordTableView.backgroundColor = backgroundColor;
-    [self.recordTableView registerNib:[UINib nibWithNibName:NSStringFromClass([DXERecordTableViewCell class]) bundle:nil]
-               forCellReuseIdentifier:NSStringFromClass([DXERecordTableViewCell class])];
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,8 +95,8 @@
 {
     DXEDiningRecord *record = [self.member.records objectAtIndex:indexPath.row];
     
-    DXERecordTableViewCell *cell =
-    [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([DXERecordTableViewCell class])];
+    NSString *identifier = NSStringFromClass([DXERecordTableViewCell class]);
+    DXERecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     cell.controller = self;
     cell.date.text = record.date;
     cell.dishCount.text = [record.dishCount stringValue];

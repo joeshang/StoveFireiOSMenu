@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Shang Chuanren. All rights reserved.
 //
 
-#import "DXEOrderDishTableViewCell.h"
+#import "DXEOrderCartTableViewCell.h"
 
-@implementation DXEOrderDishTableViewCell
+@implementation DXEOrderCartTableViewCell
 
 - (void)awakeFromNib
 {
@@ -72,7 +72,7 @@
         // [self.controller performSelector:selector
         //                       withObject:self
         IMP imp = [self.controller methodForSelector:selector];
-        void (*func)(id, SEL, DXEOrderDishTableViewCell *) = (void *)imp;
+        void (*func)(id, SEL, DXEOrderCartTableViewCell *) = (void *)imp;
         func(self.controller, selector, self);
     }
 }

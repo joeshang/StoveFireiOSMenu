@@ -235,8 +235,6 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
 {
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(totalCount))])
     {
-        NSLog(@"%@", change);
-        
         NSNumber *totalCount = [DXEOrderManager sharedInstance].totalCount;
         CRTabBarItem *item = [self.tabBar.items objectAtIndex:DXEMainChildViewControllerIndexOrder];
         if ([totalCount integerValue] == 0)

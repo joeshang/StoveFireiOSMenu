@@ -9,13 +9,12 @@
 #import "DXEOrderCartViewController.h"
 #import "DXEDishItem.h"
 #import "DXEOrderManager.h"
-#import "DXEOrderDishTableViewCell.h"
-#import "DXEOrderTitleView.h"
+#import "DXEOrderCartTableViewCell.h"
+#import "DXEOrderCartTitleView.h"
 #import "DXEEnsureOrderingView.h"
 
 @interface DXEOrderCartViewController ()
 
-@property (nonatomic, strong) DXEOrderTitleView *titleView;
 @property (nonatomic, strong) DXEEnsureOrderingView *ensureOrderingView;
 @property (nonatomic, assign) float totalPrice;
 
@@ -39,17 +38,16 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
+    UIColor *backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
+    self.view.backgroundColor = backgroundColor;
     
-    [self.dishesTableView registerNib:[UINib nibWithNibName:@"DXEOrderDishTableViewCell" bundle:nil]
-               forCellReuseIdentifier:@"DXEOrderDishTableViewCell"];
+    NSString *nibName = NSStringFromClass([DXEOrderCartTableViewCell class]);
+    [self.dishesTableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
+               forCellReuseIdentifier:nibName];
+    self.dishesTableView.backgroundColor = backgroundColor;
     
-    self.titleView = [[[NSBundle mainBundle] loadNibNamed:@"DXEOrderTitleView"
-                                                    owner:self
-                                                  options:nil] firstObject];
-    self.titleView.nameTitle.text = @"已点菜品";
-    
-    self.ensureOrderingView = [[[NSBundle mainBundle] loadNibNamed:@"DXEEnsureOrderingView"
+    nibName = NSStringFromClass([DXEEnsureOrderingView class]);
+    self.ensureOrderingView = [[[NSBundle mainBundle] loadNibNamed:nibName
                                                              owner:self
                                                            options:nil] firstObject];
     self.dishesTableView.tableFooterView = self.ensureOrderingView;
@@ -95,9 +93,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DXEOrderDishTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DXEOrderDishTableViewCell" forIndexPath:indexPath];
     DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
     
+    NSString *identifier = NSStringFromClass([DXEOrderCartTableViewCell class]);
+    DXEOrderCartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     cell.controller = self;
     cell.dishName.text = item.name;
     cell.dishEnglishName.text = item.englishName;
@@ -109,17 +108,16 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (section == 0)
-    {
-        return self.titleView;
-    }
-
-    return nil;
+    NSString *nibName = NSStringFromClass([DXEOrderCartTitleView class]);
+    DXEOrderCartTitleView *titleView = [[[NSBundle mainBundle] loadNibNamed:nibName
+                                                                      owner:self
+                                                                    options:nil] firstObject];
+    return titleView;
 }
 
 #pragma mark - target-action
 
-- (void)onIncreaseButtonClickedInTableCell:(DXEOrderDishTableViewCell *)cell
+- (void)onIncreaseButtonClickedInTableCell:(DXEOrderCartTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.dishesTableView indexPathForCell:cell];
     DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
@@ -131,7 +129,7 @@
     [cell updateCellByDishCount:[item.count integerValue] dishPrice:[item.price floatValue]];
 }
 
-- (void)onDecreaseButtonClickedInTableCell:(DXEOrderDishTableViewCell *)cell
+- (void)onDecreaseButtonClickedInTableCell:(DXEOrderCartTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.dishesTableView indexPathForCell:cell];
     DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
@@ -143,7 +141,7 @@
     [cell updateCellByDishCount:[item.count integerValue] dishPrice:[item.price floatValue]];
 }
 
-- (void)onDeleteButtonClickedInTableCell:(DXEOrderDishTableViewCell *)cell
+- (void)onDeleteButtonClickedInTableCell:(DXEOrderCartTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.dishesTableView indexPathForCell:cell];
     DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];

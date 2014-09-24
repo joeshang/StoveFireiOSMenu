@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Shang Chuanren. All rights reserved.
 //
 
-#import "DXEOrderTitleView.h"
+#import "DXEOrderCartTitleView.h"
 
-@implementation DXEOrderTitleView
+@implementation DXEOrderCartTitleView
 
 - (void)awakeFromNib
 {

@@ -11,7 +11,7 @@
 #define kDXEDishItemCountInCartMin                  1
 #define kDXEDishItemCountInCartMax                  99
 
-@interface DXEOrderDishTableViewCell : UITableViewCell
+@interface DXEOrderCartTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *dishThumbnail;

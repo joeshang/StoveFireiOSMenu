@@ -19,6 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
+        _type = DXEOrderEmptyViewControllerTypeNotOrdered;
     }
     return self;
 }
@@ -32,6 +33,19 @@
     UIColor *textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.Empty.FontColor"];
     self.tipsTitle.textColor = textColor;
     self.tipsSubtitle.textColor = textColor;
+    
+    if (self.type == DXEOrderEmptyViewControllerTypeNotOrdered)
+    {
+        self.tipsImageView.image = [UIImage imageNamed:@"order_empty_cart_not_ordered"];
+        self.tipsTitle.text = @"不忍心让盘子空着?";
+        self.tipsSubtitle.text = @"快去点餐吧!";
+    }
+    else if (self.type == DXEOrderEmptyViewControllerTypeOrdered)
+    {
+        self.tipsImageView.image = [UIImage imageNamed:@"order_empty_cart_ordered"];
+        self.tipsTitle.text = @"厨师正在为您制作美食";
+        self.tipsSubtitle.text = @"请耐心等待，还需要加餐吗?";
+    }
 }
 
 - (void)didReceiveMemoryWarning

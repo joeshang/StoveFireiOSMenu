@@ -21,4 +21,11 @@
 #define kDXECommonCornerRadius                      5
 #define kDXECommonBorderWidth                       1
 
+typedef NS_ENUM(NSUInteger, DXEDishProgress)
+{
+    DXEDishProgressTodo,
+    DXEDishProgressDoing,
+    DXEDishProgressDone
+};
+
 #endif

@@ -20,6 +20,7 @@
         _inCart = NO;
         _count = [NSNumber numberWithInteger:0];
         _tradeid = nil;
+        _progress = nil;
     }
     
     return self;
