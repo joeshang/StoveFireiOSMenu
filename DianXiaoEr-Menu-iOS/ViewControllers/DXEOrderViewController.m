@@ -37,7 +37,7 @@ typedef NS_ENUM(NSUInteger, DXEOrderOperation)
 
 #define kDXEOrderScrollMenuTitles                    @[@"已点菜品", @"制作进度"]
 #define kDXEOrderScrollMenuHeight                    53
-#define kDXEOrderScrollMenuButtonPadding             63
+#define kDXEOrderScrollMenuButtonPadding             30
 #define kDXEOrderScrollMenuIndicatorHeight           2
 #define kDXEOrderScrollMenuTitleFontSize             20
 
@@ -130,12 +130,16 @@ typedef NS_ENUM(NSUInteger, DXEOrderOperation)
     [self.progressViewController willMoveToParentViewController:self];
     
     self.emptyNotOrderedViewController = [[DXEOrderEmptyViewController alloc] init];
-    self.emptyNotOrderedViewController.view.backgroundColor = [UIColor redColor];
+    self.emptyNotOrderedViewController.tipsImageView.image = [UIImage imageNamed:@"order_empty_cart_not_ordered"];
+    self.emptyOrderedViewController.tipsTitle.text = @"不忍心让盘子空着?";
+    self.emptyOrderedViewController.tipsSubtitle.text = @"快去点餐吧!";
     [self addChildViewController:self.emptyNotOrderedViewController];
     [self.emptyNotOrderedViewController willMoveToParentViewController:self];
     
     self.emptyOrderedViewController = [[DXEOrderEmptyViewController alloc] init];
-    self.emptyOrderedViewController.view.backgroundColor = [UIColor blueColor];
+    self.emptyOrderedViewController.tipsImageView.image = [UIImage imageNamed:@"order_empty_cart_ordered"];
+    self.emptyOrderedViewController.tipsTitle.text = @"厨师正在为您制作美食";
+    self.emptyOrderedViewController.tipsSubtitle.text = @"请耐心等待，还需要加餐吗?";
     [self addChildViewController:self.emptyOrderedViewController];
     [self.emptyOrderedViewController willMoveToParentViewController:self];
     

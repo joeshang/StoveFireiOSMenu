@@ -26,6 +26,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
+    
+    UIColor *textColor = [[RNThemeManager sharedManager] colorForKey:@"Order.Empty.FontColor"];
+    self.tipsTitle.textColor = textColor;
+    self.tipsSubtitle.textColor = textColor;
 }
 
 - (void)didReceiveMemoryWarning

@@ -12,6 +12,8 @@
 	<string>000000</string>
 	<key>BorderColor</key>
 	<string>646464</string>
+	<key>Cell.BackgroundColor</key>
+	<string>1B1B1B</string>
 	<key>Main.TabBar.SelectedTextColor</key>
 	<string>A3813D</string>
 	<key>Main.TabBar.NormalTextColor</key>
@@ -20,7 +22,7 @@
 	<string>FFFFFF</string>
 	<key>Order.EnsureOrdering.FontColor</key>
 	<string>E9A83D</string>
-	<key>Cell.BackgroundColor</key>
-	<string>1B1B1B</string>
+	<key>Order.Empty.FontColor</key>
+	<string>888888</string>
 </dict>
 </plist>
