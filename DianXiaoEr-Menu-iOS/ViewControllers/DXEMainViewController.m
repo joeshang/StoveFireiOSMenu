@@ -39,6 +39,8 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
 
 @interface DXEMainViewController () < CRTabBarDelegate >
 
+@property (nonatomic, strong) DXEMemberLoginView *loginView;
+
 @end
 
 @implementation DXEMainViewController
@@ -151,6 +153,11 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
     }
     self.selectedViewController = homepage;
     [self.view addSubview:homepage.view];
+    
+    NSString *nibName = NSStringFromClass([DXEMemberLoginView class]);
+    self.loginView = [[[NSBundle mainBundle] loadNibNamed:nibName
+                                                    owner:self
+                                                  options:nil] firstObject];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -189,11 +196,9 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
         DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexMyself];
         if (!myself.login)
         {
-            NSString *nibName = NSStringFromClass([DXEMemberLoginView class]);
-            DXEMemberLoginView *loginView = [[[NSBundle mainBundle] loadNibNamed:nibName
-                                                                          owner:self
-                                                                         options:nil] firstObject];
-            [CRModal showModalView:loginView
+            self.loginView.userName.text = @"";
+            self.loginView.password.text = @"";
+            [CRModal showModalView:self.loginView
                        coverOption:CRModalOptionCoverDark
                tapOutsideToDismiss:NO
                           animated:YES
@@ -245,6 +250,11 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
     DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexMyself];
     myself.member = [[DXEMember alloc] initWithJSONData:[self testMemberData]];
     myself.login = YES;
+    if (myself.login)
+    {
+        [self.tabBar setItemSelectedAtIndex:DXEMainChildViewControllerIndexMyself];
+        [self moveToChildViewControllerAtIndex:DXEMainChildViewControllerIndexMyself];
+    }
     [CRModal dismiss];
 }
 
