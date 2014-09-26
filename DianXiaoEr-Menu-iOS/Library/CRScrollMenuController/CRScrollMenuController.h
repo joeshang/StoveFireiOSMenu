@@ -13,8 +13,6 @@
 
 @property (nonatomic, strong) NSArray *viewControllers;
 
-@property (nonatomic, assign) NSUInteger currentIndex;
-
 @property (nonatomic, assign) NSUInteger scrollMenuHeight;
 @property (nonatomic, strong) UIImage *scrollMenuBackgroundImage;
 @property (nonatomic, strong) UIColor *scrollMenuBackgroundColor;
@@ -29,5 +27,8 @@
 @property (nonatomic, strong) NSDictionary *selectedSubtitleAttributes;
 
 - (void)setViewControllers:(NSArray *)viewControllers withItems:(NSArray *)items;
+- (void)setSelectedAtIndex:(NSUInteger)currentIndex;
+
+- (NSUInteger)currentIndex;
 
 @end

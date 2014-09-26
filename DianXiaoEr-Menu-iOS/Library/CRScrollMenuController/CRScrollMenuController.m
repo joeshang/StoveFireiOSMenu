@@ -13,6 +13,7 @@
 @interface CRScrollMenuController ()
 < CRScrollMenuDelegate, UIScrollViewDelegate >
 
+@property (nonatomic, assign) NSUInteger currentIndex;
 @property (nonatomic, strong) CRScrollMenu *scrollMenu;
 @property (nonatomic, strong) UIScrollView *scrollView;
 
@@ -35,6 +36,12 @@
 - (void)setup
 {
     _scrollMenuHeight = kCRScrollMenuDefaultHeight;
+}
+
+- (void)dealloc
+{
+    [_scrollView removeObserver:self
+                     forKeyPath:NSStringFromSelector(@selector(contentOffset))];
 }
 
 - (void)viewDidLoad
@@ -92,6 +99,10 @@
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.directionalLockEnabled = YES;
+        [_scrollView addObserver:self
+                      forKeyPath:NSStringFromSelector(@selector(contentOffset))
+                         options:NSKeyValueObservingOptionNew
+                         context:nil];
         [self.view addSubview:_scrollView];
         
     }
@@ -115,16 +126,16 @@
     return _scrollMenu;
 }
 
-- (void)setCurrentIndex:(NSUInteger)currentIndex
+- (void)setSelectedAtIndex:(NSUInteger)currentIndex
 {
     NSAssert(currentIndex < self.viewControllers.count, @"currentIndex should belong within the range of the view controllers array");
     
-    if (_currentIndex != currentIndex)
+    if (self.currentIndex != currentIndex)
     {
-        _currentIndex = currentIndex;
+        self.currentIndex = currentIndex;
         
         [self.scrollMenu scrollToIndex:currentIndex];
-        [self.scrollView setContentOffset:CGPointMake(currentIndex * self.scrollView.bounds.size.width, 0.) animated:YES];
+        [self.scrollView setContentOffset:CGPointMake(currentIndex * self.scrollView.bounds.size.width, 0) animated:YES];
     }
 }
 
@@ -210,18 +221,44 @@
     }
 }
 
+- (NSUInteger)currentIndex
+{
+    return _currentIndex;
+}
+
 #pragma mark - CRScrollMenu delegate
 
 - (void)scrollMenu:(CRScrollMenu *)scrollMenu didSelectedAtIndex:(NSUInteger)index
 {
+    self.currentIndex = index;
     [self.scrollView setContentOffset:CGPointMake(index * self.scrollView.bounds.size.width, 0) animated:YES];
 }
 
 #pragma mark - UIScrollView delegate
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
 {
-    self.currentIndex = scrollView.contentOffset.x / CGRectGetWidth(self.scrollView.bounds);
+    if (self.scrollView.dragging
+        && [keyPath isEqualToString:NSStringFromSelector(@selector(contentOffset))])
+    {
+        CGFloat pageScrollOffset = self.scrollView.contentOffset.x - self.currentIndex * CGRectGetWidth(self.scrollView.frame);
+        NSInteger targetIndex = (pageScrollOffset > 0) ? self.currentIndex + 1 : self.currentIndex - 1;
+        if (targetIndex >= 0 && targetIndex < [self.viewControllers count])
+        {
+            
+            CGFloat progress = fabsf(pageScrollOffset / CGRectGetWidth(self.scrollView.frame));
+            [self.scrollMenu moveToIndex:targetIndex progress:progress];
+            if (abs(pageScrollOffset) >= CGRectGetWidth(self.scrollView.frame))
+            {
+                self.currentIndex = targetIndex;
+            }
+        }
+    }
 }
+
+
 
 @end

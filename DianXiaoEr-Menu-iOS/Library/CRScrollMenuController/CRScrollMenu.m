@@ -91,40 +91,38 @@
         x += rect.size.width;
     }
 
-    [self setIndicatorAtIndex:self.currentIndex];
+    [self indicatorScrollToIndex:self.currentIndex];
+    [[self.buttons objectAtIndex:self.currentIndex] setSelected:YES];
     self.contentView.contentSize = CGSizeMake(x, CGRectGetHeight(self.bounds));
 }
 
-- (void)setIndicatorAtIndex:(NSUInteger)index
+- (void)indicatorScrollToIndex:(NSUInteger)index
 {
-    if ([self.buttons count] == 0)
-    {
-        self.indicatorView.frame = CGRectZero;
-    }
-    else
-    {
-        // 设置indicator的frame
-        CGRect rect = [[self.buttons objectAtIndex:index] frame];
-        CGRect indicatorRect = CGRectMake(rect.origin.x + self.buttonPadding - kCRScrollMenuIndicatorMargin,
-                                          rect.origin.y + rect.size.height - self.indicatorHeight,
-                                          rect.size.width - (self.buttonPadding - kCRScrollMenuIndicatorMargin) * 2,
-                                          self.indicatorHeight);
-        self.indicatorView.frame = indicatorRect;
-        
-        // index对应的button设置为selected
-        [[self.buttons objectAtIndex:index] setSelected:YES];
-    }
+    [UIView animateWithDuration:kCRScrollMenuScrollAnimationTime animations:^{
+        self.indicatorView.frame = [self indicatorFrameAtIndex:index];
+    }];
 }
 
-- (void)moveItemFromIndex:(NSUInteger)oldIndex toIndex:(NSUInteger)newIndex
+- (void)indicatorMoveToIndex:(NSUInteger)index progress:(CGFloat)progress
 {
-    [[self.buttons objectAtIndex:oldIndex] setSelected:NO];
-    [self setIndicatorAtIndex:newIndex];
+    CGRect targetRect = [self indicatorFrameAtIndex:index];
+    CGRect progressRect = [self indicatorFrameAtIndex:self.currentIndex];
+    progressRect.origin.x += roundf((targetRect.origin.x - progressRect.origin.x) * progress);
+    progressRect.size.width += roundf((targetRect.size.width - progressRect.size.width) *progress);
+    self.indicatorView.frame = progressRect;
 }
 
-#pragma mark - action
+- (CGRect)indicatorFrameAtIndex:(NSInteger)index
+{
+    CGRect rect = [[self.buttons objectAtIndex:index] frame];
+    CGRect indicatorRect = CGRectMake(rect.origin.x + self.buttonPadding - kCRScrollMenuIndicatorMargin,
+                                      rect.origin.y + rect.size.height - self.indicatorHeight,
+                                      rect.size.width - (self.buttonPadding - kCRScrollMenuIndicatorMargin) * 2,
+                                      self.indicatorHeight);
+    return indicatorRect;
+}
 
-- (void)scrollToIndex:(NSUInteger)index
+- (void)setItemSelectedAtIndex:(NSUInteger)index
 {
     CGRect rect = [[self.buttons objectAtIndex:index] frame];
     
@@ -141,12 +139,28 @@
         self.contentView.contentOffset = contentOffset;
     }];
     
-    [UIView animateWithDuration:kCRScrollMenuScrollAnimationTime animations:^{
-        [self moveItemFromIndex:self.currentIndex toIndex:index];
-    }];
-    
+    [[self.buttons objectAtIndex:self.currentIndex] setSelected:NO];
+    [[self.buttons objectAtIndex:index] setSelected:YES];
     self.currentIndex = index;
 }
+
+- (void)scrollToIndex:(NSUInteger)index
+{
+    [self setItemSelectedAtIndex:index];
+    [self indicatorScrollToIndex:index];
+}
+
+- (void)moveToIndex:(NSUInteger)index progress:(CGFloat)progress
+{
+    if (progress >= 1.0)
+    {
+        [self setItemSelectedAtIndex:index];
+    }
+    
+    [self indicatorMoveToIndex:index progress:progress];
+}
+
+#pragma mark - action
 
 - (void)onItemViewClicked:(id)sender
 {
@@ -293,6 +307,11 @@
 
 #pragma mark - overwritten setters
 
+- (NSUInteger)currentIndex
+{
+    return _currentIndex;
+}
+
 - (void)setIndicatorHeight:(NSUInteger)indicatorHeight
 {
     CGRect rect = self.indicatorView.frame;
@@ -320,11 +339,6 @@
     
     _backgroundImage = backgroundImage;
     _backgroundImageView.image = backgroundImage;
-}
-
-- (NSUInteger)currentIndex
-{
-    return _currentIndex;
 }
 
 @end
