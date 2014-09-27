@@ -11,6 +11,8 @@
 #import "DXERecordTableViewCell.h"
 #import "DXEDiningRecord.h"
 #import "DXERecordTitleView.h"
+#import "DXERecordDetailView.h"
+#import "CRModal.h"
 
 @interface DXEMyselfViewController ()
 
@@ -133,8 +135,35 @@
 
 - (void)onDetailButtonClickedInTableCell:(DXERecordTableViewCell *)cell
 {
-    
+    NSIndexPath *indexPath = [self.recordTableView indexPathForCell:cell];
+    DXEDiningRecord *record = [self.member.records objectAtIndex:indexPath.row];
+    DXERecordDetailView *recordDetailView =
+    [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([DXERecordDetailView class])
+                                   owner:self
+                                 options:nil] firstObject];
+    CGFloat height = 0.0;
+    if ([record.dishes count] >= 4)
+    {
+        height = 730;
+    }
+    else
+    {
+        height = 170 + 140 * [record.dishes count];
+    }
+    CGRect rect = recordDetailView.frame;
+    rect.size.height = height;
+    recordDetailView.frame = rect;
+
+    [CRModal showModalView:recordDetailView
+               coverOption:CRModalOptionCoverDark
+       tapOutsideToDismiss:NO
+                  animated:YES
+                completion:nil];
 }
 
+- (IBAction)onCloseButtonClickedInRecordDetailView:(id)sender
+{
+    [CRModal dismiss];
+}
 
 @end

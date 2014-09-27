@@ -96,6 +96,8 @@
 		D290287C19D35B700093AF33 /* member_login_user_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D290287819D35B700093AF33 /* member_login_user_icon@2x.png */; };
 		D290288119D5C1AD0093AF33 /* CRScrollMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = D290287E19D5C1AD0093AF33 /* CRScrollMenuController.m */; };
 		D290288219D5C1AD0093AF33 /* CRScrollMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D290288019D5C1AD0093AF33 /* CRScrollMenu.m */; };
+		D290288519D711220093AF33 /* DXERecordDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = D290288419D711220093AF33 /* DXERecordDetailView.m */; };
+		D290288719D7113E0093AF33 /* DXERecordDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D290288619D7113E0093AF33 /* DXERecordDetailView.xib */; };
 		D2981E2219B85AA900DD22E2 /* test_dish_class@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2019B85AA900DD22E2 /* test_dish_class@2x.png */; };
 		D2981E2E19B8A93E00DD22E2 /* DXEDishDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2981E2D19B8A93E00DD22E2 /* DXEDishDetailView.m */; };
 		D2981E3019B8A96400DD22E2 /* DXEDishDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2F19B8A96400DD22E2 /* DXEDishDetailView.xib */; };
@@ -246,6 +248,9 @@
 		D290287E19D5C1AD0093AF33 /* CRScrollMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRScrollMenuController.m; sourceTree = "<group>"; };
 		D290287F19D5C1AD0093AF33 /* CRScrollMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRScrollMenu.h; sourceTree = "<group>"; };
 		D290288019D5C1AD0093AF33 /* CRScrollMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRScrollMenu.m; sourceTree = "<group>"; };
+		D290288319D711220093AF33 /* DXERecordDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXERecordDetailView.h; path = Views/DXERecordDetailView.h; sourceTree = "<group>"; };
+		D290288419D711220093AF33 /* DXERecordDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXERecordDetailView.m; path = Views/DXERecordDetailView.m; sourceTree = "<group>"; };
+		D290288619D7113E0093AF33 /* DXERecordDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXERecordDetailView.xib; path = Views/DXERecordDetailView.xib; sourceTree = "<group>"; };
 		D2981E2019B85AA900DD22E2 /* test_dish_class@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test_dish_class@2x.png"; sourceTree = "<group>"; };
 		D2981E2C19B8A93E00DD22E2 /* DXEDishDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEDishDetailView.h; path = Views/DXEDishDetailView.h; sourceTree = "<group>"; };
 		D2981E2D19B8A93E00DD22E2 /* DXEDishDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEDishDetailView.m; path = Views/DXEDishDetailView.m; sourceTree = "<group>"; };
@@ -618,6 +623,9 @@
 				D290282319D0784D0093AF33 /* DXERecordTableViewCell.h */,
 				D290282419D0784D0093AF33 /* DXERecordTableViewCell.m */,
 				D290282519D0784D0093AF33 /* DXERecordTableViewCell.xib */,
+				D290288319D711220093AF33 /* DXERecordDetailView.h */,
+				D290288419D711220093AF33 /* DXERecordDetailView.m */,
+				D290288619D7113E0093AF33 /* DXERecordDetailView.xib */,
 				D290287019D35A860093AF33 /* DXEMemberLoginView.h */,
 				D290287119D35A860093AF33 /* DXEMemberLoginView.m */,
 				D290287319D35A9D0093AF33 /* DXEMemberLoginView.xib */,
@@ -740,6 +748,7 @@
 				D273A47419CAC6160081BB37 /* order_cell_decrease_normal_button@2x.png in Resources */,
 				D207122B1974D7BE00E34770 /* DXEQuestionnaireViewController.xib in Resources */,
 				D273A44419C885A10081BB37 /* dish_cell_soldout_button@2x.png in Resources */,
+				D290288719D7113E0093AF33 /* DXERecordDetailView.xib in Resources */,
 				D290284119D1A0190093AF33 /* DXEOrderEmptyViewController.xib in Resources */,
 				D290286F19D3539B0093AF33 /* origin_content@2x.png in Resources */,
 				D290286919D33BA60093AF33 /* DXEOrderProgressTitleView.xib in Resources */,
@@ -828,6 +837,7 @@
 				D26026F61999F2DF004D6579 /* DXEOpenViewController.m in Sources */,
 				D22BE1A41972747000A438D2 /* DXEAppDelegate.m in Sources */,
 				D204928D198D4EAD00D8187E /* DXETipsColletionViewCell.m in Sources */,
+				D290288519D711220093AF33 /* DXERecordDetailView.m in Sources */,
 				D246598C1973FAFA0010B1B6 /* DXEHomePageViewController.m in Sources */,
 				D290282B19D088740093AF33 /* DXEDiningRecord.m in Sources */,
 				D290288119D5C1AD0093AF33 /* CRScrollMenuController.m in Sources */,
