@@ -9,6 +9,7 @@
 #import "DXEAppDelegate.h"
 #import "RNThemeManager.h"
 #import "DXEOpenViewController.h"
+#import "DXEMainViewController.h"
 #import "DXEDishDataManager.h"
 #import "DXEImageManager.h"
 
@@ -24,8 +25,11 @@
     [[DXEImageManager sharedInstance] updateImageWithKeys:[[DXEDishDataManager sharedInstance] imageKeys]];
     
     DXEOpenViewController *open = [[DXEOpenViewController alloc] init];
-    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:open];
-    self.window.rootViewController = navi;
+    DXEMainViewController *main = [[DXEMainViewController alloc] init];
+    [main addChildViewController:open];
+    [main.view addSubview:open.view];
+    [open didMoveToParentViewController:main];
+    self.window.rootViewController = main;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -59,17 +63,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-- (void)customizeNavigationBar
-{
-    UIImage *backgroundImage = nil;
-    NSDictionary *textAttributes = nil;
-    
-    [[UINavigationBar appearance] setBackgroundImage:backgroundImage
-                                       forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 }
 
 @end

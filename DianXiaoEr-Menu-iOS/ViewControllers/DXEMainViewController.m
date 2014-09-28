@@ -19,7 +19,7 @@
 #import "DXEMember.h"
 #import "DXEDiningRecord.h"
 #import "DXERecordDishItem.h"
-#import "DXEMemberLoginView.h"
+#import "DXELoginView.h"
 
 #define DXE_TEST_MEMBER
 
@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
 
 @interface DXEMainViewController () < CRTabBarDelegate >
 
-@property (nonatomic, strong) DXEMemberLoginView *loginView;
+@property (nonatomic, strong) DXELoginView *loginView;
 
 @end
 
@@ -153,11 +153,6 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
     }
     self.selectedViewController = homepage;
     [self.view addSubview:homepage.view];
-    
-    NSString *nibName = NSStringFromClass([DXEMemberLoginView class]);
-    self.loginView = [[[NSBundle mainBundle] loadNibNamed:nibName
-                                                    owner:self
-                                                  options:nil] firstObject];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -196,8 +191,13 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
         DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexMyself];
         if (!myself.login)
         {
-            self.loginView.userName.text = @"";
-            self.loginView.password.text = @"";
+            NSString *nibName = NSStringFromClass([DXELoginView class]);
+            self.loginView = [[[NSBundle mainBundle] loadNibNamed:nibName
+                                                            owner:self
+                                                          options:nil] firstObject];
+            self.loginView.controller = self;
+            self.loginView.userNamePlaceholder = @"会员卡号/手机号码";
+            self.loginView.loginFailedMessage.text = @"用户名或密码输入错误，请重新输入！";
             [CRModal showModalView:self.loginView
                        coverOption:CRModalOptionCoverDark
                tapOutsideToDismiss:NO
@@ -240,12 +240,7 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
     
 }
 
-- (IBAction)onMemberLoginViewCloseButtonClicked:(id)sender
-{
-    [CRModal dismiss];
-}
-
-- (IBAction)onMemberLoginViewLoginButtonClicked:(id)sender
+- (void)onLoginButtonClickedInLoginView:(DXELoginView *)loginView
 {
     DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexMyself];
     myself.member = [[DXEMember alloc] initWithJSONData:[self testMemberData]];

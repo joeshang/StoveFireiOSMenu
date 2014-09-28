@@ -24,5 +24,9 @@
 	<string>E9A83D</string>
 	<key>Order.Empty.FontColor</key>
 	<string>888888</string>
+	<key>Login.HighlightColor</key>
+	<string>BE9C54</string>
+	<key>Login.Button.BackgroundColor</key>
+	<string>AA1F24</string>
 </dict>
 </plist>

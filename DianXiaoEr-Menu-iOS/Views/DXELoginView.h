@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DXEMemberLoginView : UIView
+@interface DXELoginView : UIView
 
 @property (weak, nonatomic) IBOutlet UITextField *userName;
 @property (weak, nonatomic) IBOutlet UITextField *password;
+@property (weak, nonatomic) IBOutlet UILabel *loginFailedMessage;
+
+@property (weak, nonatomic) id controller;
+
+@property (strong, nonatomic) NSString *userNamePlaceholder;
 
 @end

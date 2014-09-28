@@ -88,8 +88,8 @@
 		D290286919D33BA60093AF33 /* DXEOrderProgressTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D290286819D33BA60093AF33 /* DXEOrderProgressTitleView.xib */; };
 		D290286B19D351C70093AF33 /* DXEOriginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D290286A19D351C70093AF33 /* DXEOriginViewController.m */; };
 		D290286F19D3539B0093AF33 /* origin_content@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D290286E19D3539B0093AF33 /* origin_content@2x.png */; };
-		D290287219D35A860093AF33 /* DXEMemberLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = D290287119D35A860093AF33 /* DXEMemberLoginView.m */; };
-		D290287419D35A9D0093AF33 /* DXEMemberLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D290287319D35A9D0093AF33 /* DXEMemberLoginView.xib */; };
+		D290287219D35A860093AF33 /* DXELoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = D290287119D35A860093AF33 /* DXELoginView.m */; };
+		D290287419D35A9D0093AF33 /* DXELoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D290287319D35A9D0093AF33 /* DXELoginView.xib */; };
 		D290287919D35B700093AF33 /* member_login_brand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D290287519D35B700093AF33 /* member_login_brand@2x.png */; };
 		D290287A19D35B700093AF33 /* member_login_close_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D290287619D35B700093AF33 /* member_login_close_button@2x.png */; };
 		D290287B19D35B700093AF33 /* member_login_password_icon@2x.png.png in Resources */ = {isa = PBXBuildFile; fileRef = D290287719D35B700093AF33 /* member_login_password_icon@2x.png.png */; };
@@ -238,9 +238,9 @@
 		D290286819D33BA60093AF33 /* DXEOrderProgressTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOrderProgressTitleView.xib; path = Views/DXEOrderProgressTitleView.xib; sourceTree = "<group>"; };
 		D290286A19D351C70093AF33 /* DXEOriginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXEOriginViewController.m; sourceTree = "<group>"; };
 		D290286E19D3539B0093AF33 /* origin_content@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "origin_content@2x.png"; sourceTree = "<group>"; };
-		D290287019D35A860093AF33 /* DXEMemberLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEMemberLoginView.h; path = Views/DXEMemberLoginView.h; sourceTree = "<group>"; };
-		D290287119D35A860093AF33 /* DXEMemberLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEMemberLoginView.m; path = Views/DXEMemberLoginView.m; sourceTree = "<group>"; };
-		D290287319D35A9D0093AF33 /* DXEMemberLoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEMemberLoginView.xib; path = Views/DXEMemberLoginView.xib; sourceTree = "<group>"; };
+		D290287019D35A860093AF33 /* DXELoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXELoginView.h; path = Views/DXELoginView.h; sourceTree = "<group>"; };
+		D290287119D35A860093AF33 /* DXELoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXELoginView.m; path = Views/DXELoginView.m; sourceTree = "<group>"; };
+		D290287319D35A9D0093AF33 /* DXELoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXELoginView.xib; path = Views/DXELoginView.xib; sourceTree = "<group>"; };
 		D290287519D35B700093AF33 /* member_login_brand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "member_login_brand@2x.png"; sourceTree = "<group>"; };
 		D290287619D35B700093AF33 /* member_login_close_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "member_login_close_button@2x.png"; sourceTree = "<group>"; };
 		D290287719D35B700093AF33 /* member_login_password_icon@2x.png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "member_login_password_icon@2x.png.png"; sourceTree = "<group>"; };
@@ -629,9 +629,9 @@
 				D290288319D711220093AF33 /* DXERecordDetailView.h */,
 				D290288419D711220093AF33 /* DXERecordDetailView.m */,
 				D290288619D7113E0093AF33 /* DXERecordDetailView.xib */,
-				D290287019D35A860093AF33 /* DXEMemberLoginView.h */,
-				D290287119D35A860093AF33 /* DXEMemberLoginView.m */,
-				D290287319D35A9D0093AF33 /* DXEMemberLoginView.xib */,
+				D290287019D35A860093AF33 /* DXELoginView.h */,
+				D290287119D35A860093AF33 /* DXELoginView.m */,
+				D290287319D35A9D0093AF33 /* DXELoginView.xib */,
 			);
 			name = Myself;
 			sourceTree = "<group>";
@@ -739,7 +739,7 @@
 				D290283919D1728A0093AF33 /* myself_record_detail_button@2x.png in Resources */,
 				D273A3DD19C73CDE0081BB37 /* dish_cell_favor_hollow_icon@2x.png in Resources */,
 				D290282719D0784D0093AF33 /* DXERecordTableViewCell.xib in Resources */,
-				D290287419D35A9D0093AF33 /* DXEMemberLoginView.xib in Resources */,
+				D290287419D35A9D0093AF33 /* DXELoginView.xib in Resources */,
 				D273A46619C9D4DF0081BB37 /* DXEEnsureOrderingView.xib in Resources */,
 				D290283519D169810093AF33 /* myself_avatar_background@2x.png in Resources */,
 				D207123A1974D7F500E34770 /* DXEMyselfViewController.xib in Resources */,
@@ -855,7 +855,7 @@
 				D290282E19D089ED0093AF33 /* DXERecordDishItem.m in Sources */,
 				D290286719D33B460093AF33 /* DXEOrderProgressTitleView.m in Sources */,
 				D290282219D06B390093AF33 /* DXEMember.m in Sources */,
-				D290287219D35A860093AF33 /* DXEMemberLoginView.m in Sources */,
+				D290287219D35A860093AF33 /* DXELoginView.m in Sources */,
 				D273A45E19C98D0E0081BB37 /* DXEOrderCartTableViewCell.m in Sources */,
 				D273A46419C9D48C0081BB37 /* DXEEnsureOrderingView.m in Sources */,
 				D207122A1974D7BE00E34770 /* DXEQuestionnaireViewController.m in Sources */,

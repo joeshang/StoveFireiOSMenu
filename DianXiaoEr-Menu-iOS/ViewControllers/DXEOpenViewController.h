@@ -10,9 +10,4 @@
 
 @interface DXEOpenViewController : UIViewController
 
-@property (nonatomic, weak) IBOutlet UIButton *loginButton;
-@property (nonatomic, weak) IBOutlet UIImageView *backgroundImage;
-
-- (IBAction)onLoginButtonClicked:(id)sender;
-
 @end

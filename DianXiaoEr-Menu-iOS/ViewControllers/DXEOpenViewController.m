@@ -7,10 +7,13 @@
 //
 
 #import "DXEOpenViewController.h"
-#import "RNThemeManager.h"
 #import "DXEMainViewController.h"
+#import "DXELoginView.h"
+#import "CRModal.h"
 
 @interface DXEOpenViewController ()
+
+@property (nonatomic, strong) DXELoginView *loginView;
 
 @end
 
@@ -49,10 +52,40 @@
 
 #pragma mark - Target-Action
 
-- (IBAction)onLoginButtonClicked:(id)sender
+- (IBAction)onEnterButtonClicked:(id)sender
 {
-    DXEMainViewController *main = [[DXEMainViewController alloc] init];
-    [[UIApplication sharedApplication] keyWindow].rootViewController = main;
+    NSString *nibName = NSStringFromClass([DXELoginView class]);
+    self.loginView = [[[NSBundle mainBundle] loadNibNamed:nibName
+                                                    owner:self
+                                                  options:nil] firstObject];
+    self.loginView.controller = self;
+    self.loginView.userNamePlaceholder = @"工号";
+    self.loginView.loginFailedMessage.text = @"工号或密码输入错误，请重新输入！";
+    [CRModal showModalView:self.loginView
+               coverOption:CRModalOptionCoverDark
+       tapOutsideToDismiss:NO
+                  animated:YES
+                completion:^{
+                    [UIView animateWithDuration:0.3
+                                     animations:^{
+                                         self.view.alpha = 0.0;
+                                     }
+                                     completion:^(BOOL finished){
+                                         [self willMoveToParentViewController:nil];
+                                         [self.view removeFromSuperview];
+                                         [self removeFromParentViewController];
+                                     }];
+                }];
+}
+
+- (IBAction)onChoosingTableButtonClicked:(id)sender
+{
+    
+}
+
+- (void)onLoginButtonClickedInLoginView:(DXELoginView *)loginView
+{
+    [CRModal dismiss];
 }
 
 @end
