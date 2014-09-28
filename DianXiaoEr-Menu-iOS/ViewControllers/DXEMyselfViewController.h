@@ -15,19 +15,9 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *memberImage;
 @property (weak, nonatomic) IBOutlet UILabel *memberUppercaseName;
-@property (weak, nonatomic) IBOutlet UILabel *accountTitle;
-@property (weak, nonatomic) IBOutlet UIImageView *accountUnderline;
-@property (weak, nonatomic) IBOutlet UILabel *recordTitle;
-@property (weak, nonatomic) IBOutlet UIImageView *recordUnderline;
 @property (weak, nonatomic) IBOutlet UILabel *memberName;
 @property (weak, nonatomic) IBOutlet UILabel *memberPhone;
 @property (weak, nonatomic) IBOutlet UILabel *memberAccount;
-@property (weak, nonatomic) IBOutlet UIImageView *memberNameIcon;
-@property (weak, nonatomic) IBOutlet UIImageView *memberPhoneIcon;
-@property (weak, nonatomic) IBOutlet UIImageView *memberAccountIcon;
-@property (weak, nonatomic) IBOutlet UILabel *memberNameTitle;
-@property (weak, nonatomic) IBOutlet UILabel *memberPhoneTitle;
-@property (weak, nonatomic) IBOutlet UILabel *memberAccountTitle;
 @property (weak, nonatomic) IBOutlet UITableView *recordTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *recordEmptyTips;
 

@@ -19,6 +19,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
+      "filename" : "splash@2x.png",
       "scale" : "2x"
     },
     {

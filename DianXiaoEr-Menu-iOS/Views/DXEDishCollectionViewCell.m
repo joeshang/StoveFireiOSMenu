@@ -21,11 +21,6 @@
     self.layer.borderColor = [[[RNThemeManager sharedManager] colorForKey:@"BorderColor"] CGColor];
     
     self.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
-    UIColor *tintColor = [[RNThemeManager sharedManager] colorForKey:@"DarkenColor"];
-    self.dishName.textColor = tintColor;
-    self.dishEnglishName.textColor = tintColor;
-    self.dishPrice.textColor = tintColor;
-    self.dishFavor.textColor = tintColor;
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(onTapOnDishImage:)];

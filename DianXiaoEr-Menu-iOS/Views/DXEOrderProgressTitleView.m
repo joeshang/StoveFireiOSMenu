@@ -12,12 +12,6 @@
 
 - (void)awakeFromNib
 {
-    UIColor *titleColor = [[RNThemeManager sharedManager] colorForKey:@"NormalColor"];
-    self.nameTitle.textColor = titleColor;
-    self.progressTitle.textColor = titleColor;
-    self.countTitle.textColor = titleColor;
-    self.priceTitle.textColor = titleColor;
-    
     self.contentView.clipsToBounds = YES;
     self.contentView.layer.cornerRadius = kDXECommonCornerRadius;
     self.contentView.layer.borderWidth = kDXECommonBorderWidth;

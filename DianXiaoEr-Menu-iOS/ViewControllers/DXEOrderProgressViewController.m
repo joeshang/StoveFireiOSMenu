@@ -53,18 +53,6 @@
     UIColor *backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
     self.view.backgroundColor = backgroundColor;
     
-    self.todoIcon.image = [[RNThemeManager sharedManager] imageForName:@"order_progress_todo_icon.png"];
-    self.doingIcon.image = [[RNThemeManager sharedManager] imageForName:@"order_progress_doing_icon.png"];
-    self.doneIcon.image = [[RNThemeManager sharedManager] imageForName:@"order_progress_done_icon.png"];
-    UIColor *highlightColor = [[RNThemeManager sharedManager] colorForKey:@"HighlightColor"];
-    self.progressTitle.textColor = highlightColor;
-    self.countTitle.textColor = highlightColor;
-    self.todoTitle.textColor = highlightColor;
-    self.doingTitle.textColor = highlightColor;
-    self.doneTitle.textColor = highlightColor;
-    self.todoCount.textColor = highlightColor;
-    self.doingCount.textColor = highlightColor;
-    self.doneCount.textColor = highlightColor;
     [self updateProgressCounts];
     
     NSString *nibName = NSStringFromClass([DXEOrderProgressTableViewCell class]);
@@ -83,6 +71,7 @@
     int todoCount = 0;
     int doingCount = 0;
     int doneCount = 0;
+    float totalPrice = 0.0;
     
     for (DXEDishItem *item in [DXEOrderManager sharedInstance].order)
     {
@@ -100,11 +89,14 @@
             default:
                 break;
         }
+        
+        totalPrice += [item.price floatValue] * [item.count integerValue];
     }
     
     self.todoCount.text = [NSString stringWithFormat:@"%d", todoCount];
     self.doingCount.text = [NSString stringWithFormat:@"%d", doingCount];
     self.doneCount.text = [NSString stringWithFormat:@"%d", doneCount];
+    self.totalPrice.text = [NSString stringWithFormat:@"%.2f元", totalPrice];
 }
 
 #pragma mark - UITableViewDataSource

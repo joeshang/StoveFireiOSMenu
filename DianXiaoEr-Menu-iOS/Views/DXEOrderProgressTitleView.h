@@ -11,9 +11,5 @@
 @interface DXEOrderProgressTitleView : UIView
 
 @property (weak, nonatomic) IBOutlet UIView  *contentView;
-@property (weak, nonatomic) IBOutlet UILabel *nameTitle;
-@property (weak, nonatomic) IBOutlet UILabel *progressTitle;
-@property (weak, nonatomic) IBOutlet UILabel *countTitle;
-@property (weak, nonatomic) IBOutlet UILabel *priceTitle;
 
 @end

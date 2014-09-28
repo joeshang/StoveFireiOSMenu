@@ -78,7 +78,7 @@
     UIColor *selectedColor =[[RNThemeManager sharedManager] colorForKey:@"HighlightColor"];
     self.scrollMenuController = [[CRScrollMenuController alloc] init];
     self.scrollMenuController.scrollMenuHeight = kDXEHomePageScrollMenuHeight;
-    self.scrollMenuController.scrollMenuBackgroundImage = [[RNThemeManager sharedManager] imageForName:@"scrollmenu_background"];
+    self.scrollMenuController.scrollMenuBackgroundImage = [[RNThemeManager sharedManager] imageForKey:@"scrollmenu_background"];
     self.scrollMenuController.scrollMenuIndicatorColor = selectedColor;
     self.scrollMenuController.scrollMenuIndicatorHeight = kDXEHomePageScrollMenuIndicatorHeight;
     self.scrollMenuController.scrollMenuButtonPadding = kDXEHomePageScrollMenuButtonPadding;

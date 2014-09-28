@@ -11,7 +11,6 @@
 @interface DXEEnsureOrderingView : UIView
 
 @property (weak, nonatomic) IBOutlet UIView *priceView;
-@property (weak, nonatomic) IBOutlet UILabel *totalPriceTitle;
 @property (weak, nonatomic) IBOutlet UILabel *totalPrice;
 
 @end

@@ -17,6 +17,7 @@
 @interface DXEMyselfViewController ()
 
 @property (nonatomic, strong) DXERecordTitleView *titleView;
+@property (nonatomic, strong) DXEDiningRecord *detailedRecord;
 
 @end
 
@@ -44,25 +45,6 @@
     self.memberImage.layer.borderColor = [[UIColor whiteColor] CGColor];
     self.memberImage.layer.borderWidth = 3;
     
-    UIColor *highlightColor = [[RNThemeManager sharedManager] colorForKey:@"HighlightColor"];
-    UIColor *normalColor = [[RNThemeManager sharedManager] colorForKey:@"NormalColor"];
-    
-    UIImage *underline = [[RNThemeManager sharedManager] imageForName:@"myself_title_underline.png"];
-    self.accountTitle.textColor = highlightColor;
-    self.recordTitle.textColor = highlightColor;
-    self.accountUnderline.image = underline;
-    self.recordUnderline.image = underline;
-    
-    self.memberName.textColor = highlightColor;
-    self.memberPhone.textColor = highlightColor;
-    self.memberAccount.textColor = highlightColor;
-    self.memberNameTitle.textColor = normalColor;
-    self.memberPhoneTitle.textColor = normalColor;
-    self.memberAccountTitle.textColor = normalColor;
-    self.memberNameIcon.image = [[RNThemeManager sharedManager] imageForName:@"myself_member_name_icon.png"];
-    self.memberPhoneIcon.image = [[RNThemeManager sharedManager] imageForName:@"myself_member_phone_icon.png"];
-    self.memberAccountIcon.image = [[RNThemeManager sharedManager] imageForName:@"myself_member_account_icon.png"];
-    
     NSString *nibName = NSStringFromClass([DXERecordTitleView class]);
     self.titleView = [[[NSBundle mainBundle] loadNibNamed:nibName
                                                    owner:self
@@ -88,28 +70,49 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.member.records count];
+    if (tableView == self.recordTableView)
+    {
+        return [self.member.records count];
+    }
+    else
+    {
+        return 0;//[self.detailedRecord.dishes count];
+    }
 }
 
 #pragma mark - UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DXEDiningRecord *record = [self.member.records objectAtIndex:indexPath.row];
-    
-    NSString *identifier = NSStringFromClass([DXERecordTableViewCell class]);
-    DXERecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    cell.controller = self;
-    cell.date.text = record.date;
-    cell.dishCount.text = [record.dishCount stringValue];
-    cell.totalPrice.text = [NSString stringWithFormat:@"￥%.2f", [record.totalPrice floatValue]];
-    
-    return cell;
+    if (tableView == self.recordTableView)
+    {
+        DXEDiningRecord *record = [self.member.records objectAtIndex:indexPath.row];
+        
+        NSString *identifier = NSStringFromClass([DXERecordTableViewCell class]);
+        DXERecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        cell.controller = self;
+        cell.date.text = record.date;
+        cell.dishCount.text = [record.dishCount stringValue];
+        cell.totalPrice.text = [NSString stringWithFormat:@"￥%.2f", [record.totalPrice floatValue]];
+        
+        return cell;
+    }
+    else
+    {
+        return nil;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return self.titleView;
+    if (tableView == self.recordTableView)
+    {
+        return self.titleView;
+    }
+    else
+    {
+        return nil;
+    }
 }
 
 #pragma mark - setter
@@ -125,7 +128,7 @@
     if ([member.records count] == 0)
     {
         self.recordEmptyTips.hidden = NO;
-        self.recordEmptyTips.image = [[RNThemeManager sharedManager] imageForName:@"myself_record_empty_flag.png"];
+        self.recordEmptyTips.image = [[RNThemeManager sharedManager] imageForKey:@"myself_record_empty_flag.png"];
     }
     
     [self.recordTableView reloadData];
@@ -136,19 +139,19 @@
 - (void)onDetailButtonClickedInTableCell:(DXERecordTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.recordTableView indexPathForCell:cell];
-    DXEDiningRecord *record = [self.member.records objectAtIndex:indexPath.row];
+    self.detailedRecord = [self.member.records objectAtIndex:indexPath.row];
     DXERecordDetailView *recordDetailView =
     [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([DXERecordDetailView class])
                                    owner:self
                                  options:nil] firstObject];
     CGFloat height = 0.0;
-    if ([record.dishes count] >= 4)
+    if ([self.detailedRecord.dishes count] >= 4)
     {
         height = 730;
     }
     else
     {
-        height = 170 + 140 * [record.dishes count];
+        height = 170 + 140 * [self.detailedRecord.dishes count];
     }
     CGRect rect = recordDetailView.frame;
     rect.size.height = height;

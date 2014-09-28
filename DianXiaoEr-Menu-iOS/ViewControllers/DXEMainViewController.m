@@ -79,7 +79,7 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
     self.topBarBackgroundView = [[UIImageView alloc] init];
     self.topBarBackgroundView.userInteractionEnabled = YES;
     self.topBarBackgroundView.contentMode = UIViewContentModeScaleToFill;
-    self.topBarBackgroundView.image = [[RNThemeManager sharedManager] imageForName:@"navigationbar_background.png"];
+    self.topBarBackgroundView.image = [[RNThemeManager sharedManager] imageForKey:@"navigationbar_background.png"];
     [self.view addSubview:self.topBarBackgroundView];
     
     UIImage *image = [UIImage imageNamed:@"qrcode_button"];
@@ -97,14 +97,14 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
     // TabBar
     self.tabBar = [[CRTabBar alloc] init];
     self.tabBar.delegate = self;
-    self.tabBar.backgroundImage = [[RNThemeManager sharedManager] imageForName:@"tabbar_background.png"];
+    self.tabBar.backgroundImage = [[RNThemeManager sharedManager] imageForKey:@"tabbar_background.png"];
     NSArray *titles = @[@"首 页", @"起 源", @"问 卷", @"已点菜品", @"我"];
     NSArray *prefix = @[@"homepage", @"origin", @"questionnaire", @"order", @"myself"];
     NSMutableArray *items = [NSMutableArray arrayWithCapacity:[titles count]];
     [titles enumerateObjectsUsingBlock:^(NSString *title, NSUInteger index, BOOL *stop){
-        UIImage *selectedImage = [[RNThemeManager sharedManager] imageForName:
+        UIImage *selectedImage = [[RNThemeManager sharedManager] imageForKey:
             [NSString stringWithFormat:@"%@_tabbar_selected.png", [prefix objectAtIndex:index]]];
-        UIImage *normalImage = [[RNThemeManager sharedManager] imageForName:
+        UIImage *normalImage = [[RNThemeManager sharedManager] imageForKey:
             [NSString stringWithFormat:@"%@_tabbar_normal.png", [prefix objectAtIndex:index]]];
         CRTabBarItem *item = [[CRTabBarItem alloc] initWithTitle:title
                                                      normalImage:normalImage

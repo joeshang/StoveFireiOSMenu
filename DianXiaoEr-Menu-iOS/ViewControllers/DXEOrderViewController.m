@@ -95,7 +95,7 @@ typedef NS_ENUM(NSUInteger, DXEOrderOperation)
                                                                      CGRectGetWidth(self.view.bounds),
                                                                      kDXEOrderScrollMenuHeight)];
     self.scrollMenu.delegate = self;
-    self.scrollMenu.backgroundImage = [[RNThemeManager sharedManager] imageForName:@"scrollmenu_background"];
+    self.scrollMenu.backgroundImage = [[RNThemeManager sharedManager] imageForKey:@"scrollmenu_background"];
     self.scrollMenu.indicatorColor = selectedColor;
     self.scrollMenu.indicatorHeight = kDXEOrderScrollMenuIndicatorHeight;
     self.scrollMenu.buttonPadding = kDXEOrderScrollMenuButtonPadding;

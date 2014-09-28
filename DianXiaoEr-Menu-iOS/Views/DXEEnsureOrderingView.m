@@ -12,10 +12,6 @@
 
 - (void)awakeFromNib
 {
-    UIColor *fontColor = [[RNThemeManager sharedManager] colorForKey:@"Order.EnsureOrdering.FontColor"];
-    self.totalPrice.textColor = fontColor;
-    self.totalPriceTitle.textColor = fontColor;
-    
     self.priceView.clipsToBounds = YES;
     self.priceView.layer.cornerRadius = kDXECommonCornerRadius;
     self.priceView.layer.borderWidth = kDXECommonBorderWidth;

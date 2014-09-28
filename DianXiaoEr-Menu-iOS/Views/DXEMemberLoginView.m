@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib
 {
-    UIColor *color = [UIColor colorWithHexString:@"BE9C54"];
+    UIColor *color = [UIColor rn_colorWithHexString:@"BE9C54"];
     NSDictionary *attributes = @{
                                  NSFontAttributeName: [UIFont systemFontOfSize:18],
                                  NSForegroundColorAttributeName: color

@@ -19,15 +19,8 @@
     self.layer.cornerRadius = kDXEDishDetailViewCornerRadius;
     self.layer.borderWidth = kDXECommonBorderWidth;
     self.layer.borderColor = [borderColor CGColor];
-    self.separator.backgroundColor = borderColor;
     
     self.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
-    UIColor *tintColor = [[RNThemeManager sharedManager] colorForKey:@"DarkenColor"];
-    self.dishName.textColor = tintColor;
-    self.dishEnglishName.textColor = tintColor;
-    self.dishPrice.textColor = tintColor;
-    self.dishFavor.textColor = tintColor;
-    self.dishIngredient.textColor = tintColor;
 }
 
 @end

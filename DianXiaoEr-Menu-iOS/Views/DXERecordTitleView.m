@@ -12,13 +12,6 @@
 
 - (void)awakeFromNib
 {
-    UIColor *titleColor = [[RNThemeManager sharedManager] colorForKey:@"NormalColor"];
-    self.recordTitle.textColor = titleColor;
-    self.dateTitle.textColor = titleColor;
-    self.dishCountTitle.textColor = titleColor;
-    self.totalPriceTitle.textColor = titleColor;
-    self.detailTitle.textColor = titleColor;
-    
     self.contentView.clipsToBounds = YES;
     self.contentView.layer.cornerRadius = kDXECommonCornerRadius;
     self.contentView.layer.borderWidth = kDXECommonBorderWidth;

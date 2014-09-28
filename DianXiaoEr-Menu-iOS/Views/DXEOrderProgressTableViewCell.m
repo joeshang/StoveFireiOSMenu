@@ -13,8 +13,8 @@
 - (void)awakeFromNib
 {
     self.contentView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
-    self.backgroundImageView.image = [[RNThemeManager sharedManager] imageForName:@"order_progress_cell_background.png"];
-    self.backgroundImageView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"Cell.BackgroundColor"];
+    self.backgroundImageView.image = [[RNThemeManager sharedManager] imageForKey:@"order_progress_cell_background.png"];
+    self.backgroundImageView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
     
     UIColor *highlightColor = [[RNThemeManager sharedManager] colorForKey:@"HighlightColor"];
     UIColor *normalColor = [[RNThemeManager sharedManager] colorForKey:@"NormalColor"];
@@ -33,8 +33,8 @@
 {
     UIColor *highlightColor = [[RNThemeManager sharedManager] colorForKey:@"HighlightColor"];
     UIColor *darkenColor = [[RNThemeManager sharedManager] colorForKey:@"DarkenColor"];
-    UIImage *lightPoint = [[RNThemeManager sharedManager] imageForName:@"order_progress_light_point.png"];
-    UIImage *darkPoint = [[RNThemeManager sharedManager] imageForName:@"order_progress_dark_point.png"];
+    UIImage *lightPoint = [[RNThemeManager sharedManager] imageForKey:@"order_progress_light_point.png"];
+    UIImage *darkPoint = [[RNThemeManager sharedManager] imageForKey:@"order_progress_dark_point.png"];
     
     switch (cellState) {
         case DXEDishProgressTodo:
