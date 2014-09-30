@@ -23,8 +23,6 @@
 
 #define DXE_TEST_MEMBER
 
-#define kDXEQrCodeButtonOriginX         660
-#define kDXEQrCodeButtonOriginY         25
 #define kDXETabBarTitleFontSize         12
 #define kDXEOrderBadgeFontSize          13
 
@@ -74,25 +72,6 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // TopBar
-    self.topBarBackgroundView = [[UIImageView alloc] init];
-    self.topBarBackgroundView.userInteractionEnabled = YES;
-    self.topBarBackgroundView.contentMode = UIViewContentModeScaleToFill;
-    self.topBarBackgroundView.image = [[RNThemeManager sharedManager] imageForKey:@"navigationbar_background.png"];
-    [self.view addSubview:self.topBarBackgroundView];
-    
-    UIImage *image = [UIImage imageNamed:@"qrcode_button"];
-    CGSize imageSize = [image size];
-    self.qrCodeButton = [[UIButton alloc] initWithFrame:CGRectMake(kDXEQrCodeButtonOriginX,
-                                                                   kDXEQrCodeButtonOriginY,
-                                                                   imageSize.width,
-                                                                   imageSize.height)];
-    [self.qrCodeButton setImage:image forState:UIControlStateNormal];
-    [self.qrCodeButton addTarget:self
-                          action:@selector(onQRcodeButtonClicked:)
-                forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.qrCodeButton];
     
     // TabBar
     self.tabBar = [[CRTabBar alloc] init];
@@ -159,10 +138,6 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
 {
     [super viewWillAppear:animated];
     
-    self.topBarBackgroundView.frame = CGRectMake(0,
-                                                 0,
-                                                 CGRectGetWidth(self.view.bounds),
-                                                 kDXENavigationBarHeight);
     self.tabBar.frame = CGRectMake(0,
                                    CGRectGetHeight(self.view.bounds) - kDXETabBarHeight,
                                    CGRectGetWidth(self.view.bounds),
@@ -235,7 +210,7 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
 
 #pragma mark - notification
 
-- (void)onQRcodeButtonClicked:(id)sender
+- (IBAction)onQRcodeButtonClicked:(id)sender
 {
     
 }

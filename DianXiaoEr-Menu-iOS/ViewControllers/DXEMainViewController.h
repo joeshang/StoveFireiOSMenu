@@ -12,8 +12,6 @@
 
 @interface DXEMainViewController : UIViewController
 
-@property (nonatomic, strong) UIImageView *topBarBackgroundView;
-@property (nonatomic, strong) UIButton *qrCodeButton;
 @property (nonatomic, strong) CRTabBar *tabBar;
 @property (nonatomic, strong) NSArray *contentViewControllers;
 @property (nonatomic, strong) UIViewController *selectedViewController;

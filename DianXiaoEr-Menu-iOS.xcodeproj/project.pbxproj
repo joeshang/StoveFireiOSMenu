@@ -99,6 +99,9 @@
 		D290288519D711220093AF33 /* DXERecordDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = D290288419D711220093AF33 /* DXERecordDetailView.m */; };
 		D290288719D7113E0093AF33 /* DXERecordDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D290288619D7113E0093AF33 /* DXERecordDetailView.xib */; };
 		D290288919D7E3140093AF33 /* splash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D290288819D7E3140093AF33 /* splash@2x.png */; };
+		D290288E19DA93E20093AF33 /* DXERecordDetailFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D290288D19DA93E20093AF33 /* DXERecordDetailFooterView.m */; };
+		D290289019DA94340093AF33 /* DXERecordDetailFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D290288F19DA94340093AF33 /* DXERecordDetailFooterView.xib */; };
+		D290289219DA9B3C0093AF33 /* DXEMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D290289119DA9B3C0093AF33 /* DXEMainViewController.xib */; };
 		D2981E2219B85AA900DD22E2 /* test_dish_class@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2019B85AA900DD22E2 /* test_dish_class@2x.png */; };
 		D2981E2E19B8A93E00DD22E2 /* DXEDishDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2981E2D19B8A93E00DD22E2 /* DXEDishDetailView.m */; };
 		D2981E3019B8A96400DD22E2 /* DXEDishDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2981E2F19B8A96400DD22E2 /* DXEDishDetailView.xib */; };
@@ -253,6 +256,10 @@
 		D290288419D711220093AF33 /* DXERecordDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXERecordDetailView.m; path = Views/DXERecordDetailView.m; sourceTree = "<group>"; };
 		D290288619D7113E0093AF33 /* DXERecordDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXERecordDetailView.xib; path = Views/DXERecordDetailView.xib; sourceTree = "<group>"; };
 		D290288819D7E3140093AF33 /* splash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash@2x.png"; sourceTree = "<group>"; };
+		D290288C19DA93E20093AF33 /* DXERecordDetailFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXERecordDetailFooterView.h; path = Views/DXERecordDetailFooterView.h; sourceTree = "<group>"; };
+		D290288D19DA93E20093AF33 /* DXERecordDetailFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXERecordDetailFooterView.m; path = Views/DXERecordDetailFooterView.m; sourceTree = "<group>"; };
+		D290288F19DA94340093AF33 /* DXERecordDetailFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXERecordDetailFooterView.xib; path = Views/DXERecordDetailFooterView.xib; sourceTree = "<group>"; };
+		D290289119DA9B3C0093AF33 /* DXEMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEMainViewController.xib; path = ViewControllers/DXEMainViewController.xib; sourceTree = "<group>"; };
 		D2981E2019B85AA900DD22E2 /* test_dish_class@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test_dish_class@2x.png"; sourceTree = "<group>"; };
 		D2981E2C19B8A93E00DD22E2 /* DXEDishDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEDishDetailView.h; path = Views/DXEDishDetailView.h; sourceTree = "<group>"; };
 		D2981E2D19B8A93E00DD22E2 /* DXEDishDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEDishDetailView.m; path = Views/DXEDishDetailView.m; sourceTree = "<group>"; };
@@ -539,6 +546,7 @@
 			children = (
 				D273A43619C81FA00081BB37 /* DXEMainViewController.h */,
 				D273A43719C81FA00081BB37 /* DXEMainViewController.m */,
+				D290289119DA9B3C0093AF33 /* DXEMainViewController.xib */,
 				D20712091974D0FA00E34770 /* HomePage */,
 				D207120B1974D12800E34770 /* Origin */,
 				D207120D1974D13D00E34770 /* Questionnaire */,
@@ -629,6 +637,9 @@
 				D290288319D711220093AF33 /* DXERecordDetailView.h */,
 				D290288419D711220093AF33 /* DXERecordDetailView.m */,
 				D290288619D7113E0093AF33 /* DXERecordDetailView.xib */,
+				D290288C19DA93E20093AF33 /* DXERecordDetailFooterView.h */,
+				D290288D19DA93E20093AF33 /* DXERecordDetailFooterView.m */,
+				D290288F19DA94340093AF33 /* DXERecordDetailFooterView.xib */,
 				D290287019D35A860093AF33 /* DXELoginView.h */,
 				D290287119D35A860093AF33 /* DXELoginView.m */,
 				D290287319D35A9D0093AF33 /* DXELoginView.xib */,
@@ -747,6 +758,7 @@
 				D290287919D35B700093AF33 /* member_login_brand@2x.png in Resources */,
 				D273A44219C885A10081BB37 /* dish_cell_add2cart_button.png in Resources */,
 				D26026F71999F2DF004D6579 /* DXEOpenViewController.xib in Resources */,
+				D290289019DA94340093AF33 /* DXERecordDetailFooterView.xib in Resources */,
 				D273A44319C885A10081BB37 /* dish_cell_add2cart_pressed_button.png in Resources */,
 				D273A47419CAC6160081BB37 /* order_cell_decrease_normal_button@2x.png in Resources */,
 				D207122B1974D7BE00E34770 /* DXEQuestionnaireViewController.xib in Resources */,
@@ -767,6 +779,7 @@
 				D273A47719CAC6160081BB37 /* order_ensure_ordering_button@2x.png in Resources */,
 				D290286419D2D42A0093AF33 /* DXEOrderProgressTableViewCell.xib in Resources */,
 				D273A3DE19C73CDE0081BB37 /* dish_cell_favor_solid_icon@2x.png in Resources */,
+				D290289219DA9B3C0093AF33 /* DXEMainViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -845,6 +858,7 @@
 				D246598C1973FAFA0010B1B6 /* DXEHomePageViewController.m in Sources */,
 				D290282B19D088740093AF33 /* DXEDiningRecord.m in Sources */,
 				D290288119D5C1AD0093AF33 /* CRScrollMenuController.m in Sources */,
+				D290288E19DA93E20093AF33 /* DXERecordDetailFooterView.m in Sources */,
 				D29FAB5619B5C1E000E667D4 /* DXEDishClass.m in Sources */,
 				D290282619D0784D0093AF33 /* DXERecordTableViewCell.m in Sources */,
 				D29FAB5D19B603A000E667D4 /* DXEDishDataManager.m in Sources */,

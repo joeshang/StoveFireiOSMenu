@@ -8,16 +8,28 @@
 
 #import "DXEMyselfViewController.h"
 #import "DXEMember.h"
+#import "DXEDishItem.h"
 #import "DXERecordTableViewCell.h"
 #import "DXEDiningRecord.h"
 #import "DXERecordTitleView.h"
 #import "DXERecordDetailView.h"
+#import "DXERecordDetailFooterView.h"
+#import "DXEOrderCartTableViewCell.h"
+#import "DXEOrderCartTitleView.h"
 #import "CRModal.h"
+
+#define kDXERecordDetailCellWidth           594
+#define kDXERecordDetailCellHeight          140
+#define kDXERecordDetailExceptCellHeight    180
+#define kDXERecordDetailMaxShowCount        4
+#define kDXERecordDetailCountCenterX        352
+#define kDXERecordDetailTotalPriceCenterX   497
 
 @interface DXEMyselfViewController ()
 
-@property (nonatomic, strong) DXERecordTitleView *titleView;
 @property (nonatomic, strong) DXEDiningRecord *detailedRecord;
+@property (nonatomic, strong) DXERecordDetailView *recordDetailView;
+@property (nonatomic, strong) DXERecordDetailFooterView *recordDetailFooterView;
 
 @end
 
@@ -45,15 +57,22 @@
     self.memberImage.layer.borderColor = [[UIColor whiteColor] CGColor];
     self.memberImage.layer.borderWidth = 3;
     
-    NSString *nibName = NSStringFromClass([DXERecordTitleView class]);
-    self.titleView = [[[NSBundle mainBundle] loadNibNamed:nibName
-                                                   owner:self
-                                                  options:nil] firstObject];
-    
-    nibName = NSStringFromClass([DXERecordTableViewCell class]);
+    NSString *nibName = NSStringFromClass([DXERecordTableViewCell class]);
     [self.recordTableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
                forCellReuseIdentifier:nibName];
     self.recordTableView.backgroundColor = backgroundColor;
+    
+    nibName = NSStringFromClass([DXERecordDetailView class]);
+    self.recordDetailView = [[[NSBundle mainBundle] loadNibNamed:nibName
+                                                           owner:self
+                                                         options:nil] firstObject];
+    nibName = NSStringFromClass([DXEOrderCartTableViewCell class]);
+    [self.recordDetailView.dishesTableView registerNib:[UINib nibWithNibName:nibName bundle:nil] forCellReuseIdentifier:nibName];
+    
+    nibName = NSStringFromClass([DXERecordDetailFooterView class]);
+    self.recordDetailFooterView = [[[NSBundle mainBundle] loadNibNamed:nibName
+                                                                 owner:self
+                                                               options:nil] firstObject];
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,7 +95,7 @@
     }
     else
     {
-        return 0;//[self.detailedRecord.dishes count];
+        return [self.detailedRecord.dishes count];
     }
 }
 
@@ -99,7 +118,30 @@
     }
     else
     {
-        return nil;
+        DXEDishItem *item = [self.detailedRecord.dishes objectAtIndex:indexPath.row];
+        
+        NSString *identifier = NSStringFromClass([DXEOrderCartTableViewCell class]);
+        DXEOrderCartTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        cell.dishName.text = item.name;
+        cell.dishEnglishName.text = item.englishName;
+        cell.dishPrice.text = [NSString stringWithFormat:@"单价：￥%.2f", [item.price floatValue]];
+        cell.dishTotalPrice.text = [NSString stringWithFormat:@"￥%.2f", [item.price floatValue] * [item.count integerValue]];
+        cell.increaseButton.hidden = YES;
+        cell.decreaseButton.hidden = YES;
+        cell.countUnderline.hidden = YES;
+        cell.deleteButton.hidden = YES;
+        CGPoint center = cell.dishCount.center;
+        center.x = kDXERecordDetailCountCenterX;
+        cell.dishCount.center = center;
+        center = cell.dishTotalPrice.center;
+        center.x = kDXERecordDetailTotalPriceCenterX;
+        cell.dishTotalPrice.center = center;
+        cell.backgroundImageView.image = [[RNThemeManager sharedManager] imageForKey:@"myself_record_detail_cell_background.png"];
+        CGRect frame = cell.frame;
+        frame.size.width = kDXERecordDetailCellWidth;
+        cell.frame = frame;
+        
+        return cell;
     }
 }
 
@@ -107,11 +149,44 @@
 {
     if (tableView == self.recordTableView)
     {
-        return self.titleView;
+        NSString *nibName = NSStringFromClass([DXERecordTitleView class]);
+        DXERecordTitleView *titleView = [[[NSBundle mainBundle] loadNibNamed:nibName
+                                                                       owner:self
+                                                                     options:nil] firstObject];
+        return titleView;
     }
     else
     {
-        return nil;
+        NSString *nibName = NSStringFromClass([DXEOrderCartTitleView class]);
+        DXEOrderCartTitleView *titleView = [[[NSBundle mainBundle] loadNibNamed:nibName
+                                                                       owner:self
+                                                                     options:nil] firstObject];
+        titleView.nameTitle.text = @"菜品";
+        CGRect frame = titleView.frame;
+        frame.size.width = kDXERecordDetailCellWidth;
+        titleView.frame = frame;
+        CGPoint center = titleView.countTitle.center;
+        center.x = kDXERecordDetailCountCenterX;
+        titleView.countTitle.center = center;
+        center = titleView.totalPriceTitle.center;
+        center.x = kDXERecordDetailTotalPriceCenterX;
+        titleView.totalPriceTitle.center = center;
+        
+        return titleView;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (tableView == self.recordTableView)
+    {
+        UIView *nullFooterView = [[UIView alloc] init];
+        nullFooterView.backgroundColor = [UIColor clearColor];
+        return nullFooterView;
+    }
+    else
+    {
+        return self.recordDetailFooterView;
     }
 }
 
@@ -140,24 +215,18 @@
 {
     NSIndexPath *indexPath = [self.recordTableView indexPathForCell:cell];
     self.detailedRecord = [self.member.records objectAtIndex:indexPath.row];
-    DXERecordDetailView *recordDetailView =
-    [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([DXERecordDetailView class])
-                                   owner:self
-                                 options:nil] firstObject];
-    CGFloat height = 0.0;
-    if ([self.detailedRecord.dishes count] >= 4)
+    NSInteger showCount = kDXERecordDetailMaxShowCount;
+    if ([self.detailedRecord.dishes count] < kDXERecordDetailMaxShowCount)
     {
-        height = 730;
+        showCount = [self.detailedRecord.dishes count];
     }
-    else
-    {
-        height = 170 + 140 * [self.detailedRecord.dishes count];
-    }
-    CGRect rect = recordDetailView.frame;
-    rect.size.height = height;
-    recordDetailView.frame = rect;
+    CGRect rect = self.recordDetailView.frame;
+    rect.size.height = kDXERecordDetailExceptCellHeight + showCount * kDXERecordDetailCellHeight;
+    self.recordDetailView.frame = rect;
+    self.recordDetailFooterView.totalPrice.text = [NSString stringWithFormat:@"￥%.2f", [self.detailedRecord.totalPrice floatValue]];
+    [self.recordDetailView.dishesTableView reloadData];
 
-    [CRModal showModalView:recordDetailView
+    [CRModal showModalView:self.recordDetailView
                coverOption:CRModalOptionCoverDark
        tapOutsideToDismiss:NO
                   animated:YES

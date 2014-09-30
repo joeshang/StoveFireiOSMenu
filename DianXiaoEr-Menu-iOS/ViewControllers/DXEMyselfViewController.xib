@@ -40,7 +40,7 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="textColorKey" value="NormalColor"/>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" style="plain" separatorStyle="none" rowHeight="140" sectionHeaderHeight="45" sectionFooterHeight="20" id="dRB-3K-iKd">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" style="plain" separatorStyle="none" rowHeight="140" sectionHeaderHeight="45" sectionFooterHeight="1" id="dRB-3K-iKd">
                     <rect key="frame" x="32" y="520" width="702" height="322"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

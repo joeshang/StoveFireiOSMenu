@@ -10,4 +10,6 @@
 
 @interface DXERecordDetailView : UIView
 
+@property (weak, nonatomic) IBOutlet UITableView *dishesTableView;
+
 @end
