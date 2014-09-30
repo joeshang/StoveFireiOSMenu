@@ -50,6 +50,26 @@
     self.navigationController.navigationBarHidden = NO;
 }
 
+- (void)enterMainPage
+{
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         self.view.alpha = 0.0;
+                     }
+                     completion:^(BOOL finished){
+                         [self willMoveToParentViewController:nil];
+                         [self.view removeFromSuperview];
+                         [self removeFromParentViewController];
+                     }];
+}
+
+#pragma mark - DXEQRCodeViewControllerDelegate
+
+- (void)qrCodeDidScan:(NSString *)codeString
+{
+    self.table.text = codeString;
+}
+
 #pragma mark - Target-Action
 
 - (IBAction)onEnterButtonClicked:(id)sender
@@ -66,21 +86,15 @@
        tapOutsideToDismiss:NO
                   animated:YES
                 completion:^{
-                    [UIView animateWithDuration:0.3
-                                     animations:^{
-                                         self.view.alpha = 0.0;
-                                     }
-                                     completion:^(BOOL finished){
-                                         [self willMoveToParentViewController:nil];
-                                         [self.view removeFromSuperview];
-                                         [self removeFromParentViewController];
-                                     }];
+                    [self enterMainPage];
                 }];
 }
 
 - (IBAction)onChoosingTableButtonClicked:(id)sender
 {
-    
+    DXEQRCodeViewController *scanning = [[DXEQRCodeViewController alloc] init];
+    scanning.delegate = self;
+    [self presentViewController:scanning animated:NO completion:nil];
 }
 
 - (void)onLoginButtonClickedInLoginView:(DXELoginView *)loginView

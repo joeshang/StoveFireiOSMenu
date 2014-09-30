@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DXEOpenViewController">
             <connections>
+                <outlet property="table" destination="URA-hw-NCr" id="0mG-B7-lOj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -60,7 +61,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="B22" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URA-hw-NCr" customClass="RNThemeLabel">
-                    <rect key="frame" x="382" y="544" width="70" height="35"/>
+                    <rect key="frame" x="377" y="544" width="82" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

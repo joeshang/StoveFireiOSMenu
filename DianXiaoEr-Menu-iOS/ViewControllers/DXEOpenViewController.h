@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DXEQRCodeViewController.h"
 
 @interface DXEOpenViewController : UIViewController
+< DXEQRCodeViewControllerDelegate >
+
+@property (weak, nonatomic) IBOutlet UILabel *table;
 
 @end
