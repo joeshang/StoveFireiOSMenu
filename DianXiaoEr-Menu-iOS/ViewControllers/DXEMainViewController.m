@@ -212,7 +212,9 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
 
 - (IBAction)onQRcodeButtonClicked:(id)sender
 {
-    
+    DXEQRCodeViewController *scanning = [[DXEQRCodeViewController alloc] init];
+    scanning.delegate = self;
+    [self presentViewController:scanning animated:NO completion:nil];
 }
 
 - (void)onLoginButtonClickedInLoginView:(DXELoginView *)loginView
@@ -249,6 +251,13 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
             item.badgeValue = [totalCount stringValue];
         }
     }
+}
+
+#pragma mark - DXEQRCodeViewControllerDelegate
+
+- (void)qrCodeDidScan:(NSString *)codeString
+{
+    NSLog(@"%@", codeString);
 }
 
 #ifdef DXE_TEST_MEMBER

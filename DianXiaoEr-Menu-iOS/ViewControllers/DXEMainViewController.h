@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DXEQRCodeViewController.h"
 
 @class CRTabBar;
 
 @interface DXEMainViewController : UIViewController
+< DXEQRCodeViewControllerDelegate >
 
 @property (nonatomic, strong) CRTabBar *tabBar;
 @property (nonatomic, strong) NSArray *contentViewControllers;
