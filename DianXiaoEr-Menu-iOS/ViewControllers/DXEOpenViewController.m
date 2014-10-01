@@ -53,6 +53,8 @@
 - (void)enterMainPage
 {
     [UIView animateWithDuration:0.3
+                          delay:0.3
+                        options:0
                      animations:^{
                          self.view.alpha = 0.0;
                      }
@@ -85,9 +87,7 @@
                coverOption:CRModalOptionCoverDark
        tapOutsideToDismiss:NO
                   animated:YES
-                completion:^{
-                    [self enterMainPage];
-                }];
+                completion:nil];
 }
 
 - (IBAction)onChoosingTableButtonClicked:(id)sender
@@ -100,6 +100,7 @@
 - (void)onLoginButtonClickedInLoginView:(DXELoginView *)loginView
 {
     [CRModal dismiss];
+    [self enterMainPage];
 }
 
 @end
