@@ -71,8 +71,6 @@
 		D290282E19D089ED0093AF33 /* DXERecordDishItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D290282D19D089ED0093AF33 /* DXERecordDishItem.m */; };
 		D290283119D124750093AF33 /* DXERecordTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = D290283019D124750093AF33 /* DXERecordTitleView.m */; };
 		D290283319D124A40093AF33 /* DXERecordTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D290283219D124A40093AF33 /* DXERecordTitleView.xib */; };
-		D290283519D169810093AF33 /* myself_avatar_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D290283419D169810093AF33 /* myself_avatar_background@2x.png */; };
-		D290283919D1728A0093AF33 /* myself_record_detail_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D290283819D1728A0093AF33 /* myself_record_detail_button@2x.png */; };
 		D290284019D1A0190093AF33 /* DXEOrderEmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D290283E19D1A0190093AF33 /* DXEOrderEmptyViewController.m */; };
 		D290284119D1A0190093AF33 /* DXEOrderEmptyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D290283F19D1A0190093AF33 /* DXEOrderEmptyViewController.xib */; };
 		D290285119D1D7EE0093AF33 /* DXEOrderProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D290284F19D1D7EE0093AF33 /* DXEOrderProgressViewController.m */; };
@@ -227,8 +225,6 @@
 		D290282F19D124750093AF33 /* DXERecordTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXERecordTitleView.h; path = Views/DXERecordTitleView.h; sourceTree = "<group>"; };
 		D290283019D124750093AF33 /* DXERecordTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXERecordTitleView.m; path = Views/DXERecordTitleView.m; sourceTree = "<group>"; };
 		D290283219D124A40093AF33 /* DXERecordTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXERecordTitleView.xib; path = Views/DXERecordTitleView.xib; sourceTree = "<group>"; };
-		D290283419D169810093AF33 /* myself_avatar_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myself_avatar_background@2x.png"; sourceTree = "<group>"; };
-		D290283819D1728A0093AF33 /* myself_record_detail_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myself_record_detail_button@2x.png"; sourceTree = "<group>"; };
 		D290283D19D1A0190093AF33 /* DXEOrderEmptyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEOrderEmptyViewController.h; path = ViewControllers/DXEOrderEmptyViewController.h; sourceTree = "<group>"; };
 		D290283E19D1A0190093AF33 /* DXEOrderEmptyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEOrderEmptyViewController.m; path = ViewControllers/DXEOrderEmptyViewController.m; sourceTree = "<group>"; };
 		D290283F19D1A0190093AF33 /* DXEOrderEmptyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DXEOrderEmptyViewController.xib; path = ViewControllers/DXEOrderEmptyViewController.xib; sourceTree = "<group>"; };
@@ -388,8 +384,6 @@
 				D290285E19D2CD000093AF33 /* order_empty_cart_ordered@2x.png */,
 				D290285A19D2C97C0093AF33 /* order_empty_gotohomepage_button@2x.png */,
 				D273A47119CAC6160081BB37 /* order_ensure_ordering_button@2x.png */,
-				D290283819D1728A0093AF33 /* myself_record_detail_button@2x.png */,
-				D290283419D169810093AF33 /* myself_avatar_background@2x.png */,
 				D290287519D35B700093AF33 /* member_login_brand@2x.png */,
 				D290287619D35B700093AF33 /* member_login_close_button@2x.png */,
 				D290287719D35B700093AF33 /* member_login_password_icon@2x.png.png */,
@@ -773,12 +767,10 @@
 				D290289E19DACAD50093AF33 /* qrcode_scanning_box@2x.png in Resources */,
 				D2981E3C19BF08A000DD22E2 /* test_dish_item@2x.png in Resources */,
 				D273A45119C983970081BB37 /* DXEOrderCartViewController.xib in Resources */,
-				D290283919D1728A0093AF33 /* myself_record_detail_button@2x.png in Resources */,
 				D273A3DD19C73CDE0081BB37 /* dish_cell_favor_hollow_icon@2x.png in Resources */,
 				D290282719D0784D0093AF33 /* DXERecordTableViewCell.xib in Resources */,
 				D290287419D35A9D0093AF33 /* DXELoginView.xib in Resources */,
 				D273A46619C9D4DF0081BB37 /* DXEEnsureOrderingView.xib in Resources */,
-				D290283519D169810093AF33 /* myself_avatar_background@2x.png in Resources */,
 				D290289D19DACAD50093AF33 /* qrcode_return_button@2x.png in Resources */,
 				D207123A1974D7F500E34770 /* DXEMyselfViewController.xib in Resources */,
 				D20712261974D7AC00E34770 /* DXEOriginViewController.xib in Resources */,
@@ -1044,6 +1036,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DianXiaoEr-Menu-iOS/DianXiaoEr-Menu-iOS-Prefix.pch";
 				INFOPLIST_FILE = "DianXiaoEr-Menu-iOS/DianXiaoEr-Menu-iOS-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

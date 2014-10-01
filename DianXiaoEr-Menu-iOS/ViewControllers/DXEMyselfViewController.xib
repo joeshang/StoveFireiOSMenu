@@ -21,9 +21,12 @@
             <rect key="frame" x="0.0" y="0.0" width="768" height="859"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myself_avatar_background.png" id="W45-7c-Myh">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="W45-7c-Myh" customClass="RNThemedImageView">
                     <rect key="frame" x="0.0" y="103" width="768" height="161"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="imageKey" value="myself_avatar_background.png"/>
+                    </userDefinedRuntimeAttributes>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="b8y-Ac-iXR">
                     <rect key="frame" x="303" y="38" width="163" height="163"/>
@@ -167,7 +170,4 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>
     </objects>
-    <resources>
-        <image name="myself_avatar_background.png" width="769" height="162"/>
-    </resources>
 </document>

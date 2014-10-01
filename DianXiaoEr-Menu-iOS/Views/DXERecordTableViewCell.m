@@ -13,18 +13,7 @@
 - (void)awakeFromNib
 {
     self.contentView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
-    self.backgroundImageView.image = [[RNThemeManager sharedManager] imageForKey:@"myself_record_cell_background.png"];
     self.backgroundImageView.backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"Cell.BackgroundColor"];
-    
-    self.brand.image = [[RNThemeManager sharedManager] imageForKey:@"myself_record_brand.png"];
-    
-    UIColor *fontColor = [[RNThemeManager sharedManager] colorForKey:@"HighlightColor"];
-    self.date.textColor = fontColor;
-    self.dishCount.textColor = fontColor;
-    self.totalPrice.textColor = fontColor;
-    
-    [self.detailButton setImage:[[RNThemeManager sharedManager] imageForKey:@"myself_record_detail_button.png"]
-                       forState:UIControlStateNormal];
 }
 
 - (IBAction)onDetailButtonClicked:(id)sender

@@ -13,13 +13,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="357" height="597"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WYt-MK-oMy">
+                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WYt-MK-oMy">
                         <rect key="frame" x="0.0" y="0.0" width="357" height="490"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <imageView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="5lv-Qv-GM5">
                         <rect key="frame" x="0.0" y="0.0" width="357" height="490"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </imageView>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dish_cell_soldout_flag.png" id="Q8a-d1-nxm">
@@ -89,7 +89,6 @@
                         <state key="normal" image="dish_cell_add2cart_button.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
-                        <state key="highlighted" image="dish_cell_add2cart_pressed_button.png"/>
                         <connections>
                             <action selector="onCartButtonClicked:" destination="lGy-eV-7UU" eventType="touchUpInside" id="fmN-R8-i1I"/>
                         </connections>
@@ -126,7 +125,6 @@
     </objects>
     <resources>
         <image name="dish_cell_add2cart_button.png" width="122" height="45"/>
-        <image name="dish_cell_add2cart_pressed_button.png" width="122" height="45"/>
         <image name="dish_cell_cart_icon.png" width="28" height="23"/>
         <image name="dish_cell_favor_hollow_icon.png" width="19" height="16"/>
         <image name="dish_cell_incart_flag.png" width="48" height="66"/>
