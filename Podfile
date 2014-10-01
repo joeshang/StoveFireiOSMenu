@@ -3,3 +3,4 @@ pod 'RNThemeManager', :podspec => 'https://raw.githubusercontent.com/joeshang/RN
 pod 'CHTCollectionViewWaterfallLayout'
 pod 'NSObject-ObjectMap'
 pod 'SDWebImage'
+pod 'BCGenieEffect'

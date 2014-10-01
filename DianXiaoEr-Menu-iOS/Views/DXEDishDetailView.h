@@ -21,5 +21,6 @@
 @property (weak, nonatomic) IBOutlet UIView *separator;
 @property (weak, nonatomic) IBOutlet UITextView *dishIngredient;
 @property (weak, nonatomic) IBOutlet UIImageView *inCartFlag;
+@property (weak, nonatomic) IBOutlet UIImageView *cartIcon;
 
 @end

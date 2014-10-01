@@ -14,6 +14,7 @@
 #import "DXEDishClass.h"
 #import "DXEImageManager.h"
 #import "DXEOrderManager.h"
+#import "UIView+Genie.h"
 
 #define kDXECollectionViewCellWidth             357
 #define kDXECollectionViewInfoCellHeight        140
@@ -168,6 +169,18 @@
     {
         item.count = [NSNumber numberWithInteger:[item.count integerValue] + 1];
     }
+    
+    DXEDishCollectionViewCell *cell = (DXEDishCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.cartButton.userInteractionEnabled = NO;
+    UIImageView *dishImage = [[UIImageView alloc] initWithImage:cell.dishImage.image];
+    dishImage.frame = cell.dishImage.frame;
+    [cell.contentView insertSubview:dishImage belowSubview:cell.inCartFlag];
+    [self putDishImage:dishImage
+          intoCartIcon:cell.cartIcon
+            completion:^{
+                [cell showCellMode:DXEDishCellModeInCart animate:YES];
+                cell.cartButton.userInteractionEnabled = YES;
+    }];
 }
 
 - (void)onFavorButtonClickedInCollectionView:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath
@@ -238,21 +251,30 @@
 - (IBAction)onCartButtonClickedInDishDetailView:(id)sender
 {
     DXEDishItem *item = [self.dishClass.dishes objectAtIndex:self.selectedIndexPath.row - 1];
+    
     if (!item.inCart)
     {
         item.count = [NSNumber numberWithInteger:1];
         [[DXEOrderManager sharedInstance].cart addObject:item];
-        
-        [UIView animateWithDuration:0.3 animations:^{
-            self.dishDetailView.inCartFlag.alpha = 1.0;
-        }];
     }
     else
     {
         item.count = [NSNumber numberWithInteger:[item.count integerValue] + 1];
     }
     
-    [self.collectionView reloadItemsAtIndexPaths:@[self.selectedIndexPath]];
+    self.dishDetailView.cartButton.userInteractionEnabled = NO;
+    UIImageView *dishImage = [[UIImageView alloc] initWithImage:self.dishDetailView.dishImage.image];
+    dishImage.frame = self.dishDetailView.dishImage.frame;
+    [self.dishDetailView insertSubview:dishImage belowSubview:self.dishDetailView.inCartFlag];
+    [self putDishImage:dishImage
+          intoCartIcon:self.dishDetailView.cartIcon
+            completion:^{
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.dishDetailView.inCartFlag.alpha = 1.0;
+                }];
+                self.dishDetailView.cartButton.userInteractionEnabled = YES;
+                [self.collectionView reloadItemsAtIndexPaths:@[self.selectedIndexPath]];
+    }];
 }
 
 - (IBAction)onFavorButtonClickedInDishDetailView:(id)sender
@@ -279,6 +301,51 @@
 - (IBAction)onTapOnDishImageInDishDetailView:(id)sender
 {
     [CRModal dismiss];
+}
+
+#pragma mark - Animation
+
+#define kDXEDishImageInCartOriginX          13
+#define kDXEDishImageInCartOriginY          6
+#define kDXEDishImageInCartHeight           8
+#define kDXECartIconOriginWidth             28
+#define kDXECartIconOriginHeight            23
+
+
+- (void)putDishImage:(UIImageView *)dishImage
+        intoCartIcon:(UIImageView *)cartIcon
+          completion:(void (^)())completion
+{
+    CGFloat x = cartIcon.frame.size.width / kDXECartIconOriginWidth * kDXEDishImageInCartOriginX;
+    CGFloat y = cartIcon.frame.size.height / kDXECartIconOriginHeight * kDXEDishImageInCartOriginY;
+    CGFloat height = cartIcon.frame.size.height / kDXECartIconOriginHeight * kDXEDishImageInCartHeight;
+    CGRect inCartFrame = CGRectMake(cartIcon.frame.origin.x + floor(x),
+                                    cartIcon.frame.origin.y + floor(y),
+                                    floor(height),
+                                    floor(height));
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        // Step 1. 放大Cart图标
+        cartIcon.transform = CGAffineTransformMakeScale(1.5, 1.5);
+    } completion:^(BOOL finished){
+        // Step 2. 吸入DishImage
+        [dishImage genieInTransitionWithDuration:0.5
+                                 destinationRect:inCartFrame
+                                 destinationEdge:BCRectEdgeTop
+        completion:^{
+            // Step 3. DishImage消失
+            [dishImage removeFromSuperview];
+            [UIView animateWithDuration:0.3 animations:^{
+                // Step 4. Cart图标恢复原状
+                cartIcon.transform = CGAffineTransformIdentity;
+            } completion:^(BOOL finished){
+                if (completion)
+                {
+                    completion();
+                }
+            }];
+        }];
+    }];
 }
 
 @end

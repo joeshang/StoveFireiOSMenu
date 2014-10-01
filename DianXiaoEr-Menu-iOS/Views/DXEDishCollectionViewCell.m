@@ -29,8 +29,6 @@
 
 - (IBAction)onCartButtonClicked:(id)sender
 {
-    [self showCellMode:DXEDishCellModeInCart animate:YES];
-    
     SEL selector = NSSelectorFromString(@"onCartButtonClickedInCollectionView:atIndexPath:");
     [self sendActionToControllerWithSelector:selector];
 }
