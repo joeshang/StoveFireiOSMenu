@@ -106,10 +106,7 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
             item.badgeTextFont = [UIFont systemFontOfSize:kDXEOrderBadgeFontSize];
             item.badgeTextColor = [[RNThemeManager sharedManager] colorForKey:@"Main.TabBar.BadgeTextFontColor"];
             item.badgeBackgroundImage = nil;
-            item.badgeBackgroundColor = nil;
-            CGSize imageSize = [normalImage size];
-            item.badgePositionAdjustment = UIOffsetMake(-imageSize.width / 2,
-                                                        imageSize.height / 2 + 3);
+            item.badgePositionAdjustment = UIOffsetMake(6, 10);
         }
         
         [items addObject:item];

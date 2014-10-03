@@ -1,6 +1,7 @@
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 xcuserdata
+*.xcworkspace
 .DS_Store
 *.swp
 Pods
