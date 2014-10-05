@@ -308,7 +308,7 @@
 #define kDXEDishImageInCartOriginX          13
 #define kDXEDishImageInCartOriginY          6
 #define kDXEDishImageInCartHeight           8
-#define kDXECartIconOriginWidth             28
+#define kDXECartIconOriginWidth             29
 #define kDXECartIconOriginHeight            23
 
 
@@ -326,7 +326,7 @@
     
     [UIView animateWithDuration:0.3 animations:^{
         // Step 1. 放大Cart图标
-        cartIcon.transform = CGAffineTransformMakeScale(1.5, 1.5);
+        cartIcon.transform = CGAffineTransformMakeScale(1.3, 1.3);
     } completion:^(BOOL finished){
         // Step 2. 吸入DishImage
         [dishImage genieInTransitionWithDuration:0.5
