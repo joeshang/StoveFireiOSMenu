@@ -32,6 +32,7 @@
 
 @property (nonatomic, strong) CRScrollMenuController *scrollMenuController;
 @property (nonatomic, strong) NSMutableArray *contentViewControllers;
+@property (nonatomic, strong) NSMutableArray *scrollMenuItems;
 @property (nonatomic, strong) NSMutableArray *showDishes;
 @property (nonatomic, strong) NSMutableArray *hideDishes;
 
@@ -47,9 +48,11 @@
     if (self)
     {
         NSPredicate *showPredicate = [NSPredicate predicateWithFormat:@"name != %@", @"会员"];
-        _showDishes = [NSMutableArray arrayWithArray:[[DXEDishDataManager sharedInstance].dishClasses filteredArrayUsingPredicate:showPredicate]];
+        _showDishes = [NSMutableArray arrayWithArray:[[DXEDishDataManager sharedInstance].dishClasses
+                                                      filteredArrayUsingPredicate:showPredicate]];
         NSPredicate *hidePredicate = [NSPredicate predicateWithFormat:@"name = %@", @"会员"];
-        _hideDishes = [NSMutableArray arrayWithArray:[[DXEDishDataManager sharedInstance].dishClasses filteredArrayUsingPredicate:hidePredicate]];
+        _hideDishes = [NSMutableArray arrayWithArray:[[DXEDishDataManager sharedInstance].dishClasses
+                                                      filteredArrayUsingPredicate:hidePredicate]];
         
         [[DXEOrderManager sharedInstance] addObserver:self
                                            forKeyPath:NSStringFromSelector(@selector(cartList))
@@ -106,30 +109,13 @@
     [self.view addSubview:self.scrollMenuController.view];
     [self.scrollMenuController didMoveToParentViewController:self];
     
-    NSMutableArray *items = [NSMutableArray arrayWithCapacity:[self.showDishes count]];
     self.contentViewControllers = [NSMutableArray arrayWithCapacity:[self.showDishes count]];
-    for (DXEDishClass *class in self.showDishes)
-    {
-        CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
-        layout.sectionInset = UIEdgeInsetsMake(kDXECollectionViewSectionTop,
-                                               kDXECollectionViewSectionLeft,
-                                               kDXECollectionViewSectionBottom,
-                                               kDXECollectionViewSectionRight);
-        layout.headerHeight = kDXECollectionViewHeaderHeight;
-        layout.footerHeight = kDXECollectionViewFooterHeight;
-        layout.minimumColumnSpacing = kDXECollectionViewColumnSpacing;
-        layout.minimumInteritemSpacing = kDXECollectionViewInteritemSpacing;
-    
-        DXEDishesViewController *dishViewController = [[DXEDishesViewController alloc] initWithCollectionViewLayout:layout];
-        dishViewController.dishClass = class;
-        [self.contentViewControllers addObject:dishViewController];
-        
-        CRScrollMenuItem *item = [[CRScrollMenuItem alloc] init];
-        item.title = class.name;
-        item.subtitle = class.englishName;
-        [items addObject:item];
-    }
-    [self.scrollMenuController setViewControllers:self.contentViewControllers withItems:items];
+    self.scrollMenuItems = [NSMutableArray arrayWithCapacity:[self.showDishes count]];
+    [self.showDishes enumerateObjectsUsingBlock:^(DXEDishClass *class, NSUInteger index, BOOL *stop){
+        [self generateContentControllerByData:class atIndex:index];
+    }];
+    [self.scrollMenuController setViewControllers:self.contentViewControllers
+                                        withItems:self.scrollMenuItems];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -137,6 +123,49 @@
     [super viewWillAppear:animated];
     
     self.scrollMenuController.view.frame = self.view.bounds;
+}
+
+- (void)generateContentControllerByData:(DXEDishClass *)class
+                                atIndex:(NSInteger)index
+{
+    CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
+    layout.sectionInset = UIEdgeInsetsMake(kDXECollectionViewSectionTop,
+                                           kDXECollectionViewSectionLeft,
+                                           kDXECollectionViewSectionBottom,
+                                           kDXECollectionViewSectionRight);
+    layout.headerHeight = kDXECollectionViewHeaderHeight;
+    layout.footerHeight = kDXECollectionViewFooterHeight;
+    layout.minimumColumnSpacing = kDXECollectionViewColumnSpacing;
+    layout.minimumInteritemSpacing = kDXECollectionViewInteritemSpacing;
+    
+    DXEDishesViewController *dishViewController = [[DXEDishesViewController alloc] initWithCollectionViewLayout:layout];
+    dishViewController.dishClass = class;
+    [self.contentViewControllers insertObject:dishViewController atIndex:index];
+    
+    CRScrollMenuItem *item = [[CRScrollMenuItem alloc] init];
+    item.title = class.name;
+    item.subtitle = class.englishName;
+    [self.scrollMenuItems insertObject:item atIndex:index];
+}
+
+- (void)showAllDishClasses
+{
+    for (DXEDishClass *hideClass in self.hideDishes)
+    {
+        __block NSUInteger insertIndex = 0;
+        [self.showDishes enumerateObjectsUsingBlock:^(DXEDishClass *showClass, NSUInteger index, BOOL *stop){
+            if ([hideClass.showSequence integerValue] < [showClass.showSequence integerValue])
+            {
+                [self.showDishes insertObject:hideClass atIndex:index];
+                insertIndex = index;
+                *stop = YES;
+            }
+        }];
+        [self generateContentControllerByData:hideClass atIndex:insertIndex];
+    }
+    [self.scrollMenuController setViewControllers:self.contentViewControllers
+                                        withItems:self.scrollMenuItems];
+    [self.hideDishes removeAllObjects];
 }
 
 #pragma mark - notification

@@ -9,4 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DXEHomePageViewController : UIViewController
+
+- (void)showAllDishClasses;
+
 @end

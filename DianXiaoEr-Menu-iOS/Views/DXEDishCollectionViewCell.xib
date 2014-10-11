@@ -8,18 +8,18 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="lGy-eV-7UU" customClass="DXEDishCollectionViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="357" height="597"/>
+            <rect key="frame" x="0.0" y="0.0" width="359" height="597"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="357" height="597"/>
+                <rect key="frame" x="0.0" y="0.0" width="359" height="597"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WYt-MK-oMy">
-                        <rect key="frame" x="0.0" y="0.0" width="357" height="490"/>
+                        <rect key="frame" x="0.0" y="0.0" width="359" height="493"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <imageView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="5lv-Qv-GM5">
-                        <rect key="frame" x="0.0" y="0.0" width="357" height="490"/>
+                        <rect key="frame" x="0.0" y="0.0" width="359" height="493"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </imageView>
@@ -94,20 +94,20 @@
                             <action selector="onCartButtonClicked:" destination="lGy-eV-7UU" eventType="touchUpInside" id="fmN-R8-i1I"/>
                         </connections>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dish_cell_incart_flag.png" id="Wlk-pd-TLg">
+                        <rect key="frame" x="297" y="0.0" width="39" height="55"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dish_cell_cart_icon.png" id="GUm-mw-jfo">
                         <rect key="frame" x="269" y="559" width="20" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dish_cell_incart_flag.png" id="Wlk-pd-TLg">
-                        <rect key="frame" x="297" y="0.0" width="40" height="55"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <gestureRecognizers/>
-            <size key="customSize" width="360" height="602"/>
+            <size key="customSize" width="363" height="602"/>
             <connections>
                 <outlet property="cartButton" destination="nkE-DL-tOJ" id="jgH-oH-7jD"/>
                 <outlet property="cartIcon" destination="GUm-mw-jfo" id="HHN-7N-7Wh"/>
@@ -122,6 +122,7 @@
                 <outlet property="maskView" destination="5lv-Qv-GM5" id="Jke-EK-BV4"/>
                 <outlet property="soldoutFlag" destination="Q8a-d1-nxm" id="KdM-2z-VrN"/>
             </connections>
+            <point key="canvasLocation" x="141" y="153.5"/>
         </collectionViewCell>
     </objects>
     <resources>

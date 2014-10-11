@@ -223,6 +223,8 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
     {
         [self.tabBar setItemSelectedAtIndex:DXEMainChildViewControllerIndexMyself];
         [self moveToChildViewControllerAtIndex:DXEMainChildViewControllerIndexMyself];
+        DXEHomePageViewController *homepage = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexHomepage];
+        [homepage showAllDishClasses];
     }
     [CRModal dismiss];
 }
