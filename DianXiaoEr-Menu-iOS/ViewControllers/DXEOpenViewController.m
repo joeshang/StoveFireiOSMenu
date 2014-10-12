@@ -12,11 +12,15 @@
 #import "DXEDataManager.h"
 #import "CRModal.h"
 #import "AFNetworking.h"
+#import "JGProgressHUD.h"
+#import "JGProgressHUDErrorIndicatorView.h"
 
 @interface DXEOpenViewController () < NSXMLParserDelegate >
 
 @property (nonatomic, strong) DXELoginView *loginView;
+@property (nonatomic, strong) JGProgressHUD *hud;
 
+@property (nonatomic, strong) AFHTTPSessionManager *httpManager;
 @property (nonatomic, strong) NSXMLParser *loginParser;
 @property (nonatomic, strong) NSXMLParser *openParser;
 
@@ -37,6 +41,10 @@
                                                  selector:@selector(onFinishLoadingNotication:)
                                                      name:kDXEDidFinishLoadingNotification
                                                    object:nil];
+        
+        NSURL *baseURL = [NSURL URLWithString:kDXEWebServiceBaseURL];
+        _httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+        _httpManager.responseSerializer = [AFXMLParserResponseSerializer serializer];
     }
     return self;
 }
@@ -108,6 +116,7 @@
     else
     {
         self.tableNumber.text = @"非桌号二维码 请再次扫描";
+        [DXEDataManager sharedInstance].tableid = nil;
     }
 }
 
@@ -115,17 +124,38 @@
 
 - (IBAction)onEnterButtonClicked:(id)sender
 {
-    NSString *nibName = NSStringFromClass([DXELoginView class]);
-    self.loginView = [[[NSBundle mainBundle] loadNibNamed:nibName
-                                                    owner:self
-                                                  options:nil] firstObject];
-    self.loginView.controller = self;
-    self.loginView.userNamePlaceholder = @"工号";
-    [CRModal showModalView:self.loginView
-               coverOption:CRModalOptionCoverDark
-       tapOutsideToDismiss:NO
-                  animated:YES
-                completion:nil];
+    NSString *tableId = [DXEDataManager sharedInstance].tableid;
+    if (tableId == nil || [tableId isEqualToString:@""])
+    {
+        self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        self.hud.textLabel.text = @"请选择桌号";
+        self.hud.indicatorView = [[JGProgressHUDErrorIndicatorView alloc] init];
+        self.hud.square = YES;
+        [self.hud showInView:self.view];
+        [self.hud dismissAfterDelay:2.0];
+    }
+    else
+    {
+        self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        self.hud.textLabel.text = @"处理中";
+        self.hud.square = YES;
+        [self.hud showInView:self.view];
+        
+        NSDictionary *parameters = @{
+                                     @"tableId": tableId
+                                     };
+        [self.httpManager POST:@"GetOpenId" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
+            self.openParser = (NSXMLParser *)responseObject;
+            self.openParser.delegate = self;
+            [self.openParser parse];
+        } failure:^(NSURLSessionDataTask *task, NSError *error){
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                self.hud.textLabel.text = @"网络错误";
+                self.hud.indicatorView = [[JGProgressHUDErrorIndicatorView alloc] init];
+                [self.hud dismissAfterDelay:2.0];
+            });
+        }];
+    }
 }
 
 - (IBAction)onChoosingTableButtonClicked:(id)sender
@@ -137,18 +167,26 @@
 
 - (void)onLoginButtonClickedInLoginView:(DXELoginView *)loginView
 {
-    NSURL *baseURL = [NSURL URLWithString:kDXEWebServiceBaseURL];
+    self.loginView.loginFailedMessage.hidden = YES;
+    
+    self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    self.hud.textLabel.text = @"登录中";
+    self.hud.square = YES;
+    [self.hud showInView:loginView];
+    
     NSDictionary *parameters = @{
                                  @"name": loginView.userName.text,
                                  @"passwd": loginView.password.text
                                  };
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
-    manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
-    [manager POST:@"WaiterLogin" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
+    [self.httpManager POST:@"WaiterLogin" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
+        [self.hud dismiss];
         self.loginParser = (NSXMLParser *)responseObject;
         self.loginParser.delegate = self;
         [self.loginParser parse];
     } failure:^(NSURLSessionDataTask *task, NSError *error){
+        [self.hud dismiss];
+        self.loginView.loginFailedMessage.hidden = NO;
         self.loginView.loginFailedMessage.text = @"网络连接错误，请检查网络";
         NSLog(@"%@", error);
     }];
@@ -176,19 +214,39 @@
 
 #pragma mark - NSXMLParserDelegate
 
-- (void)parserDidStartDocument:(NSXMLParser *)parser
-{
-}
-
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
+    int result = [string intValue];
     if (parser == self.openParser)
     {
-        
+        if (result >= 0)
+        {
+            [self.hud dismiss];
+            [DXEDataManager sharedInstance].openid = string;
+            
+            NSString *nibName = NSStringFromClass([DXELoginView class]);
+            self.loginView = [[[NSBundle mainBundle] loadNibNamed:nibName
+                                                    owner:self
+                                                  options:nil] firstObject];
+            self.loginView.controller = self;
+            self.loginView.userNamePlaceholder = @"工号";
+            [CRModal showModalView:self.loginView
+                       coverOption:CRModalOptionCoverDark
+               tapOutsideToDismiss:NO
+                          animated:YES
+                        completion:nil];
+        }
+        else
+        {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                self.hud.textLabel.text = @"此桌号未开台";
+                self.hud.indicatorView = [[JGProgressHUDErrorIndicatorView alloc] init];
+                [self.hud dismissAfterDelay:2.0];
+            });
+        }
     }
     else if (parser == self.loginParser)
     {
-        int result = [string intValue];
         if (result >= 0)
         {
             [DXEDataManager sharedInstance].staffid = string;
@@ -201,11 +259,6 @@
             self.loginView.loginFailedMessage.hidden = NO;
         }
     }
-}
-
-- (void)parserDidEndDocument:(NSXMLParser *)parser
-{
-    
 }
 
 @end
