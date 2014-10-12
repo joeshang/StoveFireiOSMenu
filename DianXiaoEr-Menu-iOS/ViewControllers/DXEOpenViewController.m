@@ -167,29 +167,37 @@
 
 - (void)onLoginButtonClickedInLoginView:(DXELoginView *)loginView
 {
-    self.loginView.loginFailedMessage.hidden = YES;
-    
-    self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-    self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-    self.hud.textLabel.text = @"登录中";
-    self.hud.square = YES;
-    [self.hud showInView:loginView];
-    
-    NSDictionary *parameters = @{
-                                 @"name": loginView.userName.text,
-                                 @"passwd": loginView.password.text
-                                 };
-    [self.httpManager POST:@"WaiterLogin" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
-        [self.hud dismiss];
-        self.loginParser = (NSXMLParser *)responseObject;
-        self.loginParser.delegate = self;
-        [self.loginParser parse];
-    } failure:^(NSURLSessionDataTask *task, NSError *error){
-        [self.hud dismiss];
+    if ([loginView.userName.text isEqualToString:@""]
+        || [loginView.password.text isEqualToString:@""])
+    {
         self.loginView.loginFailedMessage.hidden = NO;
-        self.loginView.loginFailedMessage.text = @"网络连接错误，请检查网络";
-        NSLog(@"%@", error);
-    }];
+        self.loginView.loginFailedMessage.text = @"工号与密码不能为空";
+    }
+    else
+    {
+        self.loginView.loginFailedMessage.hidden = YES;
+        
+        self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        self.hud.textLabel.text = @"登录中";
+        self.hud.square = YES;
+        [self.hud showInView:loginView];
+        
+        NSDictionary *parameters = @{
+                                     @"name": loginView.userName.text,
+                                     @"passwd": loginView.password.text
+                                     };
+        [self.httpManager POST:@"WaiterLogin" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
+            [self.hud dismiss];
+            self.loginParser = (NSXMLParser *)responseObject;
+            self.loginParser.delegate = self;
+            [self.loginParser parse];
+        } failure:^(NSURLSessionDataTask *task, NSError *error){
+            [self.hud dismiss];
+            self.loginView.loginFailedMessage.hidden = NO;
+            self.loginView.loginFailedMessage.text = @"网络连接错误，请检查网络";
+            NSLog(@"%@", error);
+        }];
+    }
 }
 
 #pragma mark - Notfication

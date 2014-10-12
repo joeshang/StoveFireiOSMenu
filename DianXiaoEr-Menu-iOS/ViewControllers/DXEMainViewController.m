@@ -20,6 +20,8 @@
 #import "DXEDiningRecord.h"
 #import "DXERecordDishItem.h"
 #import "DXELoginView.h"
+#import "AFNetworking.h"
+#import "JGProgressHUD.h"
 
 #define DXE_TEST_MEMBER
 
@@ -35,9 +37,12 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
     DXEMainChildViewControllerIndexMyself
 };
 
-@interface DXEMainViewController () < CRTabBarDelegate >
+@interface DXEMainViewController () < CRTabBarDelegate, NSXMLParserDelegate >
 
 @property (nonatomic, strong) DXELoginView *loginView;
+
+@property (nonatomic, strong) NSXMLParser *loginParser;
+@property (nonatomic, strong) NSString *memberData;
 
 @end
 
@@ -169,7 +174,6 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
                                                           options:nil] firstObject];
             self.loginView.controller = self;
             self.loginView.userNamePlaceholder = @"会员卡号/手机号码";
-            self.loginView.loginFailedMessage.text = @"用户名或密码输入错误，请重新输入！";
             [CRModal showModalView:self.loginView
                        coverOption:CRModalOptionCoverDark
                tapOutsideToDismiss:NO
@@ -205,7 +209,7 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
     self.selectedViewController = newSelectedViewController;
 }
 
-#pragma mark - notification
+#pragma mark - Target-Action
 
 - (IBAction)onQRcodeButtonClicked:(id)sender
 {
@@ -216,18 +220,43 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
 
 - (void)onLoginButtonClickedInLoginView:(DXELoginView *)loginView
 {
-    DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexMyself];
-    myself.member = [[DXEMember alloc] initWithJSONData:[self testMemberData]];
-    myself.login = YES;
-    if (myself.login)
+    if ([loginView.userName.text isEqualToString:@""]
+        || [loginView.password.text isEqualToString:@""])
     {
-        [self.tabBar setItemSelectedAtIndex:DXEMainChildViewControllerIndexMyself];
-        [self moveToChildViewControllerAtIndex:DXEMainChildViewControllerIndexMyself];
-        DXEHomePageViewController *homepage = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexHomepage];
-        [homepage showAllDishClasses];
+        self.loginView.loginFailedMessage.hidden = NO;
+        self.loginView.loginFailedMessage.text = @"会员卡号/手机号码与密码不能为空";
     }
-    [CRModal dismiss];
+    else
+    {
+        self.loginView.loginFailedMessage.hidden = YES;
+        
+        JGProgressHUD *hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        hud.textLabel.text = @"登录中";
+        hud.square = YES;
+        [hud showInView:loginView];
+        
+        NSURL *baseURL = [NSURL URLWithString:kDXEWebServiceBaseURL];
+        AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+        httpManager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+        NSDictionary *parameters = @{
+                                     @"name": loginView.userName.text,
+                                     @"passwd": loginView.password.text
+                                     };
+        [httpManager POST:@"VipLogin" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
+            [hud dismiss];
+            self.loginParser = (NSXMLParser *)responseObject;
+            self.loginParser.delegate = self;
+            [self.loginParser parse];
+        } failure:^(NSURLSessionDataTask *task, NSError *error){
+            [hud dismiss];
+            self.loginView.loginFailedMessage.hidden = NO;
+            self.loginView.loginFailedMessage.text = @"网络连接错误，请检查网络";
+            NSLog(@"%@", error);
+        }];
+    }
 }
+
+#pragma mark - Notification
 
 - (void)onMoveToHomepage:(NSNotification *)notification
 {
@@ -257,6 +286,39 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
 - (void)qrCodeDidScan:(NSString *)codeString
 {
     NSLog(@"%@", codeString);
+}
+
+#pragma mark - NSXMLParserDelegate
+
+- (void)parserDidStartDocument:(NSXMLParser *)parser
+{
+    self.memberData = [NSString string];
+}
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+{
+    self.memberData = [self.memberData stringByAppendingString:string];
+}
+
+- (void)parserDidEndDocument:(NSXMLParser *)parser
+{
+    if ([self.memberData isEqualToString:@""])
+    {
+        self.loginView.loginFailedMessage.text = @"用户名或密码输入错误，请重新输入！";
+        self.loginView.loginFailedMessage.hidden = NO;
+    }
+    else
+    {
+        DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexMyself];
+        myself.member = [[DXEMember alloc] initWithJSONData:[self testMemberData]];
+        myself.login = YES;
+        [self.tabBar setItemSelectedAtIndex:DXEMainChildViewControllerIndexMyself];
+        [self moveToChildViewControllerAtIndex:DXEMainChildViewControllerIndexMyself];
+        DXEHomePageViewController *homepage = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexHomepage];
+        [homepage showAllDishClasses];
+        
+        [CRModal dismiss];
+    }
 }
 
 #ifdef DXE_TEST_MEMBER
