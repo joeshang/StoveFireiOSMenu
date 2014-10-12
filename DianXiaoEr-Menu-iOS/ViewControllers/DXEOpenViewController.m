@@ -11,10 +11,14 @@
 #import "DXELoginView.h"
 #import "DXEDataManager.h"
 #import "CRModal.h"
+#import "AFNetworking.h"
 
-@interface DXEOpenViewController ()
+@interface DXEOpenViewController () < NSXMLParserDelegate >
 
 @property (nonatomic, strong) DXELoginView *loginView;
+
+@property (nonatomic, strong) NSXMLParser *loginParser;
+@property (nonatomic, strong) NSXMLParser *openParser;
 
 @end
 
@@ -91,6 +95,7 @@
         if ([qrCode intValue] == [tableid intValue])
         {
             valid = YES;
+            [DXEDataManager sharedInstance].tableid = [tableid stringValue];
             tableNumber = [table objectForKey:@"name"];
             break;
         }
@@ -116,7 +121,6 @@
                                                   options:nil] firstObject];
     self.loginView.controller = self;
     self.loginView.userNamePlaceholder = @"工号";
-    self.loginView.loginFailedMessage.text = @"工号或密码输入错误，请重新输入！";
     [CRModal showModalView:self.loginView
                coverOption:CRModalOptionCoverDark
        tapOutsideToDismiss:NO
@@ -133,8 +137,21 @@
 
 - (void)onLoginButtonClickedInLoginView:(DXELoginView *)loginView
 {
-    [CRModal dismiss];
-    [self enterMainPage];
+    NSURL *baseURL = [NSURL URLWithString:kDXEWebServiceBaseURL];
+    NSDictionary *parameters = @{
+                                 @"name": loginView.userName.text,
+                                 @"passwd": loginView.password.text
+                                 };
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+    manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+    [manager POST:@"WaiterLogin" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
+        self.loginParser = (NSXMLParser *)responseObject;
+        self.loginParser.delegate = self;
+        [self.loginParser parse];
+    } failure:^(NSURLSessionDataTask *task, NSError *error){
+        self.loginView.loginFailedMessage.text = @"网络连接错误，请检查网络";
+        NSLog(@"%@", error);
+    }];
 }
 
 #pragma mark - Notfication
@@ -155,6 +172,40 @@
     self.tableNumber.hidden = NO;
     self.tableButton.hidden = NO;
     self.enterButton.hidden = NO;
+}
+
+#pragma mark - NSXMLParserDelegate
+
+- (void)parserDidStartDocument:(NSXMLParser *)parser
+{
+}
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+{
+    if (parser == self.openParser)
+    {
+        
+    }
+    else if (parser == self.loginParser)
+    {
+        int result = [string intValue];
+        if (result >= 0)
+        {
+            [DXEDataManager sharedInstance].staffid = string;
+            [CRModal dismiss];
+            [self enterMainPage];
+        }
+        else
+        {
+            self.loginView.loginFailedMessage.text = @"工号或密码输入错误，请重新输入！";
+            self.loginView.loginFailedMessage.hidden = NO;
+        }
+    }
+}
+
+- (void)parserDidEndDocument:(NSXMLParser *)parser
+{
+    
 }
 
 @end
