@@ -37,6 +37,7 @@
         copy.name = [self.name copy];
         copy.englishName = [self.englishName copy];
         copy.imageKey = [self.imageKey copy];
+        copy.thumbnailKey = [self.thumbnailKey copy];
         copy.showSequence = [self.showSequence copy];
         copy.price = [self.price copy];
         copy.favor = [self.favor copy];
@@ -66,6 +67,11 @@
     if (update.imageKey != nil)
     {
         self.imageKey = [update.imageKey copy];
+    }
+    
+    if (update.thumbnailKey != nil)
+    {
+        self.thumbnailKey = [update.thumbnailKey copy];
     }
     
     if (update.showSequence != nil)

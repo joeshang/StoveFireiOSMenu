@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *englishName;
 @property (nonatomic, strong) NSString *imageKey;
+@property (nonatomic, strong) NSString *thumbnailKey;
 @property (nonatomic, strong) NSNumber *showSequence;
 @property (nonatomic, strong) NSNumber *price;
 @property (nonatomic, strong) NSNumber *favor;

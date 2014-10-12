@@ -9,7 +9,6 @@
 #import "DXEAppDelegate.h"
 #import "RNThemeManager.h"
 #import "DXEOpenViewController.h"
-#import "DXEMainViewController.h"
 #import "DXEDishDataManager.h"
 #import "DXEImageManager.h"
 
@@ -21,15 +20,10 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    [DXEDishDataManager sharedInstance];
-    [[DXEImageManager sharedInstance] updateImageWithKeys:[[DXEDishDataManager sharedInstance] imageKeys]];
+    [[DXEDishDataManager sharedInstance] loadDataFromWeb];
     
     DXEOpenViewController *open = [[DXEOpenViewController alloc] init];
-    DXEMainViewController *main = [[DXEMainViewController alloc] init];
-    [main addChildViewController:open];
-    [main.view addSubview:open.view];
-    [open didMoveToParentViewController:main];
-    self.window.rootViewController = main;
+    self.window.rootViewController = open;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

@@ -14,7 +14,6 @@
 @interface DXEImageManager ()
 
 @property (nonatomic, strong) NSMutableArray *cachedImageKeys;
-@property (nonatomic, strong) NSMutableDictionary *cachedImages;
 
 - (NSString *)cachedImageKeysArchivePath;
 - (NSString *)imagePathForKey:(NSString *)imageKey;
@@ -39,8 +38,6 @@
         {
             sharedManager.cachedImageKeys = [[NSMutableArray alloc] init];
         }
-        
-        sharedManager.cachedImages = [[NSMutableDictionary alloc] init];
     }
     
     return sharedManager;
@@ -93,41 +90,25 @@
 #endif
 }
 
-- (void)requestWebImageForKey:(NSString *)imageKey
-{
-#ifdef DXE_TEST_IMAGE_KEYS
-    NSLog(@"request web image: %@", imageKey);
-#else
-    [[SDWebImageManager sharedManager] downloadImageWithURL:nil
-                                                    options:0
-                                                   progress:nil
-                                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL){
-                                                      if (image && finished)
-                                                      {
-                                                          NSLog(@"%@", [imageURL absoluteString]);
-                                                          [[SDWebImageManager sharedManager].imageCache storeImage:image forKey:imageKey];
-                                                      }
-                                                  }];
-#endif
-}
-
 - (void)updateImageWithKeys:(NSMutableArray *)newImageKeys
 {
+#ifdef DXE_TEST_IMAGE_KEYS
+#else
     if ([newImageKeys count] == 0)
     {
         return;
     }
     
+    NSMutableArray *requestImageKeys = nil;
     if ([self.cachedImageKeys count] == 0)
     {
         // 本地无图片，因此要请求每一个newKey对应的图片
-        for (NSString *newKey in newImageKeys)
-        {
-            [self requestWebImageForKey:newKey];
-        }
+        requestImageKeys = [NSMutableArray arrayWithArray:newImageKeys];
     }
     else
     {
+        requestImageKeys = [[NSMutableArray alloc] init];
+        
         for (NSString *newKey in newImageKeys)
         {
             [self.cachedImageKeys enumerateObjectsUsingBlock:^(NSString *cachedKey, NSUInteger index, BOOL *stop){
@@ -148,14 +129,14 @@
                         [self.cachedImageKeys removeObject:cachedKey];
                         
                         [self deleteImageForKey:cachedKey];
-                        [self requestWebImageForKey:newKey];
+                        [requestImageKeys addObject:newKey];
                     }
                     else
                     {
                         // newKey在cachedImageKeys没有匹配项，说明是新增项，请求图片
                         if ([cachedKey isEqualToString:[self.cachedImageKeys lastObject]])
                         {
-                            [self requestWebImageForKey:newKey];
+                            [requestImageKeys addObject:newKey];
                         }
                     }
                 }
@@ -172,7 +153,42 @@
         }
     }
     
+    // 向服务器请求图片
+    if ([requestImageKeys count] != 0)
+    {
+        __block NSUInteger totalCount = [requestImageKeys count];
+        __block NSUInteger process = 0;
+        NSString *message = [NSString stringWithFormat:@"正在加载图片(进度:%lu/%lu)", process, totalCount];
+        NSDictionary *userInfo = @{ @"message": message };
+        [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
+        for (NSString *imageKey in requestImageKeys)
+        {
+            [[SDWebImageManager sharedManager] downloadImageWithURL:nil options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL)
+             {
+                 if (image && finished)
+                 {
+                     NSLog(@"%@", [imageURL absoluteString]);
+                     [[SDWebImageManager sharedManager].imageCache storeImage:image forKey:imageKey];
+                     
+                     process++;
+                     NSString *message = [NSString stringWithFormat:@"正在加载图片(进度:%lu/%lu)", process, totalCount];
+                     NSDictionary *userInfo = @{ @"message": message };
+                     [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
+                     if (process == totalCount)
+                     {
+                         [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
+                     }
+                 }
+             }];
+        }
+    }
+    else
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
+    }
+    
     self.cachedImageKeys = [NSMutableArray arrayWithArray:newImageKeys];
+#endif
 }
 
 #pragma mark - archive

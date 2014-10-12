@@ -22,9 +22,23 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onLoadingProgressNotication:)
+                                                     name:kDXEDidLoadingProgressNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onFinishLoadingNotication:)
+                                                     name:kDXEDidFinishLoadingNotification
+                                                   object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - View Related
@@ -59,9 +73,8 @@
                          self.view.alpha = 0.0;
                      }
                      completion:^(BOOL finished){
-                         [self willMoveToParentViewController:nil];
-                         [self.view removeFromSuperview];
-                         [self removeFromParentViewController];
+                         DXEMainViewController *main = [[DXEMainViewController alloc] init];
+                         [UIApplication sharedApplication].keyWindow.rootViewController = main;
                      }];
 }
 
@@ -69,7 +82,7 @@
 
 - (void)qrCodeDidScan:(NSString *)codeString
 {
-    self.table.text = codeString;
+    self.tableNumber.text = codeString;
 }
 
 #pragma mark - Target-Action
@@ -101,6 +114,27 @@
 {
     [CRModal dismiss];
     [self enterMainPage];
+}
+
+#pragma mark - Notfication
+
+- (void)onLoadingProgressNotication:(NSNotification *)notification
+{
+    NSString *message = [notification.userInfo objectForKey:@"message"];
+    self.loadingLabel.text = message;
+}
+
+- (void)onFinishLoadingNotication:(NSNotification *)notification
+{
+    [self.loadingIndicator stopAnimating];
+//    self.loadingIndicator.hidden = YES;
+    self.loadingLabel.hidden = YES;
+    
+    self.tableTitle.hidden = NO;
+    self.tableSeperator.hidden = NO;
+    self.tableNumber.hidden = NO;
+    self.tableButton.hidden = NO;
+    self.enterButton.hidden = NO;
 }
 
 @end

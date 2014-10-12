@@ -15,6 +15,6 @@
 @property (nonatomic, strong) NSMutableArray *dishClasses;
 
 + (DXEDishDataManager *)sharedInstance;
-- (NSMutableArray *)imageKeys;
+- (void)loadDataFromWeb;
 
 @end

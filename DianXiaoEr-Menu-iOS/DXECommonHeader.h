@@ -28,4 +28,11 @@ typedef NS_ENUM(NSUInteger, DXEDishProgress)
     DXEDishProgressDone
 };
 
+#define kDXEDidFinishLoadingNotification            @"DXEDidFinishLoadingNotification"
+#define kDXEDidLoadingProgressNotification          @"DXEDidLoadingProgressNotification"
+#define kDXEDidMoveToHomepageNotification           @"DXEDidMoveToHomePageNotification"
+#define kDXEDidUpdateOrderProgressNotification      @"DXEDidUpdateOrderProgressNotification"
+
+#define kDXEWebServiceBaseURL                       @"http://192.168.1.2/webservice.asmx/"
+
 #endif

@@ -7,10 +7,17 @@
 //
 
 #import "DXEDishDataManager.h"
+#import "DXEImageManager.h"
+#import "AFNetworking.h"
 
 #define DXE_TEST_DISH_DATA
 
-@interface DXEDishDataManager ()
+@interface DXEDishDataManager () < NSXMLParserDelegate >
+
+@property (nonatomic, strong) NSString *dishClassString;
+@property (nonatomic, strong) NSString *dishItemString;
+@property (nonatomic, strong) NSXMLParser *dishClassParser;
+@property (nonatomic, strong) NSXMLParser *dishItemParser;
 
 - (void)updateDishClassFromJsonData:(NSData *)jsonData;
 - (void)updateDishItemFromJsonData:(NSData *)jsonData;
@@ -37,10 +44,10 @@
         sharedManager = [[super allocWithZone:nil] init];
 
 #ifdef DXE_TEST_DISH_DATA
-        [sharedManager updateDishClassFromJsonData:[sharedManager dishClassDataOfTestingNew]];
-        [sharedManager updateDishClassFromJsonData:[sharedManager dishClassDataOfTestingUpdateAndAdd]];
-        [sharedManager updateDishItemFromJsonData:[sharedManager dishItemDataOfTestingNew]];
-        [sharedManager updateDishItemFromJsonData:[sharedManager dishItemDataOfTestingUpdateAndAdd]];
+//        [sharedManager updateDishClassFromJsonData:[sharedManager dishClassDataOfTestingNew]];
+//        [sharedManager updateDishClassFromJsonData:[sharedManager dishClassDataOfTestingUpdateAndAdd]];
+//        [sharedManager updateDishItemFromJsonData:[sharedManager dishItemDataOfTestingNew]];
+//        [sharedManager updateDishItemFromJsonData:[sharedManager dishItemDataOfTestingUpdateAndAdd]];
 #endif
     }
     
@@ -53,6 +60,20 @@
 }
 
 #pragma mark - data update
+
+- (void)loadDataFromWeb
+{
+    NSURL *baseURL = [NSURL URLWithString:kDXEWebServiceBaseURL];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+    manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+    [manager POST:@"GetDishClasses" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject){
+        self.dishClassParser = (NSXMLParser *)responseObject;
+        self.dishClassParser.delegate = self;
+        [self.dishClassParser parse];
+    } failure:^(NSURLSessionDataTask *task, NSError *error){
+        NSLog(@"%@", error);
+    }];
+}
 
 - (void)updateDishClassFromJsonData:(NSData *)jsonData
 {
@@ -103,13 +124,6 @@
     {
         // 对于新增菜类请求此类的菜品
     }
-    
-#ifdef DXE_TEST_DISH_DATA
-    [self.dishClasses enumerateObjectsUsingBlock:^(id obj, NSUInteger index, BOOL *stop){
-        DXEDishClass *current = (DXEDishClass *)obj;
-        NSLog(@"%@", [current JSONString]);
-    }];
-#endif
 }
 
 - (void)updateDishItemFromJsonData:(NSData *)jsonData
@@ -178,7 +192,7 @@
 {
     NSMutableArray *imageKeys = [[NSMutableArray alloc] init];
     
-    if ([self.dishClasses count])
+    if ([self.dishClasses count] == 0)
     {
         return nil;
     }
@@ -198,11 +212,69 @@
                 {
                     [imageKeys addObject:item.imageKey];
                 }
+                
+                if (item.thumbnailKey != nil)
+                {
+                    [imageKeys addObject:item.thumbnailKey];
+                }
             }
         }
     }
     
     return imageKeys;
+}
+
+#pragma mark - NSXMLParserDelegate
+
+- (void)parserDidStartDocument:(NSXMLParser *)parser
+{
+    if (parser == self.dishClassParser)
+    {
+        self.dishClassString = [NSString string];
+    }
+    else if (parser == self.dishItemParser)
+    {
+        self.dishItemString = [NSString string];
+    }
+}
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+{
+    string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if (parser == self.dishClassParser)
+    {
+        self.dishClassString = [self.dishClassString stringByAppendingString:string];
+    }
+    else if (parser == self.dishItemParser)
+    {
+        self.dishItemString = [self.dishItemString stringByAppendingString:string];
+    }
+}
+
+- (void)parserDidEndDocument:(NSXMLParser *)parser
+{
+    if (parser == self.dishClassParser)
+    {
+        [self updateDishClassFromJsonData:[self.dishClassString dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSURL *baseURL = [NSURL URLWithString:kDXEWebServiceBaseURL];
+        AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+        manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+        [manager POST:@"GetDishItems" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject){
+            self.dishItemParser = (NSXMLParser *)responseObject;
+            self.dishItemParser.delegate = self;
+            [self.dishItemParser parse];
+        } failure:^(NSURLSessionDataTask *task, NSError *error){
+            NSLog(@"%@", error);
+        }];
+    }
+    else if (parser == self.dishItemParser)
+    {
+        [self updateDishItemFromJsonData:[self.dishItemString dataUsingEncoding:NSUTF8StringEncoding]];
+//        [[DXEImageManager sharedInstance] updateImageWithKeys:[self imageKeys]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
+    }
 }
 
 #ifdef DXE_TEST_DISH_DATA
@@ -226,8 +298,6 @@
         [array addObject:class];
     }
     
-    NSLog(@"%@", [array JSONString]);
-    
     return [array JSONData];
 }
 
@@ -249,7 +319,6 @@
     salad.showSequence = [NSNumber numberWithInteger:1];
     
     NSArray *array = [NSArray arrayWithObjects:vip, front, salad, nil];
-    NSLog(@"%@", [array JSONString]);
     
     return [array JSONData];
 }

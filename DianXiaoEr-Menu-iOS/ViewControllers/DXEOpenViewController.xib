@@ -7,7 +7,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DXEOpenViewController">
             <connections>
-                <outlet property="table" destination="URA-hw-NCr" id="0mG-B7-lOj"/>
+                <outlet property="enterButton" destination="roa-ws-nyt" id="swB-tF-ERk"/>
+                <outlet property="loadingIndicator" destination="Hc0-mB-JBH" id="FvG-Kp-tqO"/>
+                <outlet property="loadingLabel" destination="m6c-2P-2gI" id="mIp-Ed-qjs"/>
+                <outlet property="tableButton" destination="KJm-63-q3q" id="Djs-pd-vEN"/>
+                <outlet property="tableNumber" destination="URA-hw-NCr" id="wii-Yi-DnZ"/>
+                <outlet property="tableSeperator" destination="xl0-DO-yXa" id="Pmc-it-ZUf"/>
+                <outlet property="tableTitle" destination="bsH-BW-VB5" id="75f-lt-lIi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,7 +25,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="qF6-f7-jU3">
                     <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="roa-ws-nyt" customClass="RNThemeButton">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="roa-ws-nyt" customClass="RNThemeButton">
                     <rect key="frame" x="303" y="597" width="162" height="54"/>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <state key="normal" title="进入点餐界面">
@@ -34,7 +40,7 @@
                         <action selector="onEnterButtonClicked:" destination="-1" eventType="touchUpInside" id="kHI-LU-1fK"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJm-63-q3q" customClass="RNThemeButton">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJm-63-q3q" customClass="RNThemeButton">
                     <rect key="frame" x="303" y="533" width="162" height="54"/>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <state key="normal">
@@ -48,8 +54,8 @@
                         <action selector="onChoosingTableButtonClicked:" destination="-1" eventType="touchUpInside" id="1cH-he-NHk"/>
                     </connections>
                 </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="桌号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsH-BW-VB5" customClass="RNThemeLabel">
-                    <rect key="frame" x="321" y="551" width="42" height="21"/>
+                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="桌号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsH-BW-VB5" customClass="RNThemeLabel">
+                    <rect key="frame" x="318" y="551" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -57,8 +63,8 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="textColorKey" value="NormalColor"/>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="B22" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URA-hw-NCr" customClass="RNThemeLabel">
-                    <rect key="frame" x="377" y="544" width="82" height="35"/>
+                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="请扫描" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URA-hw-NCr" customClass="RNThemeLabel">
+                    <rect key="frame" x="377" y="544" width="88" height="35"/>
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -66,12 +72,21 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="textColorKey" value="NormalColor"/>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xl0-DO-yXa" customClass="RNThemedImageView">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xl0-DO-yXa" customClass="RNThemedImageView">
                     <rect key="frame" x="372" y="535" width="2" height="50"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="imageKey" value="open_button_seperator.png"/>
                     </userDefinedRuntimeAttributes>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="正在加载数据" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6c-2P-2gI">
+                    <rect key="frame" x="134" y="586" width="500" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Hc0-mB-JBH">
+                    <rect key="frame" x="366" y="511" width="37" height="37"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>
