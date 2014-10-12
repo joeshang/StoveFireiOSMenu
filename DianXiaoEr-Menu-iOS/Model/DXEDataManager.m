@@ -6,16 +6,19 @@
 //  Copyright (c) 2014 Shang Chuanren. All rights reserved.
 //
 
-#import "DXEDishDataManager.h"
+#import "DXEDataManager.h"
 #import "DXEImageManager.h"
 #import "AFNetworking.h"
 
 #define DXE_TEST_DISH_DATA
 
-@interface DXEDishDataManager () < NSXMLParserDelegate >
+@interface DXEDataManager () < NSXMLParserDelegate >
+
+@property (nonatomic, strong) AFHTTPSessionManager *httpManager;
 
 @property (nonatomic, strong) NSString *dishClassString;
 @property (nonatomic, strong) NSString *dishItemString;
+@property (nonatomic, strong) NSString *jsonString;
 @property (nonatomic, strong) NSXMLParser *dishClassParser;
 @property (nonatomic, strong) NSXMLParser *dishItemParser;
 
@@ -31,24 +34,17 @@
 
 @end
 
-@implementation DXEDishDataManager
+@implementation DXEDataManager
 
 #pragma mark - singleton init
 
-+ (DXEDishDataManager *)sharedInstance
++ (DXEDataManager *)sharedInstance
 {
-    static DXEDishDataManager *sharedManager = nil;
+    static DXEDataManager *sharedManager = nil;
     
     if (sharedManager == nil)
     {
         sharedManager = [[super allocWithZone:nil] init];
-
-#ifdef DXE_TEST_DISH_DATA
-//        [sharedManager updateDishClassFromJsonData:[sharedManager dishClassDataOfTestingNew]];
-//        [sharedManager updateDishClassFromJsonData:[sharedManager dishClassDataOfTestingUpdateAndAdd]];
-//        [sharedManager updateDishItemFromJsonData:[sharedManager dishItemDataOfTestingNew]];
-//        [sharedManager updateDishItemFromJsonData:[sharedManager dishItemDataOfTestingUpdateAndAdd]];
-#endif
     }
     
     return sharedManager;
@@ -59,17 +55,43 @@
     return [self sharedInstance];
 }
 
+- (id)init
+{
+    self = [super init];
+    
+    if (self)
+    {
+        NSURL *baseURL = [NSURL URLWithString:kDXEWebServiceBaseURL];
+        _httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+        _httpManager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+
+#ifdef DXE_TEST_DISH_DATA
+//        [self updateDishClassFromJsonData:[self dishClassDataOfTestingNew]];
+//        [self updateDishClassFromJsonData:[self dishClassDataOfTestingUpdateAndAdd]];
+//        [self updateDishItemFromJsonData:[self dishItemDataOfTestingNew]];
+//        [self updateDishItemFromJsonData:[self dishItemDataOfTestingUpdateAndAdd]];
+#endif
+    }
+    
+    return self;
+}
+
 #pragma mark - data update
 
 - (void)loadDataFromWeb
 {
-    NSURL *baseURL = [NSURL URLWithString:kDXEWebServiceBaseURL];
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
-    manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
-    [manager POST:@"GetDishClasses" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject){
+    [self.httpManager POST:@"GetDishClasses" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject){
         self.dishClassParser = (NSXMLParser *)responseObject;
         self.dishClassParser.delegate = self;
         [self.dishClassParser parse];
+    } failure:^(NSURLSessionDataTask *task, NSError *error){
+        NSLog(@"%@", error);
+    }];
+    
+    [self.httpManager POST:@"GetTableList" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject){
+        NSXMLParser *xmlParser = (NSXMLParser *)responseObject;
+        xmlParser.delegate = self;
+        [xmlParser parse];
     } failure:^(NSURLSessionDataTask *task, NSError *error){
         NSLog(@"%@", error);
     }];
@@ -228,40 +250,22 @@
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser
 {
-    if (parser == self.dishClassParser)
-    {
-        self.dishClassString = [NSString string];
-    }
-    else if (parser == self.dishItemParser)
-    {
-        self.dishItemString = [NSString string];
-    }
+    self.jsonString = [NSString string];
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
     string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    
-    if (parser == self.dishClassParser)
-    {
-        self.dishClassString = [self.dishClassString stringByAppendingString:string];
-    }
-    else if (parser == self.dishItemParser)
-    {
-        self.dishItemString = [self.dishItemString stringByAppendingString:string];
-    }
+    self.jsonString = [self.jsonString stringByAppendingString:string];
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
     if (parser == self.dishClassParser)
     {
-        [self updateDishClassFromJsonData:[self.dishClassString dataUsingEncoding:NSUTF8StringEncoding]];
+        [self updateDishClassFromJsonData:[self.jsonString dataUsingEncoding:NSUTF8StringEncoding]];
         
-        NSURL *baseURL = [NSURL URLWithString:kDXEWebServiceBaseURL];
-        AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
-        manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
-        [manager POST:@"GetDishItems" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject){
+        [self.httpManager POST:@"GetDishItems" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject){
             self.dishItemParser = (NSXMLParser *)responseObject;
             self.dishItemParser.delegate = self;
             [self.dishItemParser parse];
@@ -271,9 +275,15 @@
     }
     else if (parser == self.dishItemParser)
     {
-        [self updateDishItemFromJsonData:[self.dishItemString dataUsingEncoding:NSUTF8StringEncoding]];
+        [self updateDishItemFromJsonData:[self.jsonString dataUsingEncoding:NSUTF8StringEncoding]];
 //        [[DXEImageManager sharedInstance] updateImageWithKeys:[self imageKeys]];
         [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
+    }
+    else
+    {
+        self.tables = [NSJSONSerialization JSONObjectWithData:[self.jsonString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+        NSLog(@"Tables: \n");
+        NSLog(@"%@", self.tables);
     }
 }
 

@@ -10,11 +10,12 @@
 #import "DXEDishItem.h"
 #import "DXEDishClass.h"
 
-@interface DXEDishDataManager : NSObject
+@interface DXEDataManager : NSObject
 
 @property (nonatomic, strong) NSMutableArray *dishClasses;
+@property (nonatomic, strong) NSMutableArray *tables;
 
-+ (DXEDishDataManager *)sharedInstance;
++ (DXEDataManager *)sharedInstance;
 - (void)loadDataFromWeb;
 
 @end

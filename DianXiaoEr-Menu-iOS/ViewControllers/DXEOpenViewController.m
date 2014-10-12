@@ -9,6 +9,7 @@
 #import "DXEOpenViewController.h"
 #import "DXEMainViewController.h"
 #import "DXELoginView.h"
+#import "DXEDataManager.h"
 #import "CRModal.h"
 
 @interface DXEOpenViewController ()
@@ -80,9 +81,29 @@
 
 #pragma mark - DXEQRCodeViewControllerDelegate
 
-- (void)qrCodeDidScan:(NSString *)codeString
+- (void)qrCodeDidScan:(NSString *)qrCode
 {
-    self.tableNumber.text = codeString;
+    BOOL valid = NO;
+    NSString *tableNumber = nil;
+    for (NSDictionary *table in [DXEDataManager sharedInstance].tables)
+    {
+        NSNumber *tableid = [table objectForKey:@"id"];
+        if ([qrCode intValue] == [tableid intValue])
+        {
+            valid = YES;
+            tableNumber = [table objectForKey:@"name"];
+            break;
+        }
+    }
+    
+    if (valid)
+    {
+        self.tableNumber.text = tableNumber;
+    }
+    else
+    {
+        self.tableNumber.text = @"非桌号二维码 请再次扫描";
+    }
 }
 
 #pragma mark - Target-Action
@@ -127,7 +148,6 @@
 - (void)onFinishLoadingNotication:(NSNotification *)notification
 {
     [self.loadingIndicator stopAnimating];
-//    self.loadingIndicator.hidden = YES;
     self.loadingLabel.hidden = YES;
     
     self.tableTitle.hidden = NO;

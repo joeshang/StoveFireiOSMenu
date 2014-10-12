@@ -9,7 +9,7 @@
 #import "DXEAppDelegate.h"
 #import "RNThemeManager.h"
 #import "DXEOpenViewController.h"
-#import "DXEDishDataManager.h"
+#import "DXEDataManager.h"
 #import "DXEImageManager.h"
 
 @implementation DXEAppDelegate
@@ -20,7 +20,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    [[DXEDishDataManager sharedInstance] loadDataFromWeb];
+    [[DXEDataManager sharedInstance] loadDataFromWeb];
     
     DXEOpenViewController *open = [[DXEOpenViewController alloc] init];
     self.window.rootViewController = open;

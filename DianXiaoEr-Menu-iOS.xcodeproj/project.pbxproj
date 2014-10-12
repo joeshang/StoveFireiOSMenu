@@ -114,7 +114,7 @@
 		D2981F0E19C03FAD00DD22E2 /* Theme in Resources */ = {isa = PBXBuildFile; fileRef = D2981F0D19C03FAD00DD22E2 /* Theme */; };
 		D29FAB5619B5C1E000E667D4 /* DXEDishClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D29FAB5319B5C1E000E667D4 /* DXEDishClass.m */; };
 		D29FAB5719B5C1E000E667D4 /* DXEDishItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D29FAB5519B5C1E000E667D4 /* DXEDishItem.m */; };
-		D29FAB5D19B603A000E667D4 /* DXEDishDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D29FAB5C19B603A000E667D4 /* DXEDishDataManager.m */; };
+		D29FAB5D19B603A000E667D4 /* DXEDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D29FAB5C19B603A000E667D4 /* DXEDataManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -281,8 +281,8 @@
 		D29FAB5319B5C1E000E667D4 /* DXEDishClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEDishClass.m; path = Model/DXEDishClass.m; sourceTree = "<group>"; };
 		D29FAB5419B5C1E000E667D4 /* DXEDishItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEDishItem.h; path = Model/DXEDishItem.h; sourceTree = "<group>"; };
 		D29FAB5519B5C1E000E667D4 /* DXEDishItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEDishItem.m; path = Model/DXEDishItem.m; sourceTree = "<group>"; };
-		D29FAB5B19B603A000E667D4 /* DXEDishDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEDishDataManager.h; path = Model/DXEDishDataManager.h; sourceTree = "<group>"; };
-		D29FAB5C19B603A000E667D4 /* DXEDishDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEDishDataManager.m; path = Model/DXEDishDataManager.m; sourceTree = "<group>"; };
+		D29FAB5B19B603A000E667D4 /* DXEDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEDataManager.h; path = Model/DXEDataManager.h; sourceTree = "<group>"; };
+		D29FAB5C19B603A000E667D4 /* DXEDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEDataManager.m; path = Model/DXEDataManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,8 +328,8 @@
 				D29FAB5319B5C1E000E667D4 /* DXEDishClass.m */,
 				D29FAB5419B5C1E000E667D4 /* DXEDishItem.h */,
 				D29FAB5519B5C1E000E667D4 /* DXEDishItem.m */,
-				D29FAB5B19B603A000E667D4 /* DXEDishDataManager.h */,
-				D29FAB5C19B603A000E667D4 /* DXEDishDataManager.m */,
+				D29FAB5B19B603A000E667D4 /* DXEDataManager.h */,
+				D29FAB5C19B603A000E667D4 /* DXEDataManager.m */,
 				D24986CB19B70CB00029CC57 /* DXEImageManager.h */,
 				D24986CC19B70CB00029CC57 /* DXEImageManager.m */,
 				D273A44519C8A2750081BB37 /* DXEOrderManager.h */,
@@ -883,7 +883,7 @@
 				D290288E19DA93E20093AF33 /* DXERecordDetailFooterView.m in Sources */,
 				D29FAB5619B5C1E000E667D4 /* DXEDishClass.m in Sources */,
 				D290282619D0784D0093AF33 /* DXERecordTableViewCell.m in Sources */,
-				D29FAB5D19B603A000E667D4 /* DXEDishDataManager.m in Sources */,
+				D29FAB5D19B603A000E667D4 /* DXEDataManager.m in Sources */,
 				D24986CD19B70CB00029CC57 /* DXEImageManager.m in Sources */,
 				D22BE1A01972747000A438D2 /* main.m in Sources */,
 				D290286B19D351C70093AF33 /* DXEOriginViewController.m in Sources */,

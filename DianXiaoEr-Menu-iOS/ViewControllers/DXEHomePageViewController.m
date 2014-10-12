@@ -10,7 +10,7 @@
 #import "DXEDishesViewController.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "CRScrollMenuController.h"
-#import "DXEDishDataManager.h"
+#import "DXEDataManager.h"
 #import "DXEOrderManager.h"
 
 #define kDXEHomePageScrollMenuHeight                    53
@@ -48,10 +48,10 @@
     if (self)
     {
         NSPredicate *showPredicate = [NSPredicate predicateWithFormat:@"name != %@", @"会员"];
-        _showDishes = [NSMutableArray arrayWithArray:[[DXEDishDataManager sharedInstance].dishClasses
+        _showDishes = [NSMutableArray arrayWithArray:[[DXEDataManager sharedInstance].dishClasses
                                                       filteredArrayUsingPredicate:showPredicate]];
         NSPredicate *hidePredicate = [NSPredicate predicateWithFormat:@"name = %@", @"会员"];
-        _hideDishes = [NSMutableArray arrayWithArray:[[DXEDishDataManager sharedInstance].dishClasses
+        _hideDishes = [NSMutableArray arrayWithArray:[[DXEDataManager sharedInstance].dishClasses
                                                       filteredArrayUsingPredicate:hidePredicate]];
         
         [[DXEOrderManager sharedInstance] addObserver:self
