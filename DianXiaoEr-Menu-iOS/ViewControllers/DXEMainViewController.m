@@ -21,7 +21,7 @@
 #import "DXERecordDishItem.h"
 #import "DXELoginView.h"
 #import "AFNetworking.h"
-#import "JGProgressHUD.h"
+#import "SVProgressHUD.h"
 
 #define DXE_TEST_MEMBER
 
@@ -42,7 +42,7 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
 @property (nonatomic, strong) DXELoginView *loginView;
 
 @property (nonatomic, strong) NSXMLParser *loginParser;
-@property (nonatomic, strong) NSString *memberData;
+@property (nonatomic, strong) NSString *responseContent;
 
 @end
 
@@ -230,10 +230,7 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
     {
         self.loginView.loginFailedMessage.hidden = YES;
         
-        JGProgressHUD *hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        hud.textLabel.text = @"登录中";
-        hud.square = YES;
-        [hud showInView:loginView];
+        [SVProgressHUD showWithStatus:@"登录中" maskType:SVProgressHUDMaskTypeClear];
         
         NSURL *baseURL = [NSURL URLWithString:kDXEWebServiceBaseURL];
         AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
@@ -243,12 +240,12 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
                                      @"passwd": loginView.password.text
                                      };
         [httpManager POST:@"VipLogin" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
-            [hud dismiss];
+            [SVProgressHUD dismiss];
             self.loginParser = (NSXMLParser *)responseObject;
             self.loginParser.delegate = self;
             [self.loginParser parse];
         } failure:^(NSURLSessionDataTask *task, NSError *error){
-            [hud dismiss];
+            [SVProgressHUD dismiss];
             self.loginView.loginFailedMessage.hidden = NO;
             self.loginView.loginFailedMessage.text = @"网络连接错误，请检查网络";
             NSLog(@"%@", error);
@@ -292,17 +289,17 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser
 {
-    self.memberData = [NSString string];
+    self.responseContent = [NSString string];
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-    self.memberData = [self.memberData stringByAppendingString:string];
+    self.responseContent = [self.responseContent stringByAppendingString:string];
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-    if ([self.memberData isEqualToString:@""])
+    if ([self.responseContent isEqualToString:@""])
     {
         self.loginView.loginFailedMessage.text = @"用户名或密码输入错误，请重新输入！";
         self.loginView.loginFailedMessage.hidden = NO;

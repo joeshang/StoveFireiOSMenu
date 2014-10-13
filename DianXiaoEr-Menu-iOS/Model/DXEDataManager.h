@@ -14,9 +14,9 @@
 
 @property (nonatomic, strong) NSMutableArray *dishClasses;
 @property (nonatomic, strong) NSMutableArray *tables;
-@property (nonatomic, copy)   NSString *staffid;
-@property (nonatomic, copy)   NSString *openid;
-@property (nonatomic, copy)   NSString *tableid;
+@property (nonatomic, strong) NSNumber *staffid;
+@property (nonatomic, strong) NSNumber *openid;
+@property (nonatomic, strong) NSNumber *tableid;
 
 + (DXEDataManager *)sharedInstance;
 - (void)loadDataFromWeb;

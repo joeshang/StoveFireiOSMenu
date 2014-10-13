@@ -18,7 +18,7 @@
 
 @property (nonatomic, strong) NSString *dishClassString;
 @property (nonatomic, strong) NSString *dishItemString;
-@property (nonatomic, strong) NSString *jsonString;
+@property (nonatomic, strong) NSString *responseContent;
 @property (nonatomic, strong) NSXMLParser *dishClassParser;
 @property (nonatomic, strong) NSXMLParser *dishItemParser;
 
@@ -250,20 +250,20 @@
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser
 {
-    self.jsonString = [NSString string];
+    self.responseContent = [NSString string];
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
     string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    self.jsonString = [self.jsonString stringByAppendingString:string];
+    self.responseContent = [self.responseContent stringByAppendingString:string];
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
     if (parser == self.dishClassParser)
     {
-        [self updateDishClassFromJsonData:[self.jsonString dataUsingEncoding:NSUTF8StringEncoding]];
+        [self updateDishClassFromJsonData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding]];
         
         [self.httpManager POST:@"GetDishItems" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject){
             self.dishItemParser = (NSXMLParser *)responseObject;
@@ -275,15 +275,13 @@
     }
     else if (parser == self.dishItemParser)
     {
-        [self updateDishItemFromJsonData:[self.jsonString dataUsingEncoding:NSUTF8StringEncoding]];
+        [self updateDishItemFromJsonData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding]];
 //        [[DXEImageManager sharedInstance] updateImageWithKeys:[self imageKeys]];
         [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
     }
     else
     {
-        self.tables = [NSJSONSerialization JSONObjectWithData:[self.jsonString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
-        NSLog(@"Tables: \n");
-        NSLog(@"%@", self.tables);
+        self.tables = [NSJSONSerialization JSONObjectWithData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
     }
 }
 

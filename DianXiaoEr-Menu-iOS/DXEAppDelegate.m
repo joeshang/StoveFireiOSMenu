@@ -11,6 +11,7 @@
 #import "DXEOpenViewController.h"
 #import "DXEDataManager.h"
 #import "DXEImageManager.h"
+#import "SVProgressHUD.h"
 
 @implementation DXEAppDelegate
 
@@ -19,6 +20,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [SVProgressHUD appearance].hudBackgroundColor = [UIColor colorWithWhite:0.0 alpha:0.9];
+    [SVProgressHUD appearance].hudForegroundColor = [UIColor whiteColor];
     
     [[DXEDataManager sharedInstance] loadDataFromWeb];
     

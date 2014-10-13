@@ -8,15 +8,19 @@
 
 #import "DXEOrderCartViewController.h"
 #import "DXEDishItem.h"
+#import "DXEDataManager.h"
 #import "DXEOrderManager.h"
 #import "DXEOrderCartTableViewCell.h"
 #import "DXEOrderCartTitleView.h"
 #import "DXEEnsureOrderingView.h"
+#import "AFNetworking.h"
+#import "SVProgressHUD.h"
 
-@interface DXEOrderCartViewController ()
+@interface DXEOrderCartViewController () < NSXMLParserDelegate >
 
 @property (nonatomic, strong) DXEEnsureOrderingView *ensureOrderingView;
 @property (nonatomic, assign) float totalPrice;
+@property (nonatomic, strong) NSString *responseContent;
 
 @end
 
@@ -155,14 +159,74 @@
 {
     NSLog(@"ensure ordering, total price is %0.2f", self.totalPrice);
     
+    [self placeOrder];
+}
+
+- (void)placeOrder
+{
+    NSMutableArray *orderList = [NSMutableArray arrayWithCapacity:[[DXEOrderManager sharedInstance].cart count]];
     for (DXEDishItem *item in [DXEOrderManager sharedInstance].cart)
     {
-        DXEDishItem *orderedItem = [item copy];
-        [[DXEOrderManager sharedInstance].order addObject:orderedItem];
+        NSDictionary *orderedItem  = @{
+                               @"open_id": [DXEDataManager sharedInstance].openid,
+                               @"table_id": [DXEDataManager sharedInstance].tableid,
+                               @"dish_id": item.itemid,
+                               @"count": item.count
+                               };
+        [orderList addObject:orderedItem];
     }
-    [[DXEOrderManager sharedInstance].cart removeAllObjects];
-    self.totalPrice = 0.0;
-    [self.dishesTableView reloadData];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:orderList options:NSJSONWritingPrettyPrinted error:nil];
+    NSDictionary *parameters = @{
+                                 @"order": [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]
+                                 };
+    
+    [SVProgressHUD showWithStatus:@"下单中" maskType:SVProgressHUDMaskTypeClear];
+    
+    NSURL *baseURL = [NSURL URLWithString:kDXEWebServiceBaseURL];
+    AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+    httpManager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+    [httpManager POST:@"PlaceOrder" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
+        [SVProgressHUD dismiss];
+        
+        for (DXEDishItem *item in [DXEOrderManager sharedInstance].cart)
+        {
+            [[DXEOrderManager sharedInstance].order addObject:[item copy]];
+        }
+        [[DXEOrderManager sharedInstance].cart removeAllObjects];
+        self.totalPrice = 0.0;
+        [self.dishesTableView reloadData];
+        
+        NSXMLParser *parser = (NSXMLParser *)responseObject;
+        parser.delegate = self;
+        [parser parse];
+    } failure:^(NSURLSessionDataTask *task, NSError *error){
+        [SVProgressHUD showErrorWithStatus:@"网络错误,下单失败"];
+        NSLog(@"%@", error);
+    }];
+}
+
+#pragma mark - NSXMLParserDelegate 
+
+- (void)parserDidStartDocument:(NSXMLParser *)parser
+{
+    self.responseContent = [NSString string];
+}
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+{
+    self.responseContent = [self.responseContent stringByAppendingString:string];
+}
+
+- (void)parserDidEndDocument:(NSXMLParser *)parser
+{
+    NSArray *orderResults = [NSJSONSerialization JSONObjectWithData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+    for (NSDictionary *result in orderResults)
+    {
+        int dishid = [[result objectForKey:@"dish_id"] intValue];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemid == %d", dishid];
+        DXEDishItem *item = [[[DXEOrderManager sharedInstance].order filteredArrayUsingPredicate:predicate] firstObject];
+        item.tradeid = [result objectForKey:@"trade_id"];
+    }
 }
 
 @end

@@ -26,7 +26,7 @@
 @property (nonatomic, assign) BOOL inFavor;
 @property (nonatomic, strong) NSNumber *count;
 @property (nonatomic, strong) NSNumber *progress;
-@property (nonatomic, strong) NSString *tradeid;
+@property (nonatomic, strong) NSNumber *tradeid;
 
 - (void)updateByNewObject:(DXEDishItem *)update;
 

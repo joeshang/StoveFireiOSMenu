@@ -12,13 +12,11 @@
 #import "DXEDataManager.h"
 #import "CRModal.h"
 #import "AFNetworking.h"
-#import "JGProgressHUD.h"
-#import "JGProgressHUDErrorIndicatorView.h"
+#import "SVProgressHUD.h"
 
 @interface DXEOpenViewController () < NSXMLParserDelegate >
 
 @property (nonatomic, strong) DXELoginView *loginView;
-@property (nonatomic, strong) JGProgressHUD *hud;
 
 @property (nonatomic, strong) AFHTTPSessionManager *httpManager;
 @property (nonatomic, strong) NSXMLParser *loginParser;
@@ -103,7 +101,7 @@
         if ([qrCode intValue] == [tableid intValue])
         {
             valid = YES;
-            [DXEDataManager sharedInstance].tableid = [tableid stringValue];
+            [DXEDataManager sharedInstance].tableid = tableid;
             tableNumber = [table objectForKey:@"name"];
             break;
         }
@@ -124,22 +122,14 @@
 
 - (IBAction)onEnterButtonClicked:(id)sender
 {
-    NSString *tableId = [DXEDataManager sharedInstance].tableid;
-    if (tableId == nil || [tableId isEqualToString:@""])
+    NSNumber *tableId = [DXEDataManager sharedInstance].tableid;
+    if (tableId == nil)
     {
-        self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        self.hud.textLabel.text = @"请选择桌号";
-        self.hud.indicatorView = [[JGProgressHUDErrorIndicatorView alloc] init];
-        self.hud.square = YES;
-        [self.hud showInView:self.view];
-        [self.hud dismissAfterDelay:2.0];
+        [SVProgressHUD showErrorWithStatus:@"请选择桌号"];
     }
     else
     {
-        self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        self.hud.textLabel.text = @"处理中";
-        self.hud.square = YES;
-        [self.hud showInView:self.view];
+        [SVProgressHUD showWithStatus:@"处理中" maskType:SVProgressHUDMaskTypeClear];
         
         NSDictionary *parameters = @{
                                      @"tableId": tableId
@@ -149,11 +139,7 @@
             self.openParser.delegate = self;
             [self.openParser parse];
         } failure:^(NSURLSessionDataTask *task, NSError *error){
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                self.hud.textLabel.text = @"网络错误";
-                self.hud.indicatorView = [[JGProgressHUDErrorIndicatorView alloc] init];
-                [self.hud dismissAfterDelay:2.0];
-            });
+            [SVProgressHUD showErrorWithStatus:@"网络错误"];
         }];
     }
 }
@@ -177,22 +163,19 @@
     {
         self.loginView.loginFailedMessage.hidden = YES;
         
-        self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        self.hud.textLabel.text = @"登录中";
-        self.hud.square = YES;
-        [self.hud showInView:loginView];
+        [SVProgressHUD showWithStatus:@"登录中" maskType:SVProgressHUDMaskTypeClear];
         
         NSDictionary *parameters = @{
                                      @"name": loginView.userName.text,
                                      @"passwd": loginView.password.text
                                      };
         [self.httpManager POST:@"WaiterLogin" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
-            [self.hud dismiss];
+            [SVProgressHUD dismiss];
             self.loginParser = (NSXMLParser *)responseObject;
             self.loginParser.delegate = self;
             [self.loginParser parse];
         } failure:^(NSURLSessionDataTask *task, NSError *error){
-            [self.hud dismiss];
+            [SVProgressHUD dismiss];
             self.loginView.loginFailedMessage.hidden = NO;
             self.loginView.loginFailedMessage.text = @"网络连接错误，请检查网络";
             NSLog(@"%@", error);
@@ -229,8 +212,8 @@
     {
         if (result >= 0)
         {
-            [self.hud dismiss];
-            [DXEDataManager sharedInstance].openid = string;
+            [SVProgressHUD dismiss];
+            [DXEDataManager sharedInstance].openid = [NSNumber numberWithInt:result];
             
             NSString *nibName = NSStringFromClass([DXELoginView class]);
             self.loginView = [[[NSBundle mainBundle] loadNibNamed:nibName
@@ -246,18 +229,14 @@
         }
         else
         {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                self.hud.textLabel.text = @"此桌号未开台";
-                self.hud.indicatorView = [[JGProgressHUDErrorIndicatorView alloc] init];
-                [self.hud dismissAfterDelay:2.0];
-            });
+            [SVProgressHUD showErrorWithStatus:@"此桌号未开台"];
         }
     }
     else if (parser == self.loginParser)
     {
         if (result >= 0)
         {
-            [DXEDataManager sharedInstance].staffid = string;
+            [DXEDataManager sharedInstance].staffid = [NSNumber numberWithInt:result];
             [CRModal dismiss];
             [self enterMainPage];
         }
