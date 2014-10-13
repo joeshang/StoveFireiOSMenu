@@ -55,7 +55,7 @@
 
 - (IBAction)onMoveToHomepageButtonClicked:(id)sender
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"MoveToHomepage"
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidMoveToHomepageNotification
                                                         object:self];
 }
 

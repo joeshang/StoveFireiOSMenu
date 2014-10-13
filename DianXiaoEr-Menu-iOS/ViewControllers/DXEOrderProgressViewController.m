@@ -11,8 +11,15 @@
 #import "DXEOrderProgressTitleView.h"
 #import "DXEOrderManager.h"
 #import "DXEDishItem.h"
+#import "AFNetworking.h"
 
-@interface DXEOrderProgressViewController ()
+#define kDXEOrderProgressUpdatingInterval       15.0
+
+@interface DXEOrderProgressViewController () < NSXMLParserDelegate >
+
+@property (nonatomic, strong) NSTimer *progressTimer;
+@property (nonatomic, strong) AFHTTPSessionManager *httpManager;
+@property (nonatomic, strong) NSString *responseContent;
 
 @end
 
@@ -30,15 +37,20 @@
                                               options:NSKeyValueObservingOptionNew
                                               context:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(onOrderProgressUpdating:)
-                                                     name:@"OrderProgressUpdating"
+                                                 selector:@selector(onUpdateOrderProgressNotification:)
+                                                     name:kDXEDidUpdateOrderProgressNotification
                                                    object:nil];
+        
+        NSURL *baseURL = [NSURL URLWithString:kDXEWebServiceBaseURL];
+        _httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+        _httpManager.responseSerializer = [AFXMLParserResponseSerializer serializer];
     }
     return self;
 }
 
 - (void)dealloc
 {
+    [_progressTimer invalidate];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[DXEOrderManager sharedInstance] removeObserver:self
                                           forKeyPath:NSStringFromSelector(@selector(orderList))];
@@ -97,6 +109,11 @@
     self.doingCount.text = [NSString stringWithFormat:@"%d", doingCount];
     self.doneCount.text = [NSString stringWithFormat:@"%d", doneCount];
     self.totalPrice.text = [NSString stringWithFormat:@"%.2f元", totalPrice];
+    
+    if (doneCount == [[DXEOrderManager sharedInstance].order count])
+    {
+        [self.progressTimer invalidate];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -141,7 +158,7 @@
 
 #pragma mark - notification
 
-- (void)onOrderProgressUpdating:(NSNotification *)notification
+- (void)onUpdateOrderProgressNotification:(NSNotification *)notification
 {
     [self updateProgressCounts];
     [self.dishesTableView reloadData];
@@ -153,7 +170,64 @@
     {
         [self updateProgressCounts];
         [self.dishesTableView reloadData];
+        
+        if (self.progressTimer == nil || self.progressTimer.valid == NO)
+        {
+            self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:kDXEOrderProgressUpdatingInterval
+                                                                  target:self
+                                                                selector:@selector(onProgressTimer:)
+                                                                userInfo:nil
+                                                                 repeats:YES];
+        }
     }
+}
+
+- (void)onProgressTimer:(NSTimer *)timer
+{
+    NSMutableArray *request = [NSMutableArray arrayWithCapacity:[[DXEOrderManager sharedInstance].order count]];
+    for (DXEDishItem *item in [DXEOrderManager sharedInstance].order)
+    {
+        [request addObject:item.tradeid];
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:request options:NSJSONWritingPrettyPrinted error:nil];
+    NSDictionary *parameters = @{
+                                 @"idList": [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]
+                                 };
+    
+    [self.httpManager POST:@"GetOrderStatus" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
+        NSXMLParser *parser = (NSXMLParser *)responseObject;
+        parser.delegate = self;
+        [parser parse];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+#pragma mark - NSXMLParser
+
+- (void)parserDidStartDocument:(NSXMLParser *)parser
+{
+    self.responseContent = [NSString string];
+}
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+{
+    self.responseContent = [self.responseContent stringByAppendingString:string];
+}
+
+- (void)parserDidEndDocument:(NSXMLParser *)parser
+{
+    NSArray *progress = [NSJSONSerialization JSONObjectWithData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+    for (NSDictionary *dict in progress)
+    {
+        int tradeid = [[dict objectForKey:@"trade_id"] intValue];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tradeid == %d", tradeid];
+        DXEDishItem *item = [[[DXEOrderManager sharedInstance].order filteredArrayUsingPredicate:predicate] firstObject];
+        item.progress = [dict objectForKey:@"status"];
+    }
+    
+    [self updateProgressCounts];
+    [self.dishesTableView reloadData];
 }
 
 @end

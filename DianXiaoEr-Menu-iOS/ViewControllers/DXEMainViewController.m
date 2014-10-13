@@ -58,8 +58,8 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
                                               options:NSKeyValueObservingOptionNew
                                               context:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(onMoveToHomepage:)
-                                                     name:@"MoveToHomepage"
+                                                 selector:@selector(onMoveToHomepageNotification:)
+                                                     name:kDXEDidMoveToHomepageNotification
                                                    object:nil];
     }
     return self;
@@ -255,7 +255,7 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
 
 #pragma mark - Notification
 
-- (void)onMoveToHomepage:(NSNotification *)notification
+- (void)onMoveToHomepageNotification:(NSNotification *)notification
 {
     [self.tabBar setItemSelectedAtIndex:DXEMainChildViewControllerIndexHomepage];
     [self moveToChildViewControllerAtIndex:DXEMainChildViewControllerIndexHomepage];
@@ -307,7 +307,7 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
     else
     {
         DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexMyself];
-        myself.member = [[DXEMember alloc] initWithJSONData:[self testMemberData]];
+        myself.member = [[DXEMember alloc] initWithJSONData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding]];
         myself.login = YES;
         [self.tabBar setItemSelectedAtIndex:DXEMainChildViewControllerIndexMyself];
         [self moveToChildViewControllerAtIndex:DXEMainChildViewControllerIndexMyself];
