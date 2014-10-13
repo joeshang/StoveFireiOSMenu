@@ -15,6 +15,7 @@
 #import "DXEImageManager.h"
 #import "DXEOrderManager.h"
 #import "UIView+Genie.h"
+#import "AFNetworking.h"
 
 #define kDXECollectionViewCellWidth             357
 #define kDXECollectionViewInfoCellHeight        140
@@ -32,8 +33,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    if (self)
+    {
     }
     return self;
 }
@@ -188,13 +189,11 @@
     DXEDishItem *item = [self.dishClass.dishes objectAtIndex:indexPath.row - 1];
     if (item.inFavor)
     {
-        item.inFavor = NO;
-        item.favor = [NSNumber numberWithInt:[item.favor intValue] - 1];
+        [self cancelFavor:item];
     }
     else
     {
-        item.inFavor = YES;
-        item.favor = [NSNumber numberWithInt:[item.favor intValue] + 1];
+        [self doFavor:item];
     }
     
     [collectionView reloadItemsAtIndexPaths:@[indexPath]];
@@ -282,15 +281,15 @@
     DXEDishItem *item = [self.dishClass.dishes objectAtIndex:self.selectedIndexPath.row - 1];
     if (item.inFavor)
     {
-        item.inFavor = NO;
-        item.favor = [NSNumber numberWithInt:[item.favor intValue] - 1];
+        [self cancelFavor:item];
+        
         [self.dishDetailView.favorButton setImage:[UIImage imageNamed:@"dish_cell_favor_hollow_icon"]
                                          forState:UIControlStateNormal];
     }
     else
     {
-        item.inFavor = YES;
-        item.favor = [NSNumber numberWithInt:[item.favor intValue] + 1];
+        [self doFavor:item];
+        
         [self.dishDetailView.favorButton setImage:[UIImage imageNamed:@"dish_cell_favor_solid_icon"]
                                          forState:UIControlStateNormal];
     }
@@ -345,6 +344,42 @@
                 }
             }];
         }];
+    }];
+}
+
+#pragma mark - Favor
+
+- (void)doFavor:(DXEDishItem *)item
+{
+    item.inFavor = YES;
+    item.favor = [NSNumber numberWithInt:[item.favor intValue] + 1];
+    
+    NSDictionary *parameters = @{
+                                 @"id": item.itemid
+                                 };
+    NSURL *baseURL = [NSURL URLWithString:kDXEWebServiceBaseURL];
+    AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+    httpManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [httpManager POST:@"Like" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
+    } failure:^(NSURLSessionDataTask *task, NSError *error){
+        NSLog(@"%@", error);
+    }];
+}
+
+- (void)cancelFavor:(DXEDishItem *)item
+{
+    item.inFavor = NO;
+    item.favor = [NSNumber numberWithInt:[item.favor intValue] - 1];
+    
+    NSDictionary *parameters = @{
+                                 @"id": item.itemid
+                                 };
+    NSURL *baseURL = [NSURL URLWithString:kDXEWebServiceBaseURL];
+    AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+    httpManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [httpManager POST:@"Dislike" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
+    } failure:^(NSURLSessionDataTask *task, NSError *error){
+        NSLog(@"%@", error);
     }];
 }
 

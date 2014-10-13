@@ -202,6 +202,7 @@
     }
     
     self.cachedImageKeys = [NSMutableArray arrayWithArray:newImageKeys];
+    [self saveChanges];
 #endif
 }
 
