@@ -34,5 +34,6 @@ typedef NS_ENUM(NSUInteger, DXEDishProgress)
 #define kDXEDidUpdateOrderProgressNotification      @"DXEDidUpdateOrderProgressNotification"
 
 #define kDXEWebServiceBaseURL                       @"http://192.168.1.2/webservice.asmx/"
+#define kDXEImageBaseURL                            @"http://192.168.1.2/Images/"
 
 #endif

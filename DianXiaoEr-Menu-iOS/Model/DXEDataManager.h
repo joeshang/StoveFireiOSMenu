@@ -13,7 +13,7 @@
 @interface DXEDataManager : NSObject
 
 @property (nonatomic, strong) NSMutableArray *dishClasses;
-@property (nonatomic, strong) NSMutableArray *tables;
+@property (nonatomic, strong) NSArray *tables;
 @property (nonatomic, strong) NSNumber *staffid;
 @property (nonatomic, strong) NSNumber *openid;
 @property (nonatomic, strong) NSNumber *tableid;

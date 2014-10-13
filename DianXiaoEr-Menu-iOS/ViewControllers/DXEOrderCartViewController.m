@@ -9,6 +9,7 @@
 #import "DXEOrderCartViewController.h"
 #import "DXEDishItem.h"
 #import "DXEDataManager.h"
+#import "DXEImageManager.h"
 #import "DXEOrderManager.h"
 #import "DXEOrderCartTableViewCell.h"
 #import "DXEOrderCartTitleView.h"
@@ -105,6 +106,7 @@
     cell.dishName.text = item.name;
     cell.dishEnglishName.text = item.englishName;
     cell.dishPrice.text = [NSString stringWithFormat:@"单价：￥%.2f", [item.price floatValue]];
+    cell.dishThumbnail.image = [[DXEImageManager sharedInstance] imageForKey:item.thumbnailKey];
     [cell updateCellByDishCount:[item.count integerValue] dishPrice:[item.price floatValue]];
     
     return cell;

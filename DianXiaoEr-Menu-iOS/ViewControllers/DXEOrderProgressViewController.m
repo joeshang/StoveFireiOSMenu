@@ -10,6 +10,7 @@
 #import "DXEOrderProgressTableViewCell.h"
 #import "DXEOrderProgressTitleView.h"
 #import "DXEOrderManager.h"
+#import "DXEImageManager.h"
 #import "DXEDishItem.h"
 #import "AFNetworking.h"
 
@@ -141,6 +142,7 @@
     cell.dishCount.text = [item.count stringValue];
     cell.dishPrice.text = [NSString stringWithFormat:@"单价：￥%.2f", [item.price floatValue]];
     cell.dishTotalPrice.text = [NSString stringWithFormat:@"￥%.2f", [item.price floatValue] * [item.count integerValue]];
+    cell.dishThumbnail.image = [[DXEImageManager sharedInstance] imageForKey:item.thumbnailKey];
     cell.state = [item.progress integerValue];
     
     return cell;

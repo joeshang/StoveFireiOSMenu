@@ -187,8 +187,17 @@
 
 - (void)onLoadingProgressNotication:(NSNotification *)notification
 {
-    NSString *message = [notification.userInfo objectForKey:@"message"];
-    self.loadingLabel.text = message;
+    NSString *error = [notification.userInfo objectForKey:@"error"];
+    if (error)
+    {
+        [self.loadingIndicator stopAnimating];
+        self.loadingLabel.text = error;
+    }
+    else
+    {
+        NSString *message = [notification.userInfo objectForKey:@"message"];
+        self.loadingLabel.text = message;
+    }
 }
 
 - (void)onFinishLoadingNotication:(NSNotification *)notification

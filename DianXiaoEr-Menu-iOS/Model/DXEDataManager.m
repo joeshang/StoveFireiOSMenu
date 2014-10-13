@@ -10,15 +10,14 @@
 #import "DXEImageManager.h"
 #import "AFNetworking.h"
 
-#define DXE_TEST_DISH_DATA
+//#define DXE_TEST_DISH_DATA
 
 @interface DXEDataManager () < NSXMLParserDelegate >
 
 @property (nonatomic, strong) AFHTTPSessionManager *httpManager;
 
-@property (nonatomic, strong) NSString *dishClassString;
-@property (nonatomic, strong) NSString *dishItemString;
 @property (nonatomic, strong) NSString *responseContent;
+@property (nonatomic, strong) NSXMLParser *tableParser;
 @property (nonatomic, strong) NSXMLParser *dishClassParser;
 @property (nonatomic, strong) NSXMLParser *dishItemParser;
 
@@ -30,13 +29,14 @@
 - (NSData *)dishClassDataOfTestingUpdateAndAdd;
 - (NSData *)dishItemDataOfTestingNew;
 - (NSData *)dishItemDataOfTestingUpdateAndAdd;
+- (void)tableDataOfTesting;
 #endif
 
 @end
 
 @implementation DXEDataManager
 
-#pragma mark - singleton init
+#pragma mark - Singleton & init
 
 + (DXEDataManager *)sharedInstance
 {
@@ -65,37 +65,12 @@
         _httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
         _httpManager.responseSerializer = [AFXMLParserResponseSerializer serializer];
 
-#ifdef DXE_TEST_DISH_DATA
-//        [self updateDishClassFromJsonData:[self dishClassDataOfTestingNew]];
-//        [self updateDishClassFromJsonData:[self dishClassDataOfTestingUpdateAndAdd]];
-//        [self updateDishItemFromJsonData:[self dishItemDataOfTestingNew]];
-//        [self updateDishItemFromJsonData:[self dishItemDataOfTestingUpdateAndAdd]];
-#endif
     }
     
     return self;
 }
 
-#pragma mark - data update
-
-- (void)loadDataFromWeb
-{
-    [self.httpManager POST:@"GetDishClasses" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject){
-        self.dishClassParser = (NSXMLParser *)responseObject;
-        self.dishClassParser.delegate = self;
-        [self.dishClassParser parse];
-    } failure:^(NSURLSessionDataTask *task, NSError *error){
-        NSLog(@"%@", error);
-    }];
-    
-    [self.httpManager POST:@"GetTableList" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject){
-        NSXMLParser *xmlParser = (NSXMLParser *)responseObject;
-        xmlParser.delegate = self;
-        [xmlParser parse];
-    } failure:^(NSURLSessionDataTask *task, NSError *error){
-        NSLog(@"%@", error);
-    }];
-}
+#pragma mark - Update data
 
 - (void)updateDishClassFromJsonData:(NSData *)jsonData
 {
@@ -246,6 +221,36 @@
     return imageKeys;
 }
 
+#pragma mark - Load Data
+
+- (void)loadDataFromWeb
+{
+#ifdef DXE_TEST_DISH_DATA
+    [self updateDishClassFromJsonData:[self dishClassDataOfTestingNew]];
+    [self updateDishClassFromJsonData:[self dishClassDataOfTestingUpdateAndAdd]];
+    [self updateDishItemFromJsonData:[self dishItemDataOfTestingNew]];
+    [self updateDishItemFromJsonData:[self dishItemDataOfTestingUpdateAndAdd]];
+    [self tableDataOfTesting];
+#else
+    
+    [self.httpManager POST:@"GetTableList" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject){
+        self.tableParser = (NSXMLParser *)responseObject;
+        self.tableParser.delegate = self;
+        [self.tableParser parse];
+    } failure:^(NSURLSessionDataTask *task, NSError *error){
+        NSLog(@"%@", error);
+        [self sendErrorNotification:@"桌台数据"];
+    }];
+#endif
+}
+
+- (void)sendErrorNotification:(NSString *)string
+{
+    NSString *error = [NSString stringWithFormat:@"网络错误，获取%@失败，请检查网络后再次进入", string];
+    NSDictionary *userInfo = @{ @"error": error };
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
+}
+
 #pragma mark - NSXMLParserDelegate
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser
@@ -261,7 +266,20 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-    if (parser == self.dishClassParser)
+    if (parser == self.tableParser)
+    {
+        self.tables = [NSJSONSerialization JSONObjectWithData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+        
+        [self.httpManager POST:@"GetDishClasses" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject){
+            self.dishClassParser = (NSXMLParser *)responseObject;
+            self.dishClassParser.delegate = self;
+            [self.dishClassParser parse];
+        } failure:^(NSURLSessionDataTask *task, NSError *error){
+            NSLog(@"%@", error);
+            [self sendErrorNotification:@"菜类数据"];
+        }];
+    }
+    else if (parser == self.dishClassParser)
     {
         [self updateDishClassFromJsonData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding]];
         
@@ -271,17 +289,13 @@
             [self.dishItemParser parse];
         } failure:^(NSURLSessionDataTask *task, NSError *error){
             NSLog(@"%@", error);
+            [self sendErrorNotification:@"菜品数据"];
         }];
     }
     else if (parser == self.dishItemParser)
     {
         [self updateDishItemFromJsonData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding]];
-//        [[DXEImageManager sharedInstance] updateImageWithKeys:[self imageKeys]];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
-    }
-    else
-    {
-        self.tables = [NSJSONSerialization JSONObjectWithData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+        [[DXEImageManager sharedInstance] updateImageWithKeys:[self imageKeys]];
     }
 }
 
@@ -391,6 +405,16 @@
     }
     
     return [array JSONData];
+}
+
+- (void)tableDataOfTesting
+{
+    self.tables = @[
+                    @{
+                        @"name": @"C1",
+                        @"id": @22
+                        }
+                    ];
 }
 
 #endif

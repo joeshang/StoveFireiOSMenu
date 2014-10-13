@@ -9,7 +9,7 @@
 #import "DXEImageManager.h"
 #import "UIImageView+WebCache.h"
 
-#define DXE_TEST_IMAGE_KEYS
+//#define DXE_TEST_IMAGE_KEYS
 
 @interface DXEImageManager ()
 
@@ -69,11 +69,15 @@
     UIImage *image;
     if ([imageClass isEqualToString:@"0"])
     {
-        image = [UIImage imageNamed:@"test_dish_class"];
+        image = [UIImage imageNamed:@"test_dish_class.jpg"];
     }
     else if ([imageClass isEqualToString:@"1"])
     {
-        image = [UIImage imageNamed:@"test_dish_item"];
+        image = [UIImage imageNamed:@"test_dish_item.jpg"];
+    }
+    else if ([imageClass isEqualToString:@"2"])
+    {
+        image = [UIImage imageNamed:@"test_dish_item_thumbnail.jpg"];
     }
     return image;
 #else
@@ -163,14 +167,24 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
         for (NSString *imageKey in requestImageKeys)
         {
-            [[SDWebImageManager sharedManager] downloadImageWithURL:nil options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL)
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kDXEImageBaseURL, imageKey]];
+            [[SDWebImageManager sharedManager] downloadImageWithURL:url options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL)
              {
-                 if (image && finished)
+                 if (finished)
                  {
-                     NSLog(@"%@", [imageURL absoluteString]);
-                     [[SDWebImageManager sharedManager].imageCache storeImage:image forKey:imageKey];
+                     if (error)
+                     {
+                         NSLog(@"Get image %@: %@", imageURL, error);
+                         process++;
+                     }
+                     else if (image && finished)
+                     {
+                         NSLog(@"%@", [imageURL absoluteString]);
+                         [[SDWebImageManager sharedManager].imageCache storeImage:image forKey:imageKey];
+                         
+                         process++;
+                     }
                      
-                     process++;
                      NSString *message = [NSString stringWithFormat:@"正在加载图片(进度:%lu/%lu)", process, totalCount];
                      NSDictionary *userInfo = @{ @"message": message };
                      [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];

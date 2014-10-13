@@ -11,6 +11,7 @@
 #import "DXEDishItem.h"
 #import "DXERecordTableViewCell.h"
 #import "DXEDiningRecord.h"
+#import "DXEImageManager.h"
 #import "DXERecordTitleView.h"
 #import "DXERecordDetailView.h"
 #import "DXERecordDetailFooterView.h"
@@ -126,6 +127,7 @@
         cell.dishEnglishName.text = item.englishName;
         cell.dishPrice.text = [NSString stringWithFormat:@"单价：￥%.2f", [item.price floatValue]];
         cell.dishTotalPrice.text = [NSString stringWithFormat:@"￥%.2f", [item.price floatValue] * [item.count integerValue]];
+        cell.dishThumbnail.image = [[DXEImageManager sharedInstance] imageForKey:item.thumbnailKey];
         cell.increaseButton.hidden = YES;
         cell.decreaseButton.hidden = YES;
         cell.countUnderline.hidden = YES;
