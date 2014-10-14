@@ -127,7 +127,12 @@
         cell.dishEnglishName.text = item.englishName;
         cell.dishPrice.text = [NSString stringWithFormat:@"单价：￥%.2f", [item.price floatValue]];
         cell.dishTotalPrice.text = [NSString stringWithFormat:@"￥%.2f", [item.price floatValue] * [item.count integerValue]];
-        cell.dishThumbnail.image = [[DXEImageManager sharedInstance] imageForKey:item.thumbnailKey];
+        UIImage *thumbnail = [[DXEImageManager sharedInstance] imageForKey:item.thumbnailKey];
+        if (!thumbnail)
+        {
+            thumbnail = [[RNThemeManager sharedManager] imageForKey:@"myself_record_brand.png"];
+        }
+        cell.dishThumbnail.image = thumbnail;
         cell.increaseButton.hidden = YES;
         cell.decreaseButton.hidden = YES;
         cell.countUnderline.hidden = YES;
