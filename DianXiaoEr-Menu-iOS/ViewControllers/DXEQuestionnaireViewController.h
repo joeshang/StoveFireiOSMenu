@@ -9,4 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DXEQuestionnaireViewController : UIViewController
+
+@property (nonatomic, strong) IBOutlet UIWebView *webView;
+
 @end
