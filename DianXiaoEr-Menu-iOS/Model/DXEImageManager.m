@@ -161,8 +161,9 @@
     if ([requestImageKeys count] != 0)
     {
         __block NSUInteger totalCount = [requestImageKeys count];
-        __block NSUInteger process = 0;
-        NSString *message = [NSString stringWithFormat:@"正在加载图片(进度:%lu/%lu)", process, totalCount];
+        __block NSUInteger progress = 0;
+        __block BOOL sendNotification = YES;
+        NSString *message = [NSString stringWithFormat:@"正在加载图片(进度:%lu/%lu)", progress, totalCount];
         NSDictionary *userInfo = @{ @"message": message };
         [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
         for (NSString *imageKey in requestImageKeys)
@@ -172,25 +173,35 @@
              {
                  if (finished)
                  {
+                     NSDictionary *userInfo;
                      if (error)
                      {
                          NSLog(@"Get image %@: %@", imageURL, error);
-                         process++;
+                         NSString *message = [NSString stringWithFormat:@"加载图片错误，请检查网络与后台后再次进入"];
+                         userInfo = @{ @"error": message };
                      }
                      else if (image && finished)
                      {
                          NSLog(@"%@", [imageURL absoluteString]);
                          [[SDWebImageManager sharedManager].imageCache storeImage:image forKey:imageKey];
                          
-                         process++;
+                         progress++;
+                         
+                         NSString *message = [NSString stringWithFormat:@"正在加载图片(进度:%lu/%lu)", progress, totalCount];
+                         userInfo = @{ @"message": message };
                      }
                      
-                     NSString *message = [NSString stringWithFormat:@"正在加载图片(进度:%lu/%lu)", process, totalCount];
-                     NSDictionary *userInfo = @{ @"message": message };
-                     [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
-                     if (process == totalCount)
+                     if (sendNotification)
                      {
-                         [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
+                         [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
+                         if (progress == totalCount)
+                         {
+                             [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
+                         }
+                         if (error)
+                         {
+                             sendNotification = NO;
+                         }
                      }
                  }
              }];
