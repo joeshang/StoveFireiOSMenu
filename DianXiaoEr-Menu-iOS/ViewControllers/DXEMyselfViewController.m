@@ -111,7 +111,9 @@
         NSString *identifier = NSStringFromClass([DXERecordTableViewCell class]);
         DXERecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         cell.controller = self;
-        cell.date.text = record.date;
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"YYYY.MM.dd   hh:mm";
+        cell.date.text = [formatter stringFromDate:[NSDate date]];
         cell.dishCount.text = [record.dishCount stringValue];
         cell.totalPrice.text = [NSString stringWithFormat:@"￥%.2f", [record.totalPrice floatValue]];
         
@@ -125,6 +127,7 @@
         DXEOrderCartTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         cell.dishName.text = item.name;
         cell.dishEnglishName.text = item.englishName;
+        cell.dishCount.text = [item.count stringValue];
         cell.dishPrice.text = [NSString stringWithFormat:@"单价：￥%.2f", [item.price floatValue]];
         cell.dishTotalPrice.text = [NSString stringWithFormat:@"￥%.2f", [item.price floatValue] * [item.count integerValue]];
         UIImage *thumbnail = [[DXEImageManager sharedInstance] imageForKey:item.thumbnailKey];

@@ -354,9 +354,7 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
         record.dishCount = [NSNumber numberWithInt:totalCount];
         record.totalPrice = [NSNumber numberWithFloat:totalPrice];
         record.dishes = [items copy];
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"YYYY.MM.dd   hh:mm";
-        record.date = [formatter stringFromDate:[NSDate date]];
+        record.date = [NSDate date];
         
         [records addObject:record];
     }

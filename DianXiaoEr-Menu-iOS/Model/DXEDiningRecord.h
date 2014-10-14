@@ -10,7 +10,7 @@
 
 @interface DXEDiningRecord : NSObject
 
-@property (nonatomic, strong) NSString *date;
+@property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSNumber *dishCount;
 @property (nonatomic, strong) NSNumber *totalPrice;
 @property (nonatomic, strong) NSArray *dishes;
