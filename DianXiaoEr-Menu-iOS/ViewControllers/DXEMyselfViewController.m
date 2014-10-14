@@ -17,6 +17,7 @@
 #import "DXERecordDetailFooterView.h"
 #import "DXEOrderCartTableViewCell.h"
 #import "DXEOrderCartTitleView.h"
+#import "DXERecordDishItem.h"
 #import "CRModal.h"
 
 #define kDXERecordDetailCellWidth           594
@@ -114,8 +115,16 @@
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"YYYY.MM.dd   hh:mm";
         cell.date.text = [formatter stringFromDate:[NSDate date]];
-        cell.dishCount.text = [record.dishCount stringValue];
-        cell.totalPrice.text = [NSString stringWithFormat:@"￥%.2f", [record.totalPrice floatValue]];
+        
+        int dishCount = 0;
+        float totalPrice = 0.0;
+        for (DXERecordDishItem *item in record.dishes)
+        {
+            dishCount += [item.count intValue];
+            totalPrice += [item.price floatValue] * [item.count intValue];
+        }
+        cell.dishCount.text = [NSString stringWithFormat:@"%d", dishCount];
+        cell.totalPrice.text = [NSString stringWithFormat:@"￥%.2f", totalPrice];
         
         return cell;
     }
