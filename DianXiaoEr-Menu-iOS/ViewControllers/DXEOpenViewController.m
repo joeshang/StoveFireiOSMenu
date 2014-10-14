@@ -84,8 +84,9 @@
                          self.view.alpha = 0.0;
                      }
                      completion:^(BOOL finished){
-                         DXEMainViewController *main = [[DXEMainViewController alloc] init];
-                         [UIApplication sharedApplication].keyWindow.rootViewController = main;
+                         [self willMoveToParentViewController:nil];
+                         [self.view removeFromSuperview];
+                         [self removeFromParentViewController];
                      }];
 }
 
@@ -210,6 +211,12 @@
     self.tableNumber.hidden = NO;
     self.tableButton.hidden = NO;
     self.enterButton.hidden = NO;
+    
+    DXEMainViewController *main = [[DXEMainViewController alloc] init];
+    UIViewController *root = [UIApplication sharedApplication].keyWindow.rootViewController;
+    [root addChildViewController:main];
+    [root.view insertSubview:main.view belowSubview:self.view];
+    [main didMoveToParentViewController:root];
 }
 
 #pragma mark - NSXMLParserDelegate

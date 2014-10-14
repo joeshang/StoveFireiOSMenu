@@ -8,10 +8,10 @@
 
 #import "DXEAppDelegate.h"
 #import "RNThemeManager.h"
-#import "DXEOpenViewController.h"
 #import "DXEDataManager.h"
 #import "DXEImageManager.h"
 #import "SVProgressHUD.h"
+#import "DXEOpenViewController.h"
 
 @implementation DXEAppDelegate
 
@@ -26,10 +26,14 @@
     
     [[DXEDataManager sharedInstance] loadDataFromWeb];
     
+    UIViewController *container = [[UIViewController alloc] init];
     DXEOpenViewController *open = [[DXEOpenViewController alloc] init];
-    self.window.rootViewController = open;
+    [container addChildViewController:open];
+    [container.view addSubview:open.view];
+    [open didMoveToParentViewController:container];
     
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = container;
+    
     [self.window makeKeyAndVisible];
     
     return YES;
