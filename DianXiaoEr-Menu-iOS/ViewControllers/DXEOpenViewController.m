@@ -193,6 +193,7 @@
     {
         [self.loadingIndicator stopAnimating];
         self.loadingLabel.text = error;
+        self.loadingErrorIcon.hidden = NO;
     }
     else
     {

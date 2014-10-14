@@ -16,6 +16,7 @@
 #import "DXEOrderViewController.h"
 #import "DXEMyselfViewController.h"
 #import "DXEOrderManager.h"
+#import "DXEDataManager.h"
 #import "DXEMember.h"
 #import "DXEDiningRecord.h"
 #import "DXERecordDishItem.h"
@@ -237,7 +238,8 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
         httpManager.responseSerializer = [AFXMLParserResponseSerializer serializer];
         NSDictionary *parameters = @{
                                      @"name": loginView.userName.text,
-                                     @"passwd": loginView.password.text
+                                     @"passwd": loginView.password.text,
+                                     @"open_id": [DXEDataManager sharedInstance].openid
                                      };
         [httpManager POST:@"VipLogin" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
             [SVProgressHUD dismiss];

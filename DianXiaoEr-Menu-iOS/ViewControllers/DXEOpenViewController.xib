@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DXEOpenViewController">
             <connections>
                 <outlet property="enterButton" destination="roa-ws-nyt" id="swB-tF-ERk"/>
+                <outlet property="loadingErrorIcon" destination="iaJ-VP-2ra" id="JjD-9J-DBO"/>
                 <outlet property="loadingIndicator" destination="Hc0-mB-JBH" id="FvG-Kp-tqO"/>
                 <outlet property="loadingLabel" destination="m6c-2P-2gI" id="mIp-Ed-qjs"/>
                 <outlet property="tableButton" destination="KJm-63-q3q" id="Djs-pd-vEN"/>
@@ -85,7 +86,7 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在加载数据" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="m6c-2P-2gI">
-                    <rect key="frame" x="134" y="586" width="500" height="21"/>
+                    <rect key="frame" x="134" y="571" width="500" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -95,6 +96,13 @@
                     <rect key="frame" x="366" y="511" width="37" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </activityIndicatorView>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="iaJ-VP-2ra" customClass="RNThemedImageView">
+                    <rect key="frame" x="364" y="509" width="40" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="imageKey" value="loading_error_icon.png"/>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>

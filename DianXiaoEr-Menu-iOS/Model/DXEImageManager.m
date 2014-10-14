@@ -103,6 +103,7 @@
         return;
     }
     
+    NSMutableArray *deprecatedImageKeys = [NSMutableArray arrayWithArray:self.cachedImageKeys];
     NSMutableArray *requestImageKeys = nil;
     if ([self.cachedImageKeys count] == 0)
     {
@@ -120,7 +121,7 @@
                 if ([newKey isEqualToString:cachedKey])
                 {
                     *stop = YES;
-                    [self.cachedImageKeys removeObject:cachedKey];
+                    [deprecatedImageKeys removeObject:cachedKey];
                 }
                 else
                 {
@@ -130,9 +131,7 @@
                     if ([newID isEqualToString:cachedID])
                     {
                         *stop = YES;
-                        [self.cachedImageKeys removeObject:cachedKey];
-                        
-                        [self deleteImageForKey:cachedKey];
+                        // 由于没有从deprecatedImageKeys中移除，因此会在后面删除旧照片
                         [requestImageKeys addObject:newKey];
                     }
                     else
@@ -147,11 +146,12 @@
             }];
         }
         
-        // 对比完newImageKeys后在cachedImageKeys中还剩下的全是需要删除的图片
-        if ([self.cachedImageKeys count] != 0)
+        // 对比完newImageKeys后在deprecatedImageKeys中还剩下的全是需要删除的图片
+        if ([deprecatedImageKeys count] != 0)
         {
-            for (NSString *cachedKey in self.cachedImageKeys)
+            for (NSString *cachedKey in deprecatedImageKeys)
             {
+                [self.cachedImageKeys removeObject:cachedKey];
                 [self deleteImageForKey:cachedKey];
             }
         }
@@ -163,9 +163,6 @@
         __block NSUInteger totalCount = [requestImageKeys count];
         __block NSUInteger progress = 0;
         __block BOOL sendNotification = YES;
-        NSString *message = [NSString stringWithFormat:@"正在加载图片(进度:%lu/%lu)", progress, totalCount];
-        NSDictionary *userInfo = @{ @"message": message };
-        [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
         for (NSString *imageKey in requestImageKeys)
         {
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kDXEImageBaseURL, imageKey]];
@@ -184,6 +181,7 @@
                      {
                          NSLog(@"%@", [imageURL absoluteString]);
                          [[SDWebImageManager sharedManager].imageCache storeImage:image forKey:imageKey];
+                         [self.cachedImageKeys addObject:imageKey];
                          
                          progress++;
                          
@@ -194,13 +192,17 @@
                      if (sendNotification)
                      {
                          [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
-                         if (progress == totalCount)
-                         {
-                             [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
-                         }
+                         
                          if (error)
                          {
                              sendNotification = NO;
+                             [self saveChanges];
+                         }
+                         else if (progress == totalCount)
+                         {
+                             [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
+                             
+                             [self saveChanges];
                          }
                      }
                  }
@@ -211,9 +213,6 @@
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
     }
-    
-    self.cachedImageKeys = [NSMutableArray arrayWithArray:newImageKeys];
-    [self saveChanges];
 #endif
 }
 
