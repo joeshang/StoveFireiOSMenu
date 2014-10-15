@@ -189,7 +189,10 @@
     NSMutableArray *request = [NSMutableArray arrayWithCapacity:[[DXEOrderManager sharedInstance].order count]];
     for (DXEDishItem *item in [DXEOrderManager sharedInstance].order)
     {
-        [request addObject:item.tradeid];
+        if (item.tradeid)
+        {
+            [request addObject:item.tradeid];
+        }
     }
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:request options:NSJSONWritingPrettyPrinted error:nil];
     NSDictionary *parameters = @{
