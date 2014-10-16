@@ -53,11 +53,6 @@
     UIColor *backgroundColor = [[RNThemeManager sharedManager] colorForKey:@"BackgroundColor"];
     self.view.backgroundColor = backgroundColor;
     
-    self.memberImage.clipsToBounds = YES;
-    self.memberImage.layer.cornerRadius = self.memberImage.frame.size.width / 2;
-    self.memberImage.layer.borderColor = [[UIColor whiteColor] CGColor];
-    self.memberImage.layer.borderWidth = 3;
-    
     NSString *nibName = NSStringFromClass([DXERecordTableViewCell class]);
     [self.recordTableView registerNib:[UINib nibWithNibName:nibName bundle:nil]
                forCellReuseIdentifier:nibName];
@@ -214,7 +209,6 @@
 {
     _member = member;
     
-    self.memberUppercaseName.text = [member.memberName uppercaseString];
     self.memberName.text = member.memberName;
     self.memberPhone.text = member.memberPhone;
     self.memberAccount.text = [NSString stringWithFormat:@"%@ 元", member.memberAccount];

@@ -13,8 +13,6 @@
 @interface DXEMyselfViewController : UIViewController
 < UITableViewDataSource, UITableViewDelegate >
 
-@property (weak, nonatomic) IBOutlet UIImageView *memberImage;
-@property (weak, nonatomic) IBOutlet UILabel *memberUppercaseName;
 @property (weak, nonatomic) IBOutlet UILabel *memberName;
 @property (weak, nonatomic) IBOutlet UILabel *memberPhone;
 @property (weak, nonatomic) IBOutlet UILabel *memberAccount;
