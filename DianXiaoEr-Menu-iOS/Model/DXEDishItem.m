@@ -18,9 +18,6 @@
     {
         _inFavor = NO;
         _inCart = NO;
-        _count = [NSNumber numberWithInteger:0];
-        _tradeid = [NSNumber numberWithInteger:-1];
-        _progress = [NSNumber numberWithInt:DXEDishProgressTodo];
     }
     
     return self;
@@ -45,8 +42,6 @@
         copy.soldout = [self.soldout copy];
         copy.inCart = self.inCart;
         copy.inFavor = self.inFavor;
-        copy.count = [self.count copy];
-        copy.tradeid = [self.tradeid copy];
     }
     
     return copy;

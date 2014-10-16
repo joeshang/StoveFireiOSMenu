@@ -7,6 +7,8 @@
 //
 
 #import "DXEOrderManager.h"
+#import "DXEOrderItem.h"
+#import "DXEDataManager.h"
 #import "DXEDishItem.h"
 
 @interface DXEOrderManager ()
@@ -40,39 +42,40 @@
 
 - (NSMutableArray *)cart
 {
-    return [self mutableArrayValueForKey:@"cartList"];
+    return [self mutableArrayValueForKey:NSStringFromSelector(@selector(cartList))];
 }
 
 - (NSMutableArray *)order
 {
-    return [self mutableArrayValueForKey:@"orderList"];
+    return [self mutableArrayValueForKey:NSStringFromSelector(@selector(orderList))];
 }
 
 #pragma mark - KVC
 
-- (void)insertObject:(DXEDishItem *)object inCartListAtIndex:(NSUInteger)index
+- (void)insertObject:(DXEOrderItem *)object inCartListAtIndex:(NSUInteger)index
 {
     [object addObserver:self
              forKeyPath:NSStringFromSelector(@selector(count))
                 options:NSKeyValueObservingOptionNew
                 context:nil];
-    object.inCart = YES;
+    DXEDishItem *dish = [[DXEDataManager sharedInstance].dishes objectForKey:object.itemid];
+    dish.inCart = YES;
     self.totalCount = [NSNumber numberWithInteger:[self.totalCount integerValue] + [object.count integerValue]];
     [self.cartList insertObject:object atIndex:index];
 }
 
 - (void)removeObjectFromCartListAtIndex:(NSUInteger)index
 {
-    DXEDishItem *object = [self.cartList objectAtIndex:index];
+    DXEOrderItem *object = [self.cartList objectAtIndex:index];
     [object removeObserver:self
                 forKeyPath:NSStringFromSelector(@selector(count))];
-    object.inCart = NO;
+    DXEDishItem *dish = [[DXEDataManager sharedInstance].dishes objectForKey:object.itemid];
+    dish.inCart = NO;
     self.totalCount = [NSNumber numberWithInteger:[self.totalCount integerValue] - [object.count integerValue]];
-    object.count = [NSNumber numberWithInteger:0];
     [self.cartList removeObjectAtIndex:index];
 }
 
-- (void)insertObject:(DXEDishItem *)object inOrderListAtIndex:(NSUInteger)index
+- (void)insertObject:(DXEOrderItem *)object inOrderListAtIndex:(NSUInteger)index
 {
     [object addObserver:self
              forKeyPath:NSStringFromSelector(@selector(progress))
@@ -85,12 +88,10 @@
 
 - (void)removeObjectFromOrderListAtIndex:(NSUInteger)index
 {
-    DXEDishItem *object = [self.cartList objectAtIndex:index];
+    DXEOrderItem *object = [self.cartList objectAtIndex:index];
     [object removeObserver:self
                 forKeyPath:NSStringFromSelector(@selector(progress))];
-    object.progress = nil;
     self.totalCount = [NSNumber numberWithInteger:[self.totalCount integerValue] - [object.count integerValue]];
-    object.count = [NSNumber numberWithInteger:0];
     
     [self.orderList removeObjectAtIndex:index];
 }
@@ -116,8 +117,7 @@
         
         if (old == nil || [old integerValue] != [new integerValue])
         {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderProgressUpdating"
-             object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidUpdateOrderProgressNotification object:nil];
         }
     }
 }

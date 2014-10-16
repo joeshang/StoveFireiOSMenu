@@ -9,6 +9,7 @@
 #import "DXEOpenViewController.h"
 #import "DXEMainViewController.h"
 #import "DXELoginView.h"
+#import "DXEOrderItem.h"
 #import "DXEDataManager.h"
 #import "DXEOrderManager.h"
 #import "CRModal.h"
@@ -251,9 +252,10 @@
             NSArray *order_list = [content objectForKey:@"order_list"];
             for (NSDictionary *order in order_list)
             {
-                DXEDishItem *item = [[DXEDataManager sharedInstance].dishes objectForKey:[order objectForKey:@"dish_id"]];
-                if (item)
+                DXEDishItem *dish = [[DXEDataManager sharedInstance].dishes objectForKey:[order objectForKey:@"dish_id"]];
+                if (dish)
                 {
+                    DXEOrderItem *item = [[DXEOrderItem alloc] initWithItemid:dish.itemid];
                     item.count = [order objectForKey:@"count"];
                     item.tradeid = [order objectForKey:@"trade_id"];
                     item.progress = [order objectForKey:@"status"];

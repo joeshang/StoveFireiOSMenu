@@ -8,6 +8,7 @@
 
 #import "DXEOrderCartViewController.h"
 #import "DXEDishItem.h"
+#import "DXEOrderItem.h"
 #import "DXEDataManager.h"
 #import "DXEImageManager.h"
 #import "DXEOrderManager.h"
@@ -69,9 +70,10 @@
     
     [self.dishesTableView reloadData];
     float totalPrice = 0.0;
-    for (DXEDishItem *item in [DXEOrderManager sharedInstance].cart)
+    for (DXEOrderItem *item in [DXEOrderManager sharedInstance].cart)
     {
-        totalPrice += [item.price floatValue] * [item.count integerValue];
+        DXEDishItem *dish = [[DXEDataManager sharedInstance].dishes objectForKey:item.itemid];
+        totalPrice += [dish.price floatValue] * [item.count integerValue];
     }
     self.totalPrice = totalPrice;
 }
@@ -98,16 +100,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
+    DXEOrderItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
+    DXEDishItem *dish = [[DXEDataManager sharedInstance].dishes objectForKey:item.itemid];
     
     NSString *identifier = NSStringFromClass([DXEOrderCartTableViewCell class]);
     DXEOrderCartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     cell.controller = self;
-    cell.dishName.text = item.name;
-    cell.dishEnglishName.text = item.englishName;
-    cell.dishPrice.text = [NSString stringWithFormat:@"单价：￥%.2f", [item.price floatValue]];
-    cell.dishThumbnail.image = [[DXEImageManager sharedInstance] imageForKey:item.thumbnailKey];
-    [cell updateCellByDishCount:[item.count integerValue] dishPrice:[item.price floatValue]];
+    cell.dishName.text = dish.name;
+    cell.dishEnglishName.text = dish.englishName;
+    cell.dishPrice.text = [NSString stringWithFormat:@"单价：￥%.2f", [dish.price floatValue]];
+    cell.dishThumbnail.image = [[DXEImageManager sharedInstance] imageForKey:dish.thumbnailKey];
+    [cell updateCellByDishCount:[item.count integerValue] dishPrice:[dish.price floatValue]];
     
     return cell;
 }
@@ -126,32 +129,35 @@
 - (void)onIncreaseButtonClickedInTableCell:(DXEOrderCartTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.dishesTableView indexPathForCell:cell];
-    DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
+    DXEOrderItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
+    DXEDishItem *dish = [[DXEDataManager sharedInstance].dishes objectForKey:item.itemid];
     if ([item.count integerValue] < kDXEDishItemCountInCartMax)
     {
         item.count = [NSNumber numberWithInteger:[item.count integerValue] + 1];
-        self.totalPrice += [item.price floatValue];
+        self.totalPrice += [dish.price floatValue];
     }
-    [cell updateCellByDishCount:[item.count integerValue] dishPrice:[item.price floatValue]];
+    [cell updateCellByDishCount:[item.count integerValue] dishPrice:[dish.price floatValue]];
 }
 
 - (void)onDecreaseButtonClickedInTableCell:(DXEOrderCartTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.dishesTableView indexPathForCell:cell];
-    DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
+    DXEOrderItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
+    DXEDishItem *dish = [[DXEDataManager sharedInstance].dishes objectForKey:item.itemid];
     if ([item.count integerValue] > kDXEDishItemCountInCartMin)
     {
         item.count = [NSNumber numberWithInteger:[item.count integerValue] - 1];
-        self.totalPrice -= [item.price floatValue];
+        self.totalPrice -= [dish.price floatValue];
     }
-    [cell updateCellByDishCount:[item.count integerValue] dishPrice:[item.price floatValue]];
+    [cell updateCellByDishCount:[item.count integerValue] dishPrice:[dish.price floatValue]];
 }
 
 - (void)onDeleteButtonClickedInTableCell:(DXEOrderCartTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.dishesTableView indexPathForCell:cell];
-    DXEDishItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
-    self.totalPrice -= [item.price floatValue] * [item.count integerValue];
+    DXEOrderItem *item = [[DXEOrderManager sharedInstance].cart objectAtIndex:indexPath.row];
+    DXEDishItem *dish = [[DXEDataManager sharedInstance].dishes objectForKey:item.itemid];
+    self.totalPrice -= [dish.price floatValue] * [item.count integerValue];
     [[DXEOrderManager sharedInstance].cart removeObjectIdenticalTo:item];
     [self.dishesTableView deleteRowsAtIndexPaths:@[indexPath]
                           withRowAnimation:UITableViewRowAnimationFade];
@@ -167,7 +173,7 @@
 - (void)placeOrder
 {
     NSMutableArray *orderList = [NSMutableArray arrayWithCapacity:[[DXEOrderManager sharedInstance].cart count]];
-    for (DXEDishItem *item in [DXEOrderManager sharedInstance].cart)
+    for (DXEOrderItem *item in [DXEOrderManager sharedInstance].cart)
     {
         NSDictionary *orderedItem  = @{
                                @"open_id": [DXEDataManager sharedInstance].openid,
@@ -190,9 +196,9 @@
     [httpManager POST:@"PlaceOrder" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
         [SVProgressHUD dismiss];
         
-        for (DXEDishItem *item in [DXEOrderManager sharedInstance].cart)
+        for (DXEOrderItem *item in [DXEOrderManager sharedInstance].cart)
         {
-            [[DXEOrderManager sharedInstance].order addObject:[item copy]];
+            [[DXEOrderManager sharedInstance].order addObject:item];
         }
         [[DXEOrderManager sharedInstance].cart removeAllObjects];
         self.totalPrice = 0.0;
@@ -224,9 +230,9 @@
     NSArray *orderResults = [NSJSONSerialization JSONObjectWithData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
     for (NSDictionary *result in orderResults)
     {
-        int dishid = [[result objectForKey:@"dish_id"] intValue];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemid == %d", dishid];
-        DXEDishItem *item = [[[DXEOrderManager sharedInstance].order filteredArrayUsingPredicate:predicate] firstObject];
+        int itemid = [[result objectForKey:@"dish_id"] intValue];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemid == %d", itemid];
+        DXEOrderItem *item = [[[DXEOrderManager sharedInstance].order filteredArrayUsingPredicate:predicate] firstObject];
         item.tradeid = [result objectForKey:@"trade_id"];
     }
 }

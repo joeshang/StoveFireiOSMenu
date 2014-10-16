@@ -24,9 +24,6 @@
 
 @property (nonatomic, assign) BOOL inCart;
 @property (nonatomic, assign) BOOL inFavor;
-@property (nonatomic, strong) NSNumber *count;
-@property (nonatomic, strong) NSNumber *progress;
-@property (nonatomic, strong) NSNumber *tradeid;
 
 - (void)updateByNewObject:(DXEDishItem *)update;
 

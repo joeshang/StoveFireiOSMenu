@@ -10,6 +10,7 @@
 #import "DXEDishesViewController.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "CRScrollMenuController.h"
+#import "DXEOrderItem.h"
 #import "DXEDataManager.h"
 #import "DXEOrderManager.h"
 
@@ -179,13 +180,14 @@
         && [change[NSKeyValueChangeKindKey] intValue] == NSKeyValueChangeRemoval)
     {
         NSArray *removalItems = change[NSKeyValueChangeOldKey];
-        for (DXEDishItem *item in removalItems)
+        for (DXEOrderItem *item in removalItems)
         {
+            DXEDishItem *dish = [[DXEDataManager sharedInstance].dishes objectForKey:item.itemid];
             for (DXEDishesViewController *controller in self.contentViewControllers)
             {
-                if ([item.classid isEqualToNumber:[controller.dishClass classid]])
+                if ([dish.classid isEqualToNumber:[controller.dishClass classid]])
                 {
-                    [controller updateDishCellByDishItem:item];
+                    [controller updateDishCellByDishItem:dish];
                     break;
                 }
             }

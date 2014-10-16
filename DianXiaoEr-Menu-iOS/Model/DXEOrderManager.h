@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class DXEDishItem;
+@class DXEOrderItem;
 
 @interface DXEOrderManager : NSObject
 
@@ -21,9 +21,9 @@
 - (NSMutableArray *)cart;
 - (NSMutableArray *)order;
 
-- (void)insertObject:(DXEDishItem *)object inCartListAtIndex:(NSUInteger)index;
+- (void)insertObject:(DXEOrderItem*)object inCartListAtIndex:(NSUInteger)index;
 - (void)removeObjectFromCartListAtIndex:(NSUInteger)index;
-- (void)insertObject:(DXEDishItem *)object inOrderListAtIndex:(NSUInteger)index;
+- (void)insertObject:(DXEOrderItem *)object inOrderListAtIndex:(NSUInteger)index;
 - (void)removeObjectFromOrderListAtIndex:(NSUInteger)index;
 
 @end

@@ -8,7 +8,6 @@
 
 #import "DXEMyselfViewController.h"
 #import "DXEMember.h"
-#import "DXEDishItem.h"
 #import "DXERecordTableViewCell.h"
 #import "DXEDiningRecord.h"
 #import "DXEImageManager.h"
@@ -130,7 +129,7 @@
     }
     else
     {
-        DXEDishItem *item = [self.detailedRecord.dishes objectAtIndex:indexPath.row];
+        DXERecordDishItem *item = [self.detailedRecord.dishes objectAtIndex:indexPath.row];
         
         NSString *identifier = NSStringFromClass([DXEOrderCartTableViewCell class]);
         DXEOrderCartTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];

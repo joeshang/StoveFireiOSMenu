@@ -9,9 +9,11 @@
 #import "DXEOrderProgressViewController.h"
 #import "DXEOrderProgressTableViewCell.h"
 #import "DXEOrderProgressTitleView.h"
+#import "DXEDishItem.h"
+#import "DXEOrderItem.h"
+#import "DXEDataManager.h"
 #import "DXEOrderManager.h"
 #import "DXEImageManager.h"
-#import "DXEDishItem.h"
 #import "AFNetworking.h"
 
 #define kDXEOrderProgressUpdatingInterval       15.0
@@ -86,7 +88,7 @@
     int doneCount = 0;
     float totalPrice = 0.0;
     
-    for (DXEDishItem *item in [DXEOrderManager sharedInstance].order)
+    for (DXEOrderItem *item in [DXEOrderManager sharedInstance].order)
     {
         switch ([item.progress integerValue])
         {
@@ -103,7 +105,8 @@
                 break;
         }
         
-        totalPrice += [item.price floatValue] * [item.count integerValue];
+        DXEDishItem *dish = [[DXEDataManager sharedInstance].dishes objectForKey:item.itemid];
+        totalPrice += [dish.price floatValue] * [item.count integerValue];
     }
     
     self.todoCount.text = [NSString stringWithFormat:@"%d", todoCount];
@@ -133,16 +136,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DXEDishItem *item = [[DXEOrderManager sharedInstance].order objectAtIndex:indexPath.row];
+    DXEOrderItem *item = [[DXEOrderManager sharedInstance].order objectAtIndex:indexPath.row];
+    DXEDishItem *dish = [[DXEDataManager sharedInstance].dishes objectForKey:item.itemid];
     
     NSString *identifier = NSStringFromClass([DXEOrderProgressTableViewCell class]);
     DXEOrderProgressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    cell.dishName.text = item.name;
-    cell.dishEnglishName.text = item.englishName;
+    cell.dishName.text = dish.name;
+    cell.dishEnglishName.text = dish.englishName;
     cell.dishCount.text = [item.count stringValue];
-    cell.dishPrice.text = [NSString stringWithFormat:@"单价：￥%.2f", [item.price floatValue]];
-    cell.dishTotalPrice.text = [NSString stringWithFormat:@"￥%.2f", [item.price floatValue] * [item.count integerValue]];
-    cell.dishThumbnail.image = [[DXEImageManager sharedInstance] imageForKey:item.thumbnailKey];
+    cell.dishPrice.text = [NSString stringWithFormat:@"单价：￥%.2f", [dish.price floatValue]];
+    cell.dishTotalPrice.text = [NSString stringWithFormat:@"￥%.2f", [dish.price floatValue] * [item.count integerValue]];
+    cell.dishThumbnail.image = [[DXEImageManager sharedInstance] imageForKey:dish.thumbnailKey];
     cell.state = [item.progress integerValue];
     
     return cell;
@@ -187,9 +191,9 @@
 - (void)onProgressTimer:(NSTimer *)timer
 {
     NSMutableArray *request = [NSMutableArray arrayWithCapacity:[[DXEOrderManager sharedInstance].order count]];
-    for (DXEDishItem *item in [DXEOrderManager sharedInstance].order)
+    for (DXEOrderItem *item in [DXEOrderManager sharedInstance].order)
     {
-        if (item.tradeid)
+        if ([item.tradeid intValue] != -1)
         {
             [request addObject:item.tradeid];
         }
@@ -227,12 +231,12 @@
     {
         int tradeid = [[dict objectForKey:@"trade_id"] intValue];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tradeid == %d", tradeid];
-        DXEDishItem *item = [[[DXEOrderManager sharedInstance].order filteredArrayUsingPredicate:predicate] firstObject];
+        DXEOrderItem *item = [[[DXEOrderManager sharedInstance].order filteredArrayUsingPredicate:predicate] firstObject];
         item.progress = [dict objectForKey:@"status"];
     }
     
-    [self updateProgressCounts];
-    [self.dishesTableView reloadData];
+//    [self updateProgressCounts];
+//    [self.dishesTableView reloadData];
 }
 
 @end

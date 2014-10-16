@@ -12,6 +12,7 @@
 #import "CRModal.h"
 #import "DXEDishDetailView.h"
 #import "DXEDishClass.h"
+#import "DXEOrderItem.h"
 #import "DXEImageManager.h"
 #import "DXEOrderManager.h"
 #import "UIView+Genie.h"
@@ -155,21 +156,34 @@
     return size;
 }
 
+#pragma mark - Functional
+
+- (void)addToCart:(DXEDishItem *)dish
+{
+    if (dish.inCart)
+    {
+        for (DXEOrderItem *item in [DXEOrderManager sharedInstance].cart)
+        {
+            if ([item.itemid isEqualToNumber:dish.itemid])
+            {
+                item.count = [NSNumber numberWithInteger:[item.count integerValue] + 1];
+                break;
+            }
+        }
+    }
+    else
+    {
+        DXEOrderItem *item = [[DXEOrderItem alloc] initWithItemid:dish.itemid];
+        [[DXEOrderManager sharedInstance].cart addObject:item];
+    }
+}
+
 #pragma mark - Target-Action in Collection View
 
 - (void)onCartButtonClickedInCollectionView:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath
 {
     DXEDishItem *item = [self.dishClass.dishes objectAtIndex:indexPath.row - 1];
-    
-    if (!item.inCart)
-    {
-        item.count = [NSNumber numberWithInteger:1];
-        [[DXEOrderManager sharedInstance].cart addObject:item];
-    }
-    else
-    {
-        item.count = [NSNumber numberWithInteger:[item.count integerValue] + 1];
-    }
+    [self addToCart:item];
     
     DXEDishCollectionViewCell *cell = (DXEDishCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     cell.cartButton.userInteractionEnabled = NO;
@@ -250,16 +264,7 @@
 - (IBAction)onCartButtonClickedInDishDetailView:(id)sender
 {
     DXEDishItem *item = [self.dishClass.dishes objectAtIndex:self.selectedIndexPath.row - 1];
-    
-    if (!item.inCart)
-    {
-        item.count = [NSNumber numberWithInteger:1];
-        [[DXEOrderManager sharedInstance].cart addObject:item];
-    }
-    else
-    {
-        item.count = [NSNumber numberWithInteger:[item.count integerValue] + 1];
-    }
+    [self addToCart:item];
     
     self.dishDetailView.cartButton.userInteractionEnabled = NO;
     UIImageView *dishImage = [[UIImageView alloc] initWithImage:self.dishDetailView.dishImage.image];

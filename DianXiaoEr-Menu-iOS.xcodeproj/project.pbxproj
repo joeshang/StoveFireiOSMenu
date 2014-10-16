@@ -116,6 +116,7 @@
 		D2A949B719EBCCF90036042B /* test_dish_class@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2A949B419EBCCF90036042B /* test_dish_class@2x.jpg */; };
 		D2A949B819EBCCF90036042B /* test_dish_item_thumbnail@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2A949B519EBCCF90036042B /* test_dish_item_thumbnail@2x.jpg */; };
 		D2A949B919EBCCF90036042B /* test_dish_item@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D2A949B619EBCCF90036042B /* test_dish_item@2x.jpg */; };
+		D2BB5CA519EFEF1B00433F4D /* DXEOrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BB5CA419EFEF1B00433F4D /* DXEOrderItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -285,6 +286,8 @@
 		D2A949B419EBCCF90036042B /* test_dish_class@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "test_dish_class@2x.jpg"; sourceTree = "<group>"; };
 		D2A949B519EBCCF90036042B /* test_dish_item_thumbnail@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "test_dish_item_thumbnail@2x.jpg"; sourceTree = "<group>"; };
 		D2A949B619EBCCF90036042B /* test_dish_item@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "test_dish_item@2x.jpg"; sourceTree = "<group>"; };
+		D2BB5CA319EFEF1B00433F4D /* DXEOrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXEOrderItem.h; path = Model/DXEOrderItem.h; sourceTree = "<group>"; };
+		D2BB5CA419EFEF1B00433F4D /* DXEOrderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXEOrderItem.m; path = Model/DXEOrderItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,6 +337,8 @@
 				D29FAB5C19B603A000E667D4 /* DXEDataManager.m */,
 				D24986CB19B70CB00029CC57 /* DXEImageManager.h */,
 				D24986CC19B70CB00029CC57 /* DXEImageManager.m */,
+				D2BB5CA319EFEF1B00433F4D /* DXEOrderItem.h */,
+				D2BB5CA419EFEF1B00433F4D /* DXEOrderItem.m */,
 				D273A44519C8A2750081BB37 /* DXEOrderManager.h */,
 				D273A44619C8A2750081BB37 /* DXEOrderManager.m */,
 				D290282C19D089ED0093AF33 /* DXERecordDishItem.h */,
@@ -865,6 +870,7 @@
 				D273A44719C8A2750081BB37 /* DXEOrderManager.m in Sources */,
 				D290284019D1A0190093AF33 /* DXEOrderEmptyViewController.m in Sources */,
 				D273A3BD19C603180081BB37 /* CRModal.m in Sources */,
+				D2BB5CA519EFEF1B00433F4D /* DXEOrderItem.m in Sources */,
 				D290285119D1D7EE0093AF33 /* DXEOrderProgressViewController.m in Sources */,
 				D20712391974D7F500E34770 /* DXEMyselfViewController.m in Sources */,
 				D273A45019C983970081BB37 /* DXEOrderCartViewController.m in Sources */,
