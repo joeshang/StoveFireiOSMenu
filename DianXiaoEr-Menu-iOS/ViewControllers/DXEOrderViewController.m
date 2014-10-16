@@ -274,6 +274,12 @@ typedef NS_ENUM(NSUInteger, DXEOrderOperation)
             }
             else if (operation == DXEOrderOperationOrdering)
             {
+                if (self.scrollMenu.currentIndex == DXEOrderScrollMenuIndexCart)
+                {
+                    [self.scrollMenu scrollToIndex:DXEOrderScrollMenuIndexProgress];
+                    [self switchChildViewControllerFrom:self.currentViewController
+                                                     to:self.progressViewController];
+                }
                 self.state = DXEOrderViewStateOrdered;
             }
             break;
