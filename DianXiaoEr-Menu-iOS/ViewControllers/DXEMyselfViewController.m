@@ -107,8 +107,10 @@
         DXERecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         cell.controller = self;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"YYYY.MM.dd   hh:mm";
-        cell.date.text = [formatter stringFromDate:[NSDate date]];
+        formatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
+        NSDate *dinnerDate = [formatter dateFromString:record.date];
+        formatter.dateFormat = @"yyyy.MM.dd   HH:mm";
+        cell.date.text = [formatter stringFromDate:dinnerDate];
         
         int dishCount = 0;
         float totalPrice = 0.0;
