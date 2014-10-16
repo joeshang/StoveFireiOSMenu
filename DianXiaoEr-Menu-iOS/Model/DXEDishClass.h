@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *englishName;
 @property (nonatomic, strong) NSNumber *showSequence;
 @property (nonatomic, strong) NSString *imageKey;
+@property (nonatomic, strong) NSNumber *vip;
 
 @property (nonatomic, strong) NSMutableArray *dishes;
 

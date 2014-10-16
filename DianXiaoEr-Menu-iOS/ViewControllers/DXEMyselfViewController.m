@@ -143,6 +143,14 @@
         cell.decreaseButton.hidden = YES;
         cell.countUnderline.hidden = YES;
         cell.deleteButton.hidden = YES;
+        if ([item.vip boolValue])
+        {
+            cell.dishVipFlag.hidden = NO;
+        }
+        else
+        {
+            cell.dishVipFlag.hidden = YES;
+        }
         CGPoint center = cell.dishCount.center;
         center.x = kDXERecordDetailCountCenterX;
         cell.dishCount.center = center;

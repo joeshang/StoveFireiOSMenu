@@ -15,5 +15,6 @@
 @property (nonatomic, strong) NSString *thumbnailKey;
 @property (nonatomic, strong) NSNumber *price;
 @property (nonatomic, strong) NSNumber *count;
+@property (nonatomic, strong) NSNumber *vip;
 
 @end

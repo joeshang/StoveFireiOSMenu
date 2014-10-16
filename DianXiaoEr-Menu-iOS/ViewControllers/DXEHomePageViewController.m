@@ -48,10 +48,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-        NSPredicate *showPredicate = [NSPredicate predicateWithFormat:@"name != %@", @"会员"];
+        NSPredicate *showPredicate = [NSPredicate predicateWithFormat:@"vip == FALSE"];
         _showDishes = [NSMutableArray arrayWithArray:[[DXEDataManager sharedInstance].dishClasses
                                                       filteredArrayUsingPredicate:showPredicate]];
-        NSPredicate *hidePredicate = [NSPredicate predicateWithFormat:@"name = %@", @"会员"];
+        NSPredicate *hidePredicate = [NSPredicate predicateWithFormat:@"vip == TRUE"];
         _hideDishes = [NSMutableArray arrayWithArray:[[DXEDataManager sharedInstance].dishClasses
                                                       filteredArrayUsingPredicate:hidePredicate]];
         
