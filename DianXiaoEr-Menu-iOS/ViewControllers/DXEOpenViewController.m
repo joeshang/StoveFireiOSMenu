@@ -10,6 +10,7 @@
 #import "DXEMainViewController.h"
 #import "DXELoginView.h"
 #import "DXEDataManager.h"
+#import "DXEOrderManager.h"
 #import "CRModal.h"
 #import "AFNetworking.h"
 #import "SVProgressHUD.h"
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) DXELoginView *loginView;
 
 @property (nonatomic, strong) AFHTTPSessionManager *httpManager;
+@property (nonatomic, strong) NSString *responseContent;
 @property (nonatomic, strong) NSXMLParser *loginParser;
 @property (nonatomic, strong) NSXMLParser *openParser;
 
@@ -222,15 +224,42 @@
 
 #pragma mark - NSXMLParserDelegate
 
+- (void)parserDidStartDocument:(NSXMLParser *)parser
+{
+    self.responseContent = [NSString string];
+}
+
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-    int result = [string intValue];
+    self.responseContent = [self.responseContent stringByAppendingString:string];
+}
+
+- (void)parserDidEndDocument:(NSXMLParser *)parser
+{
     if (parser == self.openParser)
     {
-        if (result >= 0)
+        if ([self.responseContent isEqualToString:@""])
+        {
+            [SVProgressHUD showErrorWithStatus:@"此桌号未开台"];
+        }
+        else
         {
             [SVProgressHUD dismiss];
-            [DXEDataManager sharedInstance].openid = [NSNumber numberWithInt:result];
+            
+            NSDictionary *content = [NSJSONSerialization JSONObjectWithData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+            [DXEDataManager sharedInstance].openid = [content objectForKey:@"open_id"];
+            NSArray *order_list = [content objectForKey:@"order_list"];
+            for (NSDictionary *order in order_list)
+            {
+                DXEDishItem *item = [[DXEDataManager sharedInstance].dishes objectForKey:[order objectForKey:@"dish_id"]];
+                if (item)
+                {
+                    item.count = [order objectForKey:@"count"];
+                    item.tradeid = [order objectForKey:@"trade_id"];
+                    item.progress = [order objectForKey:@"status"];
+                    [[DXEOrderManager sharedInstance].order addObject:item];
+                }
+            }
             
             NSString *nibName = NSStringFromClass([DXELoginView class]);
             self.loginView = [[[NSBundle mainBundle] loadNibNamed:nibName
@@ -244,13 +273,10 @@
                           animated:YES
                         completion:nil];
         }
-        else
-        {
-            [SVProgressHUD showErrorWithStatus:@"此桌号未开台"];
-        }
     }
     else if (parser == self.loginParser)
     {
+        int result = [self.responseContent intValue];
         if (result >= 0)
         {
             [DXEDataManager sharedInstance].staffid = [NSNumber numberWithInt:result];

@@ -66,7 +66,11 @@ typedef NS_ENUM(NSUInteger, DXEOrderOperation)
     if (self)
     {
         [[DXEOrderManager sharedInstance] addObserver:self
-                                           forKeyPath:@"cartList"
+                                           forKeyPath:NSStringFromSelector(@selector(cartList))
+                                              options:NSKeyValueObservingOptionNew
+                                              context:nil];
+        [[DXEOrderManager sharedInstance] addObserver:self
+                                           forKeyPath:NSStringFromSelector(@selector(orderList))
                                               options:NSKeyValueObservingOptionNew
                                               context:nil];
         _state = DXEOrderViewStateEmptyCart;
@@ -77,7 +81,9 @@ typedef NS_ENUM(NSUInteger, DXEOrderOperation)
 - (void)dealloc
 {
     [[DXEOrderManager sharedInstance] removeObserver:self
-                                          forKeyPath:@"cartList"];
+                                          forKeyPath:NSStringFromSelector(@selector(cartList))];
+    [[DXEOrderManager sharedInstance] removeObserver:self
+                                          forKeyPath:NSStringFromSelector(@selector(orderList))];
 }
 
 #pragma mark - view related
@@ -219,7 +225,7 @@ typedef NS_ENUM(NSUInteger, DXEOrderOperation)
     NSInteger kind = [change[NSKeyValueChangeKindKey] integerValue];
     DXEOrderOperation operation = DXEOrderOperationUnconcern;
     
-    if ([keyPath isEqualToString:@"cartList"])
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(cartList))])
     {
         if (kind == NSKeyValueChangeInsertion)
         {
@@ -240,6 +246,13 @@ typedef NS_ENUM(NSUInteger, DXEOrderOperation)
             }
         }
     }
+    else if ([keyPath isEqualToString:NSStringFromSelector(@selector(orderList))])
+    {
+        if (kind == NSKeyValueChangeInsertion)
+        {
+            operation = DXEOrderOperationOrdering;
+        }
+    }
     
     if (operation == DXEOrderOperationUnconcern)
     {
@@ -258,6 +271,10 @@ typedef NS_ENUM(NSUInteger, DXEOrderOperation)
                                                      to:self.cartViewController];
                 }
                 self.state = DXEOrderViewStateCartButNotOrdered;
+            }
+            else if (operation == DXEOrderOperationOrdering)
+            {
+                self.state = DXEOrderViewStateOrdered;
             }
             break;
         }

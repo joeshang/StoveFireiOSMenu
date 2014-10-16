@@ -132,6 +132,11 @@
         return;
     }
     
+    if (self.dishes == nil)
+    {
+        self.dishes = [NSMutableDictionary dictionaryWithCapacity:[updateItems count]];
+    }
+    
     for (DXEDishItem *update in updateItems)
     {
         if (update.classid == nil || update.itemid == nil)
@@ -149,6 +154,7 @@
                 if (class.dishes == nil)
                 {
                     class.dishes = [NSMutableArray arrayWithObject:update];
+                    [self.dishes setObject:update forKey:update.itemid];
                 }
                 else
                 {
@@ -165,6 +171,7 @@
                             {
                                 // 新增项
                                 [class.dishes addObject:update];
+                                [self.dishes setObject:update forKey:update.itemid];
                             }
                         }
                     }];

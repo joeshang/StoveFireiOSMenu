@@ -19,8 +19,8 @@
         _inFavor = NO;
         _inCart = NO;
         _count = [NSNumber numberWithInteger:0];
-        _tradeid = nil;
-        _progress = nil;
+        _tradeid = [NSNumber numberWithInteger:-1];
+        _progress = [NSNumber numberWithInt:DXEDishProgressTodo];
     }
     
     return self;

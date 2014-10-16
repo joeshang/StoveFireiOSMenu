@@ -74,7 +74,6 @@
 
 - (void)insertObject:(DXEDishItem *)object inOrderListAtIndex:(NSUInteger)index
 {
-    object.progress = [NSNumber numberWithInt:DXEDishProgressTodo];
     [object addObserver:self
              forKeyPath:NSStringFromSelector(@selector(progress))
                 options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
