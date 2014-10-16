@@ -148,6 +148,14 @@
     cell.dishTotalPrice.text = [NSString stringWithFormat:@"￥%.2f", [dish.price floatValue] * [item.count integerValue]];
     cell.dishThumbnail.image = [[DXEImageManager sharedInstance] imageForKey:dish.thumbnailKey];
     cell.state = [item.progress integerValue];
+    if ([dish.vip boolValue])
+    {
+        cell.dishVipFlag.hidden = NO;
+    }
+    else
+    {
+        cell.dishVipFlag.hidden = YES;
+    }
     
     return cell;
 }

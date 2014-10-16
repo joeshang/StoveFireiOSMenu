@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -108,6 +109,13 @@
                             <action selector="onDeleteButtonClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0yR-F5-8cR"/>
                         </connections>
                     </button>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="aAu-Sm-ICl" customClass="RNThemedImageView">
+                        <rect key="frame" x="284" y="10" width="12" height="11"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="imageKey" value="vip_star.png"/>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -122,6 +130,7 @@
                 <outlet property="dishPrice" destination="WmT-w5-tIB" id="c3V-wy-8c9"/>
                 <outlet property="dishThumbnail" destination="Oj3-0Q-8UU" id="q16-Qf-srp"/>
                 <outlet property="dishTotalPrice" destination="13L-tc-YJ8" id="RSv-bd-xDK"/>
+                <outlet property="dishVipFlag" destination="aAu-Sm-ICl" id="D7e-s5-5WT"/>
                 <outlet property="increaseButton" destination="HtK-sT-kAT" id="IgR-D3-KOr"/>
             </connections>
         </tableViewCell>

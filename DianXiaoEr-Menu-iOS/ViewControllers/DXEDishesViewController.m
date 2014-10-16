@@ -164,7 +164,7 @@
     {
         for (DXEOrderItem *item in [DXEOrderManager sharedInstance].cart)
         {
-            if ([item.itemid isEqualToNumber:dish.itemid])
+            if ([item.itemid integerValue] == [dish.itemid integerValue])
             {
                 item.count = [NSNumber numberWithInteger:[item.count integerValue] + 1];
                 break;

@@ -111,6 +111,14 @@
     cell.dishPrice.text = [NSString stringWithFormat:@"单价：￥%.2f", [dish.price floatValue]];
     cell.dishThumbnail.image = [[DXEImageManager sharedInstance] imageForKey:dish.thumbnailKey];
     [cell updateCellByDishCount:[item.count integerValue] dishPrice:[dish.price floatValue]];
+    if ([dish.vip boolValue])
+    {
+        cell.dishVipFlag.hidden = NO;
+    }
+    else
+    {
+        cell.dishVipFlag.hidden = YES;
+    }
     
     return cell;
 }

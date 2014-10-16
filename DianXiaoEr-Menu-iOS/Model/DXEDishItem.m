@@ -23,75 +23,56 @@
     return self;
 }
 
-- (id)copyWithZone:(NSZone *)zone
-{
-    DXEDishItem *copy = [[[self class] allocWithZone:zone] init];
-    
-    if (copy)
-    {
-        copy.itemid = [self.itemid copy];
-        copy.classid = [self.classid copy];
-        copy.name = [self.name copy];
-        copy.englishName = [self.englishName copy];
-        copy.imageKey = [self.imageKey copy];
-        copy.thumbnailKey = [self.thumbnailKey copy];
-        copy.showSequence = [self.showSequence copy];
-        copy.price = [self.price copy];
-        copy.favor = [self.favor copy];
-        copy.ingredient = [self.ingredient copy];
-        copy.soldout = [self.soldout copy];
-        copy.inCart = self.inCart;
-        copy.inFavor = self.inFavor;
-    }
-    
-    return copy;
-}
-
 - (void)updateByNewObject:(DXEDishItem *)update
 {
     if (update.name != nil)
     {
-        self.name = [update.name copy];
+        self.name = update.name;
     }
     
     if (update.englishName != nil)
     {
-        self.englishName = [update.englishName copy];
+        self.englishName = update.englishName;
     }
     
     if (update.imageKey != nil)
     {
-        self.imageKey = [update.imageKey copy];
+        self.imageKey = update.imageKey;
     }
     
     if (update.thumbnailKey != nil)
     {
-        self.thumbnailKey = [update.thumbnailKey copy];
+        self.thumbnailKey = update.thumbnailKey;
     }
     
     if (update.showSequence != nil)
     {
-        self.showSequence = [update.showSequence copy];
+        self.showSequence = update.showSequence;
     }
     
     if (update.price != nil)
     {
-        self.price = [update.price copy];
+        self.price = update.price;
     }
     
     if (update.favor != nil)
     {
-        self.favor = [update.favor copy];
+        self.favor = update.favor;
     }
     
     if (update.ingredient != nil)
     {
-        self.ingredient = [update.ingredient copy];
+        self.ingredient = update.ingredient;
     }
     
     if (update.soldout != nil)
     {
-        self.soldout = [update.soldout copy];
+        self.soldout = update.soldout;
+    }
+    
+    if (update.vip != nil)
+    {
+        self.vip = update.vip;
     }
 }
 

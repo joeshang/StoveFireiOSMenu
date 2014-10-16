@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -79,6 +80,12 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rU8-dB-fez" customClass="RNThemedImageView">
+                        <rect key="frame" x="284" y="10" width="12" height="11"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="imageKey" value="vip_star.png"/>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -90,6 +97,7 @@
                 <outlet property="dishPrice" destination="lQf-Yg-idS" id="u2D-Me-UAv"/>
                 <outlet property="dishThumbnail" destination="oKh-dK-hGe" id="zLt-CD-vnd"/>
                 <outlet property="dishTotalPrice" destination="I9r-2C-z1K" id="QeT-dd-NBI"/>
+                <outlet property="dishVipFlag" destination="rU8-dB-fez" id="Aj7-sG-5El"/>
                 <outlet property="doingLine" destination="6FI-Qf-5p5" id="uLA-Ux-7vM"/>
                 <outlet property="doingPoint" destination="9DC-Cb-Hfv" id="fUk-fV-N4a"/>
                 <outlet property="doingTitle" destination="0rc-gP-2nF" id="9UQ-ZW-9zz"/>

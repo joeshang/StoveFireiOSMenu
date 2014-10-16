@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *dishCount;
 @property (weak, nonatomic) IBOutlet UILabel *dishPrice;
 @property (weak, nonatomic) IBOutlet UILabel *dishTotalPrice;
+@property (weak, nonatomic) IBOutlet UIImageView *dishVipFlag;
 @property (weak, nonatomic) IBOutlet UIImageView *todoPoint;
 @property (weak, nonatomic) IBOutlet UIImageView *doingPoint;
 @property (weak, nonatomic) IBOutlet UIImageView *donePoint;

@@ -185,7 +185,7 @@
             DXEDishItem *dish = [[DXEDataManager sharedInstance].dishes objectForKey:item.itemid];
             for (DXEDishesViewController *controller in self.contentViewControllers)
             {
-                if ([dish.classid isEqualToNumber:[controller.dishClass classid]])
+                if ([dish.classid integerValue] == [controller.dishClass.classid integerValue])
                 {
                     [controller updateDishCellByDishItem:dish];
                     break;

@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *dishPrice;
 @property (weak, nonatomic) IBOutlet UILabel *dishTotalPrice;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property (weak, nonatomic) IBOutlet UIImageView *dishVipFlag;
 
 @property (weak, nonatomic) id controller;
 

@@ -141,7 +141,7 @@
         UIImage *thumbnail = [[DXEImageManager sharedInstance] imageForKey:item.thumbnailKey];
         if (!thumbnail)
         {
-            thumbnail = [[RNThemeManager sharedManager] imageForKey:@"myself_record_brand.png"];
+            thumbnail = [[RNThemeManager sharedManager] imageForKey:@"myself_record_dish_placeholder.png"];
         }
         cell.dishThumbnail.image = thumbnail;
         cell.increaseButton.hidden = YES;
