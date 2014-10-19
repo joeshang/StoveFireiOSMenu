@@ -204,14 +204,6 @@
     [httpManager POST:@"PlaceOrder" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
         [SVProgressHUD dismiss];
         
-        for (DXEOrderItem *item in [DXEOrderManager sharedInstance].cart)
-        {
-            [[DXEOrderManager sharedInstance].order addObject:item];
-        }
-        [[DXEOrderManager sharedInstance].cart removeAllObjects];
-        self.totalPrice = 0.0;
-        [self.dishesTableView reloadData];
-        
         NSXMLParser *parser = (NSXMLParser *)responseObject;
         parser.delegate = self;
         [parser parse];
@@ -240,9 +232,18 @@
     {
         int itemid = [[result objectForKey:@"dish_id"] intValue];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemid == %d", itemid];
-        DXEOrderItem *item = [[[DXEOrderManager sharedInstance].order filteredArrayUsingPredicate:predicate] firstObject];
+        DXEOrderItem *item = [[[DXEOrderManager sharedInstance].cart filteredArrayUsingPredicate:predicate] firstObject];
         item.tradeid = [result objectForKey:@"trade_id"];
     }
+    
+    for (DXEOrderItem *item in [DXEOrderManager sharedInstance].cart)
+    {
+        [[DXEOrderManager sharedInstance].order addObject:item];
+    }
+    [[DXEOrderManager sharedInstance].cart removeAllObjects];
+    self.totalPrice = 0.0;
+    [self.dishesTableView reloadData];
+    
 }
 
 @end
