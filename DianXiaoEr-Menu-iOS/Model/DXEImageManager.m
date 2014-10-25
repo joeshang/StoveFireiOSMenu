@@ -71,15 +71,15 @@
     UIImage *image;
     if ([imageClass isEqualToString:@"0"])
     {
-        image = [UIImage imageNamed:@"test_dish_class.jpg"];
+        image = [UIImage imageNamed:@"default_dish_class.jpg"];
     }
     else if ([imageClass isEqualToString:@"1"])
     {
-        image = [UIImage imageNamed:@"test_dish_item.jpg"];
+        image = [UIImage imageNamed:@"default_dish_item.jpg"];
     }
     else if ([imageClass isEqualToString:@"2"])
     {
-        image = [UIImage imageNamed:@"test_dish_item_thumbnail.jpg"];
+        image = [UIImage imageNamed:@"default_dish_item_thumbnail.jpg"];
     }
     return image;
 #else
@@ -102,6 +102,19 @@
                 }
             }
             NSLog(@"Error: unable to find image %@", [self archivePathForKey:imageKey]);
+            NSString *imageClass = [imageKey substringToIndex:1];
+            if ([imageClass isEqualToString:@"0"])
+            {
+                result = [UIImage imageNamed:@"default_dish_class.jpg"];
+            }
+            else if ([imageClass isEqualToString:@"1"])
+            {
+                result = [UIImage imageNamed:@"default_dish_item.jpg"];
+            }
+            else if ([imageClass isEqualToString:@"2"])
+            {
+                result = [UIImage imageNamed:@"default_dish_item_thumbnail.jpg"];
+            }
         }
     }
     return result;
@@ -190,7 +203,6 @@
     {
         __block NSUInteger totalCount = [requestImageKeys count];
         __block NSUInteger progress = 0;
-        __block BOOL sendNotification = YES;
         for (NSString *imageKey in requestImageKeys)
         {
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kDXEImageBaseURL, imageKey]];
@@ -204,29 +216,23 @@
                 [imageData writeToFile:[self archivePathForKey:imageKey] atomically:YES];
                 [self.cachedImageKeys addObject:imageKey];
                 
-                if (sendNotification)
-                {
-                    NSString *message = [NSString stringWithFormat:@"正在加载图片(进度:%lu/%lu)", progress, totalCount];
-                    NSDictionary *userInfo = @{ @"message": message };
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
-                    
-                    if (progress == totalCount)
-                    {
-                        [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
-                        
-                        [self saveChanges];
-                    }
-                }
+                NSString *message = [NSString stringWithFormat:@"正在加载图片(进度:%lu/%lu)", progress, totalCount];
+                NSDictionary *userInfo = @{ @"message": message };
+                [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
                 
+                if (progress == totalCount)
+                {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
+                    
+                    [self saveChanges];
+                }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error){
                 NSLog(@"Get image %@: %@", url, error);
-                if (sendNotification)
+                progress++;
+                if (progress == totalCount)
                 {
-                    NSString *message = [NSString stringWithFormat:@"加载图片错误，请检查网络与后台后再次进入"];
-                    NSDictionary *userInfo = @{ @"error": message };
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
                     
-                    sendNotification = NO;
                     [self saveChanges];
                 }
             }];
