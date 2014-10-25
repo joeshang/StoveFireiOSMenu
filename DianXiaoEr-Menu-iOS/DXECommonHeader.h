@@ -35,5 +35,6 @@ typedef NS_ENUM(NSUInteger, DXEDishProgress)
 
 #define kDXEWebServiceBaseURL                       @"http://192.168.1.2/webservice.asmx"
 #define kDXEImageBaseURL                            @"http://192.168.1.2/Images/"
+#define kDXEQuestionnaireBaseURL                    @"http://192.168.1.2:8080"
 
 #endif

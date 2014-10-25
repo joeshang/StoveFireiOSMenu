@@ -31,7 +31,7 @@
     self.view.backgroundColor = backgroundColor;
     self.webView.backgroundColor = backgroundColor;
     
-    NSURL *url = [NSURL URLWithString:kDXEWebServiceBaseURL];
+    NSURL *url = [NSURL URLWithString:kDXEQuestionnaireBaseURL];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
 }

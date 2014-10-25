@@ -17,9 +17,6 @@
 @property (nonatomic, strong) NSMutableArray *cachedImageKeys;
 @property (nonatomic, strong) NSMutableDictionary *recentlyImages;
 
-- (NSString *)cachedImageKeysArchivePath;
-- (NSString *)imagePathForKey:(NSString *)imageKey;
-
 @end
 
 @implementation DXEImageManager
@@ -67,13 +64,6 @@
 //  * class：图片的种类，例如菜类图片的class为0，菜品图片的class为1
 //  * id：图片的ID，是图片在本类中的唯一标示
 //  * time：图片更新的时间，用来对比图片是否需要更新
-
-- (NSString *)imagePathForKey:(NSString *)imageKey
-{
-    NSString *cacheDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    
-    return [cacheDirectory stringByAppendingString:imageKey];
-}
 
 - (UIImage *)imageForKey:(NSString *)imageKey
 {
@@ -215,25 +205,31 @@
                 [imageData writeToFile:[self archivePathForKey:imageKey] atomically:YES];
                 [self.cachedImageKeys addObject:imageKey];
                 
-                NSString *message = [NSString stringWithFormat:@"正在加载图片(进度:%lu/%lu)", progress, totalCount];
-                NSDictionary *userInfo = @{ @"message": message };
-                [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
-                         
-                if (progress == totalCount)
+                if (sendNotification)
                 {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
+                    NSString *message = [NSString stringWithFormat:@"正在加载图片(进度:%lu/%lu)", progress, totalCount];
+                    NSDictionary *userInfo = @{ @"message": message };
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
                     
-                    [self saveChanges];
+                    if (progress == totalCount)
+                    {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
+                        
+                        [self saveChanges];
+                    }
                 }
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error){
                 NSLog(@"Get image %@: %@", url, error);
-                NSString *message = [NSString stringWithFormat:@"加载图片错误，请检查网络与后台后再次进入"];
-                NSDictionary *userInfo = @{ @"error": message };
-                [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
-                         
-                sendNotification = NO;
-                [self saveChanges];
+                if (sendNotification)
+                {
+                    NSString *message = [NSString stringWithFormat:@"加载图片错误，请检查网络与后台后再次进入"];
+                    NSDictionary *userInfo = @{ @"error": message };
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
+                    
+                    sendNotification = NO;
+                    [self saveChanges];
+                }
             }];
             [operation start];
         }

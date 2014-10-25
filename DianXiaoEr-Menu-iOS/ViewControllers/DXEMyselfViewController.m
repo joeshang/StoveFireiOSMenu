@@ -222,7 +222,7 @@
     self.memberName.text = member.memberName;
     self.memberPhone.text = member.memberPhone;
     self.memberAccount.text = [NSString stringWithFormat:@"%@ 元", member.memberAccount];
-    if ([member.records count] == 0)
+    if (!member.records || [member.records count] == 0)
     {
         self.recordEmptyTips.hidden = NO;
     }

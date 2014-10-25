@@ -129,14 +129,6 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="imageKey" value="myself_member_account_icon.png"/>
                     </userDefinedRuntimeAttributes>
                 </imageView>
-                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="F7c-Z9-qS4" customClass="RNThemedImageView">
-                    <rect key="frame" x="219" y="569" width="328" height="5"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="imageKey" value="myself_record_empty_flag.png"/>
-                    </userDefinedRuntimeAttributes>
-                </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" style="plain" separatorStyle="none" rowHeight="140" sectionHeaderHeight="45" sectionFooterHeight="1" id="dRB-3K-iKd">
                     <rect key="frame" x="32" y="301" width="702" height="541"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -146,6 +138,14 @@
                         <outlet property="delegate" destination="-1" id="Fbx-F7-4g3"/>
                     </connections>
                 </tableView>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="F7c-Z9-qS4" customClass="RNThemedImageView">
+                    <rect key="frame" x="219" y="569" width="328" height="5"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="imageKey" value="myself_record_empty_flag.png"/>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
