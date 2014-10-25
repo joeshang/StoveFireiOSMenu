@@ -372,7 +372,7 @@
             item.showSequence = [NSNumber numberWithInteger:j + 1];
             item.price = [NSNumber numberWithFloat:20 + arc4random() % 100];
             item.favor = [NSNumber numberWithInteger:1000 + arc4random() % 5000];
-            item.ingredient = @"此物只应天上有，人间能够几回尝，此时不尝何时尝？原料顶级棒，安全放心，注意注意，前方高能预警，核能预警！巨美味巨好吃，嘿咻嘿咻北鼻够~";
+            item.ingredient = @"此物只应天上有，人间能够几回尝，此时不尝何时尝？原料顶级棒，安全放心，注意注意，前方高能预警，核能预警！巨美味巨好吃，嘿咻嘿咻北鼻够~~\nVery delicious delicious delicious";
             item.soldout = [NSNumber numberWithBool:NO];
             [array addObject:item];
         }
@@ -400,7 +400,7 @@
         item.showSequence = [NSNumber numberWithInteger:j + 1];
         item.price = [NSNumber numberWithFloat:20 + arc4random() % 100];
         item.favor = [NSNumber numberWithInteger:1000 + arc4random() % 5000];
-        item.ingredient = @"此物只应天上有，人间能够几回尝，此时不尝何时尝？原料顶级棒，安全放心，注意注意，前方高能预警，核能预警！巨美味巨好吃，嘿咻嘿咻北鼻够~";
+        item.ingredient = @"此物只应天上有，人间能够几回尝，此时不尝何时尝？原料顶级棒，安全放心，注意注意，前方高能预警，核能预警！巨美味巨好吃，嘿咻嘿咻北鼻够~\nVery delicious delicious delicious";
         item.soldout = [NSNumber numberWithBool:NO];
         [array addObject:item];
     }

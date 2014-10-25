@@ -226,7 +226,7 @@
         self.dishDetailView.dishPrice.text = [NSString stringWithFormat:@"%.2f", [item.price floatValue]];
         self.dishDetailView.dishFavor.text = [item.favor stringValue];
         self.dishDetailView.dishIngredient.selectable = YES;
-        self.dishDetailView.dishIngredient.text = item.ingredient;
+        self.dishDetailView.dishIngredient.text = [item.ingredient stringByReplacingOccurrencesOfString: @"\\n" withString: @"\n"];
         self.dishDetailView.dishIngredient.selectable = NO;
         self.dishDetailView.dishImage.image = [[DXEImageManager sharedInstance] imageForKey:item.imageKey];
         if (item.inCart)
