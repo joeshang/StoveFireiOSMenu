@@ -10,8 +10,6 @@
 #import "DXEImageManager.h"
 #import "AFNetworking.h"
 
-//#define DXE_TEST_DISH_DATA
-
 @interface DXEDataManager () < NSXMLParserDelegate >
 
 @property (nonatomic, strong) AFHTTPSessionManager *httpManager;
@@ -24,7 +22,7 @@
 - (void)updateDishClassFromJsonData:(NSData *)jsonData;
 - (void)updateDishItemFromJsonData:(NSData *)jsonData;
 
-#ifdef DXE_TEST_DISH_DATA
+#ifdef DXE_UI_TEST
 - (NSData *)dishClassDataOfTestingNew;
 - (NSData *)dishClassDataOfTestingUpdateAndAdd;
 - (NSData *)dishItemDataOfTestingNew;
@@ -64,7 +62,6 @@
         NSURL *baseURL = [NSURL URLWithString:kDXEWebServiceBaseURL];
         _httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
         _httpManager.responseSerializer = [AFXMLParserResponseSerializer serializer];
-
     }
     
     return self;
@@ -232,7 +229,7 @@
 
 - (void)loadDataFromWeb
 {
-#ifdef DXE_TEST_DISH_DATA
+#ifdef DXE_UI_TEST
     [self updateDishClassFromJsonData:[self dishClassDataOfTestingNew]];
     [self updateDishClassFromJsonData:[self dishClassDataOfTestingUpdateAndAdd]];
     [self updateDishItemFromJsonData:[self dishItemDataOfTestingNew]];
@@ -306,7 +303,7 @@
     }
 }
 
-#ifdef DXE_TEST_DISH_DATA
+#ifdef DXE_UI_TEST
 
 #define kDXEDishClassName           @[@"前菜", @"沙拉", @"刺身", @"寿司", @"主菜", @"炸物", @"烤物", @"铁板烧", @"煮物", @"蒸物"]
 #define kDXEDishClassEnglishName    @[@"APPETIZER", @"SHALA", @"SASHIMI", @"SUSHI", @"ENTREE", @"FRIED", @"GRILLED", @"TEPPANYAKI", @"SIMMERED", @"STREAMING"]
@@ -320,6 +317,7 @@
     {
         DXEDishClass *class = [[DXEDishClass alloc] init];
         class.classid = [NSNumber numberWithInteger:i];
+        class.vip = [NSNumber numberWithBool:FALSE];
         class.showSequence = [NSNumber numberWithInteger:i + 1];
         class.name = [names objectAtIndex:i];
         class.englishName = [englishNames objectAtIndex:i];
@@ -334,6 +332,7 @@
 {
     DXEDishClass *vip = [[DXEDishClass alloc] init];
     vip.classid = [NSNumber numberWithInteger:10];
+    vip.vip = [NSNumber numberWithBool:TRUE];
     vip.showSequence = [NSNumber numberWithInteger:0];
     vip.name = @"会员";
     vip.englishName = @"VIP";
@@ -365,9 +364,11 @@
             DXEDishItem *item = [[DXEDishItem alloc] init];
             item.itemid = [NSNumber numberWithInteger:i * 100 + j];
             item.classid = [NSNumber numberWithInteger:i];
+            item.vip = [NSNumber numberWithBool:FALSE];
             item.name = [NSString stringWithFormat:@"%@_%d", [names objectAtIndex:i], j];
             item.englishName = [NSString stringWithFormat:@"%@_%d", [englishNames objectAtIndex:i], j];
             item.imageKey = [NSString stringWithFormat:@"1-%d@%.0f", j, [[NSDate date] timeIntervalSince1970]];
+            item.thumbnailKey = [NSString stringWithFormat:@"2-%d@%.0f", j, [[NSDate date] timeIntervalSince1970]];
             item.showSequence = [NSNumber numberWithInteger:j + 1];
             item.price = [NSNumber numberWithFloat:20 + arc4random() % 100];
             item.favor = [NSNumber numberWithInteger:1000 + arc4random() % 5000];
@@ -391,9 +392,11 @@
         DXEDishItem *item = [[DXEDishItem alloc] init];
         item.itemid = [NSNumber numberWithInteger:1000 + j];
         item.classid = [NSNumber numberWithInteger:10];
+        item.vip = [NSNumber numberWithBool:TRUE];
         item.name = [NSString stringWithFormat:@"会员专属_%d", j];
         item.englishName = [NSString stringWithFormat:@"VIP_%d", j];
         item.imageKey = [NSString stringWithFormat:@"1-%d@%.0f", j, [[NSDate date] timeIntervalSince1970]];
+        item.thumbnailKey = [NSString stringWithFormat:@"2-%d@%.0f", j, [[NSDate date] timeIntervalSince1970]];
         item.showSequence = [NSNumber numberWithInteger:j + 1];
         item.price = [NSNumber numberWithFloat:20 + arc4random() % 100];
         item.favor = [NSNumber numberWithInteger:1000 + arc4random() % 5000];
@@ -418,8 +421,28 @@
 {
     self.tables = @[
                     @{
+                        @"name": @"A1",
+                        @"id": @1
+                        },
+                    @{
+                        @"name": @"A2",
+                        @"id": @2
+                        },
+                    @{
+                        @"name": @"B1",
+                        @"id": @3
+                        },
+                    @{
+                        @"name": @"B2",
+                        @"id": @4
+                        },
+                    @{
                         @"name": @"C1",
-                        @"id": @22
+                        @"id": @5
+                        },
+                    @{
+                        @"name": @"C2",
+                        @"id": @6
                         }
                     ];
 }

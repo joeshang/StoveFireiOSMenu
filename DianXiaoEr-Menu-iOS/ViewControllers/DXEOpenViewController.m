@@ -62,6 +62,13 @@
     [super viewDidLoad];
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+
+#ifdef DXE_UI_TEST
+    dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, 2.0 * NSEC_PER_SEC);
+    dispatch_after(delay, dispatch_get_main_queue(), ^(void){
+        [self onFinishLoadingNotication:nil];
+    });
+#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -126,6 +133,9 @@
 
 - (IBAction)onEnterButtonClicked:(id)sender
 {
+#ifdef DXE_UI_TEST
+    [self enterMainPage];
+#else
     NSNumber *tableId = [DXEDataManager sharedInstance].tableid;
     if (tableId == nil)
     {
@@ -146,6 +156,7 @@
             [SVProgressHUD showErrorWithStatus:@"网络错误"];
         }];
     }
+#endif
 }
 
 - (IBAction)onChoosingTableButtonClicked:(id)sender

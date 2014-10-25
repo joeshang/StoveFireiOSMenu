@@ -171,15 +171,24 @@
                           withRowAnimation:UITableViewRowAnimationFade];
 }
 
+- (void)updateDataAfterOrdering
+{
+    for (DXEOrderItem *item in [DXEOrderManager sharedInstance].cart)
+    {
+        [[DXEOrderManager sharedInstance].order addObject:item];
+    }
+    [[DXEOrderManager sharedInstance].cart removeAllObjects];
+    self.totalPrice = 0.0;
+    [self.dishesTableView reloadData];
+}
+
 - (IBAction)onEnsureOrderingButtonClicked:(id)sender
 {
     NSLog(@"ensure ordering, total price is %0.2f", self.totalPrice);
     
-    [self placeOrder];
-}
-
-- (void)placeOrder
-{
+#ifdef DXE_UI_TEST
+    [self updateDataAfterOrdering];
+#else
     NSMutableArray *orderList = [NSMutableArray arrayWithCapacity:[[DXEOrderManager sharedInstance].cart count]];
     for (DXEOrderItem *item in [DXEOrderManager sharedInstance].cart)
     {
@@ -211,6 +220,7 @@
         [SVProgressHUD showErrorWithStatus:@"网络错误,下单失败"];
         NSLog(@"%@", error);
     }];
+#endif
 }
 
 #pragma mark - NSXMLParserDelegate 
@@ -236,14 +246,7 @@
         item.tradeid = [result objectForKey:@"trade_id"];
     }
     
-    for (DXEOrderItem *item in [DXEOrderManager sharedInstance].cart)
-    {
-        [[DXEOrderManager sharedInstance].order addObject:item];
-    }
-    [[DXEOrderManager sharedInstance].cart removeAllObjects];
-    self.totalPrice = 0.0;
-    [self.dishesTableView reloadData];
-    
+    [self updateDataAfterOrdering];
 }
 
 @end

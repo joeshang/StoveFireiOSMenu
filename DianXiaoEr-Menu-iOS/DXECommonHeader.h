@@ -9,6 +9,8 @@
 #ifndef DianXiaoEr_Menu_iOS_DXECommonHeader_h
 #define DianXiaoEr_Menu_iOS_DXECommonHeader_h
 
+#define DXE_UI_TEST
+
 #define kDXENavigationBarHeight                     94
 #define kDXETabBarHeight                            71
 

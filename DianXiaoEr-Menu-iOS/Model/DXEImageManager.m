@@ -9,7 +9,6 @@
 #import "DXEImageManager.h"
 #import "AFNetworking.h"
 
-//#define DXE_TEST_IMAGE_KEYS
 #define kDXEImageKeysArchiveName        @"Imagekeys.archive"
 
 @interface DXEImageManager ()
@@ -67,7 +66,7 @@
 
 - (UIImage *)imageForKey:(NSString *)imageKey
 {
-#ifdef DXE_TEST_IMAGE_KEYS
+#ifdef DXE_UI_TEST
     NSString *imageClass = [imageKey substringToIndex:1];
     UIImage *image;
     if ([imageClass isEqualToString:@"0"])
@@ -111,7 +110,7 @@
 
 - (void)deleteImageForKey:(NSString *)imageKey
 {
-#ifdef DXE_TEST_IMAGE_KEYS
+#ifdef DXE_UI_TEST
     NSLog(@"delete image: %@", imageKey);
 #else
     if (imageKey)
@@ -125,7 +124,7 @@
 
 - (void)updateImageWithKeys:(NSMutableArray *)newImageKeys
 {
-#ifdef DXE_TEST_IMAGE_KEYS
+#ifdef DXE_UI_TEST
 #else
     if ([newImageKeys count] == 0)
     {

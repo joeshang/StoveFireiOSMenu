@@ -86,6 +86,7 @@
     int todoCount = 0;
     int doingCount = 0;
     int doneCount = 0;
+    int totalCount = 0;
     float totalPrice = 0.0;
     
     for (DXEOrderItem *item in [DXEOrderManager sharedInstance].order)
@@ -107,6 +108,7 @@
         
         DXEDishItem *dish = [[DXEDataManager sharedInstance].dishes objectForKey:item.itemid];
         totalPrice += [dish.price floatValue] * [item.count integerValue];
+        totalCount += [item.count integerValue];
     }
     
     self.todoCount.text = [NSString stringWithFormat:@"%d", todoCount];
@@ -114,7 +116,7 @@
     self.doneCount.text = [NSString stringWithFormat:@"%d", doneCount];
     self.totalPrice.text = [NSString stringWithFormat:@"%.2f元", totalPrice];
     
-    if (doneCount == [[DXEOrderManager sharedInstance].order count])
+    if (doneCount == totalCount)
     {
         [self.progressTimer invalidate];
     }
@@ -198,6 +200,18 @@
 
 - (void)onProgressTimer:(NSTimer *)timer
 {
+#ifdef DXE_UI_TEST
+    for (DXEOrderItem *item in [DXEOrderManager sharedInstance].order)
+    {
+        int progress = [item.progress intValue];
+        if (progress != DXEDishProgressDone)
+        {
+            progress++;
+            item.progress = [NSNumber numberWithInt:progress];
+            return;
+        }
+    }
+#else
     NSMutableArray *request = [NSMutableArray arrayWithCapacity:[[DXEOrderManager sharedInstance].order count]];
     for (DXEOrderItem *item in [DXEOrderManager sharedInstance].order)
     {
@@ -218,6 +232,7 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%@", error);
     }];
+#endif
 }
 
 #pragma mark - NSXMLParser
@@ -242,9 +257,6 @@
         DXEOrderItem *item = [[[DXEOrderManager sharedInstance].order filteredArrayUsingPredicate:predicate] firstObject];
         item.progress = [dict objectForKey:@"status"];
     }
-    
-//    [self updateProgressCounts];
-//    [self.dishesTableView reloadData];
 }
 
 @end

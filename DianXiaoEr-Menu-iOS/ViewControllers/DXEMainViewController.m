@@ -24,8 +24,6 @@
 #import "AFNetworking.h"
 #import "SVProgressHUD.h"
 
-#define DXE_TEST_MEMBER
-
 #define kDXETabBarTitleFontSize         12
 #define kDXEOrderBadgeFontSize          13
 
@@ -44,6 +42,10 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
 
 @property (nonatomic, strong) NSXMLParser *loginParser;
 @property (nonatomic, strong) NSString *responseContent;
+
+#ifdef DXE_UI_TEST
+- (NSData *)testMemberData;
+#endif
 
 @end
 
@@ -160,6 +162,41 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
     [super didReceiveMemoryWarning];
 }
 
+- (void)moveToChildViewControllerAtIndex:(NSInteger)index
+{
+    UIViewController *newSelectedViewController = [self.contentViewControllers objectAtIndex:index];
+    if (newSelectedViewController == self.selectedViewController)
+    {
+        return;
+    }
+    
+    [self.selectedViewController.view removeFromSuperview];
+    newSelectedViewController.view.frame =
+    CGRectMake(0,
+               kDXENavigationBarHeight,
+               CGRectGetWidth(self.view.bounds),
+               CGRectGetHeight(self.view.bounds) - kDXENavigationBarHeight - kDXETabBarHeight);
+    [self.view addSubview:newSelectedViewController.view];
+    self.selectedViewController = newSelectedViewController;
+}
+
+- (void)enterMyselfPage
+{
+    DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexMyself];
+    myself.login = YES;
+#ifdef DXE_UI_TEST
+    myself.member = [[DXEMember alloc] initWithJSONData:[self testMemberData]];
+#else
+    myself.member = [[DXEMember alloc] initWithJSONData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding]];
+#endif
+    [self.tabBar setItemSelectedAtIndex:DXEMainChildViewControllerIndexMyself];
+    [self moveToChildViewControllerAtIndex:DXEMainChildViewControllerIndexMyself];
+    DXEHomePageViewController *homepage = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexHomepage];
+    [homepage showAllDishClasses];
+    
+    [CRModal dismiss];
+}
+
 #pragma mark - CRTabBarDelegate
 
 - (BOOL)tabBar:(CRTabBar *)tabBar shouldSelecteItemAtIndex:(NSInteger)index
@@ -192,24 +229,6 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
     [self moveToChildViewControllerAtIndex:index];
 }
 
-- (void)moveToChildViewControllerAtIndex:(NSInteger)index
-{
-    UIViewController *newSelectedViewController = [self.contentViewControllers objectAtIndex:index];
-    if (newSelectedViewController == self.selectedViewController)
-    {
-        return;
-    }
-    
-    [self.selectedViewController.view removeFromSuperview];
-    newSelectedViewController.view.frame =
-    CGRectMake(0,
-               kDXENavigationBarHeight,
-               CGRectGetWidth(self.view.bounds),
-               CGRectGetHeight(self.view.bounds) - kDXENavigationBarHeight - kDXETabBarHeight);
-    [self.view addSubview:newSelectedViewController.view];
-    self.selectedViewController = newSelectedViewController;
-}
-
 #pragma mark - Target-Action
 
 - (void)onLoginButtonClickedInLoginView:(DXELoginView *)loginView
@@ -222,6 +241,9 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
     }
     else
     {
+#ifdef DXE_UI_TEST
+        [self enterMyselfPage];
+#else
         self.loginView.loginFailedMessage.hidden = YES;
         
         [SVProgressHUD showWithStatus:@"登录中" maskType:SVProgressHUDMaskTypeClear];
@@ -245,6 +267,7 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
             self.loginView.loginFailedMessage.text = @"网络连接错误，请检查网络";
             NSLog(@"%@", error);
         }];
+#endif
     }
 }
 
@@ -294,19 +317,11 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
     }
     else
     {
-        DXEMyselfViewController *myself = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexMyself];
-        myself.member = [[DXEMember alloc] initWithJSONData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding]];
-        myself.login = YES;
-        [self.tabBar setItemSelectedAtIndex:DXEMainChildViewControllerIndexMyself];
-        [self moveToChildViewControllerAtIndex:DXEMainChildViewControllerIndexMyself];
-        DXEHomePageViewController *homepage = [self.contentViewControllers objectAtIndex:DXEMainChildViewControllerIndexHomepage];
-        [homepage showAllDishClasses];
-        
-        [CRModal dismiss];
+        [self enterMyselfPage];
     }
 }
 
-#ifdef DXE_TEST_MEMBER
+#ifdef DXE_UI_TEST
 
 - (NSData *)testMemberData
 {
@@ -341,7 +356,7 @@ typedef NS_ENUM(NSInteger, DXEMainChildViewControllerIndex)
         record.totalPrice = [NSNumber numberWithFloat:totalPrice];
         record.dishes = [items copy];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"YYYY-MM-dd'T'hh:mm:ss.SSS";
+        formatter.dateFormat = @"YYYY-MM-dd'T'hh:mm:ss";
         record.date = [formatter stringFromDate:[NSDate date]];
         
         [records addObject:record];
