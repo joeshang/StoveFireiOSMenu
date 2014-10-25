@@ -7,13 +7,15 @@
 //
 
 #import "DXEImageManager.h"
-#import "UIImageView+WebCache.h"
+#import "AFNetworking.h"
 
 //#define DXE_TEST_IMAGE_KEYS
+#define kDXEImageKeysArchiveName        @"Imagekeys.archive"
 
 @interface DXEImageManager ()
 
 @property (nonatomic, strong) NSMutableArray *cachedImageKeys;
+@property (nonatomic, strong) NSMutableDictionary *recentlyImages;
 
 - (NSString *)cachedImageKeysArchivePath;
 - (NSString *)imagePathForKey:(NSString *)imageKey;
@@ -31,13 +33,6 @@
     if (sharedManager == nil)
     {
         sharedManager = [[super allocWithZone:nil] init];
-        
-        NSString *path = [sharedManager cachedImageKeysArchivePath];
-        sharedManager.cachedImageKeys = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
-        if (sharedManager.cachedImageKeys == nil)
-        {
-            sharedManager.cachedImageKeys = [[NSMutableArray alloc] init];
-        }
     }
     
     return sharedManager;
@@ -46,6 +41,24 @@
 + (id)allocWithZone:(struct _NSZone *)zone
 {
     return [self sharedInstance];
+}
+
+- (id)init
+{
+    self = [super init];
+    
+    if (self)
+    {
+        NSString *path = [self archivePathForKey:kDXEImageKeysArchiveName];
+        _cachedImageKeys = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        if (_cachedImageKeys == nil)
+        {
+            _cachedImageKeys = [[NSMutableArray alloc] init];
+        }
+        
+    }
+    
+    return self;
 }
 
 #pragma mark - getting image
@@ -81,7 +94,28 @@
     }
     return image;
 #else
-    return [[SDWebImageManager sharedManager].imageCache imageFromDiskCacheForKey:imageKey];
+    UIImage *result = [self.recentlyImages objectForKey:imageKey];
+    if (!result)
+    {
+        result = [UIImage imageWithContentsOfFile:[self archivePathForKey:imageKey]];
+        if (result)
+        {
+            [self.recentlyImages setObject:result forKey:imageKey];
+        }
+        else
+        {
+            for (NSString *key in self.cachedImageKeys)
+            {
+                if ([key isEqualToString:imageKey])
+                {
+                    [self.cachedImageKeys removeObject:key];
+                    break;
+                }
+            }
+            NSLog(@"Error: unable to find image %@", [self archivePathForKey:imageKey]);
+        }
+    }
+    return result;
 #endif
 }
 
@@ -90,7 +124,12 @@
 #ifdef DXE_TEST_IMAGE_KEYS
     NSLog(@"delete image: %@", imageKey);
 #else
-    [[SDWebImageManager sharedManager].imageCache removeImageForKey:imageKey];
+    if (imageKey)
+    {
+        [self.recentlyImages removeObjectForKey:imageKey];
+        NSString *imagePath = [self archivePathForKey:imageKey];
+        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+    }
 #endif
 }
 
@@ -166,47 +205,37 @@
         for (NSString *imageKey in requestImageKeys)
         {
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kDXEImageBaseURL, imageKey]];
-            [[SDWebImageManager sharedManager] downloadImageWithURL:url options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL)
-             {
-                 if (finished)
-                 {
-                     NSDictionary *userInfo;
-                     if (error)
-                     {
-                         NSLog(@"Get image %@: %@", imageURL, error);
-                         NSString *message = [NSString stringWithFormat:@"加载图片错误，请检查网络与后台后再次进入"];
-                         userInfo = @{ @"error": message };
-                     }
-                     else if (image && finished)
-                     {
-                         NSLog(@"%@", [imageURL absoluteString]);
-                         [[SDWebImageManager sharedManager].imageCache storeImage:image forKey:imageKey];
-                         [self.cachedImageKeys addObject:imageKey];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+            operation.responseSerializer = [AFImageResponseSerializer serializer];
+            [operation setCompletionBlockWithSuccess: ^(AFHTTPRequestOperation *operation, id responseObject){
+                progress++;
+                UIImage *image = responseObject;
+                NSData *imageData = UIImageJPEGRepresentation(image, 1);
+                [imageData writeToFile:[self archivePathForKey:imageKey] atomically:YES];
+                [self.cachedImageKeys addObject:imageKey];
+                
+                NSString *message = [NSString stringWithFormat:@"正在加载图片(进度:%lu/%lu)", progress, totalCount];
+                NSDictionary *userInfo = @{ @"message": message };
+                [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
                          
-                         progress++;
+                if (progress == totalCount)
+                {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
+                    
+                    [self saveChanges];
+                }
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+                NSLog(@"Get image %@: %@", url, error);
+                NSString *message = [NSString stringWithFormat:@"加载图片错误，请检查网络与后台后再次进入"];
+                NSDictionary *userInfo = @{ @"error": message };
+                [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
                          
-                         NSString *message = [NSString stringWithFormat:@"正在加载图片(进度:%lu/%lu)", progress, totalCount];
-                         userInfo = @{ @"message": message };
-                     }
-                     
-                     if (sendNotification)
-                     {
-                         [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidLoadingProgressNotification object:self userInfo:userInfo];
-                         
-                         if (error)
-                         {
-                             sendNotification = NO;
-                             [self saveChanges];
-                         }
-                         else if (progress == totalCount)
-                         {
-                             [[NSNotificationCenter defaultCenter] postNotificationName:kDXEDidFinishLoadingNotification object:self];
-                             
-                             [self saveChanges];
-                         }
-                     }
-                 }
-             }];
+                sendNotification = NO;
+                [self saveChanges];
+            }];
+            [operation start];
         }
     }
     else
@@ -220,16 +249,16 @@
 
 - (BOOL)saveChanges
 {
-    NSString *path = [self cachedImageKeysArchivePath];
+    NSString *path = [self archivePathForKey:kDXEImageKeysArchiveName];
     
     return [NSKeyedArchiver archiveRootObject:self.cachedImageKeys toFile:path];
 }
 
-- (NSString *)cachedImageKeysArchivePath
+- (NSString *)archivePathForKey:(NSString *)key
 {
     NSString *cacheDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    
-    return [cacheDirectory stringByAppendingString:@"imageKeys.archive"];
+
+    return [cacheDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@", key]];
 }
 
 @end
