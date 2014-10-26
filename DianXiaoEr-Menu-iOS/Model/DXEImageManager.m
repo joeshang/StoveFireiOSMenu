@@ -79,7 +79,7 @@
     }
     else if ([imageClass isEqualToString:@"2"])
     {
-        image = [UIImage imageNamed:@"default_dish_item_thumbnail.jpg"];
+        image = [UIImage imageNamed:@"default_dish_thumbnail.jpg"];
     }
     return image;
 #else
@@ -113,7 +113,7 @@
             }
             else if ([imageClass isEqualToString:@"2"])
             {
-                result = [UIImage imageNamed:@"default_dish_item_thumbnail.jpg"];
+                result = [UIImage imageNamed:@"default_dish_thumbnail.jpg"];
             }
         }
     }
