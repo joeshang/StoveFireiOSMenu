@@ -71,15 +71,15 @@
     UIImage *image;
     if ([imageClass isEqualToString:@"0"])
     {
-        image = [UIImage imageNamed:@"default_dish_class.jpg"];
+        image = [UIImage imageNamed:@"default_dish_class"];
     }
     else if ([imageClass isEqualToString:@"1"])
     {
-        image = [UIImage imageNamed:@"default_dish_item.jpg"];
+        image = [UIImage imageNamed:@"default_dish_item"];
     }
     else if ([imageClass isEqualToString:@"2"])
     {
-        image = [UIImage imageNamed:@"default_dish_thumbnail.jpg"];
+        image = [UIImage imageNamed:@"default_dish_thumbnail"];
     }
     return image;
 #else
@@ -105,15 +105,15 @@
             NSString *imageClass = [imageKey substringToIndex:1];
             if ([imageClass isEqualToString:@"0"])
             {
-                result = [UIImage imageNamed:@"default_dish_class.jpg"];
+                result = [UIImage imageNamed:@"default_dish_class"];
             }
             else if ([imageClass isEqualToString:@"1"])
             {
-                result = [UIImage imageNamed:@"default_dish_item.jpg"];
+                result = [UIImage imageNamed:@"default_dish_item"];
             }
             else if ([imageClass isEqualToString:@"2"])
             {
-                result = [UIImage imageNamed:@"default_dish_thumbnail.jpg"];
+                result = [UIImage imageNamed:@"default_dish_thumbnail"];
             }
         }
     }
