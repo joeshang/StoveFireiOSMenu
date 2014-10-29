@@ -244,7 +244,7 @@
     CGRect rect = self.recordDetailView.frame;
     rect.size.height = kDXERecordDetailExceptCellHeight + showCount * kDXERecordDetailCellHeight;
     self.recordDetailView.frame = rect;
-    self.recordDetailFooterView.totalPrice.text = [NSString stringWithFormat:@"￥%.2f", [self.detailedRecord.totalPrice floatValue]];
+    self.recordDetailFooterView.totalPrice.text = cell.totalPrice.text;
     [self.recordDetailView.dishesTableView reloadData];
 
     [CRModal showModalView:self.recordDetailView
