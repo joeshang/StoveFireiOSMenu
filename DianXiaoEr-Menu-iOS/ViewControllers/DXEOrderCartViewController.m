@@ -189,8 +189,6 @@
 
 - (IBAction)onEnsureOrderingButtonClicked:(id)sender
 {
-    NSLog(@"ensure ordering, total price is %0.2f", self.totalPrice);
-    
 #ifdef DXE_UI_TEST
     [self updateDataAfterOrdering];
 #else
@@ -216,8 +214,6 @@
     AFHTTPSessionManager *httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
     httpManager.responseSerializer = [AFXMLParserResponseSerializer serializer];
     [httpManager POST:@"PlaceOrder" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject){
-        [SVProgressHUD dismiss];
-        
         NSXMLParser *parser = (NSXMLParser *)responseObject;
         parser.delegate = self;
         [parser parse];
@@ -242,16 +238,25 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-    NSArray *orderResults = [NSJSONSerialization JSONObjectWithData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
-    for (NSDictionary *result in orderResults)
+    if ([self.responseContent isEqualToString:@""])
     {
-        int itemid = [[result objectForKey:@"dish_id"] intValue];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemid == %d", itemid];
-        DXEOrderItem *item = [[[DXEOrderManager sharedInstance].cart filteredArrayUsingPredicate:predicate] firstObject];
-        item.tradeid = [result objectForKey:@"trade_id"];
+        [SVProgressHUD showErrorWithStatus:@"当前桌号不匹配,下单失败"];
     }
-    
-    [self updateDataAfterOrdering];
+    else
+    {
+        [SVProgressHUD dismiss];
+        
+        NSArray *orderResults = [NSJSONSerialization JSONObjectWithData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+        for (NSDictionary *result in orderResults)
+        {
+            int itemid = [[result objectForKey:@"dish_id"] intValue];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemid == %d", itemid];
+            DXEOrderItem *item = [[[DXEOrderManager sharedInstance].cart filteredArrayUsingPredicate:predicate] firstObject];
+            item.tradeid = [result objectForKey:@"trade_id"];
+        }
+        
+        [self updateDataAfterOrdering];
+    }
 }
 
 @end
