@@ -66,6 +66,11 @@
 
 - (UIImage *)imageForKey:(NSString *)imageKey
 {
+    if (!imageKey)
+    {
+        return nil;
+    }
+    
 #ifdef DXE_UI_TEST
     NSString *imageClass = [imageKey substringToIndex:1];
     UIImage *image;
@@ -102,19 +107,6 @@
                 }
             }
             NSLog(@"Error: unable to find image %@", [self archivePathForKey:imageKey]);
-            NSString *imageClass = [imageKey substringToIndex:1];
-            if ([imageClass isEqualToString:@"0"])
-            {
-                result = [UIImage imageNamed:@"default_dish_class"];
-            }
-            else if ([imageClass isEqualToString:@"1"])
-            {
-                result = [UIImage imageNamed:@"default_dish_item"];
-            }
-            else if ([imageClass isEqualToString:@"2"])
-            {
-                result = [UIImage imageNamed:@"default_dish_thumbnail"];
-            }
         }
     }
     return result;

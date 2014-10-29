@@ -88,7 +88,12 @@
     {
         DXETipsColletionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DXETipsCollectionViewCell"
                                                                                    forIndexPath:indexPath];
-        cell.tipsImage.image = [[DXEImageManager sharedInstance] imageForKey:self.dishClass.imageKey];
+        UIImage *dishClassImage = [[DXEImageManager sharedInstance] imageForKey:self.dishClass.imageKey];
+        if (!dishClassImage)
+        {
+            dishClassImage = [UIImage imageNamed:@"default_dish_class"];
+        }
+        cell.tipsImage.image = dishClassImage;
         
         return cell;
     }
@@ -116,7 +121,12 @@
         
         cell.dishName.text = item.name;
         cell.dishEnglishName.text = item.englishName;
-        cell.dishImage.image = [[DXEImageManager sharedInstance] imageForKey:item.imageKey];
+        UIImage *dishItemImage = [[DXEImageManager sharedInstance] imageForKey:item.imageKey];
+        if (!dishItemImage)
+        {
+            dishItemImage = [UIImage imageNamed:@"default_dish_item"];
+        }
+        cell.dishImage.image = dishItemImage;
         cell.dishPrice.text = [NSString stringWithFormat:@"%.2f", [item.price floatValue]];
         cell.dishFavor.text = [item.favor stringValue];
         if (item.inFavor)
@@ -228,7 +238,12 @@
         self.dishDetailView.dishIngredient.selectable = YES;
         self.dishDetailView.dishIngredient.text = [item.ingredient stringByReplacingOccurrencesOfString: @"\\n" withString: @"\n"];
         self.dishDetailView.dishIngredient.selectable = NO;
-        self.dishDetailView.dishImage.image = [[DXEImageManager sharedInstance] imageForKey:item.imageKey];
+        UIImage *dishItemImage = [[DXEImageManager sharedInstance] imageForKey:item.imageKey];
+        if (!dishItemImage)
+        {
+            dishItemImage = [UIImage imageNamed:@"default_dish_item"];
+        }
+        self.dishDetailView.dishImage.image = dishItemImage;
         if (item.inCart)
         {
             self.dishDetailView.inCartFlag.alpha = 1.0;

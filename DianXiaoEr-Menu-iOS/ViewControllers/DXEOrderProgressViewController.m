@@ -148,7 +148,12 @@
     cell.dishCount.text = [item.count stringValue];
     cell.dishPrice.text = [NSString stringWithFormat:@"单价：￥%.2f", [dish.price floatValue]];
     cell.dishTotalPrice.text = [NSString stringWithFormat:@"￥%.2f", [dish.price floatValue] * [item.count integerValue]];
-    cell.dishThumbnail.image = [[DXEImageManager sharedInstance] imageForKey:dish.thumbnailKey];
+    UIImage *thumbnail = [[DXEImageManager sharedInstance] imageForKey:dish.thumbnailKey];
+    if (!thumbnail)
+    {
+        thumbnail = [UIImage imageNamed:@"default_dish_thumbnail"];
+    }
+    cell.dishThumbnail.image = thumbnail;
     cell.state = [item.progress integerValue];
     if ([dish.vip boolValue])
     {
