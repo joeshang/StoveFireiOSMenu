@@ -178,10 +178,12 @@
 
 - (void)updateDataAfterOrdering
 {
-    for (SFOrderItem *item in [SFOrderManager sharedInstance].cart)
-    {
-        [[SFOrderManager sharedInstance].order addObject:item];
-    }
+    NSRange range;
+    range.location = 0;
+    range.length = [[SFOrderManager sharedInstance].cart count];
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+    [[SFOrderManager sharedInstance].order insertObjects:[SFOrderManager sharedInstance].cart
+                                               atIndexes:indexSet];
     [[SFOrderManager sharedInstance].cart removeAllObjects];
     self.totalPrice = 0.0;
     [self.dishesTableView reloadData];
