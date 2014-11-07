@@ -263,14 +263,17 @@
             NSArray *order_list = [content objectForKey:@"order_list"];
             for (NSDictionary *order in order_list)
             {
-                SFDishItem *dish = [[SFDataManager sharedInstance].dishes objectForKey:[order objectForKey:@"dish_id"]];
-                if (dish)
+                if ([[order objectForKey:@"status"] intValue] != -1)
                 {
-                    SFOrderItem *item = [[SFOrderItem alloc] initWithItemid:dish.itemid];
-                    item.count = [order objectForKey:@"count"];
-                    item.tradeid = [order objectForKey:@"trade_id"];
-                    item.progress = [order objectForKey:@"status"];
-                    [[SFOrderManager sharedInstance].order addObject:item];
+                    SFDishItem *dish = [[SFDataManager sharedInstance].dishes objectForKey:[order objectForKey:@"dish_id"]];
+                    if (dish)
+                    {
+                        SFOrderItem *item = [[SFOrderItem alloc] initWithItemid:dish.itemid];
+                        item.count = [order objectForKey:@"count"];
+                        item.tradeid = [order objectForKey:@"trade_id"];
+                        item.progress = [order objectForKey:@"status"];
+                        [[SFOrderManager sharedInstance].order addObject:item];
+                    }
                 }
             }
             

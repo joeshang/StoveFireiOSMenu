@@ -88,7 +88,7 @@
 
 - (void)removeObjectFromOrderListAtIndex:(NSUInteger)index
 {
-    SFOrderItem *object = [self.cartList objectAtIndex:index];
+    SFOrderItem *object = [self.orderList objectAtIndex:index];
     [object removeObserver:self
                 forKeyPath:NSStringFromSelector(@selector(progress))];
     self.totalCount = [NSNumber numberWithInteger:[self.totalCount integerValue] - [object.count integerValue]];

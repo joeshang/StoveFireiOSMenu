@@ -260,7 +260,18 @@
         int tradeid = [[dict objectForKey:@"trade_id"] intValue];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tradeid == %d", tradeid];
         SFOrderItem *item = [[[SFOrderManager sharedInstance].order filteredArrayUsingPredicate:predicate] firstObject];
-        item.progress = [dict objectForKey:@"status"];
+        if ([[dict objectForKey:@"status"] intValue] == -1)
+        {
+            [[SFOrderManager sharedInstance].order removeObjectIdenticalTo:item];
+            if ([[SFOrderManager sharedInstance].order count] == 0)
+            {
+                [self.progressTimer invalidate];
+            }
+        }
+        else
+        {
+            item.progress = [dict objectForKey:@"status"];
+        }
     }
 }
 
