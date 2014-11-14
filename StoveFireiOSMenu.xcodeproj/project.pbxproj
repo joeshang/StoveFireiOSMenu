@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		731CAACE6DBB4861A8AEDEC7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A19EEB29E7462C89A58EDF /* libPods.a */; };
+		D20BF1761A15F01F00A99FC4 /* SFProjectorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D20BF1751A15F01F00A99FC4 /* SFProjectorManager.m */; };
 		D22BE1941972747000A438D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22BE1931972747000A438D2 /* Foundation.framework */; };
 		D22BE1961972747000A438D2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22BE1951972747000A438D2 /* CoreGraphics.framework */; };
 		D22BE1981972747000A438D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22BE1971972747000A438D2 /* UIKit.framework */; };
@@ -132,6 +133,8 @@
 /* Begin PBXFileReference section */
 		07430FF3329A4EBFB4AB3C68 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		52A19EEB29E7462C89A58EDF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D20BF1741A15F01F00A99FC4 /* SFProjectorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFProjectorManager.h; sourceTree = "<group>"; };
+		D20BF1751A15F01F00A99FC4 /* SFProjectorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFProjectorManager.m; sourceTree = "<group>"; };
 		D22BE1901972747000A438D2 /* StoveFireiOSMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoveFireiOSMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22BE1931972747000A438D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D22BE1951972747000A438D2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -485,22 +488,24 @@
 		D2C74AC91A0B3BF500366ACC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D20BF1741A15F01F00A99FC4 /* SFProjectorManager.h */,
+				D20BF1751A15F01F00A99FC4 /* SFProjectorManager.m */,
 				D2C74ACA1A0B3BF500366ACC /* SFDataManager.h */,
 				D2C74ACB1A0B3BF500366ACC /* SFDataManager.m */,
-				D2C74ACC1A0B3BF500366ACC /* SFDiningRecord.h */,
-				D2C74ACD1A0B3BF500366ACC /* SFDiningRecord.m */,
+				D2C74AD21A0B3BF500366ACC /* SFImageManager.h */,
+				D2C74AD31A0B3BF500366ACC /* SFImageManager.m */,
+				D2C74AD81A0B3BF500366ACC /* SFOrderManager.h */,
+				D2C74AD91A0B3BF500366ACC /* SFOrderManager.m */,
 				D2C74ACE1A0B3BF500366ACC /* SFDishClass.h */,
 				D2C74ACF1A0B3BF500366ACC /* SFDishClass.m */,
 				D2C74AD01A0B3BF500366ACC /* SFDishItem.h */,
 				D2C74AD11A0B3BF500366ACC /* SFDishItem.m */,
-				D2C74AD21A0B3BF500366ACC /* SFImageManager.h */,
-				D2C74AD31A0B3BF500366ACC /* SFImageManager.m */,
-				D2C74AD41A0B3BF500366ACC /* SFMember.h */,
-				D2C74AD51A0B3BF500366ACC /* SFMember.m */,
 				D2C74AD61A0B3BF500366ACC /* SFOrderItem.h */,
 				D2C74AD71A0B3BF500366ACC /* SFOrderItem.m */,
-				D2C74AD81A0B3BF500366ACC /* SFOrderManager.h */,
-				D2C74AD91A0B3BF500366ACC /* SFOrderManager.m */,
+				D2C74AD41A0B3BF500366ACC /* SFMember.h */,
+				D2C74AD51A0B3BF500366ACC /* SFMember.m */,
+				D2C74ACC1A0B3BF500366ACC /* SFDiningRecord.h */,
+				D2C74ACD1A0B3BF500366ACC /* SFDiningRecord.m */,
 				D2C74ADA1A0B3BF500366ACC /* SFRecordDishItem.h */,
 				D2C74ADB1A0B3BF500366ACC /* SFRecordDishItem.m */,
 			);
@@ -534,10 +539,10 @@
 		D2C74B621A0B41B700366ACC /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
-				D2C74B631A0B41B700366ACC /* SFDishesViewController.h */,
-				D2C74B641A0B41B700366ACC /* SFDishesViewController.m */,
 				D2C74B651A0B41B700366ACC /* SFHomePageViewController.h */,
 				D2C74B661A0B41B700366ACC /* SFHomePageViewController.m */,
+				D2C74B631A0B41B700366ACC /* SFDishesViewController.h */,
+				D2C74B641A0B41B700366ACC /* SFDishesViewController.m */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -873,6 +878,7 @@
 				D2C74B8D1A0B41B800366ACC /* SFOrderCartViewController.m in Sources */,
 				D290288219D5C1AD0093AF33 /* CRScrollMenu.m in Sources */,
 				D2C74BDF1A0B41C200366ACC /* SFOrderProgressTableViewCell.m in Sources */,
+				D20BF1761A15F01F00A99FC4 /* SFProjectorManager.m in Sources */,
 				D2C74AE01A0B3BF500366ACC /* SFImageManager.m in Sources */,
 				D2C74B931A0B41B800366ACC /* SFOrderViewController.m in Sources */,
 				D2C74B9A1A0B41B800366ACC /* SFOpenViewController.m in Sources */,
@@ -1041,8 +1047,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chuanren Shang (V4NCBEHL9S)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chuanren Shang (V4NCBEHL9S)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StoveFireiOSMenu/StoveFireiOSMenu-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/StoveFireiOSMenu/StoveFireiOSMenu-Info.plist";

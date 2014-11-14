@@ -34,9 +34,13 @@ typedef NS_ENUM(NSUInteger, SFDishProgress)
 #define kSFDidLoadingProgressNotification          @"SFDidLoadingProgressNotification"
 #define kSFDidMoveToHomepageNotification           @"SFDidMoveToHomePageNotification"
 #define kSFDidUpdateOrderProgressNotification      @"SFDidUpdateOrderProgressNotification"
+#define kSFDidConnectToProjectorNotification       @"SFDidConnectToProjectorNotification"
+#define kSFDidDisconnectToProjectorNotification    @"SFDidDisconnectToProjectorNotification"
 
 #define kSFWebServiceBaseURL                       @"http://192.168.1.2/webservice.asmx"
 #define kSFImageBaseURL                            @"http://192.168.1.2/Images/"
 #define kSFQuestionnaireBaseURL                    @"http://192.168.1.2:8080"
+#define kSFProjectorPort                           51112
+
 
 #endif

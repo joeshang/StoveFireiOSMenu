@@ -35,8 +35,8 @@
 {
     [super viewWillAppear:animated];
     
-    [self startScanningLine];
     [self setupCamera];
+    [self startScanningLine];
 }
 
 - (void)didReceiveMemoryWarning
@@ -106,19 +106,22 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
         AVMetadataMachineReadableCodeObject *readableCodeObject = [metadataObjects firstObject];
         qrcode = readableCodeObject.stringValue;
         
-        if (self.delegate && [self.delegate respondsToSelector:@selector(qrCodeDidScan:)])
+        if ([self.delegate respondsToSelector:@selector(qrCodeDidScan:)])
         {
             [self.delegate qrCodeDidScan:qrcode];
         }
     }
     
-    [self.session stopRunning];
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self.session stopRunning];
+    }];
 }
 
 - (IBAction)onReturnButtonClicked:(id)sender
 {
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self.session stopRunning];
+    }];
 }
 
 @end

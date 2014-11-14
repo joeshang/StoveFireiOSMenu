@@ -21,6 +21,8 @@
 #import "SFDiningRecord.h"
 #import "SFRecordDishItem.h"
 #import "SFLoginView.h"
+#import "SFQRCodeViewController.h"
+#import "SFProjectorManager.h"
 #import "AFNetworking.h"
 #import "SVProgressHUD.h"
 
@@ -36,7 +38,7 @@ typedef NS_ENUM(NSInteger, SFMainChildViewControllerIndex)
     SFMainChildViewControllerIndexMyself
 };
 
-@interface SFMainViewController () < CRTabBarDelegate, NSXMLParserDelegate >
+@interface SFMainViewController () < CRTabBarDelegate, NSXMLParserDelegate, SFQRCodeViewControllerDelegate >
 
 @property (nonatomic, strong) SFLoginView *loginView;
 
@@ -63,6 +65,14 @@ typedef NS_ENUM(NSInteger, SFMainChildViewControllerIndex)
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(onMoveToHomepageNotification:)
                                                      name:kSFDidMoveToHomepageNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onConnectToProjectorNotification:)
+                                                     name:kSFDidConnectToProjectorNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onDisConnectToProjectorNotification:)
+                                                     name:kSFDidDisconnectToProjectorNotification
                                                    object:nil];
     }
     return self;
@@ -197,39 +207,14 @@ typedef NS_ENUM(NSInteger, SFMainChildViewControllerIndex)
     [CRModal dismiss];
 }
 
-#pragma mark - CRTabBarDelegate
-
-- (BOOL)tabBar:(CRTabBar *)tabBar shouldSelecteItemAtIndex:(NSInteger)index
-{
-    if (index == SFMainChildViewControllerIndexMyself)
-    {
-        SFMyselfViewController *myself = [self.contentViewControllers objectAtIndex:SFMainChildViewControllerIndexMyself];
-        if (!myself.login)
-        {
-            NSString *nibName = NSStringFromClass([SFLoginView class]);
-            self.loginView = [[[NSBundle mainBundle] loadNibNamed:nibName
-                                                            owner:self
-                                                          options:nil] firstObject];
-            self.loginView.controller = self;
-            self.loginView.userNamePlaceholder = @"会员卡号/手机号码";
-            [CRModal showModalView:self.loginView
-                       coverOption:CRModalOptionCoverDark
-               tapOutsideToDismiss:NO
-                          animated:YES
-                        completion:nil];
-            
-            return NO;
-        }
-    }
-    return YES;
-}
-
-- (void)tabBar:(CRTabBar *)tabBar didSelectItemAtIndex:(NSInteger)index
-{
-    [self moveToChildViewControllerAtIndex:index];
-}
-
 #pragma mark - Target-Action
+
+- (IBAction)onQRCodeButtonClicked:(id)sender
+{
+    SFQRCodeViewController *qrController = [[SFQRCodeViewController alloc] init];
+    qrController.delegate = self;
+    [self presentViewController:qrController animated:NO completion:nil];
+}
 
 - (void)onLoginButtonClickedInLoginView:(SFLoginView *)loginView
 {
@@ -279,6 +264,16 @@ typedef NS_ENUM(NSInteger, SFMainChildViewControllerIndex)
     [self moveToChildViewControllerAtIndex:SFMainChildViewControllerIndexHomepage];
 }
 
+- (void)onConnectToProjectorNotification:(NSNotification *)notification
+{
+    NSLog(@"Connect Projector");
+}
+
+- (void)onDisConnectToProjectorNotification:(NSNotification *)notification
+{
+    NSLog(@"Disconnect Projector");
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(totalCount))])
@@ -295,6 +290,70 @@ typedef NS_ENUM(NSInteger, SFMainChildViewControllerIndex)
         }
     }
 }
+
+#pragma mark - SFQRCodeViewControllerDelegate
+
+- (void)qrCodeDidScan:(NSString *)codeString
+{
+    NSString  *urlRegEx =@"^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+    "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+    "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+    "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+    
+    NSError *error;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:urlRegEx options:0 error:&error];
+    
+    if (regex != nil)
+    {
+        NSTextCheckingResult *firstMatch = [regex firstMatchInString:codeString
+                                                             options:0
+                                                               range:NSMakeRange(0, [codeString length])];
+        if (firstMatch)
+        {
+            NSRange matchRange = [firstMatch rangeAtIndex:0];
+            NSString *projectorAddress = [codeString substringWithRange:matchRange];
+            
+            [[SFProjectorManager sharedInstance] connectToHost:projectorAddress];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"无效的立体投影仪地址，请重新扫描"];
+        }
+    }
+}
+
+#pragma mark - CRTabBarDelegate
+
+- (BOOL)tabBar:(CRTabBar *)tabBar shouldSelecteItemAtIndex:(NSInteger)index
+{
+    if (index == SFMainChildViewControllerIndexMyself)
+    {
+        SFMyselfViewController *myself = [self.contentViewControllers objectAtIndex:SFMainChildViewControllerIndexMyself];
+        if (!myself.login)
+        {
+            NSString *nibName = NSStringFromClass([SFLoginView class]);
+            self.loginView = [[[NSBundle mainBundle] loadNibNamed:nibName
+                                                            owner:self
+                                                          options:nil] firstObject];
+            self.loginView.controller = self;
+            self.loginView.userNamePlaceholder = @"会员卡号/手机号码";
+            [CRModal showModalView:self.loginView
+                       coverOption:CRModalOptionCoverDark
+               tapOutsideToDismiss:NO
+                          animated:YES
+                        completion:nil];
+            
+            return NO;
+        }
+    }
+    return YES;
+}
+
+- (void)tabBar:(CRTabBar *)tabBar didSelectItemAtIndex:(NSInteger)index
+{
+    [self moveToChildViewControllerAtIndex:index];
+}
+
 
 #pragma mark - NSXMLParserDelegate
 

@@ -14,6 +14,7 @@
 #import "SFDishClass.h"
 #import "SFOrderItem.h"
 #import "SFImageManager.h"
+#import "SFProjectorManager.h"
 #import "SFOrderManager.h"
 #import "UIView+Genie.h"
 #import "AFNetworking.h"
@@ -263,6 +264,7 @@
                                              forState:UIControlStateNormal];
         }
         
+        [[SFProjectorManager sharedInstance] doAction:SFProjectorActionPlay withName:item.name];
         [CRModal showModalView:self.dishDetailView
                    coverOption:CRModalOptionCoverDark
            tapOutsideToDismiss:NO
@@ -270,6 +272,7 @@
                     completion:^{
                         self.selectedIndexPath = nil;
                         self.dishDetailView = nil;
+                        [[SFProjectorManager sharedInstance] doAction:SFProjectorActionStop withName:item.name];
                     }];
     }
 }
