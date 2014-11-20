@@ -11,6 +11,7 @@
 #import "SFDataManager.h"
 #import "SVProgressHUD.h"
 #import "SFOpenViewController.h"
+#import "UIView+DTDebug.h"
 
 @implementation SFAppDelegate
 

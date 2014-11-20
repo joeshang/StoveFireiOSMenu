@@ -36,6 +36,12 @@
     [super viewWillAppear:animated];
     
     [self setupCamera];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
     [self startScanningLine];
 }
 

@@ -23,6 +23,9 @@
 		D22CAF0319FF999C009A4919 /* default_dish_class@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D22CAF0019FF999C009A4919 /* default_dish_class@2x.png */; };
 		D22CAF0419FF999C009A4919 /* default_dish_item@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D22CAF0119FF999C009A4919 /* default_dish_item@2x.png */; };
 		D22CAF0519FF999C009A4919 /* default_dish_thumbnail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D22CAF0219FF999C009A4919 /* default_dish_thumbnail@2x.png */; };
+		D26D1C3A1A17553E00F348D1 /* DTObjectBlockExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = D26D1C371A17553E00F348D1 /* DTObjectBlockExecutor.m */; };
+		D26D1C3B1A17553E00F348D1 /* NSObject+DTRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = D26D1C391A17553E00F348D1 /* NSObject+DTRuntime.m */; };
+		D26D1C3E1A17556B00F348D1 /* UIView+DTDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = D26D1C3D1A17556B00F348D1 /* UIView+DTDebug.m */; };
 		D273A3BD19C603180081BB37 /* CRModal.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A3BA19C603180081BB37 /* CRModal.m */; };
 		D273A3BE19C603180081BB37 /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A3BC19C603180081BB37 /* UIImage+Blur.m */; };
 		D273A3C919C60B7B0081BB37 /* CRScrollMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D273A3C319C60B7B0081BB37 /* CRScrollMenuButton.m */; };
@@ -152,6 +155,12 @@
 		D22CAF0019FF999C009A4919 /* default_dish_class@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default_dish_class@2x.png"; sourceTree = "<group>"; };
 		D22CAF0119FF999C009A4919 /* default_dish_item@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default_dish_item@2x.png"; sourceTree = "<group>"; };
 		D22CAF0219FF999C009A4919 /* default_dish_thumbnail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default_dish_thumbnail@2x.png"; sourceTree = "<group>"; };
+		D26D1C361A17553E00F348D1 /* DTObjectBlockExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTObjectBlockExecutor.h; sourceTree = "<group>"; };
+		D26D1C371A17553E00F348D1 /* DTObjectBlockExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTObjectBlockExecutor.m; sourceTree = "<group>"; };
+		D26D1C381A17553E00F348D1 /* NSObject+DTRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DTRuntime.h"; sourceTree = "<group>"; };
+		D26D1C391A17553E00F348D1 /* NSObject+DTRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DTRuntime.m"; sourceTree = "<group>"; };
+		D26D1C3C1A17556A00F348D1 /* UIView+DTDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DTDebug.h"; sourceTree = "<group>"; };
+		D26D1C3D1A17556B00F348D1 /* UIView+DTDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DTDebug.m"; sourceTree = "<group>"; };
 		D273A3B919C603180081BB37 /* CRModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRModal.h; sourceTree = "<group>"; };
 		D273A3BA19C603180081BB37 /* CRModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRModal.m; sourceTree = "<group>"; };
 		D273A3BB19C603180081BB37 /* UIImage+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blur.h"; sourceTree = "<group>"; };
@@ -438,9 +447,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D26D1C3F1A17558700F348D1 /* UIView+DTDebug */ = {
+			isa = PBXGroup;
+			children = (
+				D26D1C3C1A17556A00F348D1 /* UIView+DTDebug.h */,
+				D26D1C3D1A17556B00F348D1 /* UIView+DTDebug.m */,
+				D26D1C361A17553E00F348D1 /* DTObjectBlockExecutor.h */,
+				D26D1C371A17553E00F348D1 /* DTObjectBlockExecutor.m */,
+				D26D1C381A17553E00F348D1 /* NSObject+DTRuntime.h */,
+				D26D1C391A17553E00F348D1 /* NSObject+DTRuntime.m */,
+			);
+			name = "UIView+DTDebug";
+			sourceTree = "<group>";
+		};
 		D273A3B719C603180081BB37 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				D26D1C3F1A17558700F348D1 /* UIView+DTDebug */,
 				D290281919CF1F650093AF33 /* CRTabBar */,
 				D273A3BF19C60B7B0081BB37 /* CRScrollMenuController */,
 				D273A3B819C603180081BB37 /* CRModal */,
@@ -724,7 +747,7 @@
 		D22BE1881972747000A438D2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = DXE;
+				CLASSPREFIX = SF;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Shang Chuanren";
 				TargetAttributes = {
@@ -873,6 +896,7 @@
 				D2C74B8F1A0B41B800366ACC /* SFOrderEmptyViewController.m in Sources */,
 				D273A3BD19C603180081BB37 /* CRModal.m in Sources */,
 				D290281E19CF1F650093AF33 /* CRTabBar.m in Sources */,
+				D26D1C3A1A17553E00F348D1 /* DTObjectBlockExecutor.m in Sources */,
 				D273A3CB19C60B7B0081BB37 /* CRScrollMenuItem.m in Sources */,
 				D290281F19CF1F650093AF33 /* CRTabBarItem.m in Sources */,
 				D2C74B8D1A0B41B800366ACC /* SFOrderCartViewController.m in Sources */,
@@ -883,6 +907,7 @@
 				D2C74B931A0B41B800366ACC /* SFOrderViewController.m in Sources */,
 				D2C74B9A1A0B41B800366ACC /* SFOpenViewController.m in Sources */,
 				D273A3C919C60B7B0081BB37 /* CRScrollMenuButton.m in Sources */,
+				D26D1C3B1A17553E00F348D1 /* NSObject+DTRuntime.m in Sources */,
 				D2C74BE11A0B41C200366ACC /* SFOrderProgressTitleView.m in Sources */,
 				D2C74B8B1A0B41B800366ACC /* SFMyselfViewController.m in Sources */,
 				D290288119D5C1AD0093AF33 /* CRScrollMenuController.m in Sources */,
@@ -894,6 +919,7 @@
 				D2C74BCF1A0B41C200366ACC /* SFLoginView.m in Sources */,
 				D2C74ADC1A0B3BF500366ACC /* SFDataManager.m in Sources */,
 				D2C74ADF1A0B3BF500366ACC /* SFDishItem.m in Sources */,
+				D26D1C3E1A17556B00F348D1 /* UIView+DTDebug.m in Sources */,
 				D2C74BDD1A0B41C200366ACC /* SFOrderCartTitleView.m in Sources */,
 				D2C74B911A0B41B800366ACC /* SFOrderProgressViewController.m in Sources */,
 				D2C74AE41A0B3BF500366ACC /* SFRecordDishItem.m in Sources */,
@@ -1035,6 +1061,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StoveFireiOSMenu/StoveFireiOSMenu-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/StoveFireiOSMenu/StoveFireiOSMenu-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = StoveFireiOSMenu;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1052,6 +1079,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StoveFireiOSMenu/StoveFireiOSMenu-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/StoveFireiOSMenu/StoveFireiOSMenu-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = StoveFireiOSMenu;
 				PROVISIONING_PROFILE = "";
