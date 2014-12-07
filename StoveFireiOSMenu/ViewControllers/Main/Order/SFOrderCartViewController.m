@@ -248,6 +248,7 @@
     {
         [SVProgressHUD dismiss];
         
+        NSString *soldoutDishesName = @"";
         NSArray *orderResults = [NSJSONSerialization JSONObjectWithData:[self.responseContent dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
         for (NSDictionary *result in orderResults)
         {
@@ -255,9 +256,28 @@
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemid == %d", itemid];
             SFOrderItem *item = [[[SFOrderManager sharedInstance].cart filteredArrayUsingPredicate:predicate] firstObject];
             item.tradeid = [result objectForKey:@"trade_id"];
+            
+            // 处理菜品售罄的情况
+            if ([item.tradeid integerValue] == -1)
+            {
+                SFDishItem *dishItem = [[SFDataManager sharedInstance].dishes objectForKey:item.itemid];
+                dishItem.soldout = [NSNumber numberWithBool:YES];
+                soldoutDishesName = [soldoutDishesName stringByAppendingString:[NSString stringWithFormat:@" “%@” ", dishItem.name]];
+                [[SFOrderManager sharedInstance].cart removeObject:item];
+            }
         }
         
         [self updateDataAfterOrdering];
+        
+        if (![soldoutDishesName isEqualToString:@""])
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"很抱歉的通知您"
+                                                                message:[NSString stringWithFormat:@"%@已售罄，请您挑选其他菜品", soldoutDishesName]
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"确定"
+                                                      otherButtonTitles:nil, nil];
+            [alertView show];
+        }
     }
 }
 
