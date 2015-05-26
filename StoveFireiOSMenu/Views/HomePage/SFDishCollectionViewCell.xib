@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -89,6 +90,7 @@
                         <state key="normal" image="dish_cell_add2cart_button.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <state key="disabled" image="dish_cell_soldout_button.png"/>
                         <connections>
                             <action selector="onCartButtonClicked:" destination="lGy-eV-7UU" eventType="touchUpInside" id="fmN-R8-i1I"/>
                         </connections>
@@ -130,6 +132,7 @@
         <image name="dish_cell_favor_hollow_icon.png" width="19" height="16"/>
         <image name="dish_cell_incart_flag.png" width="48" height="66"/>
         <image name="dish_cell_price_icon.png" width="19" height="16"/>
+        <image name="dish_cell_soldout_button.png" width="77" height="28"/>
         <image name="dish_cell_soldout_flag.png" width="128" height="128"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

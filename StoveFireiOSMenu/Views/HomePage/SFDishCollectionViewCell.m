@@ -80,7 +80,6 @@
         {
             self.cartIcon.hidden = NO;
             self.cartButton.enabled = YES;
-            self.cartButton.imageView.image = [UIImage imageNamed:@"dish_cell_add2cart_button"];
             [UIView animateWithDuration:duration
                              animations:^{
                                  self.maskView.alpha = 0.0;
@@ -98,7 +97,6 @@
         {
             self.cartIcon.hidden = NO;
             self.cartButton.enabled = YES;
-            self.cartButton.imageView.image = [UIImage imageNamed:@"dish_cell_add2cart_button"];
             self.inCartFlag.hidden = NO;
             [UIView animateWithDuration:duration
                              animations:^{
@@ -116,7 +114,6 @@
         {
             self.cartIcon.hidden = YES;
             self.cartButton.enabled = NO;
-            self.cartButton.imageView.image = [UIImage imageNamed:@"dish_cell_soldout_button"];
             self.maskView.hidden = NO;
             self.soldoutFlag.hidden = NO;
             [UIView animateWithDuration:duration
