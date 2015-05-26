@@ -21,8 +21,8 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    [SVProgressHUD appearance].hudBackgroundColor = [UIColor colorWithWhite:0.0 alpha:0.9];
-    [SVProgressHUD appearance].hudForegroundColor = [UIColor whiteColor];
+    [SVProgressHUD setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.9]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     
     [[SFDataManager sharedInstance] loadDataFromWeb];
     
