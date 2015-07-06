@@ -80,6 +80,7 @@
         {
             self.cartIcon.hidden = NO;
             self.cartButton.enabled = YES;
+            self.cartButton.alpha = 1.0;
             [UIView animateWithDuration:duration
                              animations:^{
                                  self.maskView.alpha = 0.0;
@@ -97,6 +98,7 @@
         {
             self.cartIcon.hidden = NO;
             self.cartButton.enabled = YES;
+            self.cartButton.alpha = 1.0;
             self.inCartFlag.hidden = NO;
             [UIView animateWithDuration:duration
                              animations:^{
@@ -114,6 +116,7 @@
         {
             self.cartIcon.hidden = YES;
             self.cartButton.enabled = NO;
+            self.cartButton.alpha = 0.5;
             self.maskView.hidden = NO;
             self.soldoutFlag.hidden = NO;
             [UIView animateWithDuration:duration
