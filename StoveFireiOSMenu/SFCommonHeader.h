@@ -9,7 +9,8 @@
 #ifndef StoveFireiOSMenu_SFCommonHeader_h
 #define StoveFireiOSMenu_SFCommonHeader_h
 
-//#define SF_UI_TEST
+#define SF_UI_TEST
+//#define SF_3D_PROJECTOR
 
 #define kSFNavigationBarHeight                     94
 #define kSFTabBarHeight                            71

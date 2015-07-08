@@ -249,9 +249,9 @@
         if (targetIndex >= 0 && targetIndex < [self.viewControllers count])
         {
             
-            CGFloat progress = fabsf(pageScrollOffset / CGRectGetWidth(self.scrollView.frame));
+            CGFloat progress = fabs(pageScrollOffset / CGRectGetWidth(self.scrollView.frame));
             [self.scrollMenu moveToIndex:targetIndex progress:progress];
-            if (abs(pageScrollOffset) >= CGRectGetWidth(self.scrollView.frame))
+            if (fabs(pageScrollOffset) >= CGRectGetWidth(self.scrollView.frame))
             {
                 self.currentIndex = targetIndex;
             }

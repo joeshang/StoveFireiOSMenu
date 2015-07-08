@@ -32,6 +32,7 @@
 
 - (void)connectToHost:(NSString *)host
 {
+#ifdef SF_3D_PROJECTOR
     self.socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     
     NSError *error = nil;
@@ -43,11 +44,13 @@
         [SVProgressHUD showErrorWithStatus:@"连接立体投影仪失败"];
         NSLog(@"%@", error);
     }
+#endif
 }
 
 - (void)doAction:(SFProjectorAction)action
         withName:(NSString *)name
 {
+#ifdef SF_3D_PROJECTOR
     if (self.socket && self.socket.isConnected)
     {
         NSDictionary *info = @{
@@ -60,6 +63,7 @@
                                                          error:nil];
         [self.socket writeData:data withTimeout:-1 tag:0];
     }
+#endif
 }
 
 #pragma mark - AsyncSocketDelegate
