@@ -9,7 +9,7 @@
 #import "SFHomePageViewController.h"
 #import "SFDishesViewController.h"
 #import "CHTCollectionViewWaterfallLayout.h"
-#import "CRScrollMenuController.h"
+#import "SCRScrollMenuController.h"
 #import "SFOrderItem.h"
 #import "SFDataManager.h"
 #import "SFOrderManager.h"
@@ -31,7 +31,7 @@
 
 @interface SFHomePageViewController ()
 
-@property (nonatomic, strong) CRScrollMenuController *scrollMenuController;
+@property (nonatomic, strong) SCRScrollMenuController *scrollMenuController;
 @property (nonatomic, strong) NSMutableArray *contentViewControllers;
 @property (nonatomic, strong) NSMutableArray *scrollMenuItems;
 @property (nonatomic, strong) NSMutableArray *showDishes;
@@ -80,7 +80,7 @@
     
     UIColor *normalColor =[[RNThemeManager sharedManager] colorForKey:@"DarkenColor"];
     UIColor *selectedColor =[[RNThemeManager sharedManager] colorForKey:@"HighlightColor"];
-    self.scrollMenuController = [[CRScrollMenuController alloc] init];
+    self.scrollMenuController = [[SCRScrollMenuController alloc] init];
     self.scrollMenuController.scrollMenuHeight = kSFHomePageScrollMenuHeight;
     self.scrollMenuController.scrollMenuBackgroundImage = [[RNThemeManager sharedManager] imageForKey:@"scrollmenu_background"];
     self.scrollMenuController.scrollMenuIndicatorColor = selectedColor;
@@ -143,7 +143,7 @@
     dishViewController.dishClass = class;
     [self.contentViewControllers insertObject:dishViewController atIndex:index];
     
-    CRScrollMenuItem *item = [[CRScrollMenuItem alloc] init];
+    SCRScrollMenuItem *item = [[SCRScrollMenuItem alloc] init];
     item.title = class.name;
     item.subtitle = class.englishName;
     [self.scrollMenuItems insertObject:item atIndex:index];

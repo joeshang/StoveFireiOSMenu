@@ -8,7 +8,7 @@
 
 #import "SFOrderViewController.h"
 #import "SFOrderManager.h"
-#import "CRScrollMenu.h"
+#import "SCRScrollMenu.h"
 #import "SFOrderCartViewController.h"
 #import "SFOrderProgressViewController.h"
 #import "SFOrderEmptyViewController.h"
@@ -42,9 +42,9 @@ typedef NS_ENUM(NSUInteger, SFOrderOperation)
 #define kSFOrderScrollMenuTitleFontSize             20
 
 @interface SFOrderViewController ()
-< CRScrollMenuDelegate >
+< SCRScrollMenuDelegate >
 
-@property (nonatomic, strong) CRScrollMenu *scrollMenu;
+@property (nonatomic, strong) SCRScrollMenu *scrollMenu;
 @property (nonatomic, strong) SFOrderCartViewController *cartViewController;
 @property (nonatomic, strong) SFOrderProgressViewController *progressViewController;
 @property (nonatomic, strong) SFOrderEmptyViewController *emptyOrderedViewController;
@@ -96,7 +96,7 @@ typedef NS_ENUM(NSUInteger, SFOrderOperation)
     
     UIColor *normalColor =[[RNThemeManager sharedManager] colorForKey:@"DarkenColor"];
     UIColor *selectedColor =[[RNThemeManager sharedManager] colorForKey:@"HighlightColor"];
-    self.scrollMenu = [[CRScrollMenu alloc] initWithFrame:CGRectMake(0,
+    self.scrollMenu = [[SCRScrollMenu alloc] initWithFrame:CGRectMake(0,
                                                                      0,
                                                                      CGRectGetWidth(self.view.bounds),
                                                                      kSFOrderScrollMenuHeight)];
@@ -121,7 +121,7 @@ typedef NS_ENUM(NSUInteger, SFOrderOperation)
     NSMutableArray *items = [NSMutableArray arrayWithCapacity:[titles count]];
     for (NSString *title in titles)
     {
-        CRScrollMenuItem *item = [[CRScrollMenuItem alloc] init];
+        SCRScrollMenuItem *item = [[SCRScrollMenuItem alloc] init];
         item.title = title;
         [items addObject:item];
     }
@@ -211,7 +211,7 @@ typedef NS_ENUM(NSUInteger, SFOrderOperation)
 
 #pragma mark - notification
 
-- (void)scrollMenu:(CRScrollMenu *)scrollMenu didSelectedAtIndex:(NSUInteger)index
+- (void)scrollMenu:(SCRScrollMenu *)scrollMenu didSelectedAtIndex:(NSUInteger)index
 {
     [self switchChildViewControllerFrom:self.currentViewController
                                      to:[self.menuContentContainer objectAtIndex:index]];
